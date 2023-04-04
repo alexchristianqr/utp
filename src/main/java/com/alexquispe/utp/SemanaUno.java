@@ -137,26 +137,37 @@ public class SemanaUno {
      */
     public static void tarea05() {
         // Declarar variables
-        double a, b, c, m, n, z;
+        int a, b, c, m, n, z;
 
         // Inicializar variables
-        System.out.println("Ingresar el valor de a");
-        a = dato.nextDouble();
-        System.out.println("Ingresar el valor de b");
-        b = dato.nextDouble();
-        System.out.println("Ingresar el valor de c");
-        c = dato.nextDouble();
+        System.out.println("Ingresar un valor entero para a");
+        a = dato.nextInt();
+        System.out.println("Ingresar un valor entero para b");
+        b = dato.nextInt();
+        System.out.println("Ingresar un valor entero para c");
+        c = dato.nextInt();
+        System.out.print("\r");
 
         // Proceso 
-        // Ecuacion para hallar m
-        m = (a - b - (2*c)) / 3;// m = (b + 2c - a)/3
+        // Ecuación para hallar m
+        System.out.println("Ecuaciones:");
+        
+        m = (a - b - (2*c)) / 3;// m = (a - b - 2c)/3
+        System.out.println("Ecuación para hallar m = " + "(" + a + " - " + b + " - " + "2(" + c + "))" + "/ 3");
+        System.out.println("m = " + m);
+        System.out.print("\r");
         
         // Ecuación para hallar n
         n = c - a - (3*b);// n = c - a - 3b
+        System.out.println("Ecuación para hallar n = " + "" + c + " - " + a + " - " + "3(" + b + ")");
+        System.out.println("n = " + n);
+        System.out.print("\r");
         
         // Ecuación para hallar z
         z = m + n + (5*a);// z = m + n + 5a
-       
+        System.out.println("Ecuación para hallar z = " + "" + m + " + (" + n + ") + " + "5(" + a + ")");
+        System.out.println("z = " + z);
+        System.out.print("\r");
 
         // Salida
         System.out.println("El valor de m es: " + m);
