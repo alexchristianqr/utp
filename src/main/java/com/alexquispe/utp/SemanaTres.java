@@ -4,7 +4,6 @@
  */
 package com.alexquispe.utp;
 
-import java.awt.Event;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.JComponent;
