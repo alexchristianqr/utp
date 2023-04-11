@@ -21,7 +21,8 @@ public class SemanaTres {
         // Declarar variables
         dato = new Scanner(System.in);
 
-        ejercicio02(); // Ejecutar metodo
+        // Ejecutar método
+        ejercicio02();
     }
 
     public static void tarea() {
@@ -51,7 +52,7 @@ public class SemanaTres {
         }
 
         // S
-        System.out.println("Su sexo es: " + (sexo.equals("H") ? "Hombre" : "Mujer"));
+        System.out.println("Su sexo es: " + (sexo.equals("H") ? "Hombre" : sexo.equals("M") ? "Mujer" : ""));
         System.out.println("El precio de la entrada es: " + precio);
     }
 
@@ -96,15 +97,15 @@ public class SemanaTres {
         int a, b, c, d, e;
 
         // I
-        System.out.println("Ingresar numero para a");
+        System.out.println("Ingresar numero para a:");
         a = dato.nextInt();
-        System.out.println("Ingresar numero para b");
+        System.out.println("Ingresar numero para b:");
         b = dato.nextInt();
-        System.out.println("Ingresar numero para c");
+        System.out.println("Ingresar numero para c:");
         c = dato.nextInt();
-        System.out.println("Ingresar numero para d");
+        System.out.println("Ingresar numero para d:");
         d = dato.nextInt();
-        System.out.println("Ingresar numero para e");
+        System.out.println("Ingresar numero para e:");
         e = dato.nextInt();
 
         // P
@@ -122,5 +123,37 @@ public class SemanaTres {
             System.out.println("No existe numero mayor");
         }
         // S
+    }
+
+    public static void ejercicio03() {
+        // D
+        double tarifa, total;
+        int tipoPrenda, cantidad;
+
+        // I
+        tarifa = 0;
+        System.out.println("Ingresar tipo de prenda");
+        System.out.println("1: Pantalon");
+        System.out.println("2: Saco");
+        System.out.println("3: Abrigo");
+        tipoPrenda = dato.nextInt();
+
+        System.out.println("Ingresar cantidad de unidades:");
+        cantidad = dato.nextInt();
+
+        // P
+        if (tipoPrenda == 1) {
+            tarifa = 12;
+        } else if (tipoPrenda == 2) {
+            tarifa = 32;
+        } else if (tipoPrenda == 3) {
+            tarifa = 42;
+        } else {
+            System.out.println("No existe el tipo de prenda");
+        }
+        total = cantidad * tarifa;
+
+        // S
+        System.out.println("El sueldo total a pagar es: " + total);
     }
 }

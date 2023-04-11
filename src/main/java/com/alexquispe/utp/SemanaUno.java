@@ -20,7 +20,8 @@ public class SemanaUno {
         // Declarar variables
         dato = new Scanner(System.in);
 
-        tarea02(); // Ejeuctar tarea 1
+        // Ejecutar método
+        tarea02();
     }
 
     /**
