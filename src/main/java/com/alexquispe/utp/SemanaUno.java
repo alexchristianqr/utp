@@ -20,7 +20,7 @@ public class SemanaUno {
         // Declarar variables
         dato = new Scanner(System.in);
 
-        tarea05(); // Ejeuctar tarea 1
+        tarea02(); // Ejeuctar tarea 1
     }
 
     /**
@@ -59,7 +59,7 @@ public class SemanaUno {
      */
     public static void tarea02() {
         // Declarar variables
-        double n1, n2, n3, promedio, pesoN3;
+        double n1, n2, n3, promedio, pesoN1, pesoN2, pesoN3;
 
         // Inicializar variables
         System.out.println("Ingresar Nota #1");
@@ -71,10 +71,12 @@ public class SemanaUno {
 
         // Proceso
         // Aplicar peso para la nota #3
-        pesoN3 = n3 * 2;
+        pesoN1 = n1 * 0.25;
+        pesoN2 = n2 * 0.25;
+        pesoN3 = n3 * 0.5;
 
         // Calcular nota promedio ponderado
-        promedio = (n1 + n2 + pesoN3) / 3;
+        promedio = (pesoN1 + pesoN2 + pesoN3);
 
         // Salida
         System.out.println("El promedio es: " + promedio);
