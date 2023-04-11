@@ -5,6 +5,7 @@
 package com.alexquispe.utp;
 
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,7 +23,7 @@ public class SemanaTres {
         dato = new Scanner(System.in);
 
         // Ejecutar método
-        ejercicio02();
+        ejercicio04();
     }
 
     public static void tarea() {
@@ -155,5 +156,27 @@ public class SemanaTres {
 
         // S
         System.out.println("El sueldo total a pagar es: " + total);
+    }
+
+    public static void ejercicio04() {
+        // D
+        int t, d;
+        float v;
+
+        // I
+        v = 0;
+        String sd = JOptionPane.showInputDialog("Ingrese Distancia:");
+        String st = JOptionPane.showInputDialog("Ingrese Tiempo:");
+
+        // P
+        d = Integer.parseInt(sd);
+        t = Integer.parseInt(st);
+        if (t > 0) {
+            v = (float) (d) / t;
+        }
+
+        // S
+        System.out.println("La velocidad (m/s) es: " + v);
+
     }
 }
