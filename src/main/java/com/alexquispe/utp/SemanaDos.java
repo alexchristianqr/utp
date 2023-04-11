@@ -16,7 +16,8 @@ public class SemanaDos {
     static Scanner dato;
 
     public static void main(String[] args) {
-        // Declarar variables
+
+        // Instanciar o crear objeto
         dato = new Scanner(System.in);
 
         // Ejecutar método
@@ -26,19 +27,18 @@ public class SemanaDos {
     public static void ejercicio02() {
         // D
         double distancia, velocidad, tiempo;// d = v.t ; t = d/v ; v = d/t
-        
+
         // I
         System.out.println("Ingresa la velocidad");
         velocidad = dato.nextDouble();
         System.out.println("Ingresa el tiempo");
         tiempo = dato.nextDouble();
-        
+
         // P
         distancia = velocidad * tiempo;
-        
+
         // S
         System.out.println("La distancia es: " + distancia + " km");
-        
-        
+
     }
 }

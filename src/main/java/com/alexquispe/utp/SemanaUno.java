@@ -17,7 +17,7 @@ public class SemanaUno {
     // Ejecutar programa principal
     public static void main(String[] args) {
 
-        // Declarar variables
+        // Instanciar o crear objeto
         dato = new Scanner(System.in);
 
         // Ejecutar método
