@@ -21,7 +21,7 @@ public class SemanaTres {
         // Declarar variables
         dato = new Scanner(System.in);
 
-        ejercicio01(); // Ejecutar metodo
+        ejercicio02(); // Ejecutar metodo
     }
 
     public static void tarea() {
@@ -89,5 +89,38 @@ public class SemanaTres {
 
         // S
         System.out.println("El salario semanal a pagar es: " + salarioSemanal);
+    }
+
+    public static void ejercicio02() {
+        // D
+        int a, b, c, d, e;
+
+        // I
+        System.out.println("Ingresar numero para a");
+        a = dato.nextInt();
+        System.out.println("Ingresar numero para b");
+        b = dato.nextInt();
+        System.out.println("Ingresar numero para c");
+        c = dato.nextInt();
+        System.out.println("Ingresar numero para d");
+        d = dato.nextInt();
+        System.out.println("Ingresar numero para e");
+        e = dato.nextInt();
+
+        // P
+        if (a > b && a > c && a > d && a > e) {
+            System.out.println("El numero mayor es a: " + a);
+        } else if (b > a && b > c && b > d && d > e) {
+            System.out.println("El numero mayor es b: " + b);
+        } else if (c > a && c > b && c > d && c > e) {
+            System.out.println("El numero mayor es c: " + c);
+        } else if (d > a && d > b && d > c && d > e) {
+            System.out.println("El numero mayor es d: " + d);
+        } else if (e > a && e > b && e > c && e > d) {
+            System.out.println("El numero mayor es e: " + e);
+        } else {
+            System.out.println("No existe numero mayor");
+        }
+        // S
     }
 }
