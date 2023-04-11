@@ -175,4 +175,35 @@ public class SemanaUno {
         System.out.println("El valor de m es: " + m);
         System.out.println("El valor de z es: " + z);
     }
+    
+     public static void tarea06() {
+        // D
+        String sexo;
+        int edad;
+        double precio;
+
+        // I
+        System.out.println("Ingrese su sexo:");
+        System.out.println("H: Hombre");
+        System.out.println("M: Mujer");
+        sexo = dato.next();
+
+        System.out.println("Ingrese su edad:");
+        edad = dato.nextInt();
+
+        // P
+        if (edad > 6 && edad <= 12) {
+            precio = 10;
+        } else if (edad > 12 && edad <= 60) {
+            precio = 20;
+        } else if (edad > 60) {
+            precio = 15;
+        } else {
+            precio = 0;
+        }
+
+        // S
+        System.out.println("Su sexo es: " +  (sexo.equals("H") ? "Hombre": "Mujer"));
+        System.out.println("El precio de la entrada es: " + precio);
+    }
 }
