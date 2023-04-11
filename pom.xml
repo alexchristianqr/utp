@@ -9,6 +9,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <exec.mainClass>com.alexquispe.utp.SemanaDos</exec.mainClass>
+        <exec.mainClass>com.alexquispe.utp.SemanaTres</exec.mainClass>
     </properties>
 </project>

@@ -24,8 +24,7 @@ public class SemanaUno {
     }
 
     /**
-     * Tarea 01 
-     * Ingrese su nombre, edad, genero y talla desde el teclado, luego
+     * Tarea 01 Ingrese su nombre, edad, genero y talla desde el teclado, luego
      * mostrar estos datos.
      */
     public static void tarea01() {
@@ -53,8 +52,7 @@ public class SemanaUno {
     }
 
     /**
-     * Tarea 02 
-     * Escriba un programa para ingresar 3 notas de un alumno, calcular
+     * Tarea 02 Escriba un programa para ingresar 3 notas de un alumno, calcular
      * y mostrar su promedio, sabiendo que la tercera nota tiene peso 2.
      */
     public static void tarea02() {
@@ -83,8 +81,7 @@ public class SemanaUno {
     }
 
     /**
-     * Tarea 03 
-     * Una tienda ofrece un descuento del 5% del monto de la compra,
+     * Tarea 03 Una tienda ofrece un descuento del 5% del monto de la compra,
      * mostrar el monto del descuento y el monto final que paga un cliente
      */
     public static void tarea03() {
@@ -106,8 +103,7 @@ public class SemanaUno {
     }
 
     /**
-     * Tarea 04 
-     * Desarrolle un programa que permita calcular el porcentaje de
+     * Tarea 04 Desarrolle un programa que permita calcular el porcentaje de
      * hombres y mujeres que se encuentran en el aula.
      */
     public static void tarea04() {
@@ -132,10 +128,7 @@ public class SemanaUno {
     }
 
     /**
-     * Tarea 05 
-     * a = b + 2c + 3m 
-     * c = a + 3b + n 
-     * z = m + n + 5a
+     * Tarea 05 a = b + 2c + 3m c = a + 3b + n z = m + n + 5a
      */
     public static void tarea05() {
         // Declarar variables
@@ -153,20 +146,20 @@ public class SemanaUno {
         // Proceso 
         // Ecuación para hallar m
         System.out.println("Ecuaciones:");
-        
-        m = (a - b - (2*c)) / 3;// m = (a - b - 2c)/3
+
+        m = (a - b - (2 * c)) / 3;// m = (a - b - 2c)/3
         System.out.println("Ecuación para hallar m = " + "(" + a + " - " + b + " - " + "2(" + c + "))" + "/ 3");
         System.out.println("m = " + m);
         System.out.print("\r");
-        
+
         // Ecuación para hallar n
-        n = c - a - (3*b);// n = c - a - 3b
+        n = c - a - (3 * b);// n = c - a - 3b
         System.out.println("Ecuación para hallar n = " + "" + c + " - " + a + " - " + "3(" + b + ")");
         System.out.println("n = " + n);
         System.out.print("\r");
-        
+
         // Ecuación para hallar z
-        z = m + n + (5*a);// z = m + n + 5a
+        z = m + n + (5 * a);// z = m + n + 5a
         System.out.println("Ecuación para hallar z = " + "" + m + " + (" + n + ") + " + "5(" + a + ")");
         System.out.println("z = " + z);
         System.out.print("\r");
@@ -175,35 +168,5 @@ public class SemanaUno {
         System.out.println("El valor de m es: " + m);
         System.out.println("El valor de z es: " + z);
     }
-    
-     public static void tarea06() {
-        // D
-        String sexo;
-        int edad;
-        double precio;
 
-        // I
-        System.out.println("Ingrese su sexo:");
-        System.out.println("H: Hombre");
-        System.out.println("M: Mujer");
-        sexo = dato.next();
-
-        System.out.println("Ingrese su edad:");
-        edad = dato.nextInt();
-
-        // P
-        if (edad > 6 && edad <= 12) {
-            precio = 10;
-        } else if (edad > 12 && edad <= 60) {
-            precio = 20;
-        } else if (edad > 60) {
-            precio = 15;
-        } else {
-            precio = 0;
-        }
-
-        // S
-        System.out.println("Su sexo es: " +  (sexo.equals("H") ? "Hombre": "Mujer"));
-        System.out.println("El precio de la entrada es: " + precio);
-    }
 }
