@@ -21,14 +21,14 @@ public class SemanaUno {
         dato = new Scanner(System.in);
 
         // Ejecutar método
-        tarea02();
+        ejercicio01();
     }
 
     /**
      * Tarea 01 Ingrese su nombre, edad, genero y talla desde el teclado, luego
      * mostrar estos datos.
      */
-    public static void tarea01() {
+    public static void ejercicio01() {
         // Declarar variables
         String nombre, genero, talla;
         int edad;
@@ -56,7 +56,7 @@ public class SemanaUno {
      * Tarea 02 Escriba un programa para ingresar 3 notas de un alumno, calcular
      * y mostrar su promedio, sabiendo que la tercera nota tiene peso 2.
      */
-    public static void tarea02() {
+    public static void ejercicio02() {
         // Declarar variables
         double n1, n2, n3, promedio, pesoN1, pesoN2, pesoN3;
 
@@ -85,7 +85,7 @@ public class SemanaUno {
      * Tarea 03 Una tienda ofrece un descuento del 5% del monto de la compra,
      * mostrar el monto del descuento y el monto final que paga un cliente
      */
-    public static void tarea03() {
+    public static void ejercicio03() {
         // Declarar variables
         double porcentajeDscto, montoCompra, montoDscto, montoFinal;
 
@@ -107,7 +107,7 @@ public class SemanaUno {
      * Tarea 04 Desarrolle un programa que permita calcular el porcentaje de
      * hombres y mujeres que se encuentran en el aula.
      */
-    public static void tarea04() {
+    public static void ejercicio04() {
         // Declarar variables
         int cantMujeres, cantHombres, total;
         double porcentajeMujeres, porcentajeHombres;
@@ -131,7 +131,7 @@ public class SemanaUno {
     /**
      * Tarea 05 a = b + 2c + 3m c = a + 3b + n z = m + n + 5a
      */
-    public static void tarea05() {
+    public static void ejercicio05() {
         // Declarar variables
         int a, b, c, m, n, z;
 

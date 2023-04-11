@@ -21,12 +21,13 @@ public class SemanaDos {
         dato = new Scanner(System.in);
 
         // Ejecutar método
-        ejercicio02();
+        ejercicio01();
     }
 
-    public static void ejercicio02() {
+    public static void ejercicio01() {
         // D
-        double distancia, velocidad, tiempo;// d = v.t ; t = d/v ; v = d/t
+        // d = v.t ; t = d/v ; v = d/t
+        double distancia, velocidad, tiempo;
 
         // I
         System.out.println("Ingresa la velocidad");
