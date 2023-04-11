@@ -24,7 +24,7 @@ public class SemanaTres {
         dato = new Scanner(System.in);
 
         // Ejecutar método
-        ejercicio05();
+        ejercicio03();
     }
 
     public static void tarea() {
