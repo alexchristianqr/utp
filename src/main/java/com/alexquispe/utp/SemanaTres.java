@@ -4,8 +4,10 @@
  */
 package com.alexquispe.utp;
 
+import java.awt.Event;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import javax.swing.JComponent;
 
 /**
  *
@@ -19,11 +21,11 @@ public class SemanaTres {
     // Ejecutar programa principal
     public static void main(String[] args) {
 
-        // Declarar variables
+        // Instanciar o crear objeto
         dato = new Scanner(System.in);
 
         // Ejecutar método
-        ejercicio04();
+        ejercicio05();
     }
 
     public static void tarea() {
@@ -177,6 +179,28 @@ public class SemanaTres {
 
         // S
         System.out.println("La velocidad (m/s) es: " + v);
+
+    }
+
+    public static void ejercicio05() {
+        // D
+        int t, d;
+        float v;
+
+        // I
+        String sd = JOptionPane.showInputDialog("Ingrese Distancia:");
+        String st = JOptionPane.showInputDialog("Ingrese Tiempo:");
+
+        // PS
+        d = Integer.parseInt(sd);
+        t = Integer.parseInt(st);
+        if (t > 0 && d > 0) {
+            v = (float) (d) / t;
+            System.out.println("LA VELOCIDAD (m/s) ES: " + v);
+        } else {
+            JOptionPane.showMessageDialog(new JComponent() {
+            }, "Los datos ingresados deben ser diferentes de cero");
+        }
 
     }
 }
