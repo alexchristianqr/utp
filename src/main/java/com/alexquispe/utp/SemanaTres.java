@@ -57,7 +57,8 @@ public class SemanaTres {
 
     public static void ejercicio01() {
         // D
-        double horasTrabajadas, salarioSemanal, salarioJornal, salarioExtra, precioHora, precioHoraExtra, horasTrabajadasExtra;
+        int horasTrabajadas, horasTrabajadasExtra;
+        double salarioSemanal, salarioJornal, salarioExtra, precioHora, precioHoraExtra;
 
         // I
         precioHora = 38;
@@ -65,7 +66,7 @@ public class SemanaTres {
         salarioSemanal = 0;
 
         System.out.println("Ingresar horas trabajadas:");
-        horasTrabajadas = dato.nextDouble();
+        horasTrabajadas = dato.nextInt();
 
         // P
         System.out.println("Horas trabajadas: " + horasTrabajadas);
