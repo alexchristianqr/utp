@@ -117,9 +117,9 @@ public class SemanaCuatro {
      */
     static void ejercicio03() {
         // D
-        int opcion, operador;
-        double num1, num2, resultado = 0;
-        String mensaje = "";
+        int opcion;
+        double num1, num2, resultado;
+        String mensaje;
         Scanner dato = new Scanner(System.in);
 
         // I
@@ -143,25 +143,23 @@ public class SemanaCuatro {
         switch (opcion) {
             case 1:
                 resultado = num1 + num2;
-                mensaje = "El resultado es " + resultado;
                 break;
             case 2:
                 resultado = num1 - num2;
-                mensaje = "El resultado es " + resultado;
                 break;
             case 3:
                 resultado = num1 * num2;
-                mensaje = "El resultado es " + resultado;
                 break;
             case 4:
                 resultado = num1 / num2;
-                mensaje = "El resultado es " + resultado;
                 break;
             default:
-                mensaje = "La opcion ingresada no es valida";
+                System.out.println("La opcion ingresada no es valida");
+                return;
         }
 
         // S
+        mensaje = "El resultado es " + resultado;
         System.out.println("Rpta: " + mensaje);
     }
 
