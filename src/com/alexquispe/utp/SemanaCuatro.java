@@ -63,6 +63,48 @@ public class SemanaCuatro {
         // S
         System.out.println("Rpta: " + nombreDia);
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         // D
+        int num;
+        String mensaje;
+
+        // I
+        System.out.println("Ingresa un numero de 0 a 9:");
+        System.out.println("----------------------------");
+        System.out.print("\n");
+
+        Scanner dato = new Scanner(System.in);
+        num = dato.nextInt();
+
+        // P
+        if (num < 0 || num > 9) {
+            mensaje = "No es un numero valido";
+        } else {
+            switch (num) {
+                case 0:
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 9:
+                    mensaje = "Es impar";
+                    break;
+                default:
+                    mensaje = "Es par";
+            }
+        }
+
+        // S
+        System.out.println("Rpta: " + mensaje);
+        
     }
     
 }
