@@ -22,7 +22,7 @@ public class SemanaCuatro {
         // Instanciar o crear objeto
         dato = new Scanner(System.in);
 
-        maquinaDispensadora();
+        maquinaDispensadoraUTP();
     }
 
     static void ejercicio01() {
@@ -219,7 +219,7 @@ public class SemanaCuatro {
         System.out.println("Rpta: La cuota inicial es: $" + cuotaInicial);
     }
 
-    static void maquinaDispensadora() {
+    static void maquinaDispensadoraUTP() {
         // D
         int tipoPago, tipoProducto;
         double saldo, precioProducto, vuelto;
