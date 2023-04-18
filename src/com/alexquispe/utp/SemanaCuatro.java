@@ -238,6 +238,7 @@ public class SemanaCuatro {
         saldo = dato.nextDouble();
         System.out.print("\n");
 
+        // PS
         switch (tipoPago) {
             case 1:
                 // Validar que solo acepte monedas
@@ -260,49 +261,51 @@ public class SemanaCuatro {
                 return;
         }
 
-        // PS
         // Validar permiso para comprar productos
-        if (permisoParaComprar) {
-            System.out.println("Selecionar un producto:");
-            System.out.println("1: Galleta a $1.50");
-            System.out.println("2: Gaseosa a $2.50");
-            System.out.println("3: Chocolate a $1.70");
-            System.out.println("4: Caramelo a $0.50");
-            System.out.println("5: Cerveza a $10.00");
-            tipoProducto = dato.nextInt();
-            System.out.print("\n");
-
-            switch (tipoProducto) {
-                case 1:
-                    precioProducto = 1.50;
-                    break;
-                case 2:
-                    precioProducto = 2.50;
-                    break;
-                case 3:
-                    precioProducto = 1.70;
-                    break;
-                case 4:
-                    precioProducto = 0.50;
-                    break;
-                case 5:
-                    precioProducto = 10;
-                    break;
-                default:
-                    System.out.println("No es una opcion valida");
-                    return;
-            }
-
-            // Validar saldo disponible para comprar un producto
-            if (saldo < precioProducto) {
-                System.out.println("El saldo es insuficiente");
-                return;
-            }
-
-            // Calcular
-            vuelto = saldo - precioProducto;
-            System.out.println("El monto total a pagar es: $" + precioProducto);
-            System.out.println("Tu saldo restante es: $" + vuelto);
+        if (!permisoParaComprar) {
+            System.out.println("Saliendo...");
+            return;
         }
+
+        System.out.println("Selecionar un producto:");
+        System.out.println("1: Galleta a $1.50");
+        System.out.println("2: Gaseosa a $2.50");
+        System.out.println("3: Chocolate a $1.70");
+        System.out.println("4: Caramelo a $0.50");
+        System.out.println("5: Cerveza a $10.00");
+        tipoProducto = dato.nextInt();
+        System.out.print("\n");
+
+        switch (tipoProducto) {
+            case 1:
+                precioProducto = 1.50;
+                break;
+            case 2:
+                precioProducto = 2.50;
+                break;
+            case 3:
+                precioProducto = 1.70;
+                break;
+            case 4:
+                precioProducto = 0.50;
+                break;
+            case 5:
+                precioProducto = 10;
+                break;
+            default:
+                System.out.println("No es una opcion valida");
+                return;
+        }
+
+        // Validar saldo disponible para comprar un producto
+        if (saldo < precioProducto) {
+            System.out.println("El saldo es insuficiente");
+            return;
+        }
+
+        // Calcular
+        vuelto = saldo - precioProducto;
+        System.out.println("El monto total a pagar es: $" + precioProducto);
+        System.out.println("Tu saldo restante es: $" + vuelto);
     }
 }
