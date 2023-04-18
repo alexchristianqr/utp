@@ -22,7 +22,7 @@ public class SemanaCuatro {
         // Instanciar o crear objeto
         dato = new Scanner(System.in);
 
-        ejercicio03();
+        maquinaDispensadora();
     }
 
     static void ejercicio01() {
@@ -120,11 +120,12 @@ public class SemanaCuatro {
         int opcion, operador;
         double num1, num2, resultado = 0;
         String mensaje = "";
+        Scanner dato = new Scanner(System.in);
 
         // I
-        System.out.println("-------------------");
-        System.out.println("Mi calculadora básica:");
-        System.out.println("-------------------");
+        System.out.println("---------------------");
+        System.out.println("Mi calculadora básica");
+        System.out.println("---------------------");
         System.out.println("Seleccionar una opcion:");
         System.out.println("1: Sumar");
         System.out.println("2: Restar");
@@ -157,11 +158,153 @@ public class SemanaCuatro {
                 mensaje = "El resultado es " + resultado;
                 break;
             default:
-                mensaje = "La opcion ingresada es invalida";
+                mensaje = "La opcion ingresada no es valida";
         }
 
         // S
         System.out.println("Rpta: " + mensaje);
     }
 
+    /**
+     * Una tienda automotriz ofrece la venta de autos al crédito, de esta manera el
+     * financiamiento se realiza de tres formas como lo indica la siguiente tabla:
+     * Tipo de financiamiento Cuota inicial
+     * 1 10%
+     * 2 15%
+     * 3 20%
+     * Calcular el monto de la cuota inicial y el monto que va a financiar.
+     */
+    static void ejercicio04() {
+        // D
+        int opcion;
+        double cuotaInicial, porcentaje = 0, montoFinanciamiento = 0;
+        Scanner dato = new Scanner(System.in);
+
+        // IP
+        System.out.println("--------------");
+        System.out.println("Venta de autos");
+        System.out.println("--------------");
+        System.out.println("Seleccionar tipo de financiamiento:");
+        System.out.println("1: al 10%");
+        System.out.println("2: al 15%");
+        System.out.println("3: al 20%");
+        opcion = dato.nextInt();
+        System.out.print("\n");
+
+        // Evaluar opción
+        switch (opcion) {
+            case 1:
+                porcentaje = 0.10;
+                break;
+            case 2:
+                porcentaje = 0.15;
+                break;
+            case 3:
+                porcentaje = 0.20;
+                break;
+            default:
+                System.out.println("La opcion ingresada no es valida");
+                return;
+
+        }
+
+        System.out.println("Ingresar el monto a financiar:");
+        montoFinanciamiento = dato.nextDouble();
+        System.out.print("\n");
+
+        // Calcular cuota
+        cuotaInicial = montoFinanciamiento * porcentaje;
+        montoFinanciamiento = montoFinanciamiento + cuotaInicial;
+
+        // S
+        System.out.println("Rpta: El monto total del financiamiento al " + porcentaje * 100 + "% es: $" + montoFinanciamiento);
+        System.out.println("Rpta: La cuota inicial es: $" + cuotaInicial);
+    }
+
+    static void maquinaDispensadora() {
+        // D
+        int tipoPago, tipoProducto;
+        double saldo, precioProducto, vuelto;
+        boolean permisoParaComprar = false;
+        Scanner dato = new Scanner(System.in);
+
+        // I
+        System.out.println("-------------------------------------");
+        System.out.println("Maquina dispensadora de productos UTP");
+        System.out.println("-------------------------------------");
+        System.out.println("Selecionar tipo de pago:");
+        System.out.println("1: monedas");
+        System.out.println("2: billete");
+        tipoPago = dato.nextInt();
+        System.out.println("Ingresar saldo:");
+        saldo = dato.nextDouble();
+        System.out.print("\n");
+
+        switch (tipoPago) {
+            case 1:
+                // Validar que solo acepte monedas
+                if (saldo == 1 || saldo == 2 || saldo == 5) {
+                    permisoParaComprar = true;
+                } else {
+                    System.out.println("No es una moneda");
+                }
+                break;
+            case 2:
+                // Validar que solo acepte billetes
+                if (saldo == 10 || saldo == 20 || saldo == 50 || saldo == 100 || saldo == 200) {
+                    permisoParaComprar = true;
+                } else {
+                    System.out.println("No es un billete");
+                }
+                break;
+            default:
+                System.out.println("No es una opcion valida");
+                return;
+        }
+
+        // PS
+        // Validar permiso para comprar productos
+        if (permisoParaComprar) {
+            System.out.println("Selecionar un producto:");
+            System.out.println("1: Galleta a $1.50");
+            System.out.println("2: Gaseosa a $2.50");
+            System.out.println("3: Chocolate a $1.70");
+            System.out.println("4: Caramelo a $0.50");
+            System.out.println("5: Cerveza a $10.00");
+            tipoProducto = dato.nextInt();
+            System.out.print("\n");
+
+            switch (tipoProducto) {
+                case 1:
+                    precioProducto = 1.50;
+                    break;
+                case 2:
+                    precioProducto = 2.50;
+                    break;
+                case 3:
+                    precioProducto = 1.70;
+                    break;
+                case 4:
+                    precioProducto = 0.50;
+                    break;
+                case 5:
+                    precioProducto = 10;
+                    break;
+                default:
+                    System.out.println("No es una opcion valida");
+                    return;
+            }
+
+            // Validar saldo disponible para comprar un producto
+            if (saldo < precioProducto) {
+                System.out.println("El saldo es insuficiente");
+                return;
+            }
+
+            // Calcular
+            vuelto = saldo - precioProducto;
+            System.out.println("El monto total a pagar es: $" + precioProducto);
+            System.out.println("Tu saldo restante es: $" + vuelto);
+        }
+    }
 }
