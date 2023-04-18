@@ -4,18 +4,29 @@
  */
 package com.alexquispe.utp;
 
+import java.util.Scanner;
+
 /**
- *
  * @author LAB-USR-AQ265-A0303
  */
 public class SemanaCuatro {
+    // Declarar como una variable global a nivel de clase
+    static Scanner dato;
+
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       
-         // D
+
+        // Instanciar o crear objeto
+        dato = new Scanner(System.in);
+
+        ejercicio03();
+    }
+
+    static void ejercicio01() {
+        // D
         int dia;
         String nombreDia;
 
@@ -30,9 +41,8 @@ public class SemanaCuatro {
         System.out.println("6: Sabado");
         System.out.println("7: Domingo");
         System.out.print("\n");
-        Scanner dato = new Scanner(System.in);
         dia = dato.nextInt();
-        
+
         // P
         switch (dia) {
             case 1:
@@ -62,17 +72,12 @@ public class SemanaCuatro {
 
         // S
         System.out.println("Rpta: " + nombreDia);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-         // D
+
+
+    }
+
+    static void ejercicio02() {
+        // D
         int num;
         String mensaje;
 
@@ -80,8 +85,6 @@ public class SemanaCuatro {
         System.out.println("Ingresa un numero de 0 a 9:");
         System.out.println("----------------------------");
         System.out.print("\n");
-
-        Scanner dato = new Scanner(System.in);
         num = dato.nextInt();
 
         // P
@@ -104,7 +107,61 @@ public class SemanaCuatro {
 
         // S
         System.out.println("Rpta: " + mensaje);
-        
     }
-    
+
+    /**
+     * Ejercicio 1. Construir un programa que simule el funcionamiento
+     * de una calculadora que pueda realizar las cuatro operaciones
+     * aritméticas básicas (suma, resta, producto y división) al
+     * ingresar 2 números enteros.
+     */
+    static void ejercicio03() {
+        // D
+        int opcion, operador;
+        double num1, num2, resultado = 0;
+        String mensaje = "";
+
+        // I
+        System.out.println("-------------------");
+        System.out.println("Mi calculadora básica:");
+        System.out.println("-------------------");
+        System.out.println("Seleccionar una opcion:");
+        System.out.println("1: Sumar");
+        System.out.println("2: Restar");
+        System.out.println("3: Multiplicar");
+        System.out.println("4: Dividir");
+        opcion = dato.nextInt();
+        System.out.print("\n");
+        System.out.println("Ingresar N° 1:");
+        num1 = dato.nextDouble();
+        System.out.println("Ingresar N° 2:");
+        num2 = dato.nextDouble();
+        System.out.print("\n");
+
+        // P
+        switch (opcion) {
+            case 1:
+                resultado = num1 + num2;
+                mensaje = "El resultado es " + resultado;
+                break;
+            case 2:
+                resultado = num1 - num2;
+                mensaje = "El resultado es " + resultado;
+                break;
+            case 3:
+                resultado = num1 * num2;
+                mensaje = "El resultado es " + resultado;
+                break;
+            case 4:
+                resultado = num1 / num2;
+                mensaje = "El resultado es " + resultado;
+                break;
+            default:
+                mensaje = "La opcion ingresada es invalida";
+        }
+
+        // S
+        System.out.println("Rpta: " + mensaje);
+    }
+
 }
