@@ -22,67 +22,8 @@ public class SemanaCuatro {
         // Instanciar o crear objeto
         dato = new Scanner(System.in);
 
-        maquinaDispensadoraUTP();
-        
-         // D
-        int tipoCliente, tipoEditorial;
-        double importeTotal, pjeDesc = 0;
-        Scanner dato = new Scanner(System.in);
+        ejercicio05();
 
-        // I
-        System.out.println("Ingrese el tipo comprador");
-        System.out.println("1: Estudiante");
-        System.out.println("2: Publico general");
-        tipoCliente = dato.nextInt();
-        System.out.println("Ingrese la editorial");
-        System.out.println("1: Aries");
-        System.out.println("2: Planeta");
-        System.out.println("3: Mundo");
-        tipoEditorial = dato.nextInt();
-        System.out.println("Ingrese importe de la compra");
-        importeTotal = dato.nextDouble();
-
-        // P
-        switch (tipoCliente) {
-            case 1:
-                switch (tipoEditorial) {
-                    case 1:
-                        pjeDesc = importeTotal * 0.25;
-                        break;
-                    case 2:
-                        pjeDesc = importeTotal * 0.30;
-                        break;
-                    case 3:
-                        pjeDesc = importeTotal * 0.35;
-                        break;
-                    default:
-                        System.out.println("Tipo editorial no permitido");
-                }
-                break;
-            case 2:
-                switch (tipoEditorial) {
-                    case 1:
-                        pjeDesc = importeTotal * 0.10;
-                        break;
-                    case 2:
-                        pjeDesc = importeTotal * 0.13;
-                        break;
-                    case 3:
-                        pjeDesc = importeTotal * 0.16;
-                        break;
-                    default:
-                        System.out.println("Tipo editorial no permitido");
-                }
-                break;
-
-            default:
-                System.out.println("Tipo de cliente no permitido");
-        }
-
-        importeTotal = importeTotal - pjeDesc;
-        System.out.println("El importe total es: " + importeTotal);
-        System.out.println("El descuento es: " + pjeDesc);
-        
     }
 
     static void ejercicio01() {
@@ -277,6 +218,67 @@ public class SemanaCuatro {
         // S
         System.out.println("Rpta: El monto total del financiamiento al " + porcentaje * 100 + "% es: $" + montoFinanciamiento);
         System.out.println("Rpta: La cuota inicial es: $" + cuotaInicial);
+    }
+
+    static void ejercicio05() {
+        // D
+        int tipoCliente, tipoEditorial;
+        double importeTotal, pjeDesc = 0;
+        Scanner dato = new Scanner(System.in);
+
+        // I
+        System.out.println("Ingrese el tipo comprador");
+        System.out.println("1: Estudiante");
+        System.out.println("2: Publico general");
+        tipoCliente = dato.nextInt();
+        System.out.println("Ingrese la editorial");
+        System.out.println("1: Aries");
+        System.out.println("2: Planeta");
+        System.out.println("3: Mundo");
+        tipoEditorial = dato.nextInt();
+        System.out.println("Ingrese importe de la compra");
+        importeTotal = dato.nextDouble();
+
+        // P
+        switch (tipoCliente) {
+            case 1:
+                switch (tipoEditorial) {
+                    case 1:
+                        pjeDesc = importeTotal * 0.25;
+                        break;
+                    case 2:
+                        pjeDesc = importeTotal * 0.30;
+                        break;
+                    case 3:
+                        pjeDesc = importeTotal * 0.35;
+                        break;
+                    default:
+                        System.out.println("Tipo editorial no permitido");
+                }
+                break;
+            case 2:
+                switch (tipoEditorial) {
+                    case 1:
+                        pjeDesc = importeTotal * 0.10;
+                        break;
+                    case 2:
+                        pjeDesc = importeTotal * 0.13;
+                        break;
+                    case 3:
+                        pjeDesc = importeTotal * 0.16;
+                        break;
+                    default:
+                        System.out.println("Tipo editorial no permitido");
+                }
+                break;
+
+            default:
+                System.out.println("Tipo de cliente no permitido");
+        }
+
+        importeTotal = importeTotal - pjeDesc;
+        System.out.println("El importe total es: " + importeTotal);
+        System.out.println("El descuento es: " + pjeDesc);
     }
 
     static void maquinaDispensadoraUTP() {
