@@ -6,12 +6,11 @@ public class SemanaCinco {
 
 
     public static void main(String[] args) {
-        ejercicio01();
+        ejercicio02();
     }
 
     /**
      * SANTA ELENA, una empresa de transporte tiene los siguientes precios por persona de Lima a:
-     * <p>
      * ++++++++++++++++++++++++++++++++++++++
      * Destino                Precio (soles)
      * ++++++++++++++++++++++++++++++++++++++
@@ -20,7 +19,6 @@ public class SemanaCinco {
      * Arequipa                 +   70
      * Moquegua                 +   125
      * +++++++++++++++++++++++++++++++++++++++
-     * <p>
      * Tener en cuenta que, si el destino no es ninguno de ellos, el precio debe ser 0.
      * Además recibe un descuento promocional del 18.5% si la persona tiene entre 25 y 35 años de edad.
      * Mostrar el precio final a pagar por persona usando IF y ELSE (IF anidados)
@@ -35,6 +33,7 @@ public class SemanaCinco {
         precioDscto = 0;
         valorPjeDscto = 0.185;// 18.5%
         System.out.println("-- Tours SANTA ELENA --");
+        System.out.println("-----------------------");
         System.out.println("Ingresa tu edad:");
         edad = scanner.nextInt();
         System.out.println("Nota: La promoción del 18.5% de descuento aplica solo para el rango de 25-35 años de edad.");
@@ -100,5 +99,63 @@ public class SemanaCinco {
         System.out.println("Tu edad es: " + edad + " años");
         System.out.println("El precio final del pasaje es: $" + precioPasajeFinal);
         System.out.println("Descuento promocional del " + valorPjeDscto * 100 + "% aplicado es: -$" + precioDscto);
+    }
+
+    public static void ejercicio02() {
+        // D
+        int tipoVehiculo, diasInternado;
+        double costoDiario, costoFinal, valorDscto, totalDscto;
+
+        // I
+        valorDscto = 0;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("-- DEPOSITO VEHICULAR --");
+        System.out.println("------------------------");
+        System.out.println("Selecciona un tipo de vehiculo:");
+        System.out.println("1: Moto");
+        System.out.println("2: Auto");
+        System.out.println("3: Camioneta");
+        System.out.println("4: Camion");
+        tipoVehiculo = scanner.nextInt();
+        System.out.println("Ingrese la cantidad de dias de internamiento:");
+        diasInternado = scanner.nextInt();
+
+        // P
+        switch (tipoVehiculo) {
+            case 1:
+                costoDiario = 27.5;
+                break;
+            case 2:
+                costoDiario = 35.5;
+                break;
+            case 3:
+                costoDiario = 60.5;
+                break;
+            case 4:
+                costoDiario = 75.5;
+                break;
+            default:
+                System.out.println("No existe este tipo de vehiculo");
+                return;
+        }
+
+        if (diasInternado >= 1 && diasInternado <= 5) {
+            valorDscto = 0.055; // 5.50%
+        } else {
+            if (diasInternado >= 6 && diasInternado <= 10) {
+                valorDscto = 0.085;// 8.50%
+            } else {
+                if (diasInternado > 10) {
+                    valorDscto = 0.1075;//10.75%
+                }
+            }
+        }
+
+        // Calcular descuento
+        totalDscto = costoDiario * valorDscto;
+        costoFinal = costoDiario - totalDscto;
+
+        // S
+        System.out.println("El costo final es: " + costoFinal);
     }
 }
