@@ -158,4 +158,38 @@ public class SemanaCinco {
         // S
         System.out.println("El costo final es: " + costoFinal);
     }
+    
+    public static void ejercicio03() {
+        // D
+        int numeroRollo75 = 75;
+        int numeroRollo300 = 300;
+        int numeroRollo500 = 500;
+        int totalRollos = (numeroRollo75 + numeroRollo300 + numeroRollo500);
+        double cantidadAlambre;
+
+        // I
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("-- DISTRIBUIDOR --");
+        System.out.println("Ingrese la cantidad de metros de alambre");
+        cantidadAlambre = scanner.nextDouble();
+
+        // PS 75, 300 y 500
+        if (cantidadAlambre > 1 && cantidadAlambre <= numeroRollo75) {
+            System.out.println("a: Se vendio " + cantidadAlambre + " m");
+        } else {
+            if (cantidadAlambre > numeroRollo75 && cantidadAlambre <= numeroRollo300) {
+                System.out.println("b: Se vendio " + cantidadAlambre + " m");
+            } else {
+                if (cantidadAlambre > numeroRollo300 && cantidadAlambre <= numeroRollo500) {
+                    System.out.println("c: Se vendio " + cantidadAlambre + " m");
+                } else {
+                    if (cantidadAlambre <= totalRollos) {
+                        System.out.println("d: Se vendio " + cantidadAlambre + " m");
+                    } else {
+                        System.out.println("No alcanza metraje de rollos de alambre");
+                    }
+                }
+            }
+        }
+    }
 }
