@@ -192,4 +192,55 @@ public class SemanaCinco {
             }
         }
     }
+    
+    public static void ejercicio04() {
+        // D
+        int tipoMascota, cantidadMascotas;
+        double costoMascota, costoTotal, costoFinal, valorDscto, totalDscto;
+
+        // I
+        totalDscto = 0;
+        valorDscto = 1;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("-- VETERINARIA PETSHOP LIMA --");
+        System.out.println("------------------------");
+        System.out.println("Selecciona un tipo de mascota:");
+        System.out.println("1: Perro a S/45.50");
+        System.out.println("2: Gato a S/28.50");
+        System.out.println("3: Conejo a S/20.50");
+        System.out.println("4: Otro a S/85.50");
+        tipoMascota = scanner.nextInt();
+        System.out.println("Ingrese la cantidad de mascotas:");
+        cantidadMascotas = scanner.nextInt();
+
+        // P
+        switch (tipoMascota) {
+            case 1:
+                costoMascota = 45.50;
+                break;
+            case 2:
+                costoMascota = 28.5;
+                break;
+            case 3:
+                costoMascota = 20.50;
+                break;
+            default:
+                costoMascota = 85.5;
+                break;
+        }
+
+        costoTotal = (costoMascota * cantidadMascotas);
+
+        if (cantidadMascotas > 4) {
+            valorDscto = 0.225; // 22.5%
+            totalDscto = (costoTotal * valorDscto);
+        }
+
+        // Calcular descuento
+        costoFinal = (costoTotal - totalDscto) / 3.823; // Soles a USD
+
+        // S
+        System.out.println("El costo final en USD es: $" + Math.round(costoFinal * 100.0) / 100.0);
+        System.out.println("El descuento en USD es: $" + Math.round((totalDscto / 3.823) * 100.0) / 100.0);
+    }
 }
