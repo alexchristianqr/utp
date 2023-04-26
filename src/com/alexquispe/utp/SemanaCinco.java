@@ -3,6 +3,204 @@ package com.alexquispe.utp;
 import java.util.Scanner;
 
 public class SemanaCinco {
+    
+    public static void main(String[] args) {
+        // D
+        double salarioTrab;
+        int aniosAntig;
+        double precioUnit = 0, aumento = 0, bonif = 0, sueldoNeto, totalAumento = 0, totalCompra = 0, montoCompra = 0;
+
+        // I
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("-- Summa Training --");
+        System.out.println("Ingrese su salario contratado:");
+        salarioTrab = scanner.nextDouble();
+        System.out.println("Ingrese sus anios de antiguedad:");
+        aniosAntig = scanner.nextInt();
+
+        // P
+        if (salarioTrab > 0 && salarioTrab <= 1350) {
+            aumento = 0.24;// 24%
+        } else {
+            if (salarioTrab >= 1351 && salarioTrab <= 2800) {
+                aumento = 0.16;// 16%
+            } else {
+                if (salarioTrab >= 2801 && salarioTrab <= 4000) {
+                    aumento = 0.08;// 8%
+                } else {
+                    if (salarioTrab >= 4001) {
+                        aumento = 0.03;// 3%
+                    }
+                }
+            }
+        }
+
+        if (aniosAntig >= 1 && aniosAntig <= 5) {
+            bonif = 135;
+        } else {
+            if (aniosAntig >= 6) {
+                bonif = 185;
+            }
+        }
+
+        totalAumento = (salarioTrab * aumento);
+        sueldoNeto = (salarioTrab + totalAumento + bonif);
+
+        // S
+        System.out.println("Aumento: S/" + totalAumento);
+        System.out.println("Bonificacion por anios: S/" + bonif);
+        System.out.println("El salario neto del trabajador en soles es: S/" + sueldoNeto);
+    }
+    
+    public static void main(String[] args) {
+        // D
+        int rollo375 = 375, rollo120 = 120, rollo25 = 25, sobranteRollo, cantidadAlambres;
+        int totalRollo375, totalRollo120, totalRollo25;
+        double montoCompra = 0, totalCompra = 0, totalDscto = 0, dscto = 0;
+
+        // I
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("-- ELECTRO SAC --");
+        System.out.println("Ingrese una longitud de metros de alambre:");
+        cantidadAlambres = scanner.nextInt();
+
+        // P
+        // Para 375
+        totalRollo375 = cantidadAlambres / rollo375;
+        sobranteRollo = cantidadAlambres % rollo375;
+
+        // Para 120
+        totalRollo120 = sobranteRollo / rollo120;
+        sobranteRollo = sobranteRollo % rollo120;
+
+        // Para 25
+        totalRollo25 = sobranteRollo / rollo25;
+        sobranteRollo = sobranteRollo % rollo25;
+
+        montoCompra = cantidadAlambres * 3.25;
+
+        if (sobranteRollo > 3) {
+            dscto = 0.10;
+            totalDscto = montoCompra * dscto;
+        }
+
+        totalCompra = montoCompra - totalDscto;
+        totalCompra = Math.round(totalCompra * 100.0) / 100.0;
+
+        // S
+        System.out.println("Total rollos 375: " + totalRollo375);
+        System.out.println("Total rollos 120: " + totalRollo120);
+        System.out.println("Total rollos 25: " + totalRollo25);
+        System.out.println("Total sobrantes: " + sobranteRollo);
+        System.out.println("El monto total a pagar en soles es: S/" + totalCompra);
+    }
+    
+    public static void main(String[] args) {
+        // D
+        int cantidadPanetones, marca;
+        double precioUnit = 0, dscto = 0, totalDscto = 0, totalCompra = 0, montoCompra = 0;
+
+        // I
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("-- CAMPAÑA NAVIDEÑA --");
+        System.out.println("Ingrese una marca de Paneton:");
+        System.out.println("1: Costa");
+        System.out.println("2: Bimbo");
+        System.out.println("3: Todinno");
+        System.out.println("4: Motta");
+        System.out.println("5: Union");
+        marca = scanner.nextInt();
+        System.out.println("Ingresar una cantidad de panetones a comprar:");
+        cantidadPanetones = scanner.nextInt();
+
+        // P
+        switch (marca) {
+            case 1:
+                precioUnit = 15;
+                break;
+            case 2:
+                precioUnit = 17;
+                break;
+            case 3:
+                precioUnit = 20;
+                break;
+            case 4:
+                precioUnit = 19;
+                break;
+
+            case 5:
+                precioUnit = 16;
+                break;
+            default:
+                System.out.println("No se vende este paneton");
+                return;
+        }
+
+        montoCompra = precioUnit * cantidadPanetones;
+
+        if (cantidadPanetones > 13) {
+            dscto = 0.1875;// 18.75%
+            totalDscto = montoCompra * dscto;
+        }
+
+        totalCompra = montoCompra - totalDscto;
+        totalCompra = Math.round(totalCompra * 100.0) / 100.0;
+
+        // S
+        System.out.println("El monto total a pagar en soles es: S/" + totalCompra);
+    }
+    
+    public static void main(String[] args) {
+        // D
+        int color;
+        double dscto = 0, totalDscto = 0, totalCompra = 0, totalCompraUSD = 0, montoCompra = 0;
+
+        // I
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("-- MARKET ZAGA --");
+        System.out.println("Ingrese un color");
+        System.out.println("1: Azul");
+        System.out.println("2: Amarillo");
+        System.out.println("3: Verde");
+        System.out.println("4: Naranja");
+        System.out.println("5: Rojo");
+        color = scanner.nextInt();
+
+        // P
+        switch (color) {
+            case 1:// azul
+                dscto = 0.125;// 12.5%
+                break;
+            case 2:// amarillo
+                dscto = 0.45;// 45%
+                break;
+            case 3:// verde
+                dscto = 0.255;// 25.5%
+                break;
+            case 4:// naranja
+                dscto = 0.355;// 35.5%
+                break;
+
+            case 5:// rojo
+                dscto = 0;// 0%
+                break;
+            default:
+                System.out.println("No se admite este tipo de color");
+                return;
+        }
+
+        System.out.println("Ingresar monto");
+        montoCompra = scanner.nextDouble();
+
+        totalDscto = montoCompra * dscto;
+        totalCompra = montoCompra - totalDscto;
+        totalCompraUSD = (totalCompra / 3.60);// a USD
+
+        // S
+        System.out.println("El cliente debera pagar");
+        System.out.println("Monto en USD: " + totalCompraUSD);
+        System.out.println("Monto en Soles: " + totalCompra);
+    }
 
 
     public static void main(String[] args) {
