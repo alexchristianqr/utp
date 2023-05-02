@@ -1,6 +1,5 @@
 package com.alexquispe.utp.trabajofinal;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
@@ -8,19 +7,9 @@ public class PersonTableModel extends AbstractTableModel {
 
     private static final String[] COLUMN_NAMES = {"Nombre", "DNI", "Edad"};
     private List<Person> personList;
-    String[] columnNames;
 
     public PersonTableModel(List<Person> personList) {
         this.personList = personList;
-    }
-
-
-    public String[] setColumnNames(String[] columnNames) {
-        return this.columnNames = columnNames;
-    }
-
-    public static String[] getColumnNames() {
-        return COLUMN_NAMES;
     }
 
     @Override
