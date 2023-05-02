@@ -107,11 +107,11 @@ public class App extends JFrame {
 
         // Panel table list
         JPanel panelPersonas = new JPanel();
-        String[] columnNames = {"Nombre", "DNI", "Edad"};
         DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
         columnModel.addColumn(createColumn("Nombre", 0, 100));
         columnModel.addColumn(createColumn("DNI", 1, 100));
         columnModel.addColumn(createColumn("Edad", 2, 100));
+        columnModel.addColumn(createColumn("Acciones", 3, 100));
         tablaPersonas = new JTable(personTableModel, columnModel);
         JScrollPane scrollPane = new JScrollPane(tablaPersonas);
         scrollPane.setPreferredSize(new Dimension(100, 200));
