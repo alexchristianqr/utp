@@ -1,8 +1,10 @@
 package com.alexquispe.utp.trabajofinal;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -111,7 +113,6 @@ public class App extends JFrame {
         columnModel.addColumn(createColumn("Nombre", 0, 100));
         columnModel.addColumn(createColumn("DNI", 1, 100));
         columnModel.addColumn(createColumn("Edad", 2, 100));
-        columnModel.addColumn(createColumn("Acciones", 3, 100));
         tablaPersonas = new JTable(personTableModel, columnModel);
         JScrollPane scrollPane = new JScrollPane(tablaPersonas);
         scrollPane.setPreferredSize(new Dimension(100, 200));
