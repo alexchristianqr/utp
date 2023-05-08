@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class SemanaSeis {
     public static void main(String[] args) {
-        ejercicio03();
+        ejercicio04();
     }
 
     static void ejercicio01() {
@@ -101,5 +101,24 @@ public class SemanaSeis {
 
         // S
         System.out.printf("El binario es: " + resultado);
+    }
+
+    static void ejercicio04() {
+        // D
+        int contador, residuo, acumulador = 0;
+
+        // I
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese un número límite:");
+        contador = scanner.nextInt();
+
+        // PS
+        while (contador > 0) {
+            System.out.println("El número es: " + contador);
+            residuo = contador % 10;
+            acumulador = acumulador + residuo;
+            contador = contador / 10;
+        }
+        System.out.println("El valor total es: " + acumulador);
     }
 }
