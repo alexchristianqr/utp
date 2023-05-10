@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class SemanaSiete {
     public static void main(String[] args) {
-        ejercicio03();
+        ejercicio05();
     }
 
     public static void ejercicio01() {
@@ -113,5 +113,29 @@ public class SemanaSiete {
 
         System.out.println("La suma de los digitos pares es: " + acumPares);
         System.out.println("La suma de los digitos impares es: " + acumImpares);
+    }
+
+    public static void ejercicio05() {
+        // D
+        int num;
+        double promedio, nota, acumulador = 0;
+
+        // I
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese una cantidad de notas");
+        num = scanner.nextInt();
+
+        // P
+        for (int i = 1; i <= num; i++) {
+            System.out.println("Ingrese la nota N°" + i);
+            nota = scanner.nextDouble();
+
+            acumulador = acumulador + nota;
+        }
+
+        promedio = acumulador / num;
+
+        // S
+        System.out.println("El promedio es: " + promedio);
     }
 }
