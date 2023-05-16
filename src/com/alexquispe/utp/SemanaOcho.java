@@ -43,4 +43,46 @@ public class SemanaOcho {
         System.out.println("Total rango 50-79 es: " + totalRango2);
         System.out.println("Total rango 80-100 es: " + totalRango3);
     }
+    
+    public static void ejercicio04() {
+        // DI
+        int cantAtletas = 0, cantSaltos, sumaSaltos = 0,totalCantSaltos = 0, contarSaltos = 0, promedioSalto = 0;
+        String seguirIntentando = "S";
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Ingresa una cantidad atletas");
+        cantAtletas = scanner.nextInt();
+
+        // P
+        // Iterar por cada atleta
+        for (int i = 1; i <= cantAtletas; i++) {
+            System.out.println("Ingresa una cantidad de saltos para el atleta #" + i);
+            cantSaltos = scanner.nextInt();
+            totalCantSaltos = totalCantSaltos + cantAtletas;
+
+            System.out.println("Seguir intentando el ingreso de saltos para el atleta #" + i + " S/N");
+            seguirIntentando = scanner.next();
+            
+            contarSaltos++;
+
+            // Seguir intentando los saltos
+            while (seguirIntentando.equalsIgnoreCase("S")) {
+                System.out.println("Ingresa una cantidad de saltos para el atleta #" + i);
+                cantSaltos = scanner.nextInt();
+                totalCantSaltos = totalCantSaltos + cantAtletas;
+
+                System.out.println("Seguir intentando el ingreso de saltos para el atleta #" + i + " S/N");
+                seguirIntentando = scanner.next();
+                
+                contarSaltos++;
+            }
+            
+            sumaSaltos = sumaSaltos + totalCantSaltos;
+            promedioSalto = sumaSaltos/contarSaltos;
+        }
+
+        // S
+        System.out.println("el promedio es: " + promedioSalto);
+        System.out.println("La cantidad saltos es: " + sumaSaltos);
+    }
 }
