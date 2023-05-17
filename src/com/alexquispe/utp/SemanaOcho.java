@@ -6,6 +6,59 @@ public class SemanaOcho {
     public static void main(String[] args) {
         ejercicio19();
     }
+    
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Scanner dato = new Scanner(System.in);
+        int totalclientes=0,cont1 = 0, cont2 = 0, cont3 = 0, cont4 = 0;
+        double ingresototal = 0, totalmonto = 0, totaldesc = 0, monto;
+        String ingreso = "S";
+
+        do {
+            if (ingreso.equalsIgnoreCase("S")) {
+                System.out.print("¿Desea registrar un cliente? (S/N): ");
+                ingreso = dato.next();
+                if (ingreso.equalsIgnoreCase("S")) {
+
+                    System.out.println("Ingrese el monto de la compra: ");
+                    monto = dato.nextDouble();
+
+                    if (monto >= 0 && monto <= 50) {
+                        totaldesc = monto * 0.0725;
+                        totalmonto = monto - totaldesc;
+                        cont1 = cont1 + 1;
+                    } else {
+                        if (monto >= 51 && monto <= 100) {
+                            totaldesc = monto * 0.065;
+                            totalmonto = monto - totaldesc;
+                            cont2 = cont2 + 1;
+                        } else {
+                            if (monto >= 101 && monto <= 150) {
+                                totaldesc = monto * 0.0475;
+                                totalmonto = monto - totaldesc;
+                                cont3 = cont3 + 1;
+                            } else {
+                                if (monto >= 151) {
+                                    totaldesc = monto * 0.025;
+                                    totalmonto = monto - totaldesc;
+                                    cont4 = cont4 + 1;
+                                }
+                            }
+                        }
+                    }
+                    totalclientes=cont1+cont2+cont3+cont4;
+                    ingresototal = ingresototal + totalmonto;
+                    System.out.println("El desceunto es: " + totaldesc);
+                    System.out.println("El monto final a pagar es: " + totalmonto);
+
+                }
+            }
+
+        } while (ingreso.equalsIgnoreCase("S"));
+        System.out.println("El ingreso total de ventas es: "+ingresototal);
+        System.out.println("El numero de clientes atendidos es: "+totalclientes);
+        
+    }
 
     public static void ejercicio19() {
         // DI
