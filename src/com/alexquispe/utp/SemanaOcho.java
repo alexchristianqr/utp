@@ -4,63 +4,58 @@ import java.util.Scanner;
 
 public class SemanaOcho {
     public static void main(String[] args) {
-        ejercicio19();
+        ejercicio01();
     }
-    
-    public static void main(String[] args) {
-        // TODO code application logic here
+
+    public static void ejercicio01() {
+        // DI
         Scanner dato = new Scanner(System.in);
-        int totalclientes=0,cont1 = 0, cont2 = 0, cont3 = 0, cont4 = 0;
+        int totalclientes = 0;
         double ingresototal = 0, totalmonto = 0, totaldesc = 0, monto;
-        String ingreso = "S";
+        String ingreso;
 
+        // P
         do {
+            System.out.print("¿Desea registrar un cliente? (S/N): ");
+            ingreso = dato.next();
+
             if (ingreso.equalsIgnoreCase("S")) {
-                System.out.print("¿Desea registrar un cliente? (S/N): ");
-                ingreso = dato.next();
-                if (ingreso.equalsIgnoreCase("S")) {
+                System.out.print("Ingrese el monto de la compra: ");
+                monto = dato.nextDouble();
 
-                    System.out.println("Ingrese el monto de la compra: ");
-                    monto = dato.nextDouble();
-
-                    if (monto >= 0 && monto <= 50) {
-                        totaldesc = monto * 0.0725;
-                        totalmonto = monto - totaldesc;
-                        cont1 = cont1 + 1;
+                if (monto >= 0 && monto <= 50) {
+                    totaldesc = monto * 0.0725;// 7.25%
+                } else {
+                    if (monto >= 51 && monto <= 100) {
+                        totaldesc = monto * 0.065;// 6.5%
                     } else {
-                        if (monto >= 51 && monto <= 100) {
-                            totaldesc = monto * 0.065;
-                            totalmonto = monto - totaldesc;
-                            cont2 = cont2 + 1;
+                        if (monto >= 101 && monto <= 150) {
+                            totaldesc = monto * 0.0475;// 4.75%
                         } else {
-                            if (monto >= 101 && monto <= 150) {
-                                totaldesc = monto * 0.0475;
-                                totalmonto = monto - totaldesc;
-                                cont3 = cont3 + 1;
-                            } else {
-                                if (monto >= 151) {
-                                    totaldesc = monto * 0.025;
-                                    totalmonto = monto - totaldesc;
-                                    cont4 = cont4 + 1;
-                                }
+                            if (monto >= 151) {
+                                totaldesc = monto * 0.025;// 2.5%
                             }
                         }
                     }
-                    totalclientes=cont1+cont2+cont3+cont4;
-                    ingresototal = ingresototal + totalmonto;
-                    System.out.println("El desceunto es: " + totaldesc);
-                    System.out.println("El monto final a pagar es: " + totalmonto);
-
                 }
-            }
 
+                totalclientes++;
+                totalmonto = monto - totaldesc;
+                ingresototal = ingresototal + totalmonto;
+                System.out.println("El descuento del cliente #" + totalclientes + " es: $" + totaldesc);
+                System.out.println("El monto final a pagar del cliente #" + totalclientes + " es: $" + totalmonto);
+                System.out.print("\n");
+
+            }
         } while (ingreso.equalsIgnoreCase("S"));
-        System.out.println("El ingreso total de ventas es: "+ingresototal);
-        System.out.println("El numero de clientes atendidos es: "+totalclientes);
-        
+
+        // S
+        System.out.print("\n");
+        System.out.println("El ingreso total de ventas es: $" + ingresototal);
+        System.out.println("El numero total de clientes atendidos es: " + totalclientes);
     }
 
-    public static void ejercicio19() {
+    public static void ejercicio02() {
         // DI
         int totalPostulantes = 0, totalRango1 = 0, totalRango2 = 0, totalRango3 = 0, puntos;
         Scanner scanner = new Scanner(System.in);
@@ -96,10 +91,10 @@ public class SemanaOcho {
         System.out.println("Total rango 50-79 es: " + totalRango2);
         System.out.println("Total rango 80-100 es: " + totalRango3);
     }
-    
-    public static void ejercicio04() {
+
+    public static void ejercicio03() {
         // DI
-        int cantAtletas = 0, cantSaltos, sumaSaltos = 0,totalCantSaltos = 0, contarSaltos = 0, promedioSalto = 0;
+        int cantAtletas = 0, cantSaltos, sumaSaltos = 0, totalCantSaltos = 0, contarSaltos = 0, promedioSalto = 0;
         String seguirIntentando = "S";
         Scanner scanner = new Scanner(System.in);
 
@@ -115,7 +110,7 @@ public class SemanaOcho {
 
             System.out.println("Seguir intentando el ingreso de saltos para el atleta #" + i + " S/N");
             seguirIntentando = scanner.next();
-            
+
             contarSaltos++;
 
             // Seguir intentando los saltos
@@ -126,29 +121,29 @@ public class SemanaOcho {
 
                 System.out.println("Seguir intentando el ingreso de saltos para el atleta #" + i + " S/N");
                 seguirIntentando = scanner.next();
-                
+
                 contarSaltos++;
             }
-            
+
             sumaSaltos = sumaSaltos + totalCantSaltos;
-            promedioSalto = sumaSaltos/contarSaltos;
+            promedioSalto = sumaSaltos / contarSaltos;
         }
 
         // S
         System.out.println("el promedio es: " + promedioSalto);
         System.out.println("La cantidad saltos es: " + sumaSaltos);
     }
-    
-     public static void ejercicio01() {
+
+    public static void ejercicio04() {
         // D
         int nump, edad;
         double pago, dsctoPorcentaje = 0, totalDscto = 0, totalPago = 0;
         Scanner scanner = new Scanner(System.in);
-         
+
         // I
         System.out.println("Ingrese N personas:");
         nump = scanner.nextInt();
-         
+
         // PS
         for (int i = 1; i <= nump; i++) {
             System.out.println("Ingrese edad de persona #" + i);
