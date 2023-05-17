@@ -85,4 +85,48 @@ public class SemanaOcho {
         System.out.println("el promedio es: " + promedioSalto);
         System.out.println("La cantidad saltos es: " + sumaSaltos);
     }
+    
+     public static void ejercicio01() {
+        // D
+        int nump, edad;
+        double pago, dsctoPorcentaje = 0, totalDscto = 0, totalPago = 0;
+        Scanner scanner = new Scanner(System.in);
+         
+        // I
+        System.out.println("Ingrese N personas:");
+        nump = scanner.nextInt();
+         
+        // PS
+        for (int i = 1; i <= nump; i++) {
+            System.out.println("Ingrese edad de persona #" + i);
+            edad = scanner.nextInt();
+
+            if (edad < 10) {
+                continue;
+            }
+
+            System.out.println("Ingrese pago de persona #" + i);
+            pago = scanner.nextInt();
+
+            if (edad >= 10 && edad <= 30) {
+                dsctoPorcentaje = 0.02;// 2%
+            } else {
+                if (edad >= 31 && edad <= 50) {
+                    dsctoPorcentaje = 0.03;// 3%
+                } else {
+                    if (edad >= 51) {
+                        dsctoPorcentaje = 0.05;// 5%
+                    } else {
+
+                    }
+                }
+            }
+
+            totalDscto = pago * dsctoPorcentaje;
+            totalPago = pago - totalDscto;
+
+            System.out.println("EL descuento es: " + totalDscto);
+            System.out.println("EL pago con descuento es: " + totalPago);
+        }
+    }
 }
