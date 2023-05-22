@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * @author alex
  */
-public class SemanaTres {
+public class Semana03 {
 
     // Declarar como una variable global a nivel de clase
     static Scanner dato;

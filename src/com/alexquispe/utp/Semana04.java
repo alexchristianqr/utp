@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * @author LAB-USR-AQ265-A0303
  */
-public class SemanaCuatro {
+public class Semana04 {
     // Declarar como una variable global a nivel de clase
     static Scanner dato;
 
