@@ -101,5 +101,77 @@ public class Semana09 {
             System.out.println();
         }
     }
+    
+     public static void ejercicio07() {
+        // DI
+        Scanner scanner = new Scanner(System.in);
+        int numeros[] = new int[4];
+        int suma = 0;
+        double promedio = 0;
+//        numeros[0] = 1;
+//        numeros[1] = 2;
+//        numeros[2] = 3;
+//        numeros[3] = 4;
+
+        System.out.print("Ingresa el valor #1: ");
+        numeros[0] = scanner.nextInt();
+        System.out.print("Ingresa el valor #2: ");
+        numeros[1] = scanner.nextInt();
+        System.out.print("Ingresa el valor #3: ");
+        numeros[2] = scanner.nextInt();
+        System.out.print("Ingresa el valor #4: ");
+        numeros[3] = scanner.nextInt();
+
+//        suma = numeros[0] + numeros[1] + numeros[2] + numeros[3];
+//        promedio = suma / 4;
+        // PS
+        for (int i = 0; i < numeros.length; i++) {
+            System.out.println("El numero es: " + numeros[i]);
+            suma = suma + numeros[i];
+        }
+//        promedio = (suma/numeros.length -1);
+        promedio = (suma / 4);
+        System.out.print("La suma es: " + suma + "\n");
+        System.out.print("El promedio es: " + promedio + "\n");
+    }
+
+    public static void ejercicio08() {
+        // DI
+        int max;
+        int index;
+        int dato;
+        String continuar = "N";
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingresa el tamaño de tu arreglo: ");
+        max = scanner.nextInt();
+        int numeros[] = new int[max];
+
+        // PS
+        // Iterar para ingresar datos por cada posición del arreglo
+        do {
+            index = max - 1;// Disminuir desde el maximo tamaño del arreglo
+            System.out.print("Ingresa un numero para tu arreglo en el indice [" + index + "]: ");
+            dato = scanner.nextInt();
+            numeros[index] = dato;// Añadir un valor al arreglo en la posición "x"
+
+            // Validar si el indice es mayor a CERO
+            if (index > 0) {
+                System.out.print("Quieres continuar agregando datos al arreglo S/N: ");
+                continuar = scanner.next();
+                max--;
+            }
+
+        } while (continuar.equalsIgnoreCase("S") && index != 0);
+
+        // Iterar para imprimir los datos del arreglo
+        for (int i = 0; i < numeros.length; i++) {
+            System.out.println("El numero en el indice[" + i + "] es: " + numeros[i]);
+        }
+
+        // Nueva forma de recorrer los datos del arreglo
+        /*for (int num : numeros) {
+            System.out.println("El numero es: " + num);
+        }*/
+    }
 
 }
