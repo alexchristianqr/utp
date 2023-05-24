@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Semana09 {
     public static void main(String[] args) {
-        ejercicio06();
+        ejercicio10();
     }
 
     public static void ejercicio01() {
@@ -101,8 +101,8 @@ public class Semana09 {
             System.out.println();
         }
     }
-    
-     public static void ejercicio07() {
+
+    public static void ejercicio07() {
         // DI
         Scanner scanner = new Scanner(System.in);
         int numeros[] = new int[4];
@@ -173,7 +173,7 @@ public class Semana09 {
             System.out.println("El numero es: " + num);
         }*/
     }
-    
+
     public static void ejercicio09() {
         int tamano;
 
@@ -184,38 +184,35 @@ public class Semana09 {
         int[] arreglo = new int[tamano];
 
         for (int i = 0; i < arreglo.length; i++) {
-//            System.out.print("Ingrese el valor para el indice[" + i + "]: ");
-//            arreglo[i] = scanner.nextInt();
+            // System.out.print("Ingrese el valor para el indice[" + i + "]: ");
+            // arreglo[i] = scanner.nextInt();
 
             arreglo[i] = (int) (Math.random() * 50 + 1);
-
             System.out.println("El numero es: " + arreglo[i]);
         }
     }
 
     public static void ejercicio10() {
         int[] arreglo = new int[4];
+
+        arreglo[0] = 4;
+        arreglo[1] = 30;
+        arreglo[2] = 3;
+        arreglo[3] = 2;
+
+        int menor = arreglo[0];
         int mayor = 0;
-        int menor = 0;
 
-        arreglo[0] = 10;
-        arreglo[1] = 20;
-        arreglo[2] = 30;
-        arreglo[3] = 40;
+        for (int num : arreglo) {
+            System.out.println("el valor es: " + num);
 
-        menor = arreglo[3];
-
-        for (int i = 0; i < arreglo.length; i++) {
-            System.out.println("el valor es: " + arreglo[i]);
-
-            if (arreglo[i] < menor) {
-                menor = arreglo[i];
+            if (num < menor) {
+                menor = num;
             }
 
-            if (arreglo[i] > mayor) {
-                mayor = arreglo[i];
+            if (num > mayor) {
+                mayor = num;
             }
-
         }
 
         System.out.println("El numero mayor es: " + mayor);
