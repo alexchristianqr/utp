@@ -173,5 +173,53 @@ public class Semana09 {
             System.out.println("El numero es: " + num);
         }*/
     }
+    
+    public static void ejercicio09() {
+        int tamano;
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el tamano del arreglo:");
+        tamano = scanner.nextInt();
+
+        int[] arreglo = new int[tamano];
+
+        for (int i = 0; i < arreglo.length; i++) {
+//            System.out.print("Ingrese el valor para el indice[" + i + "]: ");
+//            arreglo[i] = scanner.nextInt();
+
+            arreglo[i] = (int) (Math.random() * 50 + 1);
+
+            System.out.println("El numero es: " + arreglo[i]);
+        }
+    }
+
+    public static void ejercicio10() {
+        int[] arreglo = new int[4];
+        int mayor = 0;
+        int menor = 0;
+
+        arreglo[0] = 10;
+        arreglo[1] = 20;
+        arreglo[2] = 30;
+        arreglo[3] = 40;
+
+        menor = arreglo[3];
+
+        for (int i = 0; i < arreglo.length; i++) {
+            System.out.println("el valor es: " + arreglo[i]);
+
+            if (arreglo[i] < menor) {
+                menor = arreglo[i];
+            }
+
+            if (arreglo[i] > mayor) {
+                mayor = arreglo[i];
+            }
+
+        }
+
+        System.out.println("El numero mayor es: " + mayor);
+        System.out.println("El numero menor es: " + menor);
+    }
 
 }
