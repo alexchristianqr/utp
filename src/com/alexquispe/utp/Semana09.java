@@ -218,5 +218,4 @@ public class Semana09 {
         System.out.println("El numero mayor es: " + mayor);
         System.out.println("El numero menor es: " + menor);
     }
-
 }
