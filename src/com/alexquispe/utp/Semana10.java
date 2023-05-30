@@ -245,4 +245,69 @@ public class Semana10 {
         System.out.println("El total de alumnos Buenos es:" + totalBuenos);
         System.out.println("El total de alumnos Excelentes es:" + totalExcelentes);
     }
+
+    // Practica calificada 02
+    public static void pregunta01() {
+
+        int contador = 1;
+        int acumulador = 0;
+        int total = 0;
+
+        Scanner dato = new Scanner(System.in);
+        System.out.println("Ingresa");
+        total = dato.nextInt();
+
+        while (total <= 5) {
+            contador++;
+        }
+
+        System.out.println("El total A es: " + total);
+        System.out.println("El total B es: " + total);
+        System.out.println("El total C es: " + total);
+        System.out.println("El total D es: " + total);
+    }
+
+    public static void pregunta02() {
+
+        int contador = 1;
+        int acumulador = 0;
+        int total = 0;
+
+        Scanner dato = new Scanner(System.in);
+        System.out.println("Ingresa");
+        total = dato.nextInt();
+
+        do {
+            contador++;
+        } while (total <= 5);
+
+        System.out.println("El total A es: " + total);
+        System.out.println("El total B es: " + total);
+        System.out.println("El total C es: " + total);
+        System.out.println("El total D es: " + total);
+    }
+
+    public static void pregunta03() {
+
+        int contador = 1;
+        int acumulador = 0;
+        int total = 0;
+        int tamano = 0;
+        int[] productos;
+
+        Scanner dato = new Scanner(System.in);
+        System.out.println("Ingresa");
+        tamano = dato.nextInt();
+
+        productos = new int[tamano];
+
+        for (int i = 0; i < productos.length; i++) {
+            System.out.println("El producto es: " + productos[i]);
+        }
+
+        System.out.println("El total A es: " + total);
+        System.out.println("El total B es: " + total);
+        System.out.println("El total C es: " + total);
+        System.out.println("El total D es: " + total);
+    }
 }
