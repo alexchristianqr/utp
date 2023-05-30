@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Semana10 {
 
     public static void main(String[] args) {
-        ejercicio05();
+        ejercicio06();
     }
 
     // While
@@ -148,6 +148,52 @@ public class Semana10 {
     }
 
     public static void ejercicio06() {
+        String mejorAlumnoPHP = "";
+        String mejorAlumnoAndroid = "";
+        double mejorNotaPHP = 0;
+        double mejorNotaAndroid = 0;
 
+        int cantidadAlumnos = 0;
+        int cursoElectivo;
+        double nota = 0;
+        String alumno = "";
+
+        Scanner dato = new Scanner(System.in);
+        System.out.println("Ingrese una cantidad de Estudiantes:");
+        cantidadAlumnos = dato.nextInt();
+
+        for (int i = 1; i <= cantidadAlumnos; i++) {
+
+            System.out.println("Ingresar nombre estudiante:");
+            alumno = dato.next();
+
+            System.out.println("Seleccionar curso electivo:");
+            System.out.println("1: PHP");
+            System.out.println("2: Android");
+            cursoElectivo = dato.nextInt();
+
+            do {
+                if (nota < 0 || nota > 20) {
+                    System.out.println("La nota ingresada es inválida!!!");
+                }
+                System.out.println("Ingresar nota:");
+                nota = dato.nextDouble();
+            } while (nota < 0 || nota > 20);
+
+            if (cursoElectivo == 1) {
+                if (nota > mejorNotaPHP) {
+                    mejorNotaPHP = nota;
+                    mejorAlumnoPHP = alumno;
+                }
+            } else if (cursoElectivo == 2) {
+                if (nota > mejorNotaAndroid) {
+                    mejorNotaAndroid = nota;
+                    mejorAlumnoAndroid = alumno;
+                }
+            }
+
+        }
+        System.out.println("Alumno " + mejorAlumnoPHP + " con mejor nota en PHP: " + mejorNotaPHP);
+        System.out.println("Alumno " + mejorAlumnoAndroid + " con mejor nota en Android: " + mejorNotaAndroid);
     }
 }
