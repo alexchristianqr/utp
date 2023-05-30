@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Semana09 {
     public static void main(String[] args) {
-        ejercicio10();
+        ejercicio11();
     }
 
     public static void ejercicio01() {
@@ -220,7 +220,7 @@ public class Semana09 {
     }
     
     
-    public static void ejercicio01() {
+    public static void ejercicio11() {
         Scanner scanner = new Scanner(System.in);
         int N;
         int suma = 0;
