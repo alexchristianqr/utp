@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Semana10 {
 
     public static void main(String[] args) {
-        ejercicio06();
+        ejercicio07();
     }
 
     // While
@@ -195,5 +195,54 @@ public class Semana10 {
         }
         System.out.println("Alumno " + mejorAlumnoPHP + " con mejor nota en PHP: " + mejorNotaPHP);
         System.out.println("Alumno " + mejorAlumnoAndroid + " con mejor nota en Android: " + mejorNotaAndroid);
+    }
+
+    public static void ejercicio07() {
+        int[] notas;
+        int tamano;
+        int totalDeficientes = 0;
+        int totalIrregulares = 0;
+        int totalRegulares = 0;
+        int totalBuenos = 0;
+        int totalExcelentes = 0;
+
+        Scanner dato = new Scanner(System.in);
+        System.out.println("Ingresa una cantidad de alumnos:");
+        tamano = dato.nextInt();
+
+        notas = new int[tamano];
+
+        for (int i = 0; i < notas.length; i++) {
+            //numeros[i] = (int) (Math.random() * 10+1);// De 1-9
+            //numeros[i] = (int) (Math.random() * 10+0);// De 0-9
+            notas[i] = (int) (Math.random() * 21 + 0);// De 0-20
+            System.out.println("La nota es: " + notas[i]);
+
+            if (notas[i] >= 0 && notas[i] <= 5) {
+                totalDeficientes++;
+            } else {
+                if (notas[i] >= 6 && notas[i] <= 11) {
+                    totalIrregulares++;
+                } else {
+                    if (notas[i] >= 12 && notas[i] <= 14) {
+                        totalRegulares++;
+                    } else {
+                        if (notas[i] >= 15 && notas[i] <= 17) {
+                            totalBuenos++;
+                        } else {
+                            if (notas[i] >= 18 && notas[i] <= 20) {
+                                totalExcelentes++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        System.out.println("El total de alumnos Deficientes es:" + totalDeficientes);
+        System.out.println("El total de alumnos Irregulares es:" + totalIrregulares);
+        System.out.println("El total de alumnos Regulares es:" + totalRegulares);
+        System.out.println("El total de alumnos Buenos es:" + totalBuenos);
+        System.out.println("El total de alumnos Excelentes es:" + totalExcelentes);
     }
 }
