@@ -218,4 +218,48 @@ public class Semana09 {
         System.out.println("El numero mayor es: " + mayor);
         System.out.println("El numero menor es: " + menor);
     }
+    
+    
+    public static void ejercicio01() {
+        Scanner scanner = new Scanner(System.in);
+        int N;
+        int suma = 0;
+
+        System.out.print("Ingrese el tamano: ");
+        N = scanner.nextInt();
+
+        int arreglo[] = new int[N];
+        int mayor = 0;
+        int posicionMayor = 0;
+
+        for (int i = 0; i < arreglo.length; i++) {
+
+            // Cargar arreglo manual
+//            System.out.println("Ingrese el elemento " + (i + 1) + ":");
+//            arreglo[i] = scanner.nextInt();
+            // Si arreglo es mayor a 8
+//            if (arreglo[i] > 8) {
+//                suma = suma + arreglo[i];
+//            }
+            arreglo[i] = (int) (Math.random() * (50 - 20 + 1) + 20);
+
+            // Obtener el mayor valor
+            if (arreglo[i] > mayor) {
+                mayor = arreglo[i];
+                posicionMayor = i + 1;
+            }
+
+        }
+
+        System.out.println("\nEl arreglo es:");
+        for (int i = 0; i < arreglo.length; i++) {
+            System.out.println(arreglo[i] + " ");
+        }
+
+        // System.out.println("La suma de elementos mayor a 8 es: " + suma);
+        System.out.println("El elemento mayore es: " + mayor);
+        System.out.println("La posicion del elemento mayor es: " + posicionMayor);
+    }
+    
+    
 }
