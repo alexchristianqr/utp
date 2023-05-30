@@ -249,22 +249,69 @@ public class Semana10 {
     // Practica calificada 02
     public static void pregunta01() {
 
-        int contador = 1;
-        int acumulador = 0;
-        int total = 0;
+        String continuar = "S";
+        double dato;
+        int max;
+        int index;
+        int condicion;
+        double nota = 0;
+        int totalIngresados = 0, totalInterno = 0, totalExterno = 0, totalAlumnos = 0;
+        double totalAprob = 0, totalDesap = 0;
 
-        Scanner dato = new Scanner(System.in);
-        System.out.println("Ingresa");
-        total = dato.nextInt();
+        Scanner scanner = new Scanner(System.in);
 
-        while (total <= 5) {
-            contador++;
+        System.out.print("Ingresar alumno nuevo S/N: ");
+        continuar = scanner.next();
+
+        // PS
+        while (continuar.equalsIgnoreCase("S")) {
+
+            totalAlumnos++;
+            
+            System.out.println("Condicion del alumno");
+            System.out.println("1: Ingresante");
+            System.out.println("2: Traslado Interno");
+            System.out.println("3: Traslado Externo");
+            condicion = scanner.nextInt();
+
+            do {
+                if (nota < 0 || nota > 20) {
+                    System.out.println("La nota ingresada es inválida!!!");
+                }
+                System.out.println("Ingresar nota del alumno:");
+                nota = scanner.nextDouble();
+            } while (nota < 0 || nota > 20);
+
+            if (condicion == 1) {
+                totalIngresados++;
+            } else {
+                if (condicion == 2) {
+                    totalInterno++;
+                } else {
+                    if (condicion == 3) {
+                        totalExterno++;
+                    }
+                }
+            }
+
+            
+
+            if (nota >= 11) {
+                totalAprob++;
+            } else {
+                totalDesap++;
+            }
+
+            System.out.print("Ingresar alumno nuevo S/N: ");
+            continuar = scanner.next();
+
         }
 
-        System.out.println("El total A es: " + total);
-        System.out.println("El total B es: " + total);
-        System.out.println("El total C es: " + total);
-        System.out.println("El total D es: " + total);
+        System.out.println("Total alumnos ingresados: " + totalIngresados);
+        System.out.println("Total alumnos internos: " + totalInterno);
+        System.out.println("Total alumnos externos: " + totalExterno);
+        System.out.println("Promedio aprobados: " + totalAlumnos / totalAprob);
+        System.out.println("Promedio desaprobados: " + totalAlumnos / totalDesap);
     }
 
     public static void pregunta02() {
