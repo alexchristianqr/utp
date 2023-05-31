@@ -420,6 +420,61 @@ public class Semana10 {
         System.out.println("El total maestria menor a 40 es: " + totalMaestriaMenor40);
         System.out.println("El total doctorado a 40 es: " + totalDoctorado);
     }
+    
+    
+     public static void pregunta04() {
+
+        int tamano = 0;
+        int[] numeros;
+        int tamanoY = 0;
+        int[] numerosY;
+        int numeroMayor = 0;
+        int numeroMenor = 0;
+
+        Scanner dato = new Scanner(System.in);
+        System.out.println("Ingresa un tamano del arreglo");
+        tamano = dato.nextInt();
+
+        numeros = new int[tamano];
+        numeroMenor = numeros[0];
+        int promedioCalculado = numeros[0];
+
+        for (int i = 0; i < numeros.length; i++) {
+            numeros[i] = (int) (Math.random() * 91 + 10);
+            System.out.println("El numero del arreglo X es: " + numeros[i]);
+
+            if (numeros[i] > numeroMayor) {
+                numeroMayor = numeros[i];
+            }
+
+            if (numeros[i] < numeroMenor) {
+                numeroMenor = numeros[i];
+            }
+
+            int nuevopromedioCalculado = numeroMayor + numeroMenor / 2;
+            if (promedioCalculado < nuevopromedioCalculado) {
+                tamanoY++;
+                promedioCalculado = nuevopromedioCalculado;
+
+                System.out.println("El promedio calculado para Y es: " + promedioCalculado);
+
+                numerosY = new int[tamanoY];
+                for (int j = 0; j < numerosY.length; j++) {
+                    numerosY[j] = promedioCalculado;
+                }
+            }
+
+        }
+
+        System.out.print("\n");
+        numerosY = new int[tamanoY];
+        for (int i = 0; i < numerosY.length; i++) {
+            System.out.println("El numero del arreglo Y es: " + numeros[i]);
+        }
+
+        System.out.println("El numero mayor es: " + numeroMayor);
+        System.out.println("El numero menor es: " + numeroMenor);
+    }
 
 
 }
