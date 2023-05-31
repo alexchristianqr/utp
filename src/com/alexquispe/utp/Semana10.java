@@ -316,45 +316,51 @@ public class Semana10 {
 
     public static void pregunta02() {
 
-        int contador = 1;
-        int acumulador = 0;
-        int total = 0;
-
+        double peso;
+        int condicion;
+        int menores50 = 0, entre55y70 = 0, mayores70 = 0;
+        double mayorPesoNacional = 0, menorPesoNacionalizado = 0;
         Scanner dato = new Scanner(System.in);
-        System.out.println("Ingresa");
-        total = dato.nextInt();
 
         do {
-            contador++;
-        } while (total <= 5);
+            System.out.println("Ingrese la condicion del deportista:");
+            System.out.println("1: Nacional");
+            System.out.println("2: Nacionalizado");
+            condicion = dato.nextInt();
 
-        System.out.println("El total A es: " + total);
-        System.out.println("El total B es: " + total);
-        System.out.println("El total C es: " + total);
-        System.out.println("El total D es: " + total);
+            System.out.println("Ingrese el peso:");
+            peso = dato.nextDouble();
+
+            if (peso < 55) {
+                menores50++;
+            } else {
+                if (peso >= 55 && peso <= 70) {
+                    entre55y70++;
+                } else {
+                    if (peso > 70) {
+                        mayores70++;
+                    }
+                }
+            }
+
+            if (condicion == 1) {
+                if (peso > mayorPesoNacional) {
+                    mayorPesoNacional = peso;
+                }
+            } else if (condicion == 2) {
+                if (peso < menorPesoNacionalizado) {
+                    menorPesoNacionalizado = peso;
+                }
+            }
+
+        } while (peso >=0);
+
+        System.out.println("Deportistas < 55kg: " + menores50);
+        System.out.println("Deportistas entre 55 y 70kg: " + entre55y70);
+        System.out.println("Deportistas maypres de 70kg: " + mayores70);
+        System.out.println("Mayor peso nacional: " + mayorPesoNacional);
+        System.out.println("Menor peso nacionalizado: " + menorPesoNacionalizado);
     }
 
-    public static void pregunta03() {
 
-        int contador = 1;
-        int acumulador = 0;
-        int total = 0;
-        int tamano = 0;
-        int[] productos;
-
-        Scanner dato = new Scanner(System.in);
-        System.out.println("Ingresa");
-        tamano = dato.nextInt();
-
-        productos = new int[tamano];
-
-        for (int i = 0; i < productos.length; i++) {
-            System.out.println("El producto es: " + productos[i]);
-        }
-
-        System.out.println("El total A es: " + total);
-        System.out.println("El total B es: " + total);
-        System.out.println("El total C es: " + total);
-        System.out.println("El total D es: " + total);
-    }
 }
