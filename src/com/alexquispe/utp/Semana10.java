@@ -361,6 +361,65 @@ public class Semana10 {
         System.out.println("Mayor peso nacional: " + mayorPesoNacional);
         System.out.println("Menor peso nacionalizado: " + menorPesoNacionalizado);
     }
+    
+    public static void pregunta03() {
+
+        int totalPersonas;
+        int totalEdades = 0;
+        int edad;
+        int grado;
+        int promedioEdad, totalSecundaria = 0, totalLicen = 0, totalMaestria = 0, totalDoctorado = 0, totalMaestriaMenor40 = 0;
+
+        Scanner dato = new Scanner(System.in);
+        System.out.println("Ingresa un total de personas");
+        totalPersonas = dato.nextInt();
+
+        for (int i = 1; i <= totalPersonas; i++) {
+
+            System.out.println("Ingresa la edad de la persona #" + i);
+            edad = dato.nextInt();
+
+            totalEdades = totalEdades + edad;
+
+            System.out.println("Ingresa el grado de instruccion de la persona #" + i);
+            System.out.println("1: Secundaria");
+            System.out.println("2: Licenciatura");
+            System.out.println("3: Maestria");
+            System.out.println("4: Doctorado");
+            grado = dato.nextInt();
+
+            switch (grado) {
+                case 1:
+                    totalSecundaria++;
+                    break;
+                case 2:
+                    totalLicen++;
+                    break;
+                case 3:
+                    totalMaestria++;
+                    if (edad < 40) {
+                        totalMaestriaMenor40++;
+                    }
+                    break;
+                case 4:
+                    totalDoctorado++;
+                    break;
+                default:
+                    System.out.println("No es un grado valido /n");
+                    break;
+            }
+
+        }
+
+        promedioEdad = totalEdades / totalPersonas;
+
+        System.out.println("El promedio de edad es: " + promedioEdad);
+        System.out.println("El total secundaria es: " + totalSecundaria);
+        System.out.println("El total licenciatura es: " + totalLicen);
+        System.out.println("El total maestria es: " + totalMaestria);
+        System.out.println("El total maestria menor a 40 es: " + totalMaestriaMenor40);
+        System.out.println("El total doctorado a 40 es: " + totalDoctorado);
+    }
 
 
 }
