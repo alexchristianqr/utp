@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Semana10 {
 
     public static void main(String[] args) {
-        ejercicio07();
+        pregunta04();
     }
 
     // While
@@ -250,36 +250,32 @@ public class Semana10 {
     public static void pregunta01() {
 
         String continuar = "S";
-        double dato;
-        int max;
-        int index;
         int condicion;
         double nota = 0;
         int totalIngresados = 0, totalInterno = 0, totalExterno = 0, totalAlumnos = 0;
         double totalAprob = 0, totalDesap = 0;
-
-        Scanner scanner = new Scanner(System.in);
+        Scanner dato = new Scanner(System.in);
 
         System.out.print("Ingresar alumno nuevo S/N: ");
-        continuar = scanner.next();
+        continuar = dato.next();
 
         // PS
         while (continuar.equalsIgnoreCase("S")) {
 
             totalAlumnos++;
-            
+
             System.out.println("Condicion del alumno");
             System.out.println("1: Ingresante");
             System.out.println("2: Traslado Interno");
             System.out.println("3: Traslado Externo");
-            condicion = scanner.nextInt();
+            condicion = dato.nextInt();
 
             do {
                 if (nota < 0 || nota > 20) {
                     System.out.println("La nota ingresada es inválida!!!");
                 }
                 System.out.println("Ingresar nota del alumno:");
-                nota = scanner.nextDouble();
+                nota = dato.nextDouble();
             } while (nota < 0 || nota > 20);
 
             if (condicion == 1) {
@@ -294,7 +290,6 @@ public class Semana10 {
                 }
             }
 
-            
 
             if (nota >= 11) {
                 totalAprob++;
@@ -303,7 +298,7 @@ public class Semana10 {
             }
 
             System.out.print("Ingresar alumno nuevo S/N: ");
-            continuar = scanner.next();
+            continuar = dato.next();
 
         }
 
@@ -353,7 +348,7 @@ public class Semana10 {
                 }
             }
 
-        } while (peso >=0);
+        } while (peso >= 0);
 
         System.out.println("Deportistas < 55kg: " + menores50);
         System.out.println("Deportistas entre 55 y 70kg: " + entre55y70);
@@ -361,7 +356,7 @@ public class Semana10 {
         System.out.println("Mayor peso nacional: " + mayorPesoNacional);
         System.out.println("Menor peso nacionalizado: " + menorPesoNacionalizado);
     }
-    
+
     public static void pregunta03() {
 
         int totalPersonas;
@@ -420,54 +415,72 @@ public class Semana10 {
         System.out.println("El total maestria menor a 40 es: " + totalMaestriaMenor40);
         System.out.println("El total doctorado a 40 es: " + totalDoctorado);
     }
-    
-    
-     public static void pregunta04() {
+
+    public static void pregunta04() {
 
         int tamano = 0;
         int[] numeros;
         int tamanoY = 0;
         int[] numerosY;
         int numeroMayor = 0;
-        int numeroMenor = 0;
+        int numeroMenor;
 
         Scanner dato = new Scanner(System.in);
         System.out.println("Ingresa un tamano del arreglo");
         tamano = dato.nextInt();
 
         numeros = new int[tamano];
-        numeroMenor = numeros[0];
         int promedioCalculado = numeros[0];
 
+        numerosY = new int[tamano];
+        numeroMenor = numeros[tamano-1];
+
         for (int i = 0; i < numeros.length; i++) {
+//            numeroMenor = numeros[i];
             numeros[i] = (int) (Math.random() * 91 + 10);
             System.out.println("El numero del arreglo X es: " + numeros[i]);
 
+            if ( numeros[i] < numeroMenor) {
+                numeroMenor = numeros[i];
+                System.out.println("Menor: " + numeroMenor);
+            }
+
             if (numeros[i] > numeroMayor) {
                 numeroMayor = numeros[i];
+                System.out.println("Mayor: " + numeroMayor);
             }
 
-            if (numeros[i] < numeroMenor) {
-                numeroMenor = numeros[i];
-            }
+
 
             int nuevopromedioCalculado = numeroMayor + numeroMenor / 2;
+            numerosY[i] = nuevopromedioCalculado;
+
             if (promedioCalculado < nuevopromedioCalculado) {
                 tamanoY++;
-                promedioCalculado = nuevopromedioCalculado;
 
-                System.out.println("El promedio calculado para Y es: " + promedioCalculado);
+//                promedioCalculado = nuevopromedioCalculado;
+//                numerosY[i] = promedioCalculado;
+//                System.out.println("El promedio calculado para Y es: " + promedioCalculado);
 
-                numerosY = new int[tamanoY];
-                for (int j = 0; j < numerosY.length; j++) {
-                    numerosY[j] = promedioCalculado;
-                }
             }
+
+//            numerosY = new int[tamanoY];
+//            for (int j = 0; j < numerosY.length; j++) {
+//                numerosY[i] = promedioCalculado;
+//            }
+
+//            if(numeros.length-1 == numeros[i]){
+//
+//            }
 
         }
 
+//         for (int i = 0; i < ; i++) {
+//
+//         }
+
         System.out.print("\n");
-        numerosY = new int[tamanoY];
+//        numerosY = new int[tamanoY];
         for (int i = 0; i < numerosY.length; i++) {
             System.out.println("El numero del arreglo Y es: " + numeros[i]);
         }
@@ -475,6 +488,4 @@ public class Semana10 {
         System.out.println("El numero mayor es: " + numeroMayor);
         System.out.println("El numero menor es: " + numeroMenor);
     }
-
-
 }
