@@ -148,9 +148,8 @@ public class Semana11 {
                     totalPares++;
                 } else {
                     if ((matriz[i][j] % 2) == 1) {
-//                        vectorImpares = Arrays.copyOf(vectorImpares, totalImpares);
                         vectorImpares[totalImpares] = matriz[i][j];// Guardar numero impar en un vector
-                        totalImpares++;
+                        totalImpares++;// Contar +1
                     }
                 }
             }
