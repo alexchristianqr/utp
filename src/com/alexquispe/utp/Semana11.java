@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Semana11 {
 
     public static void main(String[] args) {
-        tarea_04();
+        tarea_05();
     }
 
     public static void ejercicio01() {
@@ -282,5 +282,56 @@ public class Semana11 {
             System.out.print("\n");
         }
         System.out.print("\n");
+    }
+
+    public static void tarea_05() {
+        int[][] matriz;
+        int[] vectorNumPares;
+        int nfilas, ncolumnas, numMayor;
+        Scanner dato = new Scanner(System.in);
+
+        System.out.print("Ingresa N filas: ");
+        nfilas = dato.nextInt();
+        System.out.print("Ingresa N columnas: ");
+        ncolumnas = dato.nextInt();
+
+        matriz = new int[nfilas][ncolumnas];
+        vectorNumPares = new int[nfilas];
+
+        // Recorrer fila
+        for (int i = 0; i < matriz.length; i++) {
+
+            // Obtener el tamaño de la columna de la fila[0]
+            int totalColumnas = matriz[0].length;
+            numMayor = 0;// Reiniciar la variable
+
+            // Recorrer columna
+            for (int j = 0; j < totalColumnas; j++) {
+                // (Math.randon) * (Max - Min) + min
+                matriz[i][j] = (int) (Math.random() * (100 - 1) + 1);
+
+                if (matriz[i][j] > numMayor) {
+                    numMayor = matriz[i][j];
+                    vectorNumPares[i] = numMayor;
+                }
+            }
+        }
+        System.out.print("\n");
+
+        // Pintar matriz bidimensional
+        System.out.println("La matriz bidimensional es: ");
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+
+        // Pintar vector
+        System.out.println("El vector de numeros pares es: ");
+        for (int i = 0; i < vectorNumPares.length; i++) {
+            System.out.print("f[" + i + "] = " + vectorNumPares[i] + "\n");
+        }
     }
 }
