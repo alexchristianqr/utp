@@ -1,12 +1,11 @@
 package com.alexquispe.utp;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Semana11 {
 
     public static void main(String[] args) {
-        tarea_03();
+        tarea_04();
     }
 
     public static void ejercicio01() {
@@ -36,7 +35,6 @@ public class Semana11 {
         System.out.print("f[2]c[0] = " + matriz[2][0] + "\t");
         System.out.print("f[2]c[1] = " + matriz[2][1] + "\t");
         System.out.println("f[2]c[2] = " + matriz[2][2] + "\t");
-
     }
 
     public static void ejercicio02() {
@@ -62,7 +60,6 @@ public class Semana11 {
             System.out.println("\n");
 
         }
-
     }
 
     public static void ejercicio03() {
@@ -72,7 +69,6 @@ public class Semana11 {
 
         System.out.print("Ingresa N filas: ");
         nfilas = dato.nextInt();
-
         System.out.print("Ingresa N columnas: ");
         ncolumnas = dato.nextInt();
 
@@ -99,7 +95,6 @@ public class Semana11 {
                 }
             }
         }
-
         System.out.print("\n");
 
         // Pintar arreglo bidimensional
@@ -114,20 +109,19 @@ public class Semana11 {
         System.out.println("El total de impares es: " + totalImpares);
     }
 
-    public static void ejercicio04() {
+    public static void tarea_02() {
         int[][] matriz;
-        int[] vectorImpares = new int[0];
+        int[] vectorImpares;
         int nfilas, ncolumnas, totalPares = 0, totalImpares = 0;
         Scanner dato = new Scanner(System.in);
 
         System.out.print("Ingresa N filas: ");
         nfilas = dato.nextInt();
-
         System.out.print("Ingresa N columnas: ");
         ncolumnas = dato.nextInt();
 
         matriz = new int[nfilas][ncolumnas];
-        vectorImpares = new int[nfilas * ncolumnas];
+        vectorImpares = new int[nfilas];
 
         // Recorrer fila
         for (int i = 0; i < matriz.length; i++) {
@@ -151,8 +145,6 @@ public class Semana11 {
                 }
             }
         }
-
-
         System.out.print("\n");
 
         // Pintar matriz bidimensional
@@ -166,7 +158,7 @@ public class Semana11 {
         System.out.print("\n");
 
         // Redimensionar vector
-        vectorImpares = Arrays.copyOf(vectorImpares, totalImpares);
+        // vectorImpares = Arrays.copyOf(vectorImpares, totalImpares);
 
         // Pintar vector
         System.out.println("El vector es: ");
@@ -186,7 +178,6 @@ public class Semana11 {
 
         System.out.print("Ingresa N filas: ");
         nfilas = dato.nextInt();
-
         System.out.print("Ingresa N columnas: ");
         ncolumnas = dato.nextInt();
 
@@ -232,5 +223,64 @@ public class Semana11 {
         System.out.println("El numero mayor es: " + numMayor);
         System.out.println("La fila del numero mayor es: " + posicionFilaMayor);
         System.out.println("La suma de los elementos de la fila del numero mayor es: " + sumaFilaMayor);
+    }
+
+    public static void tarea_04() {
+        int[][] matriz;
+        int nfilas, ncolumnas, posicionFilaInicial, posicionFilaFinal;
+        Scanner dato = new Scanner(System.in);
+
+        System.out.print("Ingresa N filas: ");
+        nfilas = dato.nextInt();
+        System.out.print("Ingresa N columnas: ");
+        ncolumnas = dato.nextInt();
+
+        matriz = new int[nfilas][ncolumnas];
+        posicionFilaInicial = 0;
+        posicionFilaFinal = matriz.length - 1;
+
+        // Recorrer fila
+        for (int i = 0; i < matriz.length; i++) {
+
+            // Obtener el tamaño de la columna de la fila[0]
+            int totalColumnas = matriz[0].length;
+
+            // Recorrer columna
+            for (int j = 0; j < totalColumnas; j++) {
+                // (Math.randon) * (Max - Min) + min
+                matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
+            }
+        }
+        System.out.print("\n");
+
+        // Pintar matriz bidimensional
+        System.out.println("La matriz bidimensional es: ");
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+
+        // Recorrer los elementos de la fila del numero mayor
+        for (int j = 0; j < matriz[posicionFilaInicial].length; j++) {
+            // Guardar elemnto de la fila final antes que se pierda
+            int elementoFilaFinal = matriz[posicionFilaFinal][j];
+
+            // Actualizar los elemntos de la fila final
+            matriz[posicionFilaFinal][j] = matriz[posicionFilaInicial][j];
+            matriz[posicionFilaInicial][j] = elementoFilaFinal;
+        }
+
+        // Pintar matriz bidimensional
+        System.out.println("La matriz bidimensional intercambiada es: ");
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
     }
 }
