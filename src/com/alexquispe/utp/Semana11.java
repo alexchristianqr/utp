@@ -2,7 +2,7 @@ package com.alexquispe.utp;
 
 import java.util.Scanner;
 
-public class Semana10 {
+public class Semana11 {
 
     public static void main(String[] args) {
         ejercicio01();
