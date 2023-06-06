@@ -1,22 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package com.alexquispe.utp;
 
 import java.util.Scanner;
 
-/**
- * @author LAB-USR-AQ265-A0303
- */
 public class Semana04 {
     // Declarar como una variable global a nivel de clase
     static Scanner dato;
 
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
 
         // Instanciar o crear objeto

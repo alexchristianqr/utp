@@ -1,10 +1,8 @@
 package com.alexquispe.utp.trabajofinal;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,10 +13,6 @@ import java.util.List;
 
 public class App extends JFrame {
 
-    // General
-    private JFrame mainFrame;
-    private JPanel controlPanel;
-
     // Persona
     JTextField textBoxNombre;
     JTextField textBoxDni;
@@ -27,6 +21,9 @@ public class App extends JFrame {
     JTable tablaPersonas;
     PersonTableModel personTableModel;
     List<Person> personList = new ArrayList<>();
+    // General
+    private JFrame mainFrame;
+    private JPanel controlPanel;
 
     public static void main(String[] args) {
         App app = new App();

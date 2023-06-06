@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
 package com.alexquispe.utp;
 
 import java.util.Scanner;
 
-/**
- *
- * @author alex
- */
 public class Semana01 {
 
     // Declarar como una variable global a nivel de clase

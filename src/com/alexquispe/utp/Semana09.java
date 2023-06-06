@@ -3,6 +3,7 @@ package com.alexquispe.utp;
 import java.util.Scanner;
 
 public class Semana09 {
+
     public static void main(String[] args) {
         ejercicio11();
     }
@@ -218,8 +219,8 @@ public class Semana09 {
         System.out.println("El numero mayor es: " + mayor);
         System.out.println("El numero menor es: " + menor);
     }
-    
-    
+
+
     public static void ejercicio11() {
         Scanner scanner = new Scanner(System.in);
         int N;
@@ -260,6 +261,6 @@ public class Semana09 {
         System.out.println("El elemento mayore es: " + mayor);
         System.out.println("La posicion del elemento mayor es: " + posicionMayor);
     }
-    
-    
+
+
 }

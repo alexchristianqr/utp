@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.alexquispe.utp;
 
 import javax.swing.*;
 import java.util.Scanner;
 
-/**
- * @author alex
- */
 public class Semana03 {
 
     // Declarar como una variable global a nivel de clase

@@ -7,8 +7,8 @@ public class Semana11 {
     public static void main(String[] args) {
         ejercicio01();
     }
-  
-      public static void ejercicio01() {
+
+    public static void ejercicio01() {
         int[][] matriz = new int[3][3];
 
         // fc => (0,[0,1,2])
@@ -37,8 +37,8 @@ public class Semana11 {
         System.out.println("f[2]c[2] = " + matriz[2][2] + "\t");
 
     }
-  
-public static void ejercicio02() {
+
+    public static void ejercicio02() {
         int[][] matriz = new int[3][3];
 
         // Cargar arreglo bidimensional
@@ -46,7 +46,7 @@ public static void ejercicio02() {
             for (int j = 0; j < matriz[i].length; j++) {
 
                 // (Math.randon) * (Max - Min) + min
-                matriz[i][j] = (int) (Math.random() * (20 - 1) +1);
+                matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
 
             }
 
@@ -63,8 +63,8 @@ public static void ejercicio02() {
         }
 
     }
-    
-   public static void ejercicio03() {
+
+    public static void ejercicio03() {
         int[][] matriz;
         int nfilas, ncolumnas, totalPares = 0, totalImpares = 0;
         Scanner dato = new Scanner(System.in);

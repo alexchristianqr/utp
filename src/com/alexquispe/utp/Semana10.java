@@ -433,14 +433,14 @@ public class Semana10 {
         int promedioCalculado = numeros[0];
 
         numerosY = new int[tamano];
-        numeroMenor = numeros[tamano-1];
+        numeroMenor = numeros[tamano - 1];
 
         for (int i = 0; i < numeros.length; i++) {
 //            numeroMenor = numeros[i];
             numeros[i] = (int) (Math.random() * 91 + 10);
             System.out.println("El numero del arreglo X es: " + numeros[i]);
 
-            if ( numeros[i] < numeroMenor) {
+            if (numeros[i] < numeroMenor) {
                 numeroMenor = numeros[i];
                 System.out.println("Menor: " + numeroMenor);
             }
@@ -449,7 +449,6 @@ public class Semana10 {
                 numeroMayor = numeros[i];
                 System.out.println("Mayor: " + numeroMayor);
             }
-
 
 
             int nuevopromedioCalculado = numeroMayor + numeroMenor / 2;
