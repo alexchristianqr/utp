@@ -54,7 +54,7 @@ public static void ejercicio02() {
         // Pintar arreglo bidimensional
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
-                System.out.print("f[0]c[0] = " + matriz[i][j] + "\t");
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
 
             }
             System.out.println("\n");
