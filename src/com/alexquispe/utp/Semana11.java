@@ -87,9 +87,6 @@ public class Semana11 {
             // Recorrer las columnas
             for (int j = 0; j < totalFilas; j++) {
 
-                // System.out.print("Ingresa dato para la matriz[" + i + "][" + j + "]: ");
-                // matriz[i][j] = dato.nextInt();
-
                 // (Math.randon) * (Max - Min) + min
                 matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
 
