@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Semana11 {
 
     public static void main(String[] args) {
-        ejercicio04();
+        tarea_03();
     }
 
     public static void ejercicio01() {
@@ -132,11 +132,11 @@ public class Semana11 {
         // Recorrer fila
         for (int i = 0; i < matriz.length; i++) {
 
-            // Obtener el tamaño de la fila[0]
-            int totalFilas = matriz[0].length;
+            // Obtener el tamaño de la columna de la fila[0]
+            int totalColumnas = matriz[0].length;
 
             // Recorrer columna
-            for (int j = 0; j < totalFilas; j++) {
+            for (int j = 0; j < totalColumnas; j++) {
 
                 // (Math.randon) * (Max - Min) + min
                 matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
@@ -177,5 +177,60 @@ public class Semana11 {
 
         System.out.println("El total de pares es: " + totalPares);
         System.out.println("El total de impares es: " + totalImpares);
+    }
+
+    public static void tarea_03() {
+        int[][] matriz;
+        int nfilas, ncolumnas, numMayor, posicionFilaMayor, sumaFilaMayor = 0;
+        Scanner dato = new Scanner(System.in);
+
+        System.out.print("Ingresa N filas: ");
+        nfilas = dato.nextInt();
+
+        System.out.print("Ingresa N columnas: ");
+        ncolumnas = dato.nextInt();
+
+        matriz = new int[nfilas][ncolumnas];
+        numMayor = matriz[0][0];
+        posicionFilaMayor = 0;
+
+        // Recorrer fila
+        for (int i = 0; i < matriz.length; i++) {
+
+            // Obtener el tamaño de la columna de la fila[0]
+            int totalColumnas = matriz[0].length;
+
+            // Recorrer columna
+            for (int j = 0; j < totalColumnas; j++) {
+                // (Math.randon) * (Max - Min) + min
+                matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
+
+                if (matriz[i][j] > numMayor) {
+                    numMayor = matriz[i][j];
+                    posicionFilaMayor = i;
+                }
+            }
+        }
+        System.out.print("\n");
+
+        // Pintar matriz bidimensional
+        System.out.println("La matriz bidimensional es: ");
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+
+        // Recorrer los elementos de la fila del numero mayor
+        for (int j = 0; j < matriz[posicionFilaMayor].length; j++) {
+            // Sumar elementos
+            sumaFilaMayor = sumaFilaMayor + matriz[posicionFilaMayor][j];
+        }
+
+        System.out.println("El numero mayor es: " + numMayor);
+        System.out.println("La fila del numero mayor es: " + posicionFilaMayor);
+        System.out.println("La suma de los elementos de la fila del numero mayor es: " + sumaFilaMayor);
     }
 }
