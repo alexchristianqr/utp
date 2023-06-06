@@ -63,4 +63,54 @@ public static void ejercicio02() {
         }
 
     }
+    
+   public static void ejercicio03() {
+        int[][] matriz;
+        int nfilas, ncolumnas, totalPares = 0, totalImpares = 0;
+        Scanner dato = new Scanner(System.in);
+
+        System.out.print("Ingresa N filas: ");
+        nfilas = dato.nextInt();
+
+        System.out.print("Ingresa N columnas: ");
+        ncolumnas = dato.nextInt();
+
+        matriz = new int[nfilas][ncolumnas];
+
+        // Cargar arreglo bidimensional
+        for (int i = 0; i < matriz.length; i++) {
+            System.out.println("EL tamano de i=" + matriz[i].length);
+            for (int j = 0; j < matriz[i].length; j++) {
+
+                System.out.print("Ingresa dato para la matriz[" + i + "][" + j + "]: ");
+                matriz[i][j] = dato.nextInt();
+                // (Math.randon) * (Max - Min) + min
+                //matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
+
+                if ((matriz[i][j] % 2) == 0) {
+                    totalPares++;
+                } else {
+                    if ((matriz[i][j] % 2) == 1) {
+                        totalImpares++;
+                    }
+                }
+            }
+        }
+
+        System.out.print("\n");
+
+        // Pintar arreglo bidimensional
+        for (int i = 0; i < matriz.length; i++) {
+            // System.out.print("EL tamano de matriz[i] es: " + matriz[i].length);
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
+            }
+            System.out.println("\n");
+
+        }
+
+        System.out.println("El total de pares es: " + totalPares);
+        System.out.println("El total de impares es: " + totalImpares);
+
+    }
 }
