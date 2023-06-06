@@ -38,7 +38,7 @@ public class Semana11 {
 
     }
   
-  public static void ejercicio02() {
+public static void ejercicio02() {
         int[][] matriz = new int[3][3];
 
         // Cargar arreglo bidimensional
@@ -54,10 +54,10 @@ public class Semana11 {
         // Pintar arreglo bidimensional
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
-
-                System.out.println("EL numero es: " + matriz[i][j]);
+                System.out.print("f[0]c[0] = " + matriz[i][j] + "\t");
 
             }
+            System.out.println("\n");
 
         }
 
