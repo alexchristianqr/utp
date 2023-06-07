@@ -365,8 +365,10 @@ public class Semana11 {
                     numMayor = matriz[i][j];
                 }
             }
+
+            // Guardar el numero mayor de la columna recorrida
             vectorNumMayores[k] = numMayor;
-            k++;
+            k++;// Contar +1
         }
         System.out.print("\n");
 
@@ -408,16 +410,27 @@ public class Semana11 {
             // Recorrer columna
             for (int j = 0; j < totalColumnas; j++) {
                 // (Math.randon) * (Max - Min) + min
-                matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
-            }
-        }
+                matriz[i][j] = (int) (Math.random() * (10 - 1) + 1);
 
-        for (int i = 0; i < matriz.length; i++) {
+                /* if (i == j) {
+                    numPrin = matriz[i][j];
+                    sumaDiagonalPrin = sumaDiagonalPrin + numPrin;
+                } */
+
+
+            }
+
+            /* numSecu = matriz[i][(matriz[i].length - 1) - i];
+            sumaDiagonalSecu = sumaDiagonalSecu + numSecu; */
+
+            // Validar en diagonal principal y secundaria
             numPrin = matriz[i][i];
             numSecu = matriz[i][(matriz[i].length - 1) - i];
             sumaDiagonalPrin = sumaDiagonalPrin + numPrin;
             sumaDiagonalSecu = sumaDiagonalSecu + numSecu;
+
         }
+        System.out.print("\n");
 
         // Pintar matriz bidimensional
         System.out.println("La matriz bidimensional es: ");
@@ -431,5 +444,32 @@ public class Semana11 {
 
         System.out.println("La suma de la diagonal principal es: " + sumaDiagonalPrin);
         System.out.println("La suma de la diagonal secundaria es: " + sumaDiagonalSecu);
+    }
+
+    public static void ejercicio05() {
+        int[][] matriz;
+        int sumaDiagonalPrin = 0, sumaDiagonalSecu = 0, numPrin, numSecu, nfilas, ncolumnas;
+        Scanner dato = new Scanner(System.in);
+
+        System.out.print("Ingresa N filas: ");
+        nfilas = dato.nextInt();
+        System.out.print("Ingresa N columnas: ");
+        ncolumnas = dato.nextInt();
+
+        matriz = new int[nfilas][ncolumnas];
+
+        // Recorrer fila
+        for (int i = 0; i < matriz.length; i++) {
+
+            // Obtener el tamaño de la columna de la fila[0]
+            int totalColumnas = matriz[0].length;
+
+            // Recorrer columna
+            for (int j = 0; j < totalColumnas; j++) {
+                // (Math.randon) * (Max - Min) + min
+                matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
+            }
+        }
+        System.out.print("\n");
     }
 }
