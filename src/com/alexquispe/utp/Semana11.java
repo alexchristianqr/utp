@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Semana11 {
 
     public static void main(String[] args) {
-        tarea_06();
+        tarea_02();
     }
 
     public static void ejercicio01() {
@@ -171,7 +171,7 @@ public class Semana11 {
     public static void tarea_02() {
         int[][] matriz;
         int[] vectorImpares;
-        int nfilas, ncolumnas, totalPares = 0, totalImpares = 0;
+        int nfilas, ncolumnas, k = 0;
         Scanner dato = new Scanner(System.in);
 
         System.out.print("Ingresa N filas: ");
@@ -180,7 +180,7 @@ public class Semana11 {
         ncolumnas = dato.nextInt();
 
         matriz = new int[nfilas][ncolumnas];
-        vectorImpares = new int[nfilas];
+        vectorImpares = new int[nfilas * ncolumnas];
 
         // Recorrer fila
         for (int i = 0; i < matriz.length; i++) {
@@ -192,15 +192,11 @@ public class Semana11 {
             for (int j = 0; j < totalColumnas; j++) {
 
                 // (Math.randon) * (Max - Min) + min
-                matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
+                matriz[i][j] = (int) (Math.random() * (100 - 1) + 1);
 
-                if ((matriz[i][j] % 2) == 0) {
-                    totalPares++;
-                } else {
-                    if ((matriz[i][j] % 2) == 1) {
-                        vectorImpares[totalImpares] = matriz[i][j];// Guardar numero impar en un vector
-                        totalImpares++;// Contar +1
-                    }
+                if ((matriz[i][j] % 2) == 1) {
+                    vectorImpares[k] = matriz[i][j];// Guardar numero impar en un vector
+                    k++;// Contar +1
                 }
             }
         }
@@ -220,14 +216,10 @@ public class Semana11 {
         // vectorImpares = Arrays.copyOf(vectorImpares, totalImpares);
 
         // Pintar vector
-        System.out.println("El vector es: ");
-        for (int i = 0; i < vectorImpares.length; i++) {
-            System.out.print("f[" + i + "] = " + vectorImpares[i] + "\t");
+        System.out.println("El vector de impares es: ");
+        for (int i = 0; i < k; i++) {
+            System.out.print("f[" + i + "] = " + vectorImpares[i] + "\n");
         }
-        System.out.println("\n");
-
-        System.out.println("El total de pares es: " + totalPares);
-        System.out.println("El total de impares es: " + totalImpares);
     }
 
     public static void tarea_03() {
