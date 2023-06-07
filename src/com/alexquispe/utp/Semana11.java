@@ -109,6 +109,65 @@ public class Semana11 {
         System.out.println("El total de impares es: " + totalImpares);
     }
 
+    public static void ejercicio04() {
+
+        int[][] matriz;
+        int[] vector;
+        int multiplo;
+        int nfilas, ncolumnas;
+        Scanner dato = new Scanner(System.in);
+
+        System.out.print("Ingresa N filas: ");
+        nfilas = dato.nextInt();
+        System.out.print("Ingresa M columnas: ");
+        ncolumnas = dato.nextInt();
+        System.out.print("Ingresa el multiplo: ");
+        multiplo = dato.nextInt();
+
+        matriz = new int[nfilas][ncolumnas];
+        vector = new int[nfilas * ncolumnas];
+        int k = 0;
+
+        // Recorrer fila
+        for (int i = 0; i < matriz.length; i++) {
+
+            // Obtener el tamaño de la columna de la fila[0]
+            int totalColumnas = matriz[0].length;
+
+            // Recorrer columna
+            for (int j = 0; j < totalColumnas; j++) {
+
+                System.out.print("Ingresa el vaor para f[" + i + "]c[" + j + "]: ");
+                matriz[i][j] = dato.nextInt();
+
+                // (Math.randon) * (Max - Min) + min
+                // matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
+                // Evaluar si es multiplo
+                if (matriz[i][j] % multiplo == 0) {
+                    vector[k] = matriz[i][j];
+                    k++;
+                }
+            }
+        }
+        System.out.print("\n");
+
+        // Pintar matriz bidimensional
+        System.out.println("La matriz bidimensional es: ");
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+
+        // Pintar vector
+        System.out.println("El vector es: ");
+        for (int i = 0; i < k; i++) {
+            System.out.print("f[" + i + "] = " + vector[i] + "\n");
+        }
+    }
+
     public static void tarea_02() {
         int[][] matriz;
         int[] vectorImpares;
@@ -338,7 +397,7 @@ public class Semana11 {
     public static void tarea_06() {
         int[][] matriz;
         int sumaDiagonalPrin = 0, sumaDiagonalSecu = 0, numPrin, numSecu;
-        int nfilas, ncolumnas, posisionFilaInicial, posisionColumnaFinal;
+        int nfilas, ncolumnas;
         Scanner dato = new Scanner(System.in);
 
         System.out.print("Ingresa N filas: ");
@@ -347,8 +406,6 @@ public class Semana11 {
         ncolumnas = dato.nextInt();
 
         matriz = new int[nfilas][ncolumnas];
-        posisionFilaInicial = 1;
-        posisionColumnaFinal = ncolumnas;
 
         // Recorrer fila
         for (int i = 0; i < matriz.length; i++) {
@@ -382,65 +439,5 @@ public class Semana11 {
 
         System.out.println("La suma de la diagonal principal es: " + sumaDiagonalPrin);
         System.out.println("La suma de la diagonal secundaria es: " + sumaDiagonalSecu);
-    }
-    
-    
-     public static void ejercicio01() {
-
-        int[][] matriz;
-        int[] vector;
-        int multiplo;
-        int nfilas, ncolumnas;
-        Scanner dato = new Scanner(System.in);
-
-        System.out.print("Ingresa N filas: ");
-        nfilas = dato.nextInt();
-        System.out.print("Ingresa M columnas: ");
-        ncolumnas = dato.nextInt();
-        System.out.print("Ingresa el multiplo: ");
-        multiplo = dato.nextInt();
-
-        matriz = new int[nfilas][ncolumnas];
-        vector = new int[nfilas * ncolumnas];
-        int k = 0;
-
-        // Recorrer fila
-        for (int i = 0; i < matriz.length; i++) {
-
-            // Obtener el tamaño de la columna de la fila[0]
-            int totalColumnas = matriz[0].length;
-
-            // Recorrer columna
-            for (int j = 0; j < totalColumnas; j++) {
-
-                System.out.print("Ingresa el vaor para f[" + i + "]c[" + j + "]: ");
-                matriz[i][j] = dato.nextInt();
-
-                // (Math.randon) * (Max - Min) + min
-                // matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
-                // Evaluar si es multiplo
-                if (matriz[i][j] % multiplo == 0) {
-                    vector[k] = matriz[i][j];
-                    k++;
-                }
-            }
-        }
-        System.out.print("\n");
-
-        // Pintar matriz bidimensional
-        System.out.println("La matriz bidimensional es: ");
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
-                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
-            }
-            System.out.print("\n");
-        }
-        System.out.print("\n");
-
-        // Pintar vector
-        System.out.println("El vector es: ");
-        for (int i = 0; i < k; i++) {
-            System.out.print("f[" + i + "] = " + vector[i] + "\n");
-        }
     }
 }
