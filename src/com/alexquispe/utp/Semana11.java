@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Semana11 {
 
     public static void main(String[] args) {
-        tarea_02();
+        tarea_06();
     }
 
     public static void ejercicio01() {
@@ -337,8 +337,8 @@ public class Semana11 {
 
     public static void tarea_05() {
         int[][] matriz;
-        int[] vectorNumPares;
-        int nfilas, ncolumnas, numMayor;
+        int[] vectorNumMayores;
+        int nfilas, ncolumnas, numMayor, k = 0;
         Scanner dato = new Scanner(System.in);
 
         System.out.print("Ingresa N filas: ");
@@ -347,7 +347,7 @@ public class Semana11 {
         ncolumnas = dato.nextInt();
 
         matriz = new int[nfilas][ncolumnas];
-        vectorNumPares = new int[nfilas];
+        vectorNumMayores = new int[nfilas * ncolumnas];
 
         // Recorrer fila
         for (int i = 0; i < matriz.length; i++) {
@@ -363,9 +363,10 @@ public class Semana11 {
 
                 if (matriz[i][j] > numMayor) {
                     numMayor = matriz[i][j];
-                    vectorNumPares[i] = numMayor;
                 }
             }
+            vectorNumMayores[k] = numMayor;
+            k++;
         }
         System.out.print("\n");
 
@@ -380,16 +381,15 @@ public class Semana11 {
         System.out.print("\n");
 
         // Pintar vector
-        System.out.println("El vector de numeros pares es: ");
-        for (int i = 0; i < vectorNumPares.length; i++) {
-            System.out.print("f[" + i + "] = " + vectorNumPares[i] + "\n");
+        System.out.println("El vector de numeros mayores es: ");
+        for (int i = 0; i < k; i++) {
+            System.out.print("f[" + i + "] = " + vectorNumMayores[i] + "\n");
         }
     }
 
     public static void tarea_06() {
         int[][] matriz;
-        int sumaDiagonalPrin = 0, sumaDiagonalSecu = 0, numPrin, numSecu;
-        int nfilas, ncolumnas;
+        int sumaDiagonalPrin = 0, sumaDiagonalSecu = 0, numPrin, numSecu, nfilas, ncolumnas;
         Scanner dato = new Scanner(System.in);
 
         System.out.print("Ingresa N filas: ");
