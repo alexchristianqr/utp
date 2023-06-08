@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Semana11 {
 
     public static void main(String[] args) {
-        tarea_06();
+        ejercicio05();
     }
 
     public static void ejercicio01() {
@@ -416,8 +416,6 @@ public class Semana11 {
                     numPrin = matriz[i][j];
                     sumaDiagonalPrin = sumaDiagonalPrin + numPrin;
                 } */
-
-
             }
 
             /* numSecu = matriz[i][(matriz[i].length - 1) - i];
@@ -448,7 +446,7 @@ public class Semana11 {
 
     public static void ejercicio05() {
         int[][] matriz;
-        int sumaDiagonalPrin = 0, sumaDiagonalSecu = 0, numPrin, numSecu, nfilas, ncolumnas;
+        int sumaElementos = 0, nfilas, ncolumnas;
         Scanner dato = new Scanner(System.in);
 
         System.out.print("Ingresa N filas: ");
@@ -467,9 +465,33 @@ public class Semana11 {
             // Recorrer columna
             for (int j = 0; j < totalColumnas; j++) {
                 // (Math.randon) * (Max - Min) + min
-                matriz[i][j] = (int) (Math.random() * (20 - 1) + 1);
+                matriz[i][j] = (int) (Math.random() * (5 - 1) + 1);
             }
         }
         System.out.print("\n");
+
+        // Sumar la fila superior e inferior de la "O"
+        for (int j = 0; j < ncolumnas; j++) {
+            sumaElementos += matriz[0][j]; // Fila superior
+            sumaElementos += matriz[nfilas - 1][j]; // Fila inferior
+        }
+
+        // Sumar la columna izquierda y derecha de la "O"
+        for (int i = 1; i < nfilas - 1; i++) {
+            sumaElementos += matriz[i][0];  // Columna izquierda
+            sumaElementos += matriz[i][ncolumnas - 1];  // Columna derecha
+        }
+
+        // Pintar matriz bidimensional
+        System.out.println("La matriz bidimensional es: ");
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+
+        System.out.println("La suma de la letra O es: " + sumaElementos);
     }
 }
