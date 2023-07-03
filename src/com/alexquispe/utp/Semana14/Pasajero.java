@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package semana14;
+package com.alexquispe.utp.Semana14;
 
 /**
- *
  * @author LAB-USR-AQ265-A0303
  */
 public class Pasajero {
 
+    double incremento = 0;
     private double peso;
     private String destino;
     private char esFrecuente;
@@ -64,8 +64,6 @@ public class Pasajero {
     public void setDestino(String destino) {
         this.destino = destino;
     }
-
-    double incremento = 0;
 
     public void calcularIncremento() {
         if (peso >= 0 && peso <= 20) {
