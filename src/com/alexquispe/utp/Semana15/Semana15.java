@@ -8,6 +8,15 @@ public class Semana15 {
         ejercicio06();
     }
 
+    /* Practica calificada 03 */
+
+
+    
+    
+    
+    
+    /* -- */
+
     public static void ejercicio01() {
         Scanner scanner = new Scanner(System.in);
 
