@@ -10,7 +10,46 @@ public class Semana15 {
 
     /* Practica calificada 03 */
 
+    public static void pregunta04() {
 
+        int N = 4;
+        int M = 4;
+        int[][] matriz = new int[N][M];
+
+        // Asignar valores a todos los elementos
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                matriz[i][j] = (int) (Math.random() * (30 - 1) + 1);
+            }
+        }
+
+        // Pintar matriz bidimensional
+        System.out.println("La matriz bidimensional es: ");
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+
+        // Asignar a la diagonal secundaria
+        for (int i = 0; i < matriz.length; i++) {
+            // matriz[i][(M-1) -i] = 0;
+            matriz[i][(M - 1) - i] *= 4;
+        }
+
+        // Mostrar la matriz
+        System.out.println("Matriz resultante:");
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+
+    }
+    
     public static void pregunta02() {
         Scanner scanner = new Scanner(System.in);
 
