@@ -11,6 +11,56 @@ public class Semana15 {
     /* Practica calificada 03 */
 
 
+    public static void pregunta02() {
+        Scanner scanner = new Scanner(System.in);
+
+        // Ingresar tamaño de la matriz
+        System.out.print("Ingrese el número de filas (N): ");
+        int N = scanner.nextInt();
+        System.out.print("Ingrese el número de columnas (M): ");
+        int M = scanner.nextInt();
+
+        // Crear la matriz
+        int[][] matriz = new int[N][M];
+
+        // Cargar matriz
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                matriz[i][j] = (int) (Math.random() * (30 - 1) + 1);
+            }
+        }
+
+        // Pintar matriz bidimensional
+        System.out.println("La matriz bidimensional es: ");
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+
+        // Multiplicar por 3 los elementos formando la letra C
+        // Sumar la fila inferior de la "C"
+        for (int i = 0; i < M; i++) {
+            matriz[0][i] *= 3;// Fila superior
+            matriz[N - 1][i] *= 3;// Fila inferior
+        }
+
+        // Sumar la columna izquierda de la "C"
+        for (int i = 1; i < N - 1; i++) {
+            matriz[i][0] *= 3;// Columna izquierda
+        }
+
+        // Imprimir la matriz resultante
+        System.out.println("Matriz resultante:");
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                System.out.print("f[" + i + "]c[" + j + "] = " + matriz[i][j] + "\t");
+            }
+            System.out.print("\n");
+        }
+    }
     
     
     
