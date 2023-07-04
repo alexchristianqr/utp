@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Semana15 {
 
     public static void main(String[] args) {
-        ejercicio05();
+        ejercicio06();
     }
 
     public static void ejercicio01() {
@@ -235,6 +235,51 @@ public class Semana15 {
             }
             System.out.print("\n");
         }
+    }
+
+    public static void ejercicio06() {
+
+        int version;
+        double precio = 0, dscto = 0, totalDscto, totalPago;
+        int cantidadLicencias;
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la version:");
+        System.out.println("1: Estudiante");
+        System.out.println("2: Profesional");
+        System.out.println("3: Empresarial");
+        version = scanner.nextInt();
+        System.out.println("Ingrese la cantidad");
+        cantidadLicencias = scanner.nextInt();
+
+        switch (version) {
+            case 1:
+                precio = 90;
+                break;
+            case 2:
+                precio = 120;
+                break;
+            case 3:
+                precio = 150;
+                break;
+            default:
+                return;
+        }
+
+        if (cantidadLicencias < 5) {
+            dscto = 0.11;// 11%
+        } else if (cantidadLicencias >= 5 && cantidadLicencias < 10) {
+            dscto = 0.13;// 13%
+        } else if (cantidadLicencias >= 10) {
+            dscto = 0.14;// 14%
+        }
+
+        totalDscto = (precio * dscto) * cantidadLicencias;
+        totalPago = (precio * cantidadLicencias) - totalDscto;
+
+        System.out.println("El total es: " + (precio * cantidadLicencias));
+        System.out.println("El total dscto es: " + totalDscto);
+        System.out.println("El precio total con dscto " + (dscto * 100) + "% a pagar es: " + totalPago);
     }
 
 }
