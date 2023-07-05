@@ -12,6 +12,111 @@ public class Semana15 {
     /* Practica calificada 03 */
 
 
+    class Agencia {
+
+    private int destino;
+    private String modalidad;
+    private double tarifa;
+
+    public double getTarifa() {
+        return tarifa;
+    }
+
+    public void setTarifa(double tarifa) {
+        this.tarifa = tarifa;
+    }
+
+    public Agencia(int destino, String modalidad, double tarifa) {
+        this.destino = destino;
+        this.modalidad = modalidad;
+        this.tarifa = tarifa;
+    }
+
+    public void calcularIncremento() {
+
+        double incremento = 0;
+        double totalIncremento = 0;
+
+        switch (this.getModalidad()) {
+            case "A":
+                incremento = 0;
+                break;
+            case "B":
+                incremento = 0.25;
+                break;
+            case "C":
+                incremento = 0.25;
+                break;
+            case "D":
+                incremento = 0.45;
+                break;
+        }
+
+        double precio = this.getTarifa();
+        totalIncremento = precio * incremento;
+        this.setTarifa(precio + totalIncremento);
+
+    }
+
+    public int getDestino() {
+        return destino;
+    }
+
+    public void setDestino(int destino) {
+        this.destino = destino;
+    }
+
+    public String getModalidad() {
+        return modalidad;
+    }
+
+    public void setModalidad(String modalidad) {
+        this.modalidad = modalidad;
+    }
+
+}
+
+    public static void pregunta01() {
+
+        int destino;
+        String modalidad;
+        double precio;
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Ingresar destino:");
+        System.out.println("1: Trujillo $150");
+        System.out.println("2: Chiclayo $200");
+        System.out.println("3: Ica $100");
+        destino = scanner.nextInt();
+
+        System.out.println("Ingresar la modalidad:");
+        System.out.println("A: (Agencia - Agencia)");
+        System.out.println("B: (Agencia - Domicilio)");
+        System.out.println("C: (Domicilio - Agencia)");
+        System.out.println("D: (Domicilio - Domicilio)");
+        modalidad = scanner.next();
+
+        switch (destino) {
+            case 1:
+                precio = 150;
+                break;
+            case 2:
+                precio = 200;
+                break;
+            case 3:
+                precio = 100;
+                break;
+            default:
+                return;
+        }
+
+        Agencia agencia = new Agencia(destino, modalidad, precio);
+        agencia.calcularIncremento();
+
+        System.out.println("El total a pagar es: " + (agencia.getTarifa()));
+    }
+
         public static void pregunta03() {
 
 System.out.println(generarSerie(3));
