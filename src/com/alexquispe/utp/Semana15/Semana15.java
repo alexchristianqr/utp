@@ -6,9 +6,34 @@ public class Semana15 {
 
     public static void main(String[] args) {
         ejercicio06();
+        System.out.println(generarSerie(3));
     }
 
     /* Practica calificada 03 */
+
+
+    
+    
+      public static String generarSerie(int cantidadElementos) {
+
+        int[] numeros = new int[cantidadElementos];
+        int sumaElementos = 0;
+        String mensaje = "";
+
+        for (int i = 0; i < numeros.length; i++) {
+            numeros[i] = (int) (Math.random() * (20 - 1) + 1);
+        }
+
+        mensaje += "La serie es: [";
+        for (int i = 0; i < numeros.length; i++) {
+            sumaElementos += numeros[i];
+            mensaje += numeros[i] + ",";
+        }
+        mensaje += "]";
+        mensaje += " y el total de la suma de sus elementos es: " + sumaElementos;
+
+        return mensaje;
+    }
 
     public static void pregunta04() {
 
