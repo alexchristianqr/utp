@@ -12,7 +12,10 @@ public class Semana15 {
     /* Practica calificada 03 */
 
 
-    
+        public static void pregunta03() {
+
+System.out.println(generarSerie(3));
+    }
     
       public static String generarSerie(int cantidadElementos) {
 
