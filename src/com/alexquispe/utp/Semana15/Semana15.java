@@ -45,7 +45,6 @@ class Agencia {
         double precio = this.getTarifa();
         totalIncremento = precio * incremento;
         this.setTarifa(precio + totalIncremento);
-
     }
 
     public int getDestino() {
@@ -166,29 +165,31 @@ public class Semana15 {
         }
     }
 
-    public static String generarSerie(int cantidadElementos) {
-
-        int[] numeros = new int[cantidadElementos];
-        int sumaElementos = 0;
-        String mensaje = "";
-
-        for (int i = 0; i < numeros.length; i++) {
-            numeros[i] = (int) (Math.random() * (20 - 1) + 1);
-        }
-
-        mensaje += "La serie es: [";
-        for (int i = 0; i < numeros.length; i++) {
-            sumaElementos += numeros[i];
-            mensaje += numeros[i] + ",";
-        }
-        mensaje += "]";
-        mensaje += " y el total de la suma de sus elementos es: " + sumaElementos;
-
-        return mensaje;
+    public static void pregunta03() {
+        System.out.println(generarSerie(10));
     }
 
-    public static void pregunta03() {
-        System.out.println(generarSerie(3));
+    public static String generarSerie(int cantidadElementos) {
+
+        String mensaje = "";
+        int suma = 0;
+        int acumulador = 0;
+
+        mensaje += "La serie es: [";
+
+        for (int i = 0; i <= cantidadElementos; i++) {
+            acumulador += i;
+            suma = suma + acumulador;
+            mensaje += acumulador + "-";
+        }
+
+        mensaje += "]";
+        mensaje += " y el total de la suma de sus elementos es: " + suma;
+
+        return mensaje;
+
+        // Salida en la consola
+        // La serie es: [0-1-3-6-10-15-] y el total de la suma de sus elementos es: 35
     }
 
     public static void pregunta04() {
