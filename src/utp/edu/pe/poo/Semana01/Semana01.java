@@ -1,7 +1,14 @@
 package utp.edu.pe.poo.Semana01;
 
 public class Semana01 {
+     /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
-        System.out.println("Hello POO");
+        Paralelepipedo paralelepipedo = new Paralelepipedo(2,4,5);
+        paralelepipedo.perimetro();
+        paralelepipedo.area();
+        paralelepipedo.volumen();
+        paralelepipedo.informacion();
     }
 }
