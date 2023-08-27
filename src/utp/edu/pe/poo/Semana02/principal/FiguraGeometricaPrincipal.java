@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package principal;
+package utp.edu.pe.poo.Semana02.principal;
 
-import encapsulamiento.CirculoEncapsulado;
-import encapsulamiento.RectanguloEncapsulado;
+import utp.edu.pe.poo.Semana02.encapsulamiento.CirculoEncapsulado;
+import utp.edu.pe.poo.Semana02.encapsulamiento.RectanguloEncapsulado;
 
 /**
  *
