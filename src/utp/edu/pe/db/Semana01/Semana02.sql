@@ -1,7 +1,8 @@
--- drop table Libro
-
-use Coleccionlibros
+use ColeccionLibros
 go
+
+-- alter database Coleccionlibros MODIFY NAME =  ColeccionLibros
+-- go
 
 -- Crear tabla Autor
 create table Autor
@@ -49,6 +50,8 @@ foreign key (codigoAutor) references Autor(Codigo)
 )
 go
 
+-- drop table Libro
+
 -- Insertar tabla Libro
 insert into Libro (Codigo, Titulo, CodigoAutor, FechaCompra, Paginas, AnioPublicacion, Descripcion) values (1,'Cien años de soledad',2,GETDATE(),100,1875,'Libro antiguo')
 go
@@ -61,4 +64,3 @@ go
 
 -- Utilidades
 -- select GETDATE();
-
