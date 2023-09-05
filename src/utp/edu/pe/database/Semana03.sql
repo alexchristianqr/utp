@@ -28,7 +28,7 @@ go
 -- # Agregar columna a la tabla
 -- alter table Autor add PaisNacimiento varchar(50) 
 
--- # Insertar tabla Autor
+-- # Insertar registro a la tabla Autor
 insert into Autor (Codigo, Nombre, PaisNacimiento) values (1,'Cesar Vallejo','Peru')
 insert into Autor (Codigo, Nombre, PaisNacimiento) values (2,'Ricardo Palma','Peru')
 go
@@ -37,7 +37,7 @@ go
 select * from Autor
 go
 
--- # Actualizar tabla Autor por ID
+-- # Actualizar registro de la tabla Autor por ID
 update Autor set PaisNacimiento = 'Peru' where Autor.Codigo = 1
 go
 
@@ -62,11 +62,11 @@ go
 -- # Eliminar tabla
 -- drop table Libro
 
--- # Insertar tabla Libro
+-- # Insertar registros a la tabla Libro
 insert into Libro (Codigo, Titulo, CodigoAutor, FechaCompra, Paginas, AnioPublicacion, Descripcion) values (1,'Cien años de soledad',2,GETDATE(),100,1875,'Libro antiguo')
 go
 
--- # Mostrar tabla Libro
+-- # Mostrar registros de la tabla Libro
 select * from Libro
 select a.Nombre as 'Nombre Autor',l.Titulo, l.Paginas from Libro as l 
 join Autor as a on a.Codigo = l.CodigoAutor
