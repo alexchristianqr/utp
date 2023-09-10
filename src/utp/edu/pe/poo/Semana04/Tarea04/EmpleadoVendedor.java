@@ -1,6 +1,5 @@
 package utp.edu.pe.poo.Semana04.Tarea04;
 
-
 import java.text.DecimalFormat;
 
 /*
@@ -13,10 +12,10 @@ import java.text.DecimalFormat;
  */
 public class EmpleadoVendedor extends Empleado {
 
-    private double montoVendido;
-    private double tasaComision;
+    double montoVendido;
+    double tasaComision;
 
-    public EmpleadoVendedor(String dni, String apellidos, String nombres,double montoVendido, double tasaComision) {
+    public EmpleadoVendedor(String dni, String apellidos, String nombres, double montoVendido, double tasaComision) {
         super(dni, apellidos, nombres);
         this.montoVendido = montoVendido;
         this.tasaComision = tasaComision;
@@ -45,16 +44,19 @@ public class EmpleadoVendedor extends Empleado {
     }
 
     public double sueldo() {
-        return ingresos() + bonificaciones() + descuentos();
+        return ingresos() + bonificaciones() - descuentos();
     }
 
     public String mostrarInfo() {
         DecimalFormat decimalFormat = new DecimalFormat("###0.00");
         String msg = "";
-        
+
         msg += super.mostrarInfo();
-        msg += "Empleado: " + decimalFormat.format(ingresos())+"\n";
-        
+        msg += "Ingresos: " + decimalFormat.format(ingresos()) + "\t";
+        msg += "Bonificaciones: $" + decimalFormat.format(bonificaciones()) + "\t";
+        msg += "Descuentos: $" + decimalFormat.format(descuentos()) + "\t";
+        msg += "Sueldo Neto: $" + decimalFormat.format(sueldo()) + "\n";
+
         return msg;
     }
 

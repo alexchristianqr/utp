@@ -1,6 +1,5 @@
 package utp.edu.pe.poo.Semana04.Tarea04;
 
-
 import java.text.DecimalFormat;
 
 /*
@@ -34,12 +33,18 @@ public class EmpleadoPermanente extends Empleado {
         return sueldoBase;
     }
 
+    public double sueldo() {
+        return ingresos() - descuentos();
+    }
+
     public String mostrarInfo() {
         DecimalFormat decimalFormat = new DecimalFormat("###0.00");
         String msg = "";
 
         msg += super.mostrarInfo();
-        msg += "Empleado: " + decimalFormat.format(ingresos()) + "\n";
+        msg += "Ingresos: " + decimalFormat.format(ingresos()) + "\t";
+        msg += "Descuentos: $" + decimalFormat.format(descuentos()) + "\t";
+        msg += "Sueldo Neto: $" + decimalFormat.format(sueldo()) + "\n";
 
         return msg;
     }
