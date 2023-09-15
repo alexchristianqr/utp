@@ -83,3 +83,34 @@ select
 top 5
 od.UnitPrice * od.Quantity * (1-od.Discount) as 'Calculo'
 from OrderDetails od
+
+
+-- Pregunta 01
+select concat(e.LastName,' ',e.FirstName) as 'Apellidos y Nombres',e.Country,sum((e.Salary * 12)+((e.Salary * 12) * 0.35)) as 'Sueldo Anual' from Employees e
+where e.Country = 'USA'
+group by e.LastName,e.FirstName,e.Country
+having sum((e.Salary * 12)+((e.Salary * 12) * 0.35)) > 45000
+go
+
+-- Pregunta 02
+select o.OrderID, o.Freight, o.ShipCountry, year(o.ShippedDate) from Orders o where o.ShipCountry ='France' and o.Freight < 1 and year(o.ShippedDate) = '1997'
+go
+
+-- Pregunta 03
+select s.CompanyName, (p.UnitPrice * p.UnitsInStock) as 'Stock Valorizado',s.City from Products p
+inner join Suppliers s on s.SupplierID = p.SupplierID
+where s.City in ('Osaka', 'Sydney','Frankfurt')
+order by 2 desc
+go
+
+-- Pregunta 04
+select 
+c.CategoryName,
+count(p.ProductId) as 'Total productos',
+avg(p.UnitPrice) as 'Promedio de Precio unitario',
+avg(UnitsInStock) as 'Promedio de Unidades en stock'
+from Products p
+inner join Categories c on c.CategoryID = p.CategoryID
+where p.UnitsInStock > 60
+group by c.CategoryName
+go
