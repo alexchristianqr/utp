@@ -48,6 +48,37 @@ from Orders o
 join Customers c on c.CustomerID = o.CustomerID
 join Employees e on e.EmployeeID = o.EmployeeID
 
+-- # INNER JOIN
+select
+LastName,
+o.EmployeeID,
+OrderID
+from Orders o
+join Employees e on e.EmployeeID = o.EmployeeID
+
+-- # RIGHT JOIN
+select
+LastName,
+o.EmployeeID,
+OrderID
+from Orders o right join Employees e on e.EmployeeID = o.EmployeeID
+--            --> Hacia la derecha
+
+-- # LEFT JOIN
+select
+LastName,
+o.EmployeeID,
+OrderID
+from Orders o left join Employees e on e.EmployeeID = o.EmployeeID
+--			  <-- Hacia la izquierda
+
+-- # FULL JOIN
+select
+LastName,
+o.EmployeeID,
+OrderID
+from Orders o full join Employees e on e.EmployeeID = o.EmployeeID
+
 
 
 
