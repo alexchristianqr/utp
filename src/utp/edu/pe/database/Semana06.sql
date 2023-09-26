@@ -54,14 +54,14 @@ LastName,
 o.EmployeeID,
 OrderID
 from Orders o
-join Employees e on e.EmployeeID = o.EmployeeID
+join Employees e on e.EmployeeID = o.EmployeeID -- Todos los registros que NO incluyen valores nulos
 
 -- # RIGHT JOIN
 select
 LastName,
 o.EmployeeID,
 OrderID
-from Orders o right join Employees e on e.EmployeeID = o.EmployeeID
+from Orders o right join Employees e on e.EmployeeID = o.EmployeeID -- Todos los registros que SI incluyen valores nulos
 --            --> Hacia la derecha
 
 -- # LEFT JOIN
@@ -69,7 +69,7 @@ select
 LastName,
 o.EmployeeID,
 OrderID
-from Orders o left join Employees e on e.EmployeeID = o.EmployeeID
+from Orders o left join Employees e on e.EmployeeID = o.EmployeeID -- Todos los registros que SI incluyen valores nulos
 --			  <-- Hacia la izquierda
 
 -- # FULL JOIN
@@ -77,7 +77,7 @@ select
 LastName,
 o.EmployeeID,
 OrderID
-from Orders o full join Employees e on e.EmployeeID = o.EmployeeID
+from Orders o full join Employees e on e.EmployeeID = o.EmployeeID -- Todos los registros que SI incluyen valores nulos
 
 
 
