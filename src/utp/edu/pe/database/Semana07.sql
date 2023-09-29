@@ -5,7 +5,7 @@ go
 insert into Categories (CategoryName) values ('Textiles')
 go
 
-insert into Categories (CategoryName, Description) values ('Refrigeraci�n', 'Equipo de congelamiento')
+insert into Categories (CategoryName, Description) values ('Refrigeración', 'Equipo de congelamiento')
 go
 
 insert into Categories values ('Transporte', 'Movilidad de carga y personal',null)
@@ -67,3 +67,115 @@ go
 
 insert into BackupOrderDetails values (select OrderID, ProductID, UnitPrice, Quantity, Discount from OrderDetails)
 go
+
+
+-- Error
+select 
+c.CompanyName,
+sum(Freight),
+year(OrderDate)
+from Orders o
+join Customers c on c.CustomerID = o.CustomerID
+where c.CompanyName like 'WOLS%'
+group by OrderDate,c.CompanyName
+go
+
+-- OVER Solucion 01
+select distinct
+c.CompanyName,
+sum(Freight) over(partition by o.CustomerID) as 'Gasto cliente',
+sum(Freight) over(partition by year(o.OrderDate)) as 'Gasto por año',
+year(OrderDate) as 'Año',
+e.FirstName,
+sum(Freight) over(partition by o.EmployeeID) as 'Gasto por empleado'
+from Orders o
+join Customers c on c.CustomerID = o.CustomerID
+join Employees e on e.EmployeeID = o.EmployeeID
+where c.CompanyName like 'WOLS%'
+go
+
+-- OVER Solucion 02
+select distinct
+c.CompanyName,
+sum(Freight) over(partition by o.CustomerID) as 'Gasto cliente',
+sum(Freight) over(partition by year(o.OrderDate)) as 'Gasto por año',
+year(OrderDate) as 'Año',
+e.FirstName,
+sum(Freight) over(partition by o.EmployeeID, o.CustomerID, year(o.OrderDate)) as 'Gasto por empleado'-- Particionado por ID empleado, ID cliente y Año
+from Orders o
+join Customers c on c.CustomerID = o.CustomerID
+join Employees e on e.EmployeeID = o.EmployeeID
+where c.CompanyName like 'WOLS%'
+go
+
+-- OVER y SUB-CONSULTA
+select distinct
+c.CompanyName,
+sum(Freight) over(partition by o.CustomerID) as 'Gasto cliente',
+sum(Freight) over(partition by year(o.OrderDate)) as 'Gasto por año',
+year(OrderDate) as 'Año',
+(select e.FirstName from Employees e where e.EmployeeID = o.EmployeeID) as 'Empleado',
+sum(Freight) over(partition by o.EmployeeID, o.CustomerID, year(o.OrderDate)) as 'Gasto por empleado'-- Particionado por ID empleado, ID cliente y Año
+from Orders o
+join Customers c on c.CustomerID = o.CustomerID
+where c.CompanyName like 'WOLS%'
+go
+
+-- PIVOT ejemplo 01
+select * from 
+(select 
+Freight,
+year(OrderDate) as Periodo,
+CompanyName
+from Orders o
+join Customers c on c.CustomerID = o.CustomerID) as Fuente
+pivot 
+(sum(Freight) for Periodo in ([1996],[1997],[1998]))as Resultado
+go
+
+-- PIVOT Ejemplo 01
+select * from 
+(select 
+Freight,
+year(OrderDate) as Periodo,
+CompanyName
+from Orders o
+join Customers c on c.CustomerID = o.CustomerID) as Fuente
+pivot 
+(sum(Freight) for Periodo in ([1996],[1997],[1998]))as Resultado
+go
+
+-- PIVOT Ejemplo 02
+select * from 
+(select 
+Freight,
+LastName,
+CompanyName
+from Orders o
+join Customers c on c.CustomerID = o.CustomerID
+join Employees e on e.EmployeeID = o.EmployeeID ) as Fuente
+pivot 
+(sum(Freight) for LastName in ([Davolio],[Fuller]))as Resultado
+go
+
+-- PIVOT Ejemplo 03
+select * from 
+(select 
+year(OrderDate) as Periodo,
+month(OrderDate) as Mes,
+UnitPrice * Quantity * (1-Discount) as Venta,
+CompanyName
+from Orders o
+join OrderDetails od on od.OrderID = o.OrderID
+join Customers c on c.CustomerID = o.CustomerID
+join Employees e on e.EmployeeID = o.EmployeeID ) as Fuente
+pivot 
+(sum(Venta) for Mes in ([1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12])) as Resultado
+go
+
+
+
+
+
+
+
