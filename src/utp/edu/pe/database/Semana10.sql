@@ -61,7 +61,7 @@ go
 
 -- * --
 	
--- Ejemplo crear o actualizar STORE PROCEDURE
+-- Ejemplo crear o actualizar PROCEDURE
 create or alter procedure SpListarGastosAcumulados
 (
 	@periodo int,
