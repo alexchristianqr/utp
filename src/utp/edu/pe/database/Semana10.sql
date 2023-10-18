@@ -27,6 +27,8 @@ join Employees e on e.EmployeeID = o.EmployeeID
 where year(OrderDate) = 1997 and month(OrderDate) between  1 and 12 and o.CustomerID = 'SAVEA' and o.EmployeeID = 1
 go
 
+-- * --
+
 -- Ejemplo crear o actualizar FUNCTION
 create or alter function dbo.FnListarGastosAcumulados
 (
@@ -53,19 +55,20 @@ return
 )
 go
 
--- Ejecutar una FUNCTION
+-- Ejecutar FUNCTION
 select * from dbo.FnListarGastosAcumulados(1996, 1)
 go
 
+-- * --
+	
 -- Ejemplo crear o actualizar STORE PROCEDURE
-create or alter function dbo.SpListarGastosAcumulados
+create or alter procedure SpListarGastosAcumulados
 (
 	@periodo int,
 	@conteo int
 )
 as
 begin 
-(
 	select 
 	sum(Freight) as 'Suma total', 
 	count(o.CustomerID) as 'Conteo total',
@@ -80,7 +83,10 @@ begin
 	where year(OrderDate) = @periodo
 	group by OrderDate, Freight, o.CustomerID, o.EmployeeID, e.LastName
 	having count(o.CustomerID) >= @conteo
-)
 end
+go
+
+-- Ejecutar PROCEDURE
+exec SpListarGastosAcumulados 1996, 1
 go
 
