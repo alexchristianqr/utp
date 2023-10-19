@@ -89,13 +89,23 @@ create table Reserva
 )
 go
 
-create or alter function dbo.tieneDescuento
+create or alter function dbo.FnClienteTieneDescuento
 (
-  
+  @ClienteID
 ) returns boolean
 as
 begin
   -- select * from 
 end
+go
 
+create or alter function SpPagarReserva
+(
+  @ReservaID int
+)
+as
+begin
+  -- select * from 
+end
+go
 
