@@ -13,6 +13,7 @@ create table Persona
   Nombre varchar(100) not null,
   Apellido varchar(100) not null,
   Edad varchar(5),
+  FechaCreado Date,
   primary key (PersonaId)
 )
 go
@@ -25,6 +26,7 @@ create table Cliente
   Empresa varchar(5) not null,
   TipoDocumento varchar(100) not null,
   NroDocumento varchar(5) not null,
+  FechaCreado Date,
   primary key (ClienteID),
   foreign key (PersonaID) references Persona(PersonaID)
 )
@@ -36,6 +38,7 @@ create table Perfil
   PerfilID int not null,
   Nombre varchar(100) not null,
   Permisos varchar(250) not null,
+  FechaCreado Date,
   primary key (PerfilID)
 )
 go
@@ -47,6 +50,7 @@ create table Empleado
   PersonaID int not null,
   PerfilID int not null,
   Sueldo decimal not null,
+  FechaCreado Date,
   primary key (EmpleadoID),
   foreign key (PersonaID) references Persona(PersonaID),
   foreign key (PerfilID) references Perfil(PerfilID)
@@ -57,7 +61,9 @@ go
 create table Habitacion
 (
   HabitacionID int not null,
+  TipoHabitacionID int not null,
   Descripcion varchar(250) not null,
+  FechaCreado Date,
   primary key (HabitacionID)
 )
 go
@@ -67,7 +73,10 @@ create table Reserva
 (
   ReservaID int not null,
   HabitacionID int not null,
-  Nombre varchar(100) not null,
+  FechaReserva Date,
+  FechaEntrada Date,
+  FechaSalida Date,
+  FechaCreado Date,
   primary key (ReservaID),
   foreign key (HabitacionID) references Habitacion(HabitacionID)
 )
