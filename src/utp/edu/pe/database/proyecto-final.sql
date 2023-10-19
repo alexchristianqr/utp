@@ -22,7 +22,7 @@ create table Cliente
 (
   ClienteID int not null,
   PersonaID int not null,
-  NombreEmpresa varchar(5) not null,
+  Empresa varchar(5) not null,
   TipoDocumento varchar(100) not null,
   NroDocumento varchar(5) not null,
   primary key (ClienteID),
@@ -30,15 +30,25 @@ create table Cliente
 )
 go
 
+  -- # Crear tabla Empleado
+create table Perfil
+(
+  PerfilID int not null,
+  Nombre varchar(100) not null,
+  Permisos varchar(250) not null,
+  primary key (PerfilID)
+)
+go
+  
 -- # Crear tabla Empleado
 create table Empleado
 (
   EmpleadoID int not null,
   PersonaID int not null,
-  PerfilID decimal not null,
+  PerfilID int not null,
   Sueldo decimal not null,
   primary key (EmpleadoID),
-  foreign key (PersonaID) references Persona(PersonaIdD,
+  foreign key (PersonaID) references Persona(PersonaID),
   foreign key (PerfilID) references Perfil(PerfilID)
 )
 go
