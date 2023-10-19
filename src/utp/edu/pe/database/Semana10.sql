@@ -24,7 +24,7 @@ e.LastName
 from Orders o
 join Customers c on c.CustomerID = o.CustomerID
 join Employees e on e.EmployeeID = o.EmployeeID
-where year(OrderDate) = 1997 and month(OrderDate) between  1 and 12 and o.CustomerID = 'SAVEA' and o.EmployeeID = 1
+where year(OrderDate) = 1997 and (month(OrderDate) between  1 and 12) and o.CustomerID = 'SAVEA' and o.EmployeeID = 1
 go
 
 -- * --
