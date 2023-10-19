@@ -63,7 +63,7 @@ create table Habitacion
   HabitacionID int not null,
   TipoHabitacionID int not null,
   Descripcion varchar(250) not null,
-  Precio decimal not null,
+  Precio money not null,
   FechaCreado date,
   primary key (HabitacionID)
 )
@@ -88,5 +88,14 @@ create table Reserva
   foreign key (ClienteID) references Cliente(ClienteID)
 )
 go
+
+create or alter function dbo.tieneDescuento
+(
+  
+) returns boolean
+as
+begin
+  -- select * from 
+end
 
 
