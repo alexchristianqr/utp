@@ -89,6 +89,9 @@ create table Reserva
 )
 go
 
+insert into Persona (PersonaId, Nombre, Apellido, Edad, FechaCreado) values (1, 'Luis', 'Torres', '25', '10/19/2023 17:34:00')
+go
+
 create or alter function dbo.FnClienteTieneDescuento
 (
   @ClienteID
@@ -97,6 +100,9 @@ as
 begin
   -- select * from 
 end
+go
+
+insert into Persona (PersonaId, Nombre, Apellido, Edad, FechaCreado) values (1, 'Luis', 'Torres', '25', '10/19/2023 17:34:00')
 go
 
 create or alter function SpPagarReserva
