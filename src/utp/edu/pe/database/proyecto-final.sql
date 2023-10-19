@@ -30,7 +30,7 @@ create table Cliente
 )
 go
 
-  -- # Crear tabla Empleado
+-- # Crear tabla Perfil
 create table Perfil
 (
   PerfilID int not null,
@@ -53,6 +53,24 @@ create table Empleado
 )
 go
 
+-- # Crear tabla Habitación
+create table Habitacion
+(
+  HabitacionID int not null,
+  Descripcion varchar(250) not null,
+  primary key (HabitacionID)
+)
+go
 
+-- # Crear tabla Reserva
+create table Reserva
+(
+  ReservaID int not null,
+  HabitacionID int not null,
+  Nombre varchar(100) not null,
+  primary key (ReservaID),
+  foreign key (HabitacionID) references Habitacion(HabitacionID)
+)
+go
 
 
