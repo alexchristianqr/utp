@@ -185,3 +185,81 @@ Pregunta 26 pts
 Crear una función que reciba el Id del Producto y devuelva el nombre y el apellido del empleado que recibió la orden con la mayor cantidad del producto indicado.
 
 Realizar una consulta que muestre los primeros 5 productos menos vendidos de los proveedores cuyos países son de Japón y Finlandia. Se debe mostrar el ID del Producto, la Descripción y la Cantidad.
+
+
+
+    SELECT TOP 5
+    p.ProductID,
+    p.ProductName as Descripcion,
+    od.Quantity
+FROM
+    Products p
+    JOIN
+    OrderDetails od ON p.ProductID = od.ProductID
+    JOIN
+    Orders o ON od.OrderID = o.OrderID
+    JOIN
+    Suppliers s ON p.SupplierID = s.SupplierID
+WHERE
+    s.Country IN ('Japan', 'Finland')
+GROUP BY
+    p.ProductID, p.ProductName, od.Quantity
+ORDER BY
+    SUM(od.Quantity) ASC;
+
+
+
+CREATE FUNCTION ObtenerEmpleadoConMasCantidad(@ProductoID INT)
+    RETURNS TABLE
+    AS
+RETURN
+(
+    SELECT TOP 1
+        e.FirstName,
+        e.LastName
+    FROM
+        Employees e
+    JOIN
+        Orders o ON e.EmployeeID = o.EmployeeID
+    JOIN
+        OrderDetails od ON o.OrderID = od.OrderID
+    WHERE
+        od.ProductID = @ProductoID
+    GROUP BY
+        e.FirstName, e.LastName
+    ORDER BY
+        SUM(od.Quantity) DESC
+);
+
+SELECT * FROM ObtenerEmpleadoConMasCantidad(2);
+
+SELECT
+    e.EmployeeID,
+    e.FirstName,
+    e.LastName,
+    COUNT(o.OrderID) as NumeroDeOrdenes
+FROM
+    Employees e
+        JOIN
+    Orders o ON e.EmployeeID = o.EmployeeID
+WHERE
+    YEAR(o.OrderDate) = 1996
+GROUP BY
+    e.EmployeeID, e.FirstName, e.LastName
+HAVING
+    COUNT(o.OrderID) > 20;
+
+
+SELECT DISTINCT
+    c.CustomerID,
+    c.CompanyName,
+    SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) OVER (PARTITION BY c.CustomerID) as SumaTotal,
+        AVG(od.UnitPrice * od.Quantity * (1 - od.Discount)) OVER (PARTITION BY c.CustomerID) as PromedioTotal
+FROM
+    Customers c
+        JOIN
+    Orders o ON c.CustomerID = o.CustomerID
+        JOIN
+    OrderDetails od ON o.OrderID = od.OrderID
+WHERE
+    YEAR(o.OrderDate) = 1998;
