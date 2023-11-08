@@ -12,6 +12,8 @@ create table Persona
   PersonaId int not null,
   Nombre varchar(100) not null,
   Apellido varchar(100) not null,
+  TipoDocumento varchar(100) not null,
+  NroDocumento varchar(5) not null,
   Edad varchar(5),
   FechaCreado date,
   primary key (PersonaId)
@@ -24,8 +26,6 @@ create table Cliente
   ClienteID int not null,
   PersonaID int not null,
   Empresa varchar(5) not null,
-  TipoDocumento varchar(100) not null,
-  NroDocumento varchar(5) not null,
   FechaCreado date,
   primary key (ClienteID),
   foreign key (PersonaID) references Persona(PersonaID)
@@ -92,10 +92,24 @@ go
 -- Persona
 insert into Persona (PersonaId, Nombre, Apellido, Edad, FechaCreado) values (1, 'Luis', 'Torres', '25', '10/19/2023 17:34:00')
 go
+  
 -- Empleado
 insert into Empleado (PersonaId, Nombre, Apellido, Edad, FechaCreado) values (1, 'Luis', 'Torres', '25', '10/19/2023 17:34:00')
 go
 
+-- Perfil
+insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (1, 'Administrador', '{}', '10/19/2023 17:34:00')
+go
+
+-- Habitacion
+insert into Habitacion (HabitacionID, TipoHabitacionID, Descripcion, Precio, FechaCreado) values (1, 1, 'Habitación 203 piso 2', 49.50, '10/19/2023 17:34:00')
+go
+
+-- Reserva
+insert into Reserva (ReservaID, ClienteID, HabitacionID, EmpleadoID, MontoTotal, CantidadPersonas, FechaReserva, FechaEntrada, FechaSalida, FechaCreado) 
+  values (1, 1, 1, 1, 89.90, '10/19/2023 17:34:00', '10/19/2023 17:34:00', '10/19/2023 17:34:00', '10/19/2023 17:34:00')
+go
+  
 create or alter function dbo.FnClienteTieneDescuento
 (
   @ClienteID
