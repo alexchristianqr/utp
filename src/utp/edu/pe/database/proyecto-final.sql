@@ -1,114 +1,116 @@
 -- # Crear base de datos
-create database db_hotel
-go
+create database DbHotel
 
 -- # Usar base de datos
-use db_hotel
-go
+use DbHotel
 
 -- # Crear tabla Persona
 create table Persona
 (
-  PersonaId int not null,
+  PersonaID int not null, -- identity(1,1),
   Nombre varchar(100) not null,
   Apellido varchar(100) not null,
-  TipoDocumento varchar(100) not null,
+  TipoDocumento int not null,
   NroDocumento varchar(5) not null,
   Edad varchar(5),
-  FechaCreado date,
+  FechaCreado datetime,
   primary key (PersonaId)
 )
-go
 
 -- # Crear tabla Cliente
 create table Cliente
 (
-  ClienteID int not null,
+  ClienteID int not null, -- identity(1,1),
   PersonaID int not null,
-  Empresa varchar(5) not null,
-  FechaCreado date,
+  Empresa varchar(250) not null,
+  FechaCreado datetime,
   primary key (ClienteID),
   foreign key (PersonaID) references Persona(PersonaID)
 )
-go
 
 -- # Crear tabla Perfil
 create table Perfil
 (
-  PerfilID int not null,
+  PerfilID int not null, -- identity(1,1),
   Nombre varchar(100) not null,
   Permisos varchar(250) not null,
-  FechaCreado date,
+  FechaCreado datetime,
   primary key (PerfilID)
 )
-go
   
 -- # Crear tabla Empleado
 create table Empleado
 (
-  EmpleadoID int not null,
+  EmpleadoID int not null, -- identity(1,1),
   PersonaID int not null,
   PerfilID int not null,
   Sueldo decimal not null,
-  FechaCreado date,
+  FechaCreado datetime,
   primary key (EmpleadoID),
   foreign key (PersonaID) references Persona(PersonaID),
   foreign key (PerfilID) references Perfil(PerfilID)
 )
-go
+
+-- # Crear tabla Tipo Habitación
+create table TipoHabitacion
+(
+    TipoHabitacionID int not null, -- identity(1,1),
+    Descripcion varchar(250) not null,
+    FechaCreado datetime,
+    primary key (TipoHabitacionID)
+)
 
 -- # Crear tabla Habitación
 create table Habitacion
 (
-  HabitacionID int not null,
+  HabitacionID int not null, -- identity(1,1),
   TipoHabitacionID int not null,
   Descripcion varchar(250) not null,
-  Precio money not null,
-  FechaCreado date,
-  primary key (HabitacionID)
+  Precio decimal not null,
+  FechaCreado datetime,
+  primary key (HabitacionID),
+  foreign key (TipoHabitacionID) references TipoHabitacion(TipoHabitacionID)
 )
-go
 
 -- # Crear tabla Reserva
 create table Reserva
 (
-  ReservaID int not null,
+  ReservaID int not null, -- identity(1,1),
   ClienteID int not null,
   HabitacionID int not null,
   EmpleadoID int not null,
   MontoTotal decimal(2),
   CantidadPersonas int not null,
-  FechaReserva date,
-  FechaEntrada date,
-  FechaSalida date,
-  FechaCreado date,
+  FechaReserva datetime,
+  FechaEntrada datetime,
+  FechaSalida datetime,
+  FechaCreado datetime,
   primary key (ReservaID),
+  foreign key (ClienteID) references Cliente(ClienteID),
   foreign key (HabitacionID) references Habitacion(HabitacionID),
-  foreign key (EmpleadoID) references Empleado(EmpleadoID),
-  foreign key (ClienteID) references Cliente(ClienteID)
+  foreign key (EmpleadoID) references Empleado(EmpleadoID)
 )
-go
-
--- Persona
-insert into Persona (PersonaId, Nombre, Apellido, Edad, FechaCreado) values (1, 'Luis', 'Torres', '25', '10/19/2023 17:34:00')
-go
-  
--- Empleado
-insert into Empleado (PersonaId, Nombre, Apellido, Edad, FechaCreado) values (1, 'Luis', 'Torres', '25', '10/19/2023 17:34:00')
-go
 
 -- Perfil
-insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (1, 'Administrador', '{}', '10/19/2023 17:34:00')
-go
+insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (1, 'Administrador', '{}', '2023-11-10 18:45:29')
+
+-- Persona Empleado
+insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Edad, FechaCreado) values (1, 'Luis', 'Torres', 1, '12345678', '30', '2023-11-10 18:45:29')
+insert into Empleado (EmpleadoID, PersonaID, PerfilID, Sueldo, FechaCreado) values (1, 1, 1, 1250.69, '2023-11-10 18:45:29')
+
+-- Persona Cliente
+insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Edad, FechaCreado) values (1, 'Javier', 'Retamoso', 2, '20345678901', '30', '2023-11-10 18:45:29')
+insert into Cliente (ClienteID, PersonaID, Empresa, FechaCreado) values (1, 1, 'Securitec Peru SAC', '2023-11-10 18:45:29')
+
+-- Tipo Habitacion
+insert into TipoHabitacion (TipoHabitacionID, Descripcion, FechaCreado) values (1, 'Clasico', '2023-11-10 18:45:29')
 
 -- Habitacion
-insert into Habitacion (HabitacionID, TipoHabitacionID, Descripcion, Precio, FechaCreado) values (1, 1, 'Habitación 203 piso 2', 49.50, '10/19/2023 17:34:00')
-go
+insert into Habitacion (HabitacionID, TipoHabitacionID, Descripcion, Precio, FechaCreado) values (1, 1, 'Habitación 203 piso 2', 49.50, '2023-11-10 18:45:29')
 
 -- Reserva
-insert into Reserva (ReservaID, ClienteID, HabitacionID, EmpleadoID, MontoTotal, CantidadPersonas, FechaReserva, FechaEntrada, FechaSalida, FechaCreado) 
-  values (1, 1, 1, 1, 89.90, '10/19/2023 17:34:00', '10/19/2023 17:34:00', '10/19/2023 17:34:00', '10/19/2023 17:34:00')
-go
+insert into Reserva (ReservaID,ClienteID,HabitacionID,EmpleadoID,MontoTotal,CantidadPersonas,FechaReserva,FechaEntrada,FechaSalida,FechaCreado)
+  values (1, 1, 1, 1, 89.90, '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29')
   
 create or alter function dbo.FnClienteTieneDescuento
 (
@@ -118,7 +120,6 @@ as
 begin
   -- select * from 
 end
-go
 
 create or alter function SpPagarReserva
 (
@@ -128,5 +129,4 @@ as
 begin
   -- select * from 
 end
-go
 
