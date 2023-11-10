@@ -99,8 +99,8 @@ insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, E
 insert into Empleado (EmpleadoID, PersonaID, PerfilID, Sueldo, FechaCreado) values (1, 1, 1, 1250.69, '2023-11-10 18:45:29')
 
 -- Persona Cliente
-insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Edad, FechaCreado) values (1, 'Javier', 'Retamoso', 2, '20345678901', '30', '2023-11-10 18:45:29')
-insert into Cliente (ClienteID, PersonaID, Empresa, FechaCreado) values (1, 1, 'Securitec Peru SAC', '2023-11-10 18:45:29')
+insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Edad, FechaCreado) values (2, 'Javier', 'Retamoso', 2, '20345678901', '30', '2023-11-10 18:45:29')
+insert into Cliente (ClienteID, PersonaID, Empresa, FechaCreado) values (1, 2, 'Securitec Peru SAC', '2023-11-10 18:45:29')
 
 -- Tipo Habitacion
 insert into TipoHabitacion (TipoHabitacionID, Descripcion, FechaCreado) values (1, 'Clasico', '2023-11-10 18:45:29')
