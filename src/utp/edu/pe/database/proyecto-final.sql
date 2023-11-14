@@ -7,7 +7,7 @@ use DbHotel
 -- # Crear tabla Persona
 create table Persona
 (
-  PersonaID int not null, -- identity(1,1),
+  PersonaID int not null identity(1,1),
   Nombre varchar(100) not null,
   Apellido varchar(100) not null,
   TipoDocumento int not null,
@@ -20,7 +20,7 @@ create table Persona
 -- # Crear tabla Cliente
 create table Cliente
 (
-  ClienteID int not null, -- identity(1,1),
+  ClienteID int not null identity(1,1),
   PersonaID int not null,
   Empresa varchar(250) not null,
   FechaCreado datetime not null,
@@ -31,7 +31,7 @@ create table Cliente
 -- # Crear tabla Perfil
 create table Perfil
 (
-  PerfilID int not null, -- identity(1,1),
+  PerfilID int not null identity(1,1),
   Nombre varchar(100) not null,
   Permisos varchar(250) not null,
   FechaCreado datetime not null,
@@ -41,7 +41,7 @@ create table Perfil
 -- # Crear tabla Empleado
 create table Empleado
 (
-  EmpleadoID int not null, -- identity(1,1),
+  EmpleadoID int not null identity(1,1),
   PersonaID int not null,
   PerfilID int not null,
   Sueldo decimal not null,
@@ -54,7 +54,7 @@ create table Empleado
 -- # Crear tabla Tipo Habitación
 create table TipoHabitacion
 (
-    TipoHabitacionID int not null, -- identity(1,1),
+    TipoHabitacionID int not null identity(1,1),
     Descripcion varchar(250) not null,
     FechaCreado datetime not null,
     primary key (TipoHabitacionID)
@@ -63,7 +63,7 @@ create table TipoHabitacion
 -- # Crear tabla Habitación
 create table Habitacion
 (
-  HabitacionID int not null, -- identity(1,1),
+  HabitacionID int not null identity(1,1),
   TipoHabitacionID int not null,
   Descripcion varchar(250) not null,
   Precio decimal not null,
@@ -75,7 +75,7 @@ create table Habitacion
 -- # Crear tabla Producto
 create table Producto
 (
-    ProductoID int not null, -- identity(1,1),
+    ProductoID int not null identity(1,1),
     Descripcion varchar(250) not null,
     Precio decimal not null,
     CantidadStock int not null,
@@ -86,7 +86,7 @@ create table Producto
 -- # Crear tabla ReservaConsumo
 create table ReservaConsumo
 (
-    ReservaID int not null,
+    ReservaID int not null identity(1,1),
     ProductoID int not null,
     Cantidad int not null,
     Precio decimal(2) not null,
@@ -98,7 +98,7 @@ create table ReservaConsumo
 -- # Crear tabla Reserva
 create table Reserva
 (
-  ReservaID int not null, -- identity(1,1),
+  ReservaID int not null identity(1,1),
   ClienteID int not null,
   HabitacionID int not null,
   EmpleadoID int not null,
@@ -117,7 +117,7 @@ create table Reserva
 -- # Crear tabla Comprobante de Pago
 create table ComprobantePago
 (
-    ComprobantePagoID int not null, -- identity(1,1),
+    ComprobantePagoID int not null identity(1,1),
     ReservaID int not null,
     EmpleadoID int not null,
     TipoComprobante int not null, -- 1: Factura, 2: Boleta
