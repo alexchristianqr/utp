@@ -124,7 +124,7 @@ create table ComprobantePago
     ComprobantePagoID int not null identity(1,1),
     ReservaID int not null,
     EmpleadoID int not null,
-    TipoComprobante int not null, -- 1: Factura, 2: Boleta
+    TipoComprobante varchar(5) not null, -- 1: Factura, 2: Boleta
     FechaCreado datetime not null,
     FechaPagado datetime,
     Estado varchar(50) not null, -- Activo, Pendiente pago, Pagado, Cancelado
@@ -135,6 +135,11 @@ create table ComprobantePago
 
 -- Perfil
 insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (1, 'Administrador', '{}', '2023-11-10 18:45:29')
+insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (2, 'Recepcionista', '{}', '2023-11-09 10:23:51')
+insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (3, 'Portero', '{}', '2023-11-08 08:51:49')
+insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (4, 'Conserje', '{}', '2023-11-07 11:01:36')
+insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (5, 'Personal de limpieza', '{}', '2023-11-06 16:06:02')
+insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (6, 'Personal de mantenimiento', '{}', '2023-11-05 12:01:20')
 
 -- Persona Empleado
 insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values (1, 'Luis', 'Torres', 1, '12345678', 'M', '30', '2023-11-10 18:45:29')
@@ -154,8 +159,14 @@ insert into Habitacion (HabitacionID, TipoHabitacionID, Descripcion, Nivel, Nume
 insert into Reserva (ReservaID, ClienteID, HabitacionID, MontoTotal, CantidadPersonas, FechaReserva, FechaEntrada, FechaSalida, FechaCreado)
   values (1, 1, 1, 89.90, '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29')
 
+-- Producto
+insert into Producto (ProductoID, Descripcion, Precio, CantidadStock, FechaCreado) values (1, 'Botella de agua cielo', 5, 100, '2023-11-10 18:45:29')
+
+-- Reserva Consumo
+insert into ReservaConsumo (ReservaID, ProductoID, Cantidad, Precio, FechaCreado) values (1, 1, 3, 5, '2023-11-10 18:45:29')
+
 -- Comprobante Pago
-insert into ComprobantePago (ComprobantePagoID, ReservaID, EmpleadoID, TipoComprobante, FechaCreado, FechaPagado, Estado) values ()  
+insert into ComprobantePago (ComprobantePagoID, ReservaID, EmpleadoID, TipoComprobante, FechaCreado, FechaPagado, Estado) values (1, 1, 1, '1', '2023-11-10 18:45:29', '2023-11-10 18:45:29', 'Pagado')
   
 create or alter function dbo.FnClienteTieneDescuento
 (
