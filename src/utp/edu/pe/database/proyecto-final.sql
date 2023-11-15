@@ -70,6 +70,7 @@ create table Habitacion
   Nivel varchar(25) not null,
   NumeroPiso varchar(25) not null,
   Precio decimal not null,
+  CantidadCamas int not null,
   FechaCreado datetime not null,
   primary key (HabitacionID),
   foreign key (TipoHabitacionID) references TipoHabitacion(TipoHabitacionID)
@@ -147,7 +148,7 @@ insert into Cliente (ClienteID, PersonaID, Empresa, FechaCreado) values (1, 2, n
 insert into TipoHabitacion (TipoHabitacionID, Descripcion, FechaCreado) values (1, 'Clasico', '2023-11-10 18:45:29')
 
 -- Habitacion
-insert into Habitacion (HabitacionID, TipoHabitacionID, Descripcion, Nivel, NumeroPiso, Precio, FechaCreado) values (1, 1, 'Habitación con agua caliente + TV', '1', '101', 49.50, '2023-11-10 18:45:29')
+insert into Habitacion (HabitacionID, TipoHabitacionID, Descripcion, Nivel, NumeroPiso, Precio, CantidadCamas, FechaCreado) values (1, 1, 'Habitación con agua caliente + TV', '1', '101', 49.50, 1, '2023-11-10 18:45:29')
 
 -- Reserva
 insert into Reserva (ReservaID, ClienteID, HabitacionID, MontoTotal, CantidadPersonas, FechaReserva, FechaEntrada, FechaSalida, FechaCreado)
