@@ -23,7 +23,7 @@ create table Cliente
 (
   ClienteID int not null identity(1,1),
   PersonaID int not null,
-  Empresa varchar(250) not null,
+  Empresa varchar(250),
   FechaCreado datetime not null,
   primary key (ClienteID),
   foreign key (PersonaID) references Persona(PersonaID)
@@ -141,7 +141,7 @@ insert into Empleado (EmpleadoID, PersonaID, PerfilID, Sueldo, FechaCreado) valu
 
 -- Persona Cliente
 insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values (2, 'Javier', 'Retamoso', 2, '20345678901', 'M', '30', '2023-11-10 18:45:29')
-insert into Cliente (ClienteID, PersonaID, Empresa, FechaCreado) values (1, 2, 'Securitec Peru SAC', '2023-11-10 18:45:29')
+insert into Cliente (ClienteID, PersonaID, Empresa, FechaCreado) values (1, 2, null, '2023-11-10 18:45:29')
 
 -- Tipo Habitacion
 insert into TipoHabitacion (TipoHabitacionID, Descripcion, FechaCreado) values (1, 'Clasico', '2023-11-10 18:45:29')
