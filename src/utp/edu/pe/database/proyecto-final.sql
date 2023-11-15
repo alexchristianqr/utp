@@ -12,6 +12,7 @@ create table Persona
   Apellido varchar(100) not null,
   TipoDocumento int not null,
   NroDocumento varchar(5) not null,
+  Sexo varchar(10) not null, 
   Edad varchar(5),
   FechaCreado datetime not null,
   primary key (PersonaId)
@@ -135,11 +136,11 @@ create table ComprobantePago
 insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (1, 'Administrador', '{}', '2023-11-10 18:45:29')
 
 -- Persona Empleado
-insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Edad, FechaCreado) values (1, 'Luis', 'Torres', 1, '12345678', '30', '2023-11-10 18:45:29')
+insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values (1, 'Luis', 'Torres', 1, '12345678', 'M', '30', '2023-11-10 18:45:29')
 insert into Empleado (EmpleadoID, PersonaID, PerfilID, Sueldo, FechaCreado) values (1, 1, 1, 1250.69, '2023-11-10 18:45:29')
 
 -- Persona Cliente
-insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Edad, FechaCreado) values (2, 'Javier', 'Retamoso', 2, '20345678901', '30', '2023-11-10 18:45:29')
+insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values (2, 'Javier', 'Retamoso', 2, '20345678901', 'M', '30', '2023-11-10 18:45:29')
 insert into Cliente (ClienteID, PersonaID, Empresa, FechaCreado) values (1, 2, 'Securitec Peru SAC', '2023-11-10 18:45:29')
 
 -- Tipo Habitacion
