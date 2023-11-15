@@ -140,7 +140,7 @@ insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, S
 insert into Empleado (EmpleadoID, PersonaID, PerfilID, Sueldo, FechaCreado) values (1, 1, 1, 1250.69, '2023-11-10 18:45:29')
 
 -- Persona Cliente
-insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values (2, 'Javier', 'Retamoso', 2, '20345678901', 'M', '30', '2023-11-10 18:45:29')
+insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values (2, 'Javier', 'Retamoso', 1, '74567890', 'M', '30', '2023-11-10 18:45:29')
 insert into Cliente (ClienteID, PersonaID, Empresa, FechaCreado) values (1, 2, null, '2023-11-10 18:45:29')
 
 -- Tipo Habitacion
