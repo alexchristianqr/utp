@@ -151,6 +151,9 @@ insert into Habitacion (HabitacionID, TipoHabitacionID, Descripcion, Nivel, Nume
 -- Reserva
 insert into Reserva (ReservaID, ClienteID, HabitacionID, MontoTotal, CantidadPersonas, FechaReserva, FechaEntrada, FechaSalida, FechaCreado)
   values (1, 1, 1, 89.90, '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29')
+
+-- Comprobante Pago
+insert into ComprobantePago (ComprobantePagoID, ReservaID, EmpleadoID, TipoComprobante, FechaCreado, FechaPagado, Estado) values ()  
   
 create or alter function dbo.FnClienteTieneDescuento
 (
