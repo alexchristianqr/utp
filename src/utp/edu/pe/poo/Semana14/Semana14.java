@@ -1,64 +1,112 @@
-package semana14;
+package utp.edu.pe.poo.Semana14;
 
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
-class Conexion {
+public class Semana14 {
 
-    private static Connection cnx = null;
-
-    public static Connection obtener() throws SQLException, ClassNotFoundException {
-        if (cnx == null) {
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                String xuser = "root";
-                String xpassword = "";
-                cnx = DriverManager.getConnection("jdbc:mysql://localhost:3308/inventario", xuser, xpassword);
-            } catch (SQLException ex) {
-                throw new SQLException(ex);
-            } catch (ClassNotFoundException ex) {
-                throw new ClassCastException(ex.getMessage());
-            }
-        }
-        return cnx;
-    }
-
-    public static void cerrar() throws SQLException {
-        if (cnx != null) {
-            cnx.close();
-        }
-    }
-    
-    
-
-}
-
-
-
-
-
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-public class Principal {
-/** Clase principal y método MAIN */
     public static void main(String[] args) {
-        String consulta="SELECT title,length FROM film";
-        
+        queryConsultar();
+        queryInsertar();
+        queryActualizar();
+        queryEliminar();
+    }
+
+    public static void queryConsultar() {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
         try {
-            Statement sentencia=Conexion.obtener().createStatement();
-            ResultSet resultado=sentencia.executeQuery(consulta);
-            while (resultado.next())
-            {
-                System.out.println (resultado.getString (1) + " " + resultado.getInt(2));
+            conn = Conexion.obtenerConexion();
+
+            stmt = conn.prepareStatement("SELECT * FROM country where code = ?");
+            stmt.setString(1, "ABW");
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String code = rs.getString("code");
+                String name = rs.getString("name");
+                System.out.println("Code: " + code + " Name: " + name);
             }
-            
-        } catch (ClassNotFoundException | SQLException e) {
-            
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            Conexion.cerrarConsulta(stmt);
+            Conexion.cerrarConexion(conn);
+        }
+    }
+
+    public static int queryInsertar() {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = Conexion.obtenerConexion();
+
+            stmt = conn.prepareStatement("insert into city (Name, CountryCode, District, Population) values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, "TEST");
+            stmt.setString(2, "PER");
+            stmt.setString(3, "TEST");
+            stmt.setInt(4, 1045);
+
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                int code = rs.getInt(1);
+                System.out.println("Code: " + code);
+            }
+
+            return stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            Conexion.cerrarConsulta(stmt);
+            Conexion.cerrarConexion(conn);
+        }
+    }
+
+    public static int queryActualizar() {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = Conexion.obtenerConexion();
+
+            stmt = conn.prepareStatement("update city set name = ? where id = ?");
+            stmt.setString(1, "Alex");
+            stmt.setInt(2, 4082);
+
+            return stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            Conexion.cerrarConsulta(stmt);
+            Conexion.cerrarConexion(conn);
+        }
+    }
+
+    public static int queryEliminar() {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = Conexion.obtenerConexion();
+
+            stmt = conn.prepareStatement("delete from city where id = ?");
+            stmt.setInt(1, 4082);
+
+            return stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            Conexion.cerrarConsulta(stmt);
+            Conexion.cerrarConexion(conn);
         }
     }
 
