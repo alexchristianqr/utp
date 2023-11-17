@@ -1,3 +1,11 @@
+-- ****************************** --
+-- NORMALIZACION DE BASE DE DATOS --
+-- ****************************** --
+-- Sitio web: https://www.marcossarmiento.com/2017/06/28/normalizacion-de-base-de-datos/
+-- 1FN: Eliminar datos repetitivos en varias columnas
+-- 2FN: Eliminar datos redundantes en la tabla principal y ponerlas en otra tabla por PK1 y PK2.
+-- 3FN: Eliminar columnas que no dependen de la PK en la tabla principal en y ponerlas a otra tabla
+  
 -- # Crear base de datos
 create database DbHotel
 
