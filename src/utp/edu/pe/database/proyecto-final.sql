@@ -115,7 +115,6 @@ create table Reserva
   HabitacionID int not null,
   EmpleadoID int not null,
   MontoTotal decimal(2) not null,
-  CantidadPersonas int not null,
   FechaReserva datetime,
   FechaEntrada datetime,
   FechaSalida datetime,
@@ -164,7 +163,7 @@ insert into TipoHabitacion (TipoHabitacionID, Descripcion, FechaCreado) values (
 insert into Habitacion (HabitacionID, TipoHabitacionID, Descripcion, Nivel, NumeroPiso, Precio, CantidadCamas, FechaCreado) values (1, 1, 'Habitación con agua caliente + TV', '1', '101', 49.50, 1, '2023-11-10 18:45:29')
 
 -- Reserva
-insert into Reserva (ReservaID, ClienteID, HabitacionID, MontoTotal, CantidadPersonas, FechaReserva, FechaEntrada, FechaSalida, FechaCreado)
+insert into Reserva (ReservaID, ClienteID, HabitacionID, MontoTotal, FechaReserva, FechaEntrada, FechaSalida, FechaCreado)
   values (1, 1, 1, 89.90, '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29')
 
 -- Producto
