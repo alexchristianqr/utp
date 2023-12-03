@@ -29,18 +29,20 @@ GO
 -- REQ03: Obtener el total de ingresos por empleado en un rango de fechas
 SELECT
     e.EmpleadoID,
+    pe.Nombre,
     p.Nombre AS EmpleadoNombre,
     p.Apellido AS EmpleadoApellido,
-    SUM(cp.MontoTotal) AS TotalIngresos
+    SUM(r.MontoTotal) AS TotalIngresos
 FROM
     Empleado e
         INNER JOIN Persona p ON e.PersonaID = p.PersonaID
         INNER JOIN Reserva r ON e.EmpleadoID = r.EmpleadoID
         INNER JOIN ComprobantePago cp ON r.ReservaID = cp.ReservaID
+        INNER JOIN Perfil pe ON pe.PerfilID = e.PerfilID
 WHERE
     cp.FechaPagado BETWEEN '2023-01-01' AND '2023-12-31'
 GROUP BY
-    e.EmpleadoID, p.Nombre, p.Apellido
+    e.EmpleadoID, p.Nombre, p.Apellido, pe.Nombre
 GO
 
 -- REQ04: Función Avanzada: Calcular el promedio de gasto por reserva
@@ -142,5 +144,11 @@ FROM
         INNER JOIN TipoHabitacion th ON h.TipoHabitacionID = th.TipoHabitacionID
         LEFT JOIN ReservaConsumo rc ON r.ReservaID = rc.ReservaID
         LEFT JOIN Producto p ON rc.ProductoID = p.ProductoID
+GO
+
+-- Ejecutar vista
+SELECT ReservaID, count(ProductoID)
+FROM VistaReservasDetalladas
+GROUP BY ReservaID
 GO
 
