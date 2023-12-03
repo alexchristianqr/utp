@@ -145,9 +145,3 @@ create table ComprobantePago
     foreign key (ReservaID) references Reserva(ReservaID),
     foreign key (EmpleadoID) references Empleado(EmpleadoID)
 )
-
--- # Resetear tablas
-truncate table Perfil
-
-ALTER TABLE Reserva DROP CONSTRAINT FK_PROBLEM_REASON
-truncate table Reserva
