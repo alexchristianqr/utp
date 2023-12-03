@@ -5,7 +5,9 @@
 -- 1FN: Eliminar datos repetitivos en varias columnas
 -- 2FN: Eliminar datos redundantes en la tabla principal y ponerlas en otra tabla por PK1 y PK2.
 -- 3FN: Eliminar columnas que no dependen de la PK en la tabla principal en y ponerlas a otra tabla
-  
+
+-- (DDL) DATA DEFINITION LANGUAGE
+
 -- # Crear base de datos
 create database DBHotel
 
@@ -152,8 +154,10 @@ create table ComprobantePago
     foreign key (EmpleadoID) references Empleado(EmpleadoID)
 )
 
+-- (DML) DATA MANIPULATION LANGUAGE
+
 -- Perfil
-insert into Perfil (Nombre, Permisos, FechaCreado) values ('Administrador', '{}', '2023-11-10 18:45:29')
+    insert into Perfil (Nombre, Permisos, FechaCreado) values ('Administrador', '{}', '2023-11-10 18:45:29')
 insert into Perfil (Nombre, Permisos, FechaCreado) values ('Recepcionista', '{}', '2023-11-09 10:23:51')
 insert into Perfil (Nombre, Permisos, FechaCreado) values ('Portero', '{}', '2023-11-08 08:51:49')
 insert into Perfil (Nombre, Permisos, FechaCreado) values ('Conserje', '{}', '2023-11-07 11:01:36')
@@ -161,11 +165,11 @@ insert into Perfil (Nombre, Permisos, FechaCreado) values ('Personal de limpieza
 insert into Perfil (Nombre, Permisos, FechaCreado) values ('Personal de mantenimiento', '{}', '2023-11-05 12:01:20')
 
 -- Persona Empleado
-insert into Persona (Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values ('Luis', 'Torres', 1, '12345678', 'M', '30', '2023-11-10 18:45:29')
+insert into Persona (Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values ('Luis', 'Torres', '1', '12345678', 'M', '30', '2023-11-10 18:45:29')
 insert into Empleado (PersonaID, PerfilID, Sueldo, FechaCreado) values (1, 1, 1250.69, '2023-11-10 18:45:29')
 
 -- Persona Cliente
-insert into Persona (Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values ('Javier', 'Retamoso', 1, '74567890', 'M', '30', '2023-11-10 18:45:29')
+insert into Persona (Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values ('Javier', 'Retamoso', '1', '74567890', 'M', '30', '2023-11-10 18:45:29')
 insert into Cliente (PersonaID, Empresa, FechaCreado) values (2, null, '2023-11-10 18:45:29')
 
 -- Tipo Habitacion
@@ -176,7 +180,7 @@ insert into Habitacion (TipoHabitacionID, Descripcion, Nivel, NumeroPiso, Precio
 
 -- Reserva
 insert into Reserva (ClienteID, HabitacionID, MontoTotal, FechaReserva, FechaEntrada, FechaSalida, FechaCreado)
-  values (1, 1, 89.90, '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29')
+values (1, 1, 89.90, '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29')
 
 -- Producto
 insert into Producto (ProductoID, Descripcion, Precio, CantidadStock, FechaCreado) values (1, 'Botella de agua cielo', 5, 100, '2023-11-10 18:45:29')

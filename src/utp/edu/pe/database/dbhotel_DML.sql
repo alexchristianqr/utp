@@ -9,11 +9,11 @@ insert into Perfil (Nombre, Permisos, FechaCreado) values ('Personal de limpieza
 insert into Perfil (Nombre, Permisos, FechaCreado) values ('Personal de mantenimiento', '{}', '2023-11-05 12:01:20')
 
 -- Persona Empleado
-insert into Persona (Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values ('Luis', 'Torres', 1, '12345678', 'M', '30', '2023-11-10 18:45:29')
+insert into Persona (Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values ('Luis', 'Torres', '1', '12345678', 'M', '30', '2023-11-10 18:45:29')
 insert into Empleado (PersonaID, PerfilID, Sueldo, FechaCreado) values (1, 1, 1250.69, '2023-11-10 18:45:29')
 
 -- Persona Cliente
-insert into Persona (Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values ('Javier', 'Retamoso', 1, '74567890', 'M', '30', '2023-11-10 18:45:29')
+insert into Persona (Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values ('Javier', 'Retamoso', '1', '74567890', 'M', '30', '2023-11-10 18:45:29')
 insert into Cliente (PersonaID, Empresa, FechaCreado) values (2, null, '2023-11-10 18:45:29')
 
 -- Tipo Habitacion
