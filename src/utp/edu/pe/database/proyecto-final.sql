@@ -1,8 +1,8 @@
 -- # Crear base de datos
-create database DbHotel
+create database DBHotel
 
 -- # Usar base de datos
-use DbHotel
+use DBHotel
 
 -- # Crear tabla Persona
 create table Persona
@@ -15,6 +15,7 @@ create table Persona
   Sexo varchar(10) not null, 
   Edad varchar(5),
   FechaCreado datetime not null,
+  FechaActualizado datetime,
   primary key (PersonaId)
 )
 
@@ -25,6 +26,7 @@ create table Cliente
   PersonaID int not null,
   Empresa varchar(250),
   FechaCreado datetime not null,
+  FechaActualizado datetime,
   primary key (ClienteID),
   foreign key (PersonaID) references Persona(PersonaID)
 )
@@ -36,6 +38,7 @@ create table Perfil
   Nombre varchar(100) not null,
   Permisos varchar(250) not null,
   FechaCreado datetime not null,
+  FechaActualizado datetime,
   primary key (PerfilID)
 )
   
@@ -47,6 +50,7 @@ create table Empleado
   PerfilID int not null,
   Sueldo decimal not null,
   FechaCreado datetime not null,
+  FechaActualizado datetime,
   primary key (EmpleadoID),
   foreign key (PersonaID) references Persona(PersonaID),
   foreign key (PerfilID) references Perfil(PerfilID)
@@ -58,6 +62,7 @@ create table TipoHabitacion
     TipoHabitacionID int not null identity(1,1),
     Descripcion varchar(250) not null,
     FechaCreado datetime not null,
+    FechaActualizado datetime,
     primary key (TipoHabitacionID)
 )
 
@@ -72,6 +77,7 @@ create table Habitacion
   Precio decimal not null,
   CantidadCamas int not null,
   FechaCreado datetime not null,
+  FechaActualizado datetime,
   primary key (HabitacionID),
   foreign key (TipoHabitacionID) references TipoHabitacion(TipoHabitacionID)
 )
@@ -84,19 +90,8 @@ create table Producto
     Precio decimal not null,
     CantidadStock int not null,
     FechaCreado datetime not null,
+    FechaActualizado datetime,
     primary key (ProductoID)
-)
-
--- # Crear tabla ReservaConsumo
-create table ReservaConsumo
-(
-    ReservaID int not null identity(1,1),
-    ProductoID int not null,
-    Cantidad int not null,
-    Precio decimal(2) not null,
-    FechaCreado datetime not null,
-    foreign key (ReservaID) references Reserva(ReservaID),
-    foreign key (ProductoID) references Producto(ProductoID),
 )
 
 -- # Crear tabla Reserva
@@ -108,14 +103,29 @@ create table Reserva
   EmpleadoID int not null,
   MontoTotal decimal(2) not null,
   CantidadPersonas int not null,
+  Estado varchar(50) not null, -- activo, reservado, en_proceso, finalizado, cancelado
   FechaReserva datetime,
   FechaEntrada datetime,
   FechaSalida datetime,
   FechaCreado datetime not null,
+  FechaActualizado datetime,
   primary key (ReservaID),
   foreign key (ClienteID) references Cliente(ClienteID),
   foreign key (HabitacionID) references Habitacion(HabitacionID),
   foreign key (EmpleadoID) references Empleado(EmpleadoID)
+)
+
+-- # Crear tabla ReservaConsumo
+create table ReservaConsumo
+(
+    ReservaID int not null identity(1,1),
+    ProductoID int not null,
+    Cantidad int not null,
+    Precio decimal(2) not null,
+    FechaCreado datetime not null,
+    FechaActualizado datetime,
+    foreign key (ReservaID) references Reserva(ReservaID),
+    foreign key (ProductoID) references Producto(ProductoID),
 )
 
 -- # Crear tabla Comprobante de Pago
@@ -125,9 +135,10 @@ create table ComprobantePago
     ReservaID int not null,
     EmpleadoID int not null,
     TipoComprobante varchar(5) not null, -- 1: Factura, 2: Boleta
-    FechaCreado datetime not null,
+    Estado varchar(50) not null, -- activo, pendiente_pago, pagado, cancelado
     FechaPagado datetime,
-    Estado varchar(50) not null, -- Activo, Pendiente pago, Pagado, Cancelado
+    FechaCreado datetime not null,
+    FechaActualizado datetime,
     primary key (ComprobantePagoID),
     foreign key (ReservaID) references Reserva(ReservaID),
     foreign key (EmpleadoID) references Empleado(EmpleadoID)
