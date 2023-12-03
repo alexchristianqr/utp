@@ -20,17 +20,16 @@ insert into Cliente (PersonaID, Empresa, FechaCreado) values (2, null, '2023-11-
 insert into TipoHabitacion (Descripcion, FechaCreado) values ('Clasico', '2023-11-10 18:45:29')
 
 -- Habitacion
-insert into Habitacion (TipoHabitacionID, Descripcion, Nivel, NumeroPiso, Precio, CantidadCamas, FechaCreado) values (1, 1, 'Habitación con agua caliente + TV', '1', '101', 49.50, 1, '2023-11-10 18:45:29')
+insert into Habitacion (TipoHabitacionID, Descripcion, Nivel, NumeroPiso, Precio, CantidadCamas, FechaCreado) values (1, 'Habitación con agua caliente + TV', '1', '101', 49.50, 1, '2023-11-10 18:45:29')
 
 -- Reserva
-insert into Reserva (ClienteID, HabitacionID, MontoTotal, FechaReserva, FechaEntrada, FechaSalida, FechaCreado)
-values (1, 1, 89.90, '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29')
+insert into Reserva (ClienteID, HabitacionID, EmpleadoID, MontoTotal, CantidadPersonas, Estado, FechaReserva, FechaEntrada, FechaSalida, FechaCreado) values (1, 1, 1, 89.90, 2, 'activo', '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29')
 
 -- Producto
-insert into Producto (ProductoID, Descripcion, Precio, CantidadStock, FechaCreado) values (1, 'Botella de agua cielo', 5, 100, '2023-11-10 18:45:29')
+insert into Producto (Descripcion, Precio, CantidadStock, FechaCreado) values ('Botella de agua cielo', 5, 100, '2023-11-10 18:45:29')
 
 -- Reserva Consumo
-insert into ReservaConsumo (ReservaID, ProductoID, Cantidad, Precio, FechaCreado) values (1, 1, 3, 5, '2023-11-10 18:45:29')
+insert into ReservaConsumo (ReservaID, ProductoID, Cantidad, Precio, FechaCreado) values (1, 1, 3, 5.99, '2023-11-10 18:45:29')
 
 -- Comprobante Pago
-insert into ComprobantePago (ComprobantePagoID, ReservaID, EmpleadoID, TipoComprobante, FechaCreado, FechaPagado, Estado) values (1, 1, 1, '1', '2023-11-10 18:45:29', '2023-11-10 18:45:29', 'Pagado')
+insert into ComprobantePago (ReservaID, EmpleadoID, TipoComprobante, FechaCreado, FechaPagado, Estado) values (1, 1, '1', '2023-11-10 18:45:29', '2023-11-10 18:45:29', 'Pagado')

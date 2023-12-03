@@ -148,4 +148,6 @@ create table ComprobantePago
 
 -- # Resetear tablas
 truncate table Perfil
+
+ALTER TABLE Reserva DROP CONSTRAINT FK_PROBLEM_REASON
 truncate table Reserva
