@@ -120,7 +120,7 @@ create table Reserva
 -- # Crear tabla ReservaConsumo
 create table ReservaConsumo
 (
-    ReservaID int not null identity(1,1),
+    ReservaID int not null,
     ProductoID int not null,
     Cantidad int not null,
     Precio decimal(2) not null,
