@@ -116,7 +116,7 @@ GO
 -- Ejecutar procedimineto almacenado
 exec ActualizarEstadoReservaYGenerarComprobantePago 1, '1', 'pendiente_pago'
 
--- REQ06: Vista asociada a un Requerimiento de Negocio: Información Detallada de Reservas con Consumos
+-- REQ06: Mostrar Información Detallada de Reservas con sus Consumos respectivo
 CREATE VIEW VistaReservasDetalladas AS
 SELECT
     r.ReservaID,
@@ -148,8 +148,12 @@ FROM
 GO
 
 -- Ejecutar vista
-SELECT ReservaID, count(ProductoID)
+SELECT * FROM VistaReservasDetalladas
+GO
+
+SELECT ReservaID, count(ProductoID) as 'Cantidad Productos'
 FROM VistaReservasDetalladas
 GROUP BY ReservaID
+HAVING count(ProductoID) > 0
 GO
 
