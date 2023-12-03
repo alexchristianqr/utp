@@ -1,3 +1,11 @@
+-- ****************************** --
+-- NORMALIZACION DE BASE DE DATOS --
+-- ****************************** --
+-- Sitio web: https://www.marcossarmiento.com/2017/06/28/normalizacion-de-base-de-datos/
+-- 1FN: Eliminar datos repetitivos en varias columnas
+-- 2FN: Eliminar datos redundantes en la tabla principal y ponerlas en otra tabla por PK1 y PK2.
+-- 3FN: Eliminar columnas que no dependen de la PK en la tabla principal en y ponerlas a otra tabla
+  
 -- # Crear base de datos
 create database DBHotel
 
@@ -153,11 +161,11 @@ insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (5, 'Persona
 insert into Perfil (PerfilID, Nombre, Permisos, FechaCreado) values (6, 'Personal de mantenimiento', '{}', '2023-11-05 12:01:20')
 
 -- Persona Empleado
-insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values (1, 'Luis', 'Torres', 1, '12345678', 'M', '30', '2023-11-10 18:45:29')
+insert into Persona (PersonaID, Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values (1, 'Luis', 'Torres', 1, '12345678', 'M', '30', '2023-11-10 18:45:29')
 insert into Empleado (EmpleadoID, PersonaID, PerfilID, Sueldo, FechaCreado) values (1, 1, 1, 1250.69, '2023-11-10 18:45:29')
 
 -- Persona Cliente
-insert into Persona (PersonaId, Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values (2, 'Javier', 'Retamoso', 1, '74567890', 'M', '30', '2023-11-10 18:45:29')
+insert into Persona (PersonaID, Nombre, Apellido, TipoDocumento, NroDocumento, Sexo, Edad, FechaCreado) values (2, 'Javier', 'Retamoso', 1, '74567890', 'M', '30', '2023-11-10 18:45:29')
 insert into Cliente (ClienteID, PersonaID, Empresa, FechaCreado) values (1, 2, null, '2023-11-10 18:45:29')
 
 -- Tipo Habitacion
@@ -167,7 +175,7 @@ insert into TipoHabitacion (TipoHabitacionID, Descripcion, FechaCreado) values (
 insert into Habitacion (HabitacionID, TipoHabitacionID, Descripcion, Nivel, NumeroPiso, Precio, CantidadCamas, FechaCreado) values (1, 1, 'Habitación con agua caliente + TV', '1', '101', 49.50, 1, '2023-11-10 18:45:29')
 
 -- Reserva
-insert into Reserva (ReservaID, ClienteID, HabitacionID, MontoTotal, CantidadPersonas, FechaReserva, FechaEntrada, FechaSalida, FechaCreado)
+insert into Reserva (ReservaID, ClienteID, HabitacionID, MontoTotal, FechaReserva, FechaEntrada, FechaSalida, FechaCreado)
   values (1, 1, 1, 89.90, '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29', '2023-11-10 18:45:29')
 
 -- Producto
