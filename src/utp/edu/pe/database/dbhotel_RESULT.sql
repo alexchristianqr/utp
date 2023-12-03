@@ -76,7 +76,9 @@ select dbo.CalcularPromedioGastoReserva(1)
 
 -- REQ05: Procedimiento Almacenado Avanzado: Actualizar el Estado de Reserva y Generar Comprobante de Pago
 CREATE PROCEDURE ActualizarEstadoReservaYGenerarComprobantePago
-    @ReservaID int
+    @ReservaID int,
+    @TipoComprobante varchar,
+    @Estado varchar
 AS
 BEGIN
     DECLARE @NuevoEstado varchar(50)
@@ -99,13 +101,12 @@ BEGIN
 
     -- Actualizar el estado de la reserva
     UPDATE Reserva
-    SET Estado = @NuevoEstado,
-        FechaActualizado = @FechaActual
+    SET Estado = @NuevoEstado, FechaActualizado = @FechaActual
     WHERE ReservaID = @ReservaID
 
     -- Generar nuevo comprobante de pago
     INSERT INTO ComprobantePago (ReservaID, EmpleadoID, TipoComprobante, Estado, FechaCreado, FechaActualizado)
-    VALUES (@ReservaID, @EmpleadoID, '1', 'pendiente_pago', @FechaActual, @FechaActual)
+    VALUES (@ReservaID, @EmpleadoID, @TipoComprobante, @Estado, @FechaActual, @FechaActual)
 
     -- Imprimir mensaje de éxito
     PRINT 'Estado de reserva actualizado y nuevo comprobante de pago generado exitosamente.'
@@ -113,7 +114,7 @@ END
 GO
 
 -- Ejecutar procedimineto almacenado
-exec ActualizarEstadoReservaYGenerarComprobantePago 1
+exec ActualizarEstadoReservaYGenerarComprobantePago 1, '1', 'pendiente_pago'
 
 -- REQ06: Vista asociada a un Requerimiento de Negocio: Información Detallada de Reservas con Consumos
 CREATE VIEW VistaReservasDetalladas AS
