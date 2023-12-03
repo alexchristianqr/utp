@@ -190,22 +190,5 @@ insert into ReservaConsumo (ReservaID, ProductoID, Cantidad, Precio, FechaCreado
 
 -- Comprobante Pago
 insert into ComprobantePago (ComprobantePagoID, ReservaID, EmpleadoID, TipoComprobante, FechaCreado, FechaPagado, Estado) values (1, 1, 1, '1', '2023-11-10 18:45:29', '2023-11-10 18:45:29', 'Pagado')
-  
-create or alter function dbo.FnClienteTieneDescuento
-(
-  @ClienteID
-) returns boolean
-as
-begin
-  -- select * from 
-end
 
-create or alter function SpPagarReserva
-(
-  @ReservaID int
-)
-as
-begin
-  -- select * from 
-end
 

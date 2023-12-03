@@ -10,6 +10,8 @@ GROUP BY
     th.Descripcion
 GO
 
+-- * --
+
 -- REQ02: Listar las reservas activas con detalles de habitación y cliente
 SELECT
     r.ReservaID,
@@ -25,6 +27,8 @@ FROM
 WHERE
         r.Estado = 'activo'
 GO
+
+-- * --
 
 -- REQ03: Obtener el total de ingresos por empleado en un rango de fechas
 SELECT
@@ -45,8 +49,10 @@ GROUP BY
     e.EmpleadoID, p.Nombre, p.Apellido, pe.Nombre
 GO
 
--- REQ04: Función Avanzada: Calcular el promedio de gasto por reserva
-CREATE FUNCTION CalcularPromedioGastoReserva(@ReservaID int)
+-- * --
+
+-- REQ04: Función Avanzada - Calcular el promedio de gasto por reserva
+CREATE OR ALTER FUNCTION CalcularPromedioGastoReserva(@ReservaID int)
     RETURNS DECIMAL(10,2)
 AS
 BEGIN
@@ -74,25 +80,34 @@ GO
 -- Ejecutar funcion
 select dbo.CalcularPromedioGastoReserva(1)
 
--- REQ05: Procedimiento Almacenado Avanzado: Actualizar el Estado de Reserva y Generar Comprobante de Pago
-CREATE PROCEDURE ActualizarEstadoReservaYGenerarComprobantePago
-    @ReservaID int,
-    @TipoComprobante varchar,
-    @Estado varchar
+-- * --
+
+-- REQ05: Procedimiento Almacenado Avanzado - Actualizar el Estado de Reserva y Generar Comprobante de Pago
+CREATE OR ALTER PROCEDURE FinalizarReservaYGenerarComprobantePago
+    @ReservaID int
 AS
 BEGIN
-    DECLARE @NuevoEstado varchar(50)
+    DECLARE @NuevoEstadoReserva varchar(50)
     DECLARE @FechaActual datetime
     DECLARE @MontoTotal decimal(10,2)
     DECLARE @EmpleadoID int
 
+    -- Verificar si la reserva existe y no está finalizada ni cancelada
+    IF NOT EXISTS (SELECT 1 FROM Reserva WHERE ReservaID = @ReservaID)
+    BEGIN
+        PRINT 'Error: La reserva no existe.'
+        RETURN
+    END
+
+    IF (SELECT Estado FROM Reserva WHERE ReservaID = @ReservaID) IN ('finalizado', 'cancelado')
+    BEGIN
+        PRINT 'Error: La reserva ya está finalizada o cancelada.'
+        RETURN
+    END
+
     -- Obtener información necesaria de la reserva
     SELECT
-        @NuevoEstado = CASE
-            WHEN Estado = 'reservado' THEN 'en_proceso'
-            WHEN Estado = 'en_proceso' THEN 'finalizado'
-            ELSE Estado
-        END,
+        @NuevoEstadoReserva = 'finalizado',
         @FechaActual = GETDATE(),
         @MontoTotal = MontoTotal,
         @EmpleadoID = EmpleadoID
@@ -101,23 +116,27 @@ BEGIN
 
     -- Actualizar el estado de la reserva
     UPDATE Reserva
-    SET Estado = @NuevoEstado, FechaActualizado = @FechaActual
+    SET Estado = @NuevoEstadoReserva, FechaActualizado = @FechaActual
     WHERE ReservaID = @ReservaID
 
-    -- Generar nuevo comprobante de pago
-    INSERT INTO ComprobantePago (ReservaID, EmpleadoID, TipoComprobante, Estado, FechaCreado, FechaActualizado)
-    VALUES (@ReservaID, @EmpleadoID, @TipoComprobante, @Estado, @FechaActual, @FechaActual)
+    -- Generar nuevo comprobante de pago con estado "pagado"
+    INSERT INTO ComprobantePago (ReservaID, EmpleadoID, TipoComprobante, Estado, FechaPagado, FechaCreado, FechaActualizado)
+    VALUES (@ReservaID, @EmpleadoID, '1', 'pagado', @FechaActual, @FechaActual, @FechaActual)
 
     -- Imprimir mensaje de éxito
-    PRINT 'Estado de reserva actualizado y nuevo comprobante de pago generado exitosamente.'
+    PRINT 'La reserva ha sido finalizada y se ha generado un comprobante de pago pagado exitosamente.'
 END
 GO
 
--- Ejecutar procedimineto almacenado
-exec ActualizarEstadoReservaYGenerarComprobantePago 1, '1', 'pendiente_pago'
+-- Ejecutar procedimiento almacenado
+exec ActualizarEstadoReservaYGenerarComprobantePago 1
+SELECT ReservaID, Estado FROM Reserva WHERE ReservaID = 1
+GO
+
+-- * --
 
 -- REQ06: Mostrar Información Detallada de Reservas con sus Consumos respectivo
-CREATE VIEW VistaReservasDetalladas AS
+CREATE OR ALTER VIEW VistaReservasDetalladas AS
 SELECT
     r.ReservaID,
     r.Estado,
@@ -150,7 +169,6 @@ GO
 -- Ejecutar vista
 SELECT * FROM VistaReservasDetalladas
 GO
-
 SELECT ReservaID, count(ProductoID) as 'Cantidad Productos'
 FROM VistaReservasDetalladas
 GROUP BY ReservaID
