@@ -53,3 +53,31 @@ where year(o.ShippedDate) = '1997'
 group by e.FirstName,e.LastName,e.Salary
 order by e.FirstName asc
 go
+
+
+
+
+
+
+
+
+-- 03 pregunta EF
+select 
+e.FirstName,(od.Quantity * od.UnitPrice) as 'Valor_total', 
+((od.Quantity * od.UnitPrice) * 0.10) as 'Comision',
+((od.Quantity * od.UnitPrice) + (od.Quantity * od.UnitPrice) * 0.10) as 'Valor_total_c_comision',
+MONTH(o.ShippedDate) as 'Mes',
+year(o.ShippedDate) as 'Anio'
+from Orders o 
+join Employees e on e.EmployeeID = o.EmployeeID
+join OrderDetails od on od.OrderID = o.OrderID
+group by e.FirstName,od.Quantity,od.UnitPrice,o.ShippedDate
+
+
+
+
+
+
+
+
+
