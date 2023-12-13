@@ -83,9 +83,12 @@ create or alter function dbo.MayorVentaProducto
 as
 return 
 (
-	select 
-	*
-	from Products
+	select top 1 e.EmployeeID,MAX(od.Quantity * od.UnitPrice) as 'MaximaVenta'
+	from Orders o
+	join OrderDetails od on od.OrderID = o.OrderID
+	join Employees e on e.EmployeeID = o.EmployeeID
+	group by e.EmployeeID
+	order by 1 asc
 )
 go
 
