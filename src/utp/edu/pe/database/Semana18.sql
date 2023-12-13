@@ -74,6 +74,20 @@ join OrderDetails od on od.OrderID = o.OrderID
 group by e.FirstName,od.Quantity,od.UnitPrice,o.ShippedDate
 
 
+    -- 02 EF
+create or alter function dbo.MayorVentaProducto
+(
+	@anio varchar,
+	@nombreCliente varchar
+) returns table
+as
+return 
+(
+	select 
+	*
+	from Products
+)
+go
 
 
 
