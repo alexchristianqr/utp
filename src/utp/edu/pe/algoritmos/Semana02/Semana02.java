@@ -1,12 +1,9 @@
-package semana02;
+package utp.edu.pe.algoritmos.Semana02;
 
 import java.util.Scanner;
 
 public class Semana02 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // Inicializamos las variables a utilizar
         int[] miarray;
@@ -102,5 +99,4 @@ public class Semana02 {
         }
 
     }
-
 }
