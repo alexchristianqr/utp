@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOTEL EL BANDIDO</title>
+    <style>
+        :root {
+            --primary: #333;
+            --secondary: #FFF;
+            --tertiary: #666;
+            --primary-color-text: var(--primary);
+            --secondary-color-text: var(--secondary);
+        }
+
+        html {
+        }
+
+        body {
+            width: 100%;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        header {
+            top: 0;
+            position: static;
+            background-color: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+            padding: 1px 0;
+            width: 100%;
+        }
+
+        footer {
+            bottom: 0;
+            position: fixed;
+            width: 100%;
+            background-color: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+        }
+
+        .utp-nav-header {
+            width: 100%;
+            position: absolute;
+
+        }
+
+        .utp-container {
+            width: 100%;
+            padding: 5rem 0 5rem 0;
+        }
+
+        nav {
+            background-color: var(--tertiary);
+            color: var(--secondary);
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav a {
+            color: var(--secondary);
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .utp-form {
+            display: inline-block;
+            position: relative;
+            left: 30%;
+            right: 30%;
+            border: 1px solid #000;
+            padding: 0 10rem;
+            border-radius: 5px;
+        }
+
+        form {
+            width: 100%;
+            display: inline-block;
+            border-radius: 5px;
+            height: auto;
+            padding: 20px 0;
+            margin: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input[type="text"],
+        form input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 0 10px 20px 0;
+            border: 1px solid var(--tertiary);;
+            border-radius: 5px;
+        }
+
+        form select {
+            width: 50%;
+            padding: 10px;
+            margin: 0 10px 20px 0;
+            border: 1px solid var(--tertiary);;
+            border-radius: 5px;
+        }
+
+        form button {
+            background-color: var(--primary);;
+            color: var(--secondary-color-text);
+            border-radius: 5px;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>HOTEL EL BANDIDO</h1>
+</header>
+<div class="utp-nav-header">
+    <div>
+        <nav>
+            <a href="reservacion">Reservación</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </div>
+</div>
+<div class="utp-container">
+    <section>
+        <div class="utp-form">
+            <div style="text-align: center">
+                <h1>NUEVA RESERVA</h1>
+            </div>
+            <form action="procesar_reserva.php" method="post">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="habitacion">Tipo de Habitación:</label>
+                <select id="habitacion" name="habitacion">
+                    <option value="individual">Individual</option>
+                    <option value="doble">Doble</option>
+                    <option value="suite">Suite</option>
+                </select>
+                <label for="fecha_entrada">Fecha de Entrada:</label>
+                <input type="text" id="fecha_entrada" name="fecha_entrada" placeholder="dd/mm/aaaa" required>
+                <label for="fecha_salida">Fecha de Salida:</label>
+                <input type="text" id="fecha_salida" name="fecha_salida" placeholder="dd/mm/aaaa" required>
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+
+    </section>
+</div>
+<!--<center><img src="HOTEL_FOTO.jpg" width="250px"></center>-->
+<footer>
+    <div>
+        <p>&copy; 2024 Hotel El Bandido - Todos los derechos reservados</p>
+    </div>
+</footer>
+</body>
+</html>

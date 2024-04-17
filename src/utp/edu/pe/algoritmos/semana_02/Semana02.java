@@ -1,4 +1,4 @@
-package utp.edu.pe.algoritmos.Semana02;
+package utp.edu.pe.algoritmos.semana_02;
 
 import java.util.Scanner;
 
