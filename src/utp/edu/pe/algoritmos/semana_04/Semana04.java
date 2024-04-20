@@ -1,4 +1,4 @@
-package semana04;
+package utp.edu.pe.algoritmos.semana_04;
 
 import java.util.Scanner;
 
@@ -6,15 +6,21 @@ public class Semana04 {
 
     public static void main(String[] args) {
         // Inicializamos las variables a utilizar
-        int[] miarray;
-        Scanner dato = new Scanner(System.in);
+        int[] miarray = {60, 12, 20, 8, 35, 6, 10, 11};
+        ordenarPorBurbuja(miarray);
 
-        // Obtener tamaño de los elementos del arreglo
-        System.out.println("Ingresar un valor para definir el tamano del arreglo:");
-        miarray = new int[dato.nextInt()];
+        for (int i = 0; i < miarray.length; i++) {
+            System.out.println("El valor es: " + miarray[i]);
+        }
 
-        // Inicializar menu principal
-        mostrarMenu(miarray);
+//        Scanner dato = new Scanner(System.in);
+//
+//        // Obtener tamaño de los elementos del arreglo
+//        System.out.println("Ingresar un valor para definir el tamano del arreglo:");
+//        miarray = new int[dato.nextInt()];
+//
+//        // Inicializar menu principal
+//        mostrarMenu(miarray);
     }
 
     public static void mostrarMenu(int[] miarray) {
@@ -40,19 +46,19 @@ public class Semana04 {
                 mostrarMenu(miarray);
                 break;
             case 3:
-                ordenar(miarray);
+                ordenarPorInserción(miarray);
                 mostrarMenu(miarray);
                 break;
             case 4:
                 System.out.println("Ingresar el valor a buscar:");
                 int valorBuscar = dato.nextInt();
                 int posicionEncontrada = busquedaBinaria(miarray, valorBuscar);
-                
-                System.out.println("es: "+ posicionEncontrada);
+
+                System.out.println("es: " + posicionEncontrada);
 
                 // Validar valor encontrado
                 if (posicionEncontrada >= 0) {
-                    System.out.println("El valor encontrado es: " + miarray[posicionEncontrada] + ", en el arreglo miarray["+posicionEncontrada+"]");
+                    System.out.println("El valor encontrado es: " + miarray[posicionEncontrada] + ", en el arreglo miarray[" + posicionEncontrada + "]");
                 } else {
                     System.out.println("Valor no encontrado");
                 }
@@ -84,36 +90,61 @@ public class Semana04 {
         }
     }
 
-    public static void ordenar(int miarray[]) {
+    public static void ordenarPorInserción(int miarray[]) {
 
-        int aux, j, x;
-        /*
-            aux: para trasladar
-            j: para comparar
-            x: para contar movimientos
-         */
-        String mensaje = "";
+        int elementoActual, j;
 
+        // Iterar filas
         for (int i = 1; i < miarray.length; i++) {
-            aux = miarray[i];// Valor posición actual en el arreglo
-            j = i - 1;// Valor posición anterior
-            // x = 0;// Inicializar a cero
+            elementoActual = miarray[i];// Elemento en el arreglo
+            j = i - 1;// Posición inicial = 0
 
-            while (j >= 0 && miarray[j] > aux) {
+            // Iterar columnas
+            while (j >= 0 && miarray[j] > elementoActual) {
                 miarray[j + 1] = miarray[j];
-
-                // 
                 j--;
-
-                // Contar los movimientos
-                // x++;
             }
 
-            // mensaje = "Cantidad de movimientos: " + x;
-            miarray[j + 1] = aux;
+            miarray[j + 1] = elementoActual;
         }
+    }
 
-        // System.out.println(mensaje);
+    public static void ordenarPorSeleccion(int miarray[]) {
+
+        // Iterar filas
+        for (int i = 0; i < (miarray.length - 1); i++) {
+
+            int min = i;// Posición menor
+
+            // Iterar columnas
+            for (int j = (i + 1); j < miarray.length; j++) {
+                if (miarray[j] < miarray[min]) {
+                    min = j;// Actualizar posición menor
+                }
+            }
+
+            // Validar posición actual sea diferente a la posicion menor encontrada
+            if (i != min) {
+                int temp = miarray[i];// Guardar temporalmente el valor elemento actual
+                miarray[i] = miarray[min];// Guardar valor elemento menor
+                miarray[min] = temp;// Guardar temporal
+            }
+        }
+    }
+
+    public static void ordenarPorBurbuja(int miarray[]) {
+        // Iterar filas
+        for (int i = 0; i < miarray.length - 1; i++) {
+
+            // Iterar columnas
+            for (int j = (i + 1); j < miarray.length; j++) {
+                if (miarray[i] > miarray[j]) {
+                    int temp = miarray[i];
+                    miarray[i] = miarray[j];
+                    miarray[j] = temp;
+                }
+            }
+        }
     }
 
     public static int busquedaBinaria(int miarray[], int dato) {
@@ -135,7 +166,7 @@ public class Semana04 {
         return -1;
 
     }
-    
+
     public static int busquedaBinaria2(int miarray[], int dato) {
         int inicio = 0;
         int fin = miarray.length - 1;// Total elementos -1 = Total de posiciones
@@ -155,4 +186,5 @@ public class Semana04 {
         return -1;
 
     }
+
 }
