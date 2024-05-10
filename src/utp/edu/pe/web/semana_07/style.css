@@ -1,0 +1,86 @@
+* {
+    font-family: Arial, Helvetica, sans-serif
+}
+
+ol>li {
+    margin-bottom: 5rem;
+}
+
+ol>li>div {
+    font-size: 14px;
+
+}
+
+/* UTP */
+
+.utp-h1 {
+    font-size: 48px;
+    font-weight: 900;
+}
+
+.utp-h2 {
+    font-size: calc(48px - 12px);
+    font-weight: 900;
+}
+
+.utp-h3 {
+    font-size: calc(48px - 24px);
+    font-weight: 900;
+}
+
+.utp-h4 {
+    font-size: calc(48px - 28px);
+    font-weight: 900;
+}
+
+.utp-h5 {
+    font-size: calc(48px - 32px);
+    font-weight: 900;
+}
+
+.utp-h6 {
+    font-size: calc(48px - 36PX);
+    font-weight: 900;
+}
+
+table.utp-table {
+    border: 1px solid #a3a3a3;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+table.utp-table>thead {
+    font-size: 2.5rem;
+    color: darkred;
+}
+
+table.utp-table>thead,
+table.utp-table>tbody {
+    width: 100%;
+}
+
+table.utp-table>thead>tr>th {
+    border: 1px solid #a3a3a3;
+}
+
+table.utp-table>tbody>tr>td {
+    border: 1px solid #a3a3a3;
+}
+
+.utp-margin-tb {
+    margin: 2rem 0;
+}
+
+ol.utp-ul,
+ul.utp-ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ol.utp-ul > li,
+ul.utp-ul > li {
+    font-size: 1.5rem;
+    line-height: 3rem;
+}
