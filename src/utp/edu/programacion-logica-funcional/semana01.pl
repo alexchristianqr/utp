@@ -39,3 +39,13 @@ es_madre(ana, carlos).
 % Regla
 papitos(X,Y) :-  es_padre(X,Y).
 papitos(X,Y) :-  es_madre(X,Y).
+% Hechos de Peliculas
+es_pelicula(harry_potter, accion).
+es_pelicula(rambo, accion).
+es_pelicula(cenicienta, animado).
+es_cancion(una_cancion_de_amor, romantica).
+es_cancion(muelle_de_sanblas, rock).
+es_cancion(gata_fiera, perreo).
+% Regla
+entretenimiento(X,Y) :- es_pelicula(X,Y).
+entretenimiento(X,Y) :- es_cancion(X,Y).
