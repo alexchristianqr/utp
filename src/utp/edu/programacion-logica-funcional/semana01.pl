@@ -29,4 +29,13 @@ mujer(lucia).
 % Regla consulta simple
 persona(X) :- hombre(X).
 persona(X) :- mujer(X).
-
+% Hechos de relaciones familiares
+es_padre(juan, maria).
+es_padre(carlos, pedro).
+es_padre(miguel, laura).
+es_madre(ana, luis).
+es_madre(ana, tatiana).
+es_madre(ana, carlos).
+% Regla
+papitos(X,Y) :-  es_padre(X,Y).
+papitos(X,Y) :-  es_madre(X,Y).
