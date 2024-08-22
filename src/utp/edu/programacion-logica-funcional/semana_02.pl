@@ -153,3 +153,23 @@ habitaciones_disponibles(Tipo, HabitacionesDisponibles) :-
 % true.
 % ?- disponible(102, '2024-08-21').
 % false.
+
+
+% Hechos Tarea 01
+autor_de(alex, libro_1).
+autor_de(juan, libro_2).
+autor_de(maria, libro_3).
+autor_de(alex, libro_4).
+
+libros_de_autor(Autor, Libro) :- autor_de(Autor, Libro).
+
+% libros_de_autor(alex,libro_1).
+% libros_de_autor(alex,libro_4).
+
+calificacion(miguel, 14).
+calificacion(luis, 18).
+calificacion(lorena, 11).
+
+estudiantes_con_calificacion_mayor_a(Nota) :-
+    findall(Calificacion,_, Nota),
+    Calificacion >= Nota.
