@@ -1,3 +1,7 @@
+% Apuntes
+% /+ :
+%  findall : Lista de objetos
+
 % Hechos 01
 padre(john, mary).
 padre(john, tom).
@@ -34,6 +38,7 @@ tiene_padres_completos(Nino) :-
 % true.
 % ?- tiene_padres_completos(anne).
 % false.
+
 
 % Hechos 02
 producto(televisor, 500).
@@ -93,4 +98,58 @@ Cadena = [Persona, Amigo1, Amigo2, Amigo3].
 % ?- cadena_de_amigos(john, Cadena).
 % Cadena = [john, mary, alice, bob].
 % ?- cadena_de_amigos(alice, Cadena).
+% false.
+
+
+% Hechos 04
+calificacion(john, 85).
+calificacion(mary, 92).
+calificacion(alice, 78).
+calificacion(bob, 65).
+calificacion(charlie, 88).
+
+% Regla 1: Categoría de calificación
+categoria(Calificacion, 'Excelente') :- Calificacion >= 90.
+categoria(Calificacion, 'Bueno') :- Calificacion >= 80, Calificacion < 90.
+categoria(Calificacion, 'Suficiente') :- Calificacion >= 70, Calificacion < 80.
+categoria(Calificacion, 'Insuficiente') :- Calificacion < 70.
+
+% Regla 2: Estudiantes en una categoría específica
+estudiantes_en_categoria(Categoria, Estudiantes) :-
+    findall(Nombre, (calificacion(Nombre, Calificacion), categoria(Calificacion, Categoria)), Estudiantes).
+
+% ?- categoria(85, Categoria).
+% Categoria = 'Bueno'.
+% ?- categoria(65, Categoria).
+% Categoria = 'Insuficiente'.
+% ?- estudiantes_en_categoria('Bueno', Estudiantes).
+% Estudiantes = [john, alice, charlie].
+% ?- estudiantes_en_categoria('Insuficiente', Estudiantes).
+% Estudiantes = [bob].
+
+
+% Hechos 05
+habitacion(101, simple).
+habitacion(102, doble).
+habitacion(103, suite).
+habitacion(104, suite).
+
+% Hechos de reservas
+reservado(101, '2024-08-20').
+reservado(102, '2024-08-21').
+
+% Regla 1: Verificar si una habitación está disponible en una fecha
+disponible(Habitacion, Fecha) :-
+    habitacion(Habitacion, _),
+    \+ reservado(Habitacion, Fecha).
+
+% Regla 2: Obtener habitaciones disponibles de un tipo específico
+habitaciones_disponibles(Tipo, HabitacionesDisponibles) :-
+    findall(Habitacion, (habitacion(Habitacion, Tipo), disponible(Habitacion, _)), HabitacionesDisponibles).
+
+% ?- disponible(101, '2024-08-20').
+% false.
+% ?- disponible(101, '2024-08-22').
+% true.
+% ?- disponible(102, '2024-08-21').
 % false.
