@@ -187,7 +187,7 @@ private:
 
    void drawTriangle( )
    {  
-      glColor3d(1.0, 0.0, 0.8);
+      glColor3d(1.0, 0.0, 0.8);76
       glBegin(GL_TRIANGLES);
       {
          glVertex3d(0,0,0);
