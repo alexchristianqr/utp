@@ -64,3 +64,85 @@ private:
 };
 //---------------------------------------------------------------------------
 #endif
+
+// EJERCICIO 02
+
+#ifndef L14_WHILE_H
+#define L14_WHILE_H
+//---------------------------------------------------------------------------
+// Programming 3D to Newbies : Indiana Aiki
+//---------------------------------------------------------------------------
+#include <GL/gl.h>
+#include "Scene.h"
+//---------------------------------------------------------------------------
+class L14_While : public Scene
+{
+private:
+   double a;
+public:
+
+   L14_While( )
+   {   
+
+   }
+
+   void draw( )
+   {
+      background();
+      // drawSquare();
+      drawPolygon(60);
+      //drawPolygon(45);
+   }
+
+private:    
+
+   void background( )
+   { 
+      glClearColor(0,0,0.2,1);
+   }   
+   
+   drawPolygon(int grados)
+   {
+    a=0;
+   while(a<360)
+   {
+   drawRotate();
+   a+=grados;
+   }
+   }
+
+   void drawSquare(int grados)
+   {
+   a=0;
+   while(a<360)
+   {
+   drawRotate();
+   a+=grados;
+   }
+
+   }
+
+   void drawRotate( )
+   {
+   glPushMatrix();
+   glRotated(a,0,0,1);
+   drawTriangle();
+   glPopMatrix();
+   }
+
+   void drawTriangle( )
+   {  
+   glColor3d(1.0,0,0.8);
+   glBegin(GL_TRIANGLES);
+   {
+   glVertex3d(0,0,0);
+   glVertex3d(-5,-12,0);
+   glVertex3d(5,-12,0);
+   }
+   glEnd();
+   }
+
+};
+//---------------------------------------------------------------------------
+#endif
+
