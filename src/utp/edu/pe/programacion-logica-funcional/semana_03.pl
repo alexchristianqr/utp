@@ -21,7 +21,6 @@ precio_producto(NombreProducto, PrecioProducto) :-
 productos_categoria(Categoria, Productos) :-
     findall(Nombre, (producto(_,Nombre,Categoria,_,_)), Productos).
 
-
 % EJERCICIO 02
 % Hechos
 % curso(nombre_curso, profesor, dia, hora, aula).
@@ -35,4 +34,5 @@ curso(ciencias, javier, jueves, '9pm', a501).
 horario_curso(NombreCurso, Dia, Hora) :-
     curso(NombreCurso,Dia,Hora,_).
 
-
+cursos_profesor(Docente, Cursos) :-
+    findall(Nombre, (curso(Nombre,Docente,_,_,_)), Cursos).
