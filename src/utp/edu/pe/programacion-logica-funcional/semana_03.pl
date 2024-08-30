@@ -1,4 +1,4 @@
-% SWI-Prolog version web: 
+% SWI-Prolog versión web: 
 % https://wasm.swi-prolog.org/wasm/shell
 
 % EJERCICIO 01
