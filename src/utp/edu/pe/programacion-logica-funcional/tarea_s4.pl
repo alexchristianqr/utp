@@ -10,6 +10,24 @@ aviones(8, aerolineas_argentinas, 210).
 aviones(9, viva_air, 160).
 aviones(10, interjet, 230).
 
+% Regla: Aviones grandes, son aquellos que tengan una capacidad >= 200 personas
+aviones_grandes(Resultado) :- 
+    findall(Codigo, (aviones(Codigo,_,Capacidad), Capacidad >= 200), Resultado).
+% ?- aviones_grandes(Resultado).
+
+% Regla: Aviones cuya capacidad está entre Min y Max
+aviones_entre_capacidades(Min, Max, Resultado) :- 
+    findall(Codigo, (aviones(Codigo, _, Capacidad), Capacidad >= Min, Capacidad =< Max), Resultado).
+% ?- aviones_entre_capacidades(50,150,Resultado).
+
+% Regla: Avión con mayor capacidad
+avion_mayor_capacidad_dos(Codigo, Aerolinea, Capacidad) :- 
+    findall(Capacidad, aviones(_, _, Capacidad), ListaCapacidades),
+    max_list(ListaCapacidades, MaxCapacidad),
+    aviones(Codigo, Aerolinea, MaxCapacidad),
+    Capacidad = MaxCapacidad.
+% ?- avion_mayor_capacidad(Codigo, Aerolinea, Capacidad).
+
 % Hechos piloto(codigo,dni,nombre,edad)
 pilotos(1, 12345678,juan_perez, 34).
 pilotos(2, 23456789, maria_garcia, 29).
