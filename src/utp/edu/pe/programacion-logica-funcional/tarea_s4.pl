@@ -1,10 +1,16 @@
-# Hechos aviones(codigo,marca,capacidad)
+% Hechos aviones(codigo, aerolinea, capacidad)
 aviones(1,latam,200).
+aviones(2, avianca, 180).
+aviones(3, aeromexico, 220).
+aviones(4, copa, 150).
+aviones(5, gol, 170).
+aviones(6, azul, 140).
+aviones(7, sky, 190).
+aviones(8, aerolineas_argentinas, 210).
+aviones(9, viva_air, 160).
+aviones(10, interjet, 230).
 
-# vuelo(avion, pasajeros, salida, llegada, horario)
-
-
-#piloto(codigo,dni,nombre,edad)
+# Hechos piloto(codigo,dni,nombre,edad)
 pilotos(1, 12345678,juan_perez, 34).
 pilotos(2, 23456789, maria_garcia, 29).
 pilotos(3, 34567890, juan_lopez, 41).
@@ -15,3 +21,6 @@ pilotos(7, 78901234, carlos_jimenez, 38).
 pilotos(8, 89012345, sofia_ortiz, 45).
 pilotos(9, 90123456, pedro_fernandez, 40).
 pilotos(10, 12345679, claudia_alvarez, 33).
+
+% Hechos vuelo(avion, pasajeros, salida, llegada, horario)
+
