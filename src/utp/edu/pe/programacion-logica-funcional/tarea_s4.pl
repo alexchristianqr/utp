@@ -1,7 +1,28 @@
-% Hechos aviones(codigo,marca,capacidad)
+% Hechos aviones(codigo, aerolinea, capacidad)
 aviones(1,latam,200).
+aviones(2, avianca, 180).
+aviones(3, aeromexico, 220).
+aviones(4, copa, 150).
+aviones(5, gol, 170).
+aviones(6, azul, 140).
+aviones(7, sky, 190).
+aviones(8, aerolineas_argentinas, 210).
+aviones(9, viva_air, 160).
+aviones(10, interjet, 230).
 
-% vuelo(cod_vuelo, tipo_vuelo, avion, piloto, pasajeros, salida, llegada, fecha, hora)
+# Hechos piloto(codigo,dni,nombre,edad)
+pilotos(1, 12345678,juan_perez, 34).
+pilotos(2, 23456789, maria_garcia, 29).
+pilotos(3, 34567890, juan_lopez, 41).
+pilotos(4, 45678901, ana_martinez, 36).
+pilotos(5, 56789012, roberto_sanchez, 32).
+pilotos(6, 67890123, laura_reyes, 27).
+pilotos(7, 78901234, carlos_jimenez, 38).
+pilotos(8, 89012345, sofia_ortiz, 45).
+pilotos(9, 90123456, pedro_fernandez, 40).
+pilotos(10, 12345679, claudia_alvarez, 33).
+
+% Hechos vuelo(cod_vuelo, tipo_vuelo, avion, piloto, pasajeros, salida, llegada, fecha, hora)
 vuelo(1, nacional, 1, 1, [juan_perez, ruth_torres, alex_quispe, mario_vargas, jose_reyes, sebastian_mogollon], lima, cuzco, '10-05-24', '15:00').
 vuelo(2, internacional, 2, 2, [marta_lopez, fernando_garcia, lucia_fernandez], madrid, paris, '11-05-24', '09:30').
 vuelo(3, nacional, 3, 3, [carmen_diaz, eduardo_martinez, laura_castro], bogota, medellin, '12-05-24', '12:45').
