@@ -21,7 +21,7 @@ aviones_entre_capacidades(Min, Max, Resultado) :-
 % ?- aviones_entre_capacidades(50,150,Resultado).
 
 % Regla: Avión con mayor capacidad
-avion_mayor_capacidad_dos(Codigo, Aerolinea, Capacidad) :- 
+avion_mayor_capacidad(Codigo, Aerolinea, Capacidad) :- 
     findall(Capacidad, aviones(_, _, Capacidad), ListaCapacidades),
     max_list(ListaCapacidades, MaxCapacidad),
     aviones(Codigo, Aerolinea, MaxCapacidad),
