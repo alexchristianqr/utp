@@ -28,17 +28,17 @@ avion_mayor_capacidad(Codigo, Aerolinea, Capacidad) :-
     Capacidad = MaxCapacidad.
 % ?- avion_mayor_capacidad(Codigo, Aerolinea, Capacidad).
 
-% Hechos piloto(codigo,dni,nombre,edad)
-pilotos(1, 12345678,juan_perez, 34).
-pilotos(2, 23456789, maria_garcia, 29).
-pilotos(3, 34567890, juan_lopez, 41).
-pilotos(4, 45678901, ana_martinez, 36).
-pilotos(5, 56789012, roberto_sanchez, 32).
-pilotos(6, 67890123, laura_reyes, 27).
-pilotos(7, 78901234, carlos_jimenez, 38).
-pilotos(8, 89012345, sofia_ortiz, 45).
-pilotos(9, 90123456, pedro_fernandez, 40).
-pilotos(10, 12345679, claudia_alvarez, 33).
+% Hechos pilotos(codigo,dni,nombre,edad,anios_experienicia)
+pilotos(1, 12345678,juan_perez, 34, 5).
+pilotos(2, 23456789, maria_garcia, 29, 3).
+pilotos(3, 34567890, juan_lopez, 41, 15).
+pilotos(4, 45678901, ana_martinez, 36, 8).
+pilotos(5, 56789012, roberto_sanchez, 32, 9).
+pilotos(6, 67890123, laura_reyes, 27, 4).
+pilotos(7, 78901234, carlos_jimenez, 38, 9).
+pilotos(8, 89012345, sofia_ortiz, 45, 18).
+pilotos(9, 90123456, pedro_fernandez, 40, 15).
+pilotos(10, 12345679, claudia_alvarez, 33, 6).
 
 % Hechos vuelo(cod_vuelo, tipo_vuelo, avion, piloto, pasajeros, salida, llegada, fecha, hora)
 vuelo(1, nacional, 1, 1, [juan_perez, ruth_torres, alex_quispe, mario_vargas, jose_reyes, sebastian_mogollon], lima, cuzco, '10-05-24', '15:00').
