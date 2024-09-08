@@ -1,5 +1,5 @@
 % Hechos aviones(codigo, aerolinea, capacidad)
-aviones(1,latam,200).
+aviones(1, latam, 200).
 aviones(2, avianca, 180).
 aviones(3, aeromexico, 220).
 aviones(4, copa, 150).
@@ -9,6 +9,11 @@ aviones(7, sky, 190).
 aviones(8, aerolineas_argentinas, 210).
 aviones(9, viva_air, 160).
 aviones(10, interjet, 230).
+aviones(11, avianca, 90).
+aviones(12, sky, 120).
+aviones(13, viva_air, 100).
+aviones(14, latam, 350).
+aviones(15, interjet, 300).
 
 % Regla: Aviones grandes, son aquellos que tengan una capacidad >= 200 personas
 aviones_grandes(Resultado) :- 
@@ -39,6 +44,11 @@ pilotos(7, 78901234, carlos_jimenez, 38, 9).
 pilotos(8, 89012345, sofia_ortiz, 45, 18).
 pilotos(9, 90123456, pedro_fernandez, 40, 15).
 pilotos(10, 12345679, claudia_alvarez, 33, 6).
+
+% Regla: Pilotos con años de experiencia >= 10
+pilotos_experimentados(Resultado) :- 
+     findall(Codigo, (pilotos(Codigo,_,_,_,AniosExp), AniosExp >= 10), Resultado).
+% ?- pilotos_experimentados(Resultado).
 
 % Hechos vuelo(cod_vuelo, tipo_vuelo, avion, piloto, pasajeros, salida, llegada, fecha, hora)
 vuelo(1, nacional, 1, 1, [juan_perez, ruth_torres, alex_quispe, mario_vargas, jose_reyes, sebastian_mogollon], lima, cuzco, '10-05-24', '15:00').
