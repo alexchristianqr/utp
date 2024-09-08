@@ -10,7 +10,7 @@ aviones(8, aerolineas_argentinas, 210).
 aviones(9, viva_air, 160).
 aviones(10, interjet, 230).
 
-# Hechos piloto(codigo,dni,nombre,edad)
+% Hechos piloto(codigo,dni,nombre,edad)
 pilotos(1, 12345678,juan_perez, 34).
 pilotos(2, 23456789, maria_garcia, 29).
 pilotos(3, 34567890, juan_lopez, 41).
