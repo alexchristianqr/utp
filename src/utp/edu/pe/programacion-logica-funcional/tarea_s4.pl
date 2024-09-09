@@ -123,3 +123,25 @@ mejor_viajero(Pasajero, Cantidad) :-
     Cantidad = MaxCantidad,
     format('El viajero más frecuente es: ~w, con ~d apariciones.~n', [Pasajero, MaxCantidad]).
 % mejor_viajero(Pasajero, Cantidad).
+
+
+
+%Regla para saber los vuelos asignados a una fecha en particular
+vuelos_por_fecha(Fecha, Resultado) :-
+    findall(ID, vuelo(ID, _, _, _, _, _, _, Fecha, _), Resultado).
+% ?- vuelos_por_fecha('10-05-24', Resultado).
+
+%Regla para saber el nombre de un piloto brindando el codigo de vuelo
+nombre_piloto_por_vuelo(CodVuelo, NombrePiloto) :-
+    vuelo(CodVuelo, _, _, CodPiloto, _, _, _, _, _),
+    pilotos(CodPiloto, _, NombrePiloto, _, _).
+%?- nombre_piloto_por_vuelo(8, NombrePiloto).
+
+% Regla para saber fecha y hora de un vuelo brindando las ciudades
+info_vuelo(CiudadSalida, CiudadLlegada, CodVuelo, Fecha, Hora) :-
+    vuelo(CodVuelo, _, _, _, _, CiudadSalida, CiudadLlegada, Fecha, Hora).
+%?- info_vuelo(lima,cuzco,CodVuelo,Fecha,Hora).
+
+
+
+
