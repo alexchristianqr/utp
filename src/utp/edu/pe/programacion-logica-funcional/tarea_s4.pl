@@ -71,7 +71,7 @@ vuelo(17, internacional, 17, 7, [diego_hernandez, laura_rivera, pablo_morales, a
 vuelo(18, nacional, 18, 8, [martha_perez, antonio_rios, carlos_vega, paula_diaz, jorge_morales], lima, piura, '27-05-24', '14:10').
 vuelo(19, internacional, 19, 9, [carmen_bermudez, manuel_zapata, andrea_moreno, jose_perez, sandra_suarez], berlin, zurich, '28-05-24', '16:00').
 vuelo(20, nacional, 20, 10, [andres_uribe, daniela_aro, juan_suarez, ana_martinez, carlos_torres], medellin, cartagena, '29-05-24', '11:30').
-vuelo(21, internacional, 1, 1, [sandra_jimenez, antonio_uribe, pedro_gomez, luisa_rojas, carlos_perez], sydney, auckland, '30-05-24', '19:45').
+vuelo(21, internacional, 1, 1, [sandra_jimenez, antonio_uribe, pedro_gomez, luisa_rojas, carlos_perez], sydney, auckland, '10-05-24', '19:45').
 vuelo(22, nacional, 2, 2, [ivan_ponce, juliana_carreno, maria_torres, juan_lopez, patricia_moreno], quito, cuenca, '31-05-24', '08:00').
 vuelo(23, internacional, 3, 3, [veronica_moreno, alberto_perez, sofia_diaz, jose_ramos, maria_gonzalez], tokyo, beijing, '01-06-24', '23:00').
 vuelo(24, nacional, 4, 4, [camila_mora, gustavo_gallegos, juan_velez, paola_ramos, victor_torres], buenos_aires, cordoba, '02-06-24', '17:30').
@@ -82,7 +82,7 @@ vuelo(28, nacional, 8, 8, [alicia_jimenez, samuel_mosquera, luisa_flores, mario_
 vuelo(29, internacional, 9, 9, [mario_castro, isabella_torres, pablo_gomez, carla_moreno, jose_ramirez], london, tokyo, '07-06-24', '21:10').
 vuelo(30, nacional, 10, 10, [lorena_vega, miguel_cardenas, juan_diaz, sofia_morales, eduardo_lopez], arequipa, cusco, '08-06-24', '09:30').
 vuelo(31, internacional, 11, 1, [sandra_jimenez, antonio_uribe, pedro_gomez, luisa_rojas, carlos_perez], sydney, auckland, '09-06-24', '19:45').
-vuelo(32, nacional, 12, 2, [ivan_ponce, juliana_carreno, maria_torres, juan_lopez, patricia_moreno], quito, cuenca, '10-06-24', '08:00').
+vuelo(32, nacional, 12, 2, [ivan_ponce, juliana_carreno, maria_torres, juan_lopez, patricia_moreno], quito, cuenca, '10-05-24', '08:00').
 vuelo(33, internacional, 13, 3, [veronica_moreno, alberto_perez, sofia_diaz, jose_ramos, maria_gonzalez], tokyo, beijing, '11-06-24', '23:00').
 vuelo(34, nacional, 14, 4, [camila_mora, gustavo_gallegos, juan_velez, paola_ramos, victor_torres], buenos_aires, cordoba, '12-06-24', '17:30').
 vuelo(35, internacional, 15, 5, [karen_lopez, andres_garcia, mario_rodriguez, juan_felipe, luisa_perez], miami, buenos_aires, '13-06-24', '10:10').
@@ -92,14 +92,14 @@ vuelo(38, nacional, 18, 8, [alicia_jimenez, samuel_mosquera, luisa_flores, mario
 vuelo(39, internacional, 19, 9, [mario_castro, isabella_torres, pablo_gomez, carla_moreno, jose_ramirez], london, tokyo, '17-06-24', '21:10').
 vuelo(40, nacional, 20, 10, [lorena_vega, miguel_cardenas, juan_diaz, juan_perez ,eduardo_lopez], arequipa, cusco, '18-06-24', '09:30').
 vuelo(41, internacional, 1, 1, [alexa_morales, hugo_perez, daniela_mendez, carlos_vega, laura_moreno], sydney, auckland, '19-06-24', '19:45').
-vuelo(42, nacional, 2, 2, [gabriel_rios, mariana_torres, juan_perez, paola_sanchez, sofia_garcia], quito, cuenca, '20-06-24', '08:00').
+vuelo(42, nacional, 2, 2, [gabriel_rios, mariana_torres, juan_perez, paola_sanchez, sofia_garcia], quito, cuenca, '20-05-24', '08:00').
 vuelo(43, internacional, 3, 3, [veronica_ramirez, alberto_fernandez, sofia_velez, jose_garcia, maria_sanchez], tokyo, beijing, '21-06-24', '23:00').
 vuelo(44, nacional, 4, 4, [camila_rivera, gustavo_mora, juan_velez, paola_castano, victor_morales], buenos_aires, cordoba, '22-06-24', '17:30').
 vuelo(45, internacional, 5, 5, [karen_paredes, andres_moreno, mario_rojas, juan_fernandez, luisa_torres], miami, buenos_aires, '23-06-24', '10:10').
 vuelo(46, nacional, 6, 6, [gabriel_lopez, lucia_perez, sofia_mora, juan_perez, andrea_vega], bogota, barranquilla, '24-06-24', '15:55').
 vuelo(47, internacional, 7, 7, [julio_silva, estefania_torres, juan_diaz, maria_gonzalez, jose_ramirez], new_york, madrid, '25-06-24', '14:00').
 vuelo(48, nacional, 8, 8, [alicia_garcia, samuel_perez, luisa_morales, mario_vega, jorge_rodriguez], quito, guayaquil, '26-06-24', '12:20').
-vuelo(49, internacional, 9, 9, [mario_torres, isabella_flores, pablo_sanchez, carla_velez, jose_moreno], london, tokyo, '27-06-24', '21:10').
+vuelo(49, internacional, 9, 9, [mario_torres, isabella_flores, pablo_sanchez, carla_velez, jose_moreno], london, tokyo, '20-05-24', '21:10').
 vuelo(50, nacional, 10, 10, [lorena_sanchez, miguel_vega, juan_castano, sofia_rih, eduardo_suarez], arequipa, cusco, '28-06-24', '09:30').
 
 % Regla: vuelos por tipo
