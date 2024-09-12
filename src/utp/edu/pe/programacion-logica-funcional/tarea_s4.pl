@@ -15,24 +15,6 @@ aviones(13, viva_air, 100).
 aviones(14, latam, 350).
 aviones(15, interjet, 300).
 
-% Regla: Aviones grandes, son aquellos que tengan una capacidad >= 200 personas
-aviones_grandes(Resultado) :- 
-    findall(Codigo, (aviones(Codigo,_,Capacidad), Capacidad >= 200), Resultado).
-% ?- aviones_grandes(Resultado).
-
-% Regla: Aviones cuya capacidad está entre Min y Max
-aviones_entre_capacidades(Min, Max, Resultado) :- 
-    findall(Codigo, (aviones(Codigo, _, Capacidad), Capacidad >= Min, Capacidad =< Max), Resultado).
-% ?- aviones_entre_capacidades(50,150,Resultado).
-
-% Regla: Avión con mayor capacidad
-avion_mayor_capacidad(Codigo, Aerolinea, Capacidad) :- 
-    findall(Capacidad, aviones(_, _, Capacidad), ListaCapacidades),
-    max_list(ListaCapacidades, MaxCapacidad),
-    aviones(Codigo, Aerolinea, MaxCapacidad),
-    Capacidad = MaxCapacidad.
-% ?- avion_mayor_capacidad(Codigo, Aerolinea, Capacidad).
-
 % Hechos pilotos(codigo,dni,nombre,edad,anios_experienicia)
 pilotos(1, 12345678,juan_perez, 34, 5).
 pilotos(2, 23456789, maria_garcia, 29, 3).
@@ -44,11 +26,6 @@ pilotos(7, 78901234, carlos_jimenez, 38, 9).
 pilotos(8, 89012345, sofia_ortiz, 45, 18).
 pilotos(9, 90123456, pedro_fernandez, 40, 15).
 pilotos(10, 12345679, claudia_alvarez, 33, 6).
-
-% Regla: Pilotos con años de experiencia >= 10
-pilotos_experimentados(Resultado) :- 
-     findall(Codigo, (pilotos(Codigo,_,_,_,AniosExp), AniosExp >= 10), Resultado).
-% ?- pilotos_experimentados(Resultado).
 
 % Hechos Vuelo(cod_vuelo, tipo_vuelo, avion, piloto, pasajeros, salida, llegada, fecha, hora)
 vuelo(1, nacional, 1, 1, [juan_perez, ruth_torres, alex_quispe, mario_vargas, jose_reyes, sebastian_mogollon], lima, cuzco, '10-05-24', '15:00').
@@ -102,6 +79,49 @@ vuelo(48, nacional, 8, 8, [alicia_garcia, samuel_perez, luisa_morales, mario_veg
 vuelo(49, internacional, 9, 9, [mario_torres, isabella_flores, pablo_sanchez, carla_velez, jose_moreno], london, tokyo, '20-05-24', '21:10').
 vuelo(50, nacional, 10, 10, [lorena_sanchez, miguel_vega, juan_castano, sofia_rih, eduardo_suarez], arequipa, cusco, '28-06-24', '09:30').
 
+% Regla: Aviones grandes, son aquellos que tengan una capacidad >= 200 personas
+aviones_grandes(Resultado) :- 
+    findall(Codigo, (aviones(Codigo,_,Capacidad), Capacidad >= 200), Resultado).
+% ?- aviones_grandes(Resultado).
+
+% Regla: Aviones cuya capacidad está entre Min y Max
+aviones_entre_capacidades(Min, Max, Resultado) :- 
+    findall(Codigo, (aviones(Codigo, _, Capacidad), Capacidad >= Min, Capacidad =< Max), Resultado).
+% ?- aviones_entre_capacidades(50,150,Resultado).
+
+% Regla: Avión con mayor capacidad
+avion_mayor_capacidad(Codigo, Aerolinea, Capacidad) :- 
+    findall(Capacidad, aviones(_, _, Capacidad), ListaCapacidades),
+    max_list(ListaCapacidades, MaxCapacidad),
+    aviones(Codigo, Aerolinea, MaxCapacidad),
+    Capacidad = MaxCapacidad.
+% ?- avion_mayor_capacidad(Codigo, Aerolinea, Capacidad).
+
+% //
+
+% Regla: Pilotos con años de experiencia >= 10
+pilotos_experimentados(Resultado) :- 
+     findall(Codigo, (pilotos(Codigo,_,_,_,AniosExp), AniosExp >= 10), Resultado).
+% ?- pilotos_experimentados(Resultado).
+
+% Regla para saber los vuelos asignados a una fecha en particular
+vuelos_por_fecha(Fecha, Resultado) :-
+    findall(ID, vuelo(ID, _, _, _, _, _, _, Fecha, _), Resultado).
+% ?- vuelos_por_fecha('10-05-24', Resultado).
+
+% Regla para saber el nombre de un piloto brindando el codigo de vuelo
+nombre_piloto_por_vuelo(CodVuelo, NombrePiloto) :-
+    vuelo(CodVuelo, _, _, CodPiloto, _, _, _, _, _),
+    pilotos(CodPiloto, _, NombrePiloto, _, _).
+% ?- nombre_piloto_por_vuelo(8, NombrePiloto).
+
+% Regla para saber fecha y hora de un vuelo brindando las ciudades
+info_vuelo(CiudadSalida, CiudadLlegada, CodVuelo, Fecha, Hora) :-
+    vuelo(CodVuelo, _, _, _, _, CiudadSalida, CiudadLlegada, Fecha, Hora).
+% ?- info_vuelo(lima,cuzco,CodVuelo,Fecha,Hora).
+
+% //
+
 % Regla: vuelos por tipo
 vuelos_por_tipo(Tipo, Resultado) :-
     findall(ID, vuelo(ID, Tipo, _, _, _, _, _, _, _), Resultado).
@@ -123,25 +143,3 @@ mejor_viajero(Pasajero, Cantidad) :-
     Cantidad = MaxCantidad,
     format('El viajero más frecuente es: ~w, con ~d apariciones.~n', [Pasajero, MaxCantidad]).
 % mejor_viajero(Pasajero, Cantidad).
-
-
-
-%Regla para saber los vuelos asignados a una fecha en particular
-vuelos_por_fecha(Fecha, Resultado) :-
-    findall(ID, vuelo(ID, _, _, _, _, _, _, Fecha, _), Resultado).
-% ?- vuelos_por_fecha('10-05-24', Resultado).
-
-%Regla para saber el nombre de un piloto brindando el codigo de vuelo
-nombre_piloto_por_vuelo(CodVuelo, NombrePiloto) :-
-    vuelo(CodVuelo, _, _, CodPiloto, _, _, _, _, _),
-    pilotos(CodPiloto, _, NombrePiloto, _, _).
-%?- nombre_piloto_por_vuelo(8, NombrePiloto).
-
-% Regla para saber fecha y hora de un vuelo brindando las ciudades
-info_vuelo(CiudadSalida, CiudadLlegada, CodVuelo, Fecha, Hora) :-
-    vuelo(CodVuelo, _, _, _, _, CiudadSalida, CiudadLlegada, Fecha, Hora).
-%?- info_vuelo(lima,cuzco,CodVuelo,Fecha,Hora).
-
-
-
-
