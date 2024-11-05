@@ -17,9 +17,15 @@ rotar([C|Q], R) :-
 agregar_persona(Nombre) :-
     assertz(persona(Nombre)).
 
+% ?- agregar_persona('Alex').
+
 eliminar_persona(Nombre) :-
     retract(persona(Nombre)).
+
+% ?- eliminar_persona('Alex').
 
 mostrar_personas :-
     findall(Nombre, persona(Nombre), ListaPersonas),
     writeln(ListaPersonas).
+
+% ?- mostrar_personas().
