@@ -32,3 +32,23 @@ mostrar_productos :-
     format("Producto: ~w, Cantidad: ~w~n", [Nombre, Cantidad]),
     fail.
 % ?- mostrar_productos().
+
+% -- EJERCICIO 03
+
+:- dynamic alumno/3.
+
+agregar_alumno(Nombre, Edad, Calificacion):-
+    assertz(alumno(Nombre, Edad, Calificacion)).
+% ?- agregar_alumno('Juan', 17, 18).
+
+eliminar_alumno(Nombre):-
+    retract(alumno(Nombre, _, _)).
+% ?- eliminar_alumno('Juan').
+
+mostrar_alumnos :-
+    alumno(Nombre, Edad, Calificacion),
+    format("Alumno: ~w, Edad: ~w, Nota: ~w~n", [Nombre, Edad, Calificacion]),
+    fail.
+% ?- mostrar_alumnos().
+
+
