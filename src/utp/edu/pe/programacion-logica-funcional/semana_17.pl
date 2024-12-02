@@ -15,6 +15,12 @@ buscar_telefono(Nombre) :-
     contacto(Nombre, Telefono),
     write('El telefono de '), write(Nombre), write(' es: '), write(Telefono), nl.
 
+% ?- agregar_contacto(sebastian, 988229318).
+% ?- agregar_contacto(pedro, 987654321).
+% ?- eliminar_contacto(sebastian).
+% ?- actualizar_contacto(pedro, 987789987).
+% ?- buscar_telefono(pedro).
+
 % 2
 :- dynamic calificacion/2.
 agregar_calificacion(Nombre, Calificacion) :-
@@ -34,6 +40,13 @@ calcular_promedio(Promedio) :-
     Total > 0,
     Promedio is Suma / Total.
 
+% ?- agregar_calificacion(pedro, 20).
+% ?- agregar_calificacion(luis, 10).
+% ?- agregar_calificacion(alex, 20).
+% ?- eliminar_calificacion(pedro).
+% ?- actualizar_calificacion(luis, 15).
+% ?- calcular_promedio(Promedio).
+
 % 3
 :- dynamic producto/3.
 
@@ -51,6 +64,13 @@ calcular_valor_inventario(ValorTotal) :-
     findall(Valor, (producto(_, Cantidad, Precio), Valor is Cantidad * Precio), Valores),
     sum_list(Valores, ValorTotal).
 
+% ?- agregar_producto(papa, 10, 2).
+% ?- agregar_producto(arroz, 5, 3).
+% ?- agregar_producto(azucar, 2, 1).
+% ?- eliminar_producto(papa).
+% ?- actualizar_producto(arroz, 10, 5).
+% ?- calcular_valor_inventario(ValorTotal).
+
 % 4
 :- dynamic asistencia/2.
 
@@ -67,6 +87,12 @@ contar_asistencias(TotalAsistencias, NumeroEstudiantes) :-
     length(AsistenciasVerdaderas, TotalAsistencias),
     length(Asistencias, NumeroEstudiantes).
 
+% ?- registrar_asistencia(pedro, true).
+% ?- registrar_asistencia(luis, false).
+% ?- registrar_asistencia(alex, true).
+% ?- actualizar_asistencia(luis, true).
+% ?- contar_asistencias(TotalAsistencias, NumeroEstudiantes).
+
 % 5
 :- dynamic reserva/3.
 
@@ -81,6 +107,13 @@ consultar_reserva(Sala, Fecha, Persona) :-
 
 sala_reservada(Sala, Fecha) :-
     reserva(Sala, Fecha, _).
+
+% ?- agregar_reserva(1, '2021-10-10', pedro).
+% ?- agregar_reserva(2, '2021-10-11', luis).
+% ?- agregar_reserva(3, '2021-10-12', alex).
+% ?- eliminar_reserva(1, '2021-10-10').
+% ?- sala_reservada(2, '2021-10-11').
+% ?- consultar_reserva(3, '2021-10-12', Persona).
 
 % 6
 :- dynamic libro/4.
@@ -98,6 +131,13 @@ actualizar_disponibilidad(Titulo, Disponible) :-
 libros_disponibles_genero(Genero, Libros) :-
     findall(Titulo, libro(Titulo, _, Genero, true), Libros).
 
+% ?- agregar_libro('El principito', 'Antoine de Saint-Exupéry', 'Infantil', true).
+% ?- agregar_libro('El señor de los anillos', 'J.R.R. Tolkien', 'Fantasia', false).
+% ?- agregar_libro('Harry Potter', 'J.K. Rowling', 'Fantasia', true).
+% ?- eliminar_libro('El principito').
+% ?- actualizar_disponibilidad('El señor de los anillos', true).
+% ?- libros_disponibles_genero('Fantasia', Libros).
+
 % 7
 :- dynamic mascota/3.
 
@@ -112,6 +152,13 @@ buscar_mascotas_por_tipo(Tipo, Mascotas) :-
 
 mascotas_mayores_de(EdadMinima, Mascotas) :-
     findall(Nombre, (mascota(Nombre, _, Edad), Edad > EdadMinima), Mascotas).
+
+% ?- agregar_mascota('Firulais', 'Perro', 5).
+% ?- agregar_mascota('Garfield', 'Gato', 3).
+% ?- agregar_mascota('Piolin', 'Pajaro', 1).
+% ?- eliminar_mascota('Firulais').
+% ?- buscar_mascotas_por_tipo('Gato', Mascotas).
+% ?- mascotas_mayores_de(2, Mascotas).
 
 % 8
 :- dynamic empleado/4.
@@ -129,6 +176,13 @@ actualizar_salario(Nombre, NuevoSalario) :-
 empleados_con_sueldo_mayor_a(Monto, Empleados) :-
     findall(Nombre, (empleado(Nombre, _, Salario, _), Salario > Monto), Empleados).
 
+% agregar_empleado('Pedro', 'Gerente', 1000, 'Administracion').
+% agregar_empleado('Luis', 'Contador', 800, 'Contabilidad').
+% agregar_empleado('Alex', 'Programador', 500, 'Ingenieria').
+% eliminar_empleado('Pedro').
+% actualizar_salario('Luis', 900).
+% empleados_con_sueldo_mayor_a(600, Empleados).
+
 % 9
 :- dynamic vuelo/4.
 
@@ -140,6 +194,13 @@ eliminar_vuelo(Numero) :-
 
 vuelos_disponibles_destino(Destino, Vuelos) :-
     findall(Numero, (vuelo(Numero, Destino, _, true)), Vuelos).
+
+% ?- agregar_vuelo(1, 'Lima', 100, true).
+% ?- agregar_vuelo(2, 'Cusco', 200, false).
+% ?- agregar_vuelo(3, 'Cusco', 200, true).
+% ?- agregar_vuelo(4, 'Arequipa', 150, true).
+% ?- eliminar_vuelo(1).
+% ?- vuelos_disponibles_destino('Cusco', Vuelos).
 
 % 10
 :- dynamic paciente/4.
@@ -156,6 +217,13 @@ modificar_tratamiento(Nombre, NuevoTratamiento) :-
 
 pacientes_con_enfermedad(Enfermedad, Pacientes) :-
     findall(Nombre, paciente(Nombre, _, Enfermedad, _), Pacientes).
+
+% ?- agregar_paciente('Pedro', 20, 'Gripe', 'Tomar medicamento').
+% ?- agregar_paciente('Luis', 30, 'Fiebre', 'Tomar medicamento').
+% ?- agregar_paciente('Alex', 40, 'Gripe', 'Tomar medicamento').
+% ?- eliminar_paciente('Pedro').
+% ?- modificar_tratamiento('Luis', 'Tomar medicamento cada 8 horas').
+% ?- pacientes_con_enfermedad('Gripe', Pacientes).
 
 % // Ejercicio #11.
 
