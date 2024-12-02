@@ -1,3 +1,162 @@
+% 1
+:- dynamic contacto/2.
+
+agregar_contacto(Nombre, Telefono) :-
+    assertz(contacto(Nombre, Telefono)).
+
+eliminar_contacto(Nombre) :-
+    retract(contacto(Nombre, _)).
+
+actualizar_contacto(Nombre, NuevoTelefono) :-
+    retract(contacto(Nombre, _)),
+    assertz(contacto(Nombre, NuevoTelefono)).
+
+buscar_telefono(Nombre) :-
+    contacto(Nombre, Telefono),
+    write('El telefono de '), write(Nombre), write(' es: '), write(Telefono), nl.
+
+% 2
+:- dynamic calificacion/2.
+agregar_calificacion(Nombre, Calificacion) :-
+    assertz(calificacion(Nombre, Calificacion)).
+
+eliminar_calificacion(Nombre) :-
+    retract(calificacion(Nombre, _)).
+
+actualizar_calificacion(Nombre, NuevaCalificacion) :-
+    retract(calificacion(Nombre, _)),
+    assertz(calificacion(Nombre, NuevaCalificacion)).
+
+calcular_promedio(Promedio) :-
+    findall(Calificacion, calificacion(_, Calificacion), Calificaciones),
+    sum_list(Calificaciones, Suma),
+    length(Calificaciones, Total),
+    Total > 0,
+    Promedio is Suma / Total.
+
+% 3
+:- dynamic producto/3.
+
+agregar_producto(Nombre, Cantidad, Precio) :-
+    assertz(producto(Nombre, Cantidad, Precio)).
+
+eliminar_producto(Nombre) :-
+    retract(producto(Nombre, _, _)).
+
+actualizar_producto(Nombre, NuevaCantidad, NuevoPrecio) :-
+    retract(producto(Nombre, _, _)),
+    assertz(producto(Nombre, NuevaCantidad, NuevoPrecio)).
+
+calcular_valor_inventario(ValorTotal) :-
+    findall(Valor, (producto(_, Cantidad, Precio), Valor is Cantidad * Precio), Valores),
+    sum_list(Valores, ValorTotal).
+
+% 4
+:- dynamic asistencia/2.
+
+registrar_asistencia(Nombre, Asistio) :-
+    assertz(asistencia(Nombre, Asistio)).
+
+actualizar_asistencia(Nombre, Asistio) :-
+    retract(asistencia(Nombre, _)),
+    assertz(asistencia(Nombre, Asistio)).
+
+contar_asistencias(TotalAsistencias, NumeroEstudiantes) :-
+    findall(Asistio, asistencia(_, Asistio), Asistencias),
+    include(==(true), Asistencias, AsistenciasVerdaderas),
+    length(AsistenciasVerdaderas, TotalAsistencias),
+    length(Asistencias, NumeroEstudiantes).
+
+% 5
+:- dynamic reserva/3.
+
+agregar_reserva(Sala, Fecha, Persona) :-
+    assertz(reserva(Sala, Fecha, Persona)).
+
+eliminar_reserva(Sala, Fecha) :-
+    retract(reserva(Sala, Fecha, _)).
+
+consultar_reserva(Sala, Fecha, Persona) :-
+    reserva(Sala, Fecha, Persona).
+
+sala_reservada(Sala, Fecha) :-
+    reserva(Sala, Fecha, _).
+
+% 6
+:- dynamic libro/4.
+
+agregar_libro(Titulo, Autor, Genero, Disponible) :-
+    assertz(libro(Titulo, Autor, Genero, Disponible)).
+
+eliminar_libro(Titulo) :-
+    retract(libro(Titulo, _, _, _)).
+
+actualizar_disponibilidad(Titulo, Disponible) :-
+    retract(libro(Titulo, Autor, Genero, _)),
+    assertz(libro(Titulo, Autor, Genero, Disponible)).
+
+libros_disponibles_genero(Genero, Libros) :-
+    findall(Titulo, libro(Titulo, _, Genero, true), Libros).
+
+% 7
+:- dynamic mascota/3.
+
+agregar_mascota(Nombre, Tipo, Edad) :-
+    assertz(mascota(Nombre, Tipo, Edad)).
+
+eliminar_mascota(Nombre) :-
+    retract(mascota(Nombre, _, _)).
+
+buscar_mascotas_por_tipo(Tipo, Mascotas) :-
+    findall(Nombre, mascota(Nombre, Tipo, _), Mascotas).
+
+mascotas_mayores_de(EdadMinima, Mascotas) :-
+    findall(Nombre, (mascota(Nombre, _, Edad), Edad > EdadMinima), Mascotas).
+
+% 8
+:- dynamic empleado/4.
+
+agregar_empleado(Nombre, Puesto, Salario, Departamento) :-
+    assertz(empleado(Nombre, Puesto, Salario, Departamento)).
+
+eliminar_empleado(Nombre) :-
+    retract(empleado(Nombre, _, _, _)).
+
+actualizar_salario(Nombre, NuevoSalario) :-
+    retract(empleado(Nombre, Puesto, _, Departamento)),
+    assertz(empleado(Nombre, Puesto, NuevoSalario, Departamento)).
+
+empleados_con_sueldo_mayor_a(Monto, Empleados) :-
+    findall(Nombre, (empleado(Nombre, _, Salario, _), Salario > Monto), Empleados).
+
+% 9
+:- dynamic vuelo/4.
+
+agregar_vuelo(Numero, Destino, Precio, Disponible) :-
+    assertz(vuelo(Numero, Destino, Precio, Disponible)).
+
+eliminar_vuelo(Numero) :-
+    retract(vuelo(Numero, _, _, _)).
+
+vuelos_disponibles_destino(Destino, Vuelos) :-
+    findall(Numero, (vuelo(Numero, Destino, _, true)), Vuelos).
+
+% 10
+:- dynamic paciente/4.
+
+agregar_paciente(Nombre, Edad, Enfermedad, Tratamiento) :-
+    assertz(paciente(Nombre, Edad, Enfermedad, Tratamiento)).
+
+eliminar_paciente(Nombre) :-
+    retract(paciente(Nombre, _, _, _)).
+
+modificar_tratamiento(Nombre, NuevoTratamiento) :-
+    retract(paciente(Nombre, Edad, Enfermedad, _)),
+    assertz(paciente(Nombre, Edad, Enfermedad, NuevoTratamiento)).
+
+pacientes_con_enfermedad(Enfermedad, Pacientes) :-
+    findall(Nombre, paciente(Nombre, _, Enfermedad, _), Pacientes).
+
 % // Ejercicio #11.
 
 
