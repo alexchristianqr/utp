@@ -7,6 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <include layout="@layout/semana_02" />
+    <include layout="@layout/semana_04_02" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
