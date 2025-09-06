@@ -66,7 +66,5 @@ class OperacionesActivity : AppCompatActivity() {
             }
             else -> lblResultado.text = "Operación no válida"
         }
-
-//        lblResultado.text = "El resultado es: $resultado"
     }
 }
