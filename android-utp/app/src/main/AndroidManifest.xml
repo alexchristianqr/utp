@@ -21,6 +21,7 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
 <!--        </activity>-->
+
             <!-- PROBAR ACTIVITY 02 -->
 <!--        <activity-->
 <!--            android:name=".OperacionesActivity"-->
@@ -30,17 +31,28 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
 <!--        </activity>-->
-        <!-- PROBAR ACTIVITY 03 -->
-            <activity
-                android:name=".PreferenciasActivity"
-                android:exported="true">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-            </activity>
-            <activity android:name=".BienvenidaActivity">
-            </activity>
+
+            <!-- PROBAR ACTIVITY 03 -->
+<!--            <activity-->
+<!--                android:name=".PreferenciasActivity"-->
+<!--                android:exported="true">-->
+<!--                <intent-filter>-->
+<!--                    <action android:name="android.intent.action.MAIN" />-->
+<!--                    <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                </intent-filter>-->
+<!--            </activity>-->
+<!--            <activity android:name=".BienvenidaActivity">-->
+<!--            </activity>-->
+
+        <!-- PROBAR ACTIVITY 04 -->
+        <activity
+            android:name=".semana_07.AlumnoActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 
