@@ -8,5 +8,6 @@
     tools:context=".MainActivity">
 
     <include layout="@layout/semana_07" />
+<!--    <include layout="@layout/semana_08" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

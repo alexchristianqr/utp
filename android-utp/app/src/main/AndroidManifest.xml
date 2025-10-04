@@ -46,12 +46,16 @@
 
         <!-- PROBAR ACTIVITY 04 -->
         <activity
-            android:name=".semana_07.AlumnoActivity"
+            android:name=".alumnos.AlumnoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".alumnos.BuscarActivity"
+            android:exported="true">
         </activity>
 
     </application>

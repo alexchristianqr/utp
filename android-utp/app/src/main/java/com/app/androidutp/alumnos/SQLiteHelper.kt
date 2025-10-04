@@ -1,4 +1,4 @@
-package com.app.androidutp.semana_07
+package com.app.androidutp.alumnos
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
