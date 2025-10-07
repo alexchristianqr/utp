@@ -2,6 +2,7 @@ package com.app.androidutp.alumnos
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.util.Log
 
 class AlumnoService(context: Context) {
@@ -39,7 +40,7 @@ class AlumnoService(context: Context) {
     fun buscarAlumno(codigo: String): Alumno? {
         var alumno: Alumno? = null
         val db = sqLiteHelper.readableDatabase
-        var cursor: android.database.Cursor? = null
+        var cursor: Cursor? = null
 
         try {
             val sql = "SELECT codigo, nombres, apellidos, edad FROM alumnos WHERE codigo = ?"

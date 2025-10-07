@@ -11,14 +11,13 @@ import com.app.androidutp.R
 import com.app.androidutp.Utilidad
 import com.google.android.material.textfield.TextInputEditText
 
-class AlumnoActivity : AppCompatActivity() {
+class AgregarAlumnoActivity : AppCompatActivity() {
     private lateinit var tvRespuesta: TextView
     private lateinit var txtCodigo: TextInputEditText
     private lateinit var txtNombres: TextInputEditText
     private lateinit var txtApellidos: TextInputEditText
     private lateinit var txtEdad: TextInputEditText
     private lateinit var btnRegistrar: Button
-    private lateinit var btnBuscar: Button
     private lateinit var alumnoService: AlumnoService
     private lateinit var alumno: Alumno
 
@@ -26,7 +25,9 @@ class AlumnoActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.semana_07)
+
+        setContentView(R.layout.semana_07) // Utilizar el layout de la semana 07
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -38,7 +39,6 @@ class AlumnoActivity : AppCompatActivity() {
 
         // Configurar evento del botón
         btnRegistrar.setOnClickListener {
-
             registrar()
         }
     }
