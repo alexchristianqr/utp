@@ -8,7 +8,7 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
-    <include layout="@layout/semana_08" />
+    <include layout="@layout/alumno_buscar" />
     <!--    <include layout="@layout/semana_08" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

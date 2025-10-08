@@ -12,12 +12,12 @@ import androidx.core.view.WindowInsetsCompat
 import com.app.androidutp.R
 import com.app.androidutp.Utilidad
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlin.toString
 
 class BuscarAlumnoActivity : AppCompatActivity() {
 
     private lateinit var txtCodigo: EditText
     private lateinit var fieldNombre: TextView
+    private lateinit var fieldApellido: TextView
     private lateinit var fieldEdad: TextView
     private lateinit var btnBuscar: Button
     private lateinit var btnAgregar: FloatingActionButton
@@ -28,9 +28,9 @@ class BuscarAlumnoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        setContentView(R.layout.semana_08) // Utilizar el layout de la semana 08
+        setContentView(R.layout.alumno_buscar) // Utilizar el layout de la semana 08
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.alumno_buscar)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -50,6 +50,7 @@ class BuscarAlumnoActivity : AppCompatActivity() {
     fun referenciar() {
         txtCodigo = findViewById(R.id.txtCodigo)
         fieldNombre = findViewById(R.id.fieldNombre)
+        fieldApellido = findViewById(R.id.fieldApellido)
         fieldEdad = findViewById(R.id.fieldEdad)
         btnBuscar = findViewById(R.id.btnBuscar)
         btnAgregar = findViewById(R.id.btnAgregar)
@@ -61,16 +62,24 @@ class BuscarAlumnoActivity : AppCompatActivity() {
         }
 
         alumnoService = AlumnoService(this)
+        val alumno: Alumno? = alumnoService.buscarAlumno(txtCodigo.text.toString())
 
-        val alumno: Alumno? = alumnoService.buscarAlumno(txtCodigo.toString())
-        print(alumno)
+        if(alumno == null) {
+            Utilidad.mostrarAlerta(this, "Aviso", "No se encontró el alumno con el código proporcionado.")
+            fieldNombre.text = ""
+            fieldApellido.text = ""
+            fieldEdad.text = ""
+            return
+        }
 
-        fieldNombre.text = alumno?.nombres.toString()
-        fieldEdad.text = alumno?.edad.toString()
+        fieldNombre.text = alumno.nombres.toString()
+        fieldApellido.text = alumno.apellidos.toString()
+        fieldEdad.text = alumno.edad.toString()
+
     }
 
     fun validarFormulario(): Boolean {
-        val codigo = txtCodigo.text.toString().trim()
+        val codigo = this.txtCodigo.text.toString().trim()
 
         if (codigo.isEmpty()) {
             Utilidad.mostrarAlerta(this, "Error", "El código no puede estar vacío.")
@@ -89,7 +98,7 @@ class BuscarAlumnoActivity : AppCompatActivity() {
     }
 
     fun mostrarFormularioAgregar() {
-        val intent = Intent(this, AgregarAlumnoActivity::class.java)
+        val intent = Intent(this, RegistrarAlumnoActivity::class.java)
         startActivity(intent)
     }
 }

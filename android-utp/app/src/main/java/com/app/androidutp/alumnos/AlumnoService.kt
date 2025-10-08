@@ -43,7 +43,7 @@ class AlumnoService(context: Context) {
         var cursor: Cursor? = null
 
         try {
-            val sql = "SELECT codigo, nombres, apellidos, edad FROM alumnos WHERE codigo = ?"
+            val sql = "SELECT id, codigo, nombres, apellidos, edad FROM alumnos WHERE codigo = ?"
             val params = arrayOf(codigo);
             cursor = db.rawQuery(sql, params)
 

@@ -1,7 +1,9 @@
 package com.app.androidutp.alumnos
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,13 +13,14 @@ import com.app.androidutp.R
 import com.app.androidutp.Utilidad
 import com.google.android.material.textfield.TextInputEditText
 
-class AgregarAlumnoActivity : AppCompatActivity() {
+class RegistrarAlumnoActivity : AppCompatActivity() {
     private lateinit var tvRespuesta: TextView
     private lateinit var txtCodigo: TextInputEditText
     private lateinit var txtNombres: TextInputEditText
     private lateinit var txtApellidos: TextInputEditText
     private lateinit var txtEdad: TextInputEditText
     private lateinit var btnRegistrar: Button
+    private lateinit var btnRegresar: ImageButton
     private lateinit var alumnoService: AlumnoService
     private lateinit var alumno: Alumno
 
@@ -26,9 +29,9 @@ class AgregarAlumnoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        setContentView(R.layout.semana_07) // Utilizar el layout de la semana 07
+        setContentView(R.layout.alumno_registrar) // Utilizar el layout de la semana 07
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.alumno_registrar)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -41,6 +44,10 @@ class AgregarAlumnoActivity : AppCompatActivity() {
         btnRegistrar.setOnClickListener {
             registrar()
         }
+
+        btnRegresar.setOnClickListener {
+            regresar()
+        }
     }
 
     fun referenciar() {
@@ -49,7 +56,13 @@ class AgregarAlumnoActivity : AppCompatActivity() {
         txtApellidos = findViewById(R.id.txtApellidos)
         txtEdad = findViewById(R.id.txtEdad)
         btnRegistrar = findViewById(R.id.btnRegistrar)
+        btnRegresar = findViewById(R.id.btnRegresar)
         tvRespuesta = findViewById(R.id.tvRespuesta)
+    }
+
+    fun regresar(){
+        val intent = Intent(this, BuscarAlumnoActivity::class.java)
+        startActivity(intent)
     }
 
     fun registrar() {

@@ -54,7 +54,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".alumnos.AgregarAlumnoActivity">
+            android:name=".alumnos.RegistrarAlumnoActivity">
         </activity>
 
     </application>

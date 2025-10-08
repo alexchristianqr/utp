@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/alumno_buscar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -12,7 +12,7 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="Nombre:"
         android:textStyle="bold"
@@ -22,21 +22,21 @@
 
     <TextView
         android:id="@+id/fieldNombre"
-        android:layout_width="100dp"
-        android:layout_height="34dp"
+        android:layout_width="200dp"
+        android:layout_height="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:text="-"
+        android:layout_marginEnd="16dp"
+        android:text="[Nombres]"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnBuscar" />
 
     <TextView
-        android:id="@+id/fieldEdad"
-        android:layout_width="100dp"
-        android:layout_height="33dp"
+        android:id="@+id/fieldApellido"
+        android:layout_width="200dp"
+        android:layout_height="24dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="-"
+        android:layout_marginEnd="16dp"
+        android:text="[Apellidos]"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fieldNombre" />
 
@@ -44,9 +44,9 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="Edad:"
+        android:text="Apellidos:"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -55,9 +55,10 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="Buscar Alumno"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,9 +69,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:text="Buscar"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -90,15 +91,38 @@
         android:id="@+id/textInputLayout8"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnBuscar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/txtCodigo"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:hint="Codigo" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif"
+        android:text="Edad:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/fieldEdad"
+        android:layout_width="200dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="[Edad]"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fieldApellido" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
