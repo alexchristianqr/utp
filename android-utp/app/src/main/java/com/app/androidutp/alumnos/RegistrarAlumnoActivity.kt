@@ -78,6 +78,13 @@ class RegistrarAlumnoActivity : AppCompatActivity() {
             edad = txtEdad.text.toString().toInt()
         )
 
+        val alumnoExistente: Alumno? = alumnoService.buscarAlumno(alumno.codigo)
+
+        if (alumnoExistente != null) {
+            Utilidad.mostrarAlerta(this, "Error", "El código ya está registrado.")
+            return
+        }
+
         val rpta = alumnoService.registrarAlumno(alumno)
         print(rpta)
 
