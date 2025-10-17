@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.app.androidutp.R
-import com.app.androidutp.Utilidad
+import com.app.androidutp.util.Utilidad
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class BuscarAlumnoActivity : AppCompatActivity() {

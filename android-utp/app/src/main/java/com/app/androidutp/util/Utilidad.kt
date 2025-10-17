@@ -1,12 +1,9 @@
-package com.app.androidutp
+package com.app.androidutp.util
 
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
 
 object Utilidad {
 
@@ -57,4 +54,5 @@ object Utilidad {
 			loadingDialog = null
 		}
 	}
+
 }
