@@ -1,4 +1,4 @@
-package com.app.androidutp.semana_09
+package com.app.androidutp.restapi
 
 import android.os.Bundle
 import android.widget.Button
@@ -13,7 +13,7 @@ import com.app.androidutp.R
 import com.app.androidutp.util.HttpService
 import kotlinx.coroutines.launch
 
-class JsonActivity : AppCompatActivity() {
+class PostActivity : AppCompatActivity() {
 	private lateinit var tvIndex: TextView
 	private lateinit var tvUserId: TextView
 	private lateinit var tvId: TextView

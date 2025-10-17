@@ -62,7 +62,7 @@
 
 
                 <activity
-                    android:name=".semana_09.JsonActivity"
+                    android:name=".restapi.PostActivity"
                     android:exported="true">
                     <intent-filter>
                         <action android:name="android.intent.action.MAIN" />

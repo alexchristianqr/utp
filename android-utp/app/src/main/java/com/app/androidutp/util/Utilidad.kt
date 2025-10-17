@@ -6,7 +6,6 @@ import android.os.Handler
 import android.os.Looper
 
 object Utilidad {
-
 	fun mostrarAlerta(context: Context?, titulo: String, mensaje: String) {
 		// Validar que el contexto no sea nulo y que sea una Activity visible
 		if (context == null) return
@@ -54,5 +53,4 @@ object Utilidad {
 			loadingDialog = null
 		}
 	}
-
 }

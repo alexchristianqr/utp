@@ -1,4 +1,4 @@
-package com.app.androidutp.semana_09
+package com.app.androidutp.restapi
 
 import kotlinx.serialization.Serializable
 
