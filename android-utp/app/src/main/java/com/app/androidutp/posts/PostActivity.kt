@@ -1,4 +1,4 @@
-package com.app.androidutp.restapi
+package com.app.androidutp.posts
 
 import android.os.Bundle
 import android.widget.Button
@@ -29,12 +29,11 @@ class PostActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		enableEdgeToEdge()
 
-
 		// binding = ActivityMainBinding.inflate(layoutInflater)
 		// setContentView(binding.root)
 
-		setContentView(R.layout.activity_main)
-		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+		setContentView(R.layout.semana_09_posts)
+		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.semana_09_posts)) { v, insets ->
 			val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
 			v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
 			insets

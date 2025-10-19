@@ -1,4 +1,4 @@
-package com.app.androidutp.restapi
+package com.app.androidutp.posts
 
 import retrofit2.http.GET
 
