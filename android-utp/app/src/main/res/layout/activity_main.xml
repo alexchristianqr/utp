@@ -8,7 +8,6 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
-    <include layout="@layout/semana_09" />
-    <!--    <include layout="@layout/semana_08" />-->
+    <include layout="@layout/pc2_buscar_auto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
