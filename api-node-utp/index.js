@@ -1,15 +1,36 @@
 import express from "express";
 import bodyParser from "body-parser";
+import {createConnection} from "mysql2/promise";
 
 const app = express();
+
+app.use(bodyParser.json());
+
 const port = 3000;
 
 app.get("/", (req, res) => {
-  res.send("App en nodejs!");
+  res.send("API en nodejs - Desarrollado por Alex Christian!");
 });
 
-app.get("/alumnos", (req, res) => {
-  res.json({ data: [] });
+const config = {
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "",
+  database: "mydb",
+};
+
+app.get("/alumnos", async (req, res) => {
+  try {
+    const cnx = await createConnection(config);
+    // cnx.on("error", (err) => {
+    //   console.error("DB error", err);
+    // });
+    const [rows] = await cnx.execute("SELECT * FROM alumno");
+    return res.json({ data: rows });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
 });
 
 app.get("/varones", (req, res) => {
