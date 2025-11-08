@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.app.androidutp.R
-import com.app.androidutp.util.Utilidad
+import com.app.androidutp.common.util.Utilidad
 import com.google.android.material.textfield.TextInputEditText
 
 class RegistrarAutoActivity : AppCompatActivity() {

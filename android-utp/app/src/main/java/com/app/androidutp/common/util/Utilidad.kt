@@ -1,4 +1,4 @@
-package com.app.androidutp.util
+package com.app.androidutp.common.util
 
 import android.app.AlertDialog
 import android.content.Context

@@ -4,7 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.util.Log
-import com.app.androidutp.util.DynamicSQLiteHelper
+import com.app.androidutp.common.util.DynamicSQLiteHelper
 
 class AutoService(context: Context) {
     private var dbHelper: DynamicSQLiteHelper = DynamicSQLiteHelper(context, "db_autos.db")

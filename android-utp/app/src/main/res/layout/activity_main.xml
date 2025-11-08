@@ -8,6 +8,6 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
-    <include layout="@layout/pc2_buscar_auto" />
+    <include layout="@layout/estudiante_listado" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

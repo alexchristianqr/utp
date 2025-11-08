@@ -1,15 +1,14 @@
-package com.app.androidutp.util
+package com.app.androidutp.common.services
 
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import com.app.androidutp.common.constants.GlobalApp
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 object HttpService {
 
     @Volatile
-    private var baseUrl: String = "https://jsonplaceholder.typicode.com/"
+    private var baseUrl: String = GlobalApp.ESTUDIANTE_BASE_URL
+    // private var baseUrl: String = GlobalApp.JSONPLACEHOLDER_BASER_URL
 
     @Volatile
     private var retrofit: Retrofit = buildRetrofit(baseUrl)

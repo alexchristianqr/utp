@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true">
 
         <!-- PROBAR ACTIVITY MAIN -->
-        <!--        <activity-->
+<!--        <activity-->
         <!--            android:name=".MainActivity"-->
         <!--            android:exported="true">-->
         <!--            <intent-filter>-->
@@ -61,36 +61,47 @@
 
 
         <!-- SEMANA 09 -->
+        <!--        <activity-->
+        <!--            android:name=".posts.PostActivity"-->
+        <!--            android:exported="true">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
+
+
+        <!-- PC1 -->
+        <!--        <activity-->
+        <!--            android:name=".pc1.CalcularActivity"-->
+        <!--            android:exported="true">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
+
+        <!-- PC2 -->
+        <!--        <activity-->
+        <!--            android:name=".pc2.autos.BuscarAutoActivity"-->
+        <!--            android:exported="true">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
+        <!--        <activity android:name=".pc2.autos.RegistrarAutoActivity" />-->
+
+
+        <!-- SEMANA 13 -->
         <activity
-            android:name=".posts.PostActivity"
+            android:name=".universidad.EstudianteActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <!-- PC1 -->
-<!--        <activity-->
-<!--            android:name=".pc1.CalcularActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-        <!-- PC2 -->
-<!--        <activity-->
-<!--            android:name=".pc2.autos.BuscarAutoActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-<!--        <activity android:name=".pc2.autos.RegistrarAutoActivity" />-->
 
     </application>
 

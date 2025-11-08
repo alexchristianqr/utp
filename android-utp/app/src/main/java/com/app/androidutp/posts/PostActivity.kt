@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.app.androidutp.R
-import com.app.androidutp.util.HttpService
+import com.app.androidutp.common.services.HttpService
 import kotlinx.coroutines.launch
 
 class PostActivity : AppCompatActivity() {
