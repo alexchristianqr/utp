@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 });
 
 const configDB = {
-  host: 'localhost',
+  host: '127.0.0.1',
   port: 3306,
   user: 'root',
   password: '',
@@ -23,7 +23,7 @@ const configDB = {
 app.get('/alumnos', async (req, res) => {
   try {
     const cnx = await createConnection(configDB);
-    const [rows] = await cnx.execute('SELECT * FROM alumno');
+    const [rows] = await cnx.execute('SELECT a.*, c.car_nombre FROM alumno a INNER JOIN carrera c ON a.car_id = c.car_id');
     return res.json({ message: 'Todos los alumnos', data: rows });
   } catch (error) {
     return res.status(500).json({ error });
