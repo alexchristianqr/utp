@@ -1,11 +1,8 @@
 package com.app.androidutp.universidad
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.androidutp.R
 import com.app.androidutp.common.constants.GlobalApp
 import com.app.androidutp.common.services.HttpService
-import com.app.androidutp.posts.PostApi
 import com.app.androidutp.universidad.entidad.Estudiante
 import com.app.androidutp.universidad.entidad.EstudianteResponse
 import com.app.androidutp.universidad.service.EstudianteService
@@ -28,11 +24,6 @@ class EstudianteActivity : AppCompatActivity() {
 
     private var adaptador: Adaptador = Adaptador()
 
-    //    private lateinit var txtEstCodigo: TextView
-//    private lateinit var txtEstNombreApellido: TextView
-//    private lateinit var txtEstEdad: TextView
-//    private lateinit var txtEstCarrera: TextView
-//    private lateinit var imgEstGenero: ImageView
     private lateinit var rvEstList: RecyclerView
     private lateinit var btnNuevo: FloatingActionButton
 
@@ -46,9 +37,7 @@ class EstudianteActivity : AppCompatActivity() {
             insets
         }
 
-
         referenciar()
-        mostrarNuevo()
         cargarEstudiantes()
         btnNuevo.setOnClickListener {
             mostrarNuevo()
@@ -56,14 +45,8 @@ class EstudianteActivity : AppCompatActivity() {
     }
 
     private fun referenciar() {
-//        txtEstCodigo = findViewById(R.id.txtEstCodigo)
-//        txtEstNombreApellido = findViewById(R.id.txtEstNombreApellido)
-//        txtEstEdad = findViewById(R.id.txtEstEdad)
-//        txtEstCarrera = findViewById(R.id.txtEstCarrera)
-//        imgEstGenero = findViewById(R.id.imgEstGenero)
         rvEstList = findViewById(R.id.rvEstList)
 
-        // Setear el layout manager para el RecyclerView
         rvEstList.layoutManager = LinearLayoutManager(this)
         adaptador.setContext(this)
 
@@ -84,18 +67,8 @@ class EstudianteActivity : AppCompatActivity() {
                 estudianteResponse.let {
                     listaEstudiantes = it.data
                     mostrarEstudiantes()
-//                    adaptador.setListaEstudiantes(listaEstudiantes)
-//                    rvEstList.adapter = adaptador
-
-//                    val carreras = listOf("Ingeniería de Sistemas", "Ingeniería Industrial", "Administración de Empresas", "Contabilidad", "Derecho")
 
                     for (estudiante in listaEstudiantes) {
-
-//                        txtEstCodigo.text = estudiante.alu_codigo
-//                        txtEstEdad.text = estudiante.alu_edad.toString()
-//                        txtEstCarrera.text = carreras[estudiante.car_id]
-//                        txtEstNombreApellido.text = "${estudiante.alu_nombres.uppercase()} ${estudiante.alu_apellidos.uppercase()}"
-
                         Log.d(
                             "===",
                             "Item: ${estudiante.car_id}: ${estudiante.alu_nombres} ${estudiante.alu_apellidos}"

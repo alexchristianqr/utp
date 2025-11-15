@@ -18,10 +18,7 @@ import com.app.androidutp.common.util.Utilidad
 import com.app.androidutp.universidad.entidad.Carrera
 import com.app.androidutp.universidad.entidad.CarreraResponse
 import com.app.androidutp.universidad.entidad.Estudiante
-import com.app.androidutp.universidad.entidad.EstudianteResponse
 import com.app.androidutp.universidad.service.EstudianteService
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 
 class EstudianteNuevoActivity : AppCompatActivity() {
@@ -49,9 +46,9 @@ class EstudianteNuevoActivity : AppCompatActivity() {
         mostrarGeneros()
         cargarCarreras()
 
-//        btnGuardar.setOnClickListener {
-//            registrarEstudiante()
-//        }
+        btnGuardar.setOnClickListener {
+            registrarEstudiante()
+        }
     }
 
     private fun referenciar() {
@@ -104,10 +101,10 @@ class EstudianteNuevoActivity : AppCompatActivity() {
     }
 
     private fun registrarEstudiante() {
-        val codigo = txtEstudianteCodigo.toString()
-        val nombres = txtEstudianteNombre.toString()
-        val apellidos = txtEstudianteApellido.toString()
-        val edadText = txtEstudianteEdad.toString()
+        val codigo = txtEstudianteCodigo.text.toString()
+        val nombres = txtEstudianteNombre.text.toString()
+        val apellidos = txtEstudianteApellido.text.toString()
+        val edadText = txtEstudianteEdad.text.toString()
         val genero = spinGenero.selectedItem.toString()
         val carreraPosition = spinCarrera.selectedItemPosition
         val car_id = if (carreraPosition >= 0) listaCarreras[carreraPosition].car_id else null
@@ -129,20 +126,15 @@ class EstudianteNuevoActivity : AppCompatActivity() {
         val service = HttpService.create<EstudianteService>()
 
         lifecycleScope.launch {
-            val response = service.registrarEstudiante()
+            val response = service.registrarEstudiante(nuevoEstudiante)
 
             if (response.isSuccessful) {
-                val estudianteResponse: EstudianteResponse = response.body() as EstudianteResponse
-                Log.d("===", "Response: $estudianteResponse")
-
-                estudianteResponse.let {
                     // Manejar la respuesta del registro si es necesario
-                    Utilidad.mostrarAlerta(
+                Utilidad.mostrarAlerta(
                         this@EstudianteNuevoActivity,
                         "Registro Exitoso",
                         "El estudiante ha sido registrado correctamente."
                     )
-                }
             } else {
                 Log.e("===", "Error en la respuesta: ${response.code()}")
             }

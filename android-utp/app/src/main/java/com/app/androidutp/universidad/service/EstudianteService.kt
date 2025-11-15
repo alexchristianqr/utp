@@ -4,6 +4,7 @@ import com.app.androidutp.universidad.entidad.CarreraResponse
 import com.app.androidutp.universidad.entidad.Estudiante
 import com.app.androidutp.universidad.entidad.EstudianteResponse
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
@@ -13,7 +14,7 @@ interface EstudianteService {
     suspend fun cargarEstudiantes(): Response<EstudianteResponse>
 
     @POST("/alumno/registrar")
-    suspend fun registrarEstudiante(): Response<EstudianteResponse>
+    suspend fun registrarEstudiante(@Body estudiante: Estudiante): Response<EstudianteResponse>
 
     @GET("/carreras")
     suspend fun cargarCarreras(): Response<CarreraResponse>

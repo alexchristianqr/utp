@@ -75,7 +75,6 @@ class BuscarAlumnoActivity : AppCompatActivity() {
         fieldNombre.text = alumno.nombres.toString()
         fieldApellido.text = alumno.apellidos.toString()
         fieldEdad.text = alumno.edad.toString()
-
     }
 
     fun validarFormulario(): Boolean {
