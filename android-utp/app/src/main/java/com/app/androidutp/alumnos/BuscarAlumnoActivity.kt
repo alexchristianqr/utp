@@ -48,7 +48,7 @@ class BuscarAlumnoActivity : AppCompatActivity() {
     }
 
     fun referenciar() {
-        txtCodigo = findViewById(R.id.txtCodigo)
+        txtCodigo = findViewById(R.id.txtEstudianteCodigo)
         fieldNombre = findViewById(R.id.fieldNombre)
         fieldApellido = findViewById(R.id.fieldApellido)
         fieldEdad = findViewById(R.id.fieldEdad)

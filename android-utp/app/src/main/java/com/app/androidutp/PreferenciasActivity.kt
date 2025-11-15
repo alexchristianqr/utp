@@ -39,7 +39,7 @@ class PreferenciasActivity : AppCompatActivity() {
 	}
 
 	fun referenciar() {
-		txtNombre = findViewById(R.id.txtNombre)
+		txtNombre = findViewById(R.id.txtEstudianteCodigo)
 		btnContinuar = findViewById(R.id.btnContinuar)
 		chkEsVip = findViewById(R.id.chkEsVip)
 		preferencias = Preferencias(this)

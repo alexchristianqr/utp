@@ -1,6 +1,7 @@
 package com.app.androidutp.universidad
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -19,6 +20,7 @@ import com.app.androidutp.posts.PostApi
 import com.app.androidutp.universidad.entidad.Estudiante
 import com.app.androidutp.universidad.entidad.EstudianteResponse
 import com.app.androidutp.universidad.service.EstudianteService
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
 class EstudianteActivity : AppCompatActivity() {
@@ -32,6 +34,7 @@ class EstudianteActivity : AppCompatActivity() {
 //    private lateinit var txtEstCarrera: TextView
 //    private lateinit var imgEstGenero: ImageView
     private lateinit var rvEstList: RecyclerView
+    private lateinit var btnNuevo: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +48,11 @@ class EstudianteActivity : AppCompatActivity() {
 
 
         referenciar()
+        mostrarNuevo()
         cargarEstudiantes()
+        btnNuevo.setOnClickListener {
+            mostrarNuevo()
+        }
     }
 
     private fun referenciar() {
@@ -59,6 +66,8 @@ class EstudianteActivity : AppCompatActivity() {
         // Setear el layout manager para el RecyclerView
         rvEstList.layoutManager = LinearLayoutManager(this)
         adaptador.setContext(this)
+
+        btnNuevo = findViewById(R.id.btnNuevo)
     }
 
     private fun cargarEstudiantes() {
@@ -77,7 +86,6 @@ class EstudianteActivity : AppCompatActivity() {
                     mostrarEstudiantes()
 //                    adaptador.setListaEstudiantes(listaEstudiantes)
 //                    rvEstList.adapter = adaptador
-
 
 //                    val carreras = listOf("Ingeniería de Sistemas", "Ingeniería Industrial", "Administración de Empresas", "Contabilidad", "Derecho")
 
@@ -100,8 +108,13 @@ class EstudianteActivity : AppCompatActivity() {
         }
     }
 
-    private fun mostrarEstudiantes(){
+    private fun mostrarEstudiantes() {
         adaptador.setListaEstudiantes(listaEstudiantes)
         rvEstList.adapter = adaptador
+    }
+
+    private fun mostrarNuevo() {
+        val intent = Intent(this, EstudianteNuevoActivity::class.java)
+        startActivity(intent)
     }
 }

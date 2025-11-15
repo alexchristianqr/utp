@@ -51,10 +51,10 @@ class RegistrarAlumnoActivity : AppCompatActivity() {
 	}
 
 	fun referenciar() {
-		txtCodigo = findViewById(R.id.txtCodigo)
+		txtCodigo = findViewById(R.id.txtEstudianteCodigo)
 		txtNombres = findViewById(R.id.txtNombres)
 		txtApellidos = findViewById(R.id.txtApellidos)
-		txtEdad = findViewById(R.id.txtEdad)
+		txtEdad = findViewById(R.id.txtEstudianteApellido)
 		btnRegistrar = findViewById(R.id.btnRegistrar)
 		btnRegresar = findViewById(R.id.btnRegresar)
 		tvRespuesta = findViewById(R.id.tvRespuesta)

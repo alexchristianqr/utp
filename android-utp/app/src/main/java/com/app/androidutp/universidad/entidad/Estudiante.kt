@@ -10,7 +10,7 @@ data class Estudiante(
     var alu_apellidos: String,
     var alu_edad: Int,
     var alu_genero: String,
-    var car_id: Int,
-    var car_nombre: String,
+    var car_id: Int? = null,
+    var car_nombre: String? = null,
 
 )
