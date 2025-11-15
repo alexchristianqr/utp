@@ -23,7 +23,9 @@ const configDB = {
 app.get('/alumnos', async (req, res) => {
   try {
     const cnx = await createConnection(configDB);
-    const [rows] = await cnx.execute('SELECT a.*, c.car_nombre FROM alumno a INNER JOIN carrera c ON a.car_id = c.car_id');
+    const [rows] = await cnx.execute(
+      'SELECT a.*, c.car_nombre FROM alumno a INNER JOIN carrera c ON a.car_id = c.car_id'
+    );
     return res.json({ message: 'Todos los alumnos', data: rows });
   } catch (error) {
     return res.status(500).json({ error });
@@ -32,14 +34,24 @@ app.get('/alumnos', async (req, res) => {
 
 app.post('/alumno/registrar', async (req, res) => {
   try {
-  
-    const { alu_codigo,alu_nombres,alu_apellidos, alu_edad, alu_genero, car_id } = req.body;
+    const { alu_codigo, alu_nombres, alu_apellidos, alu_edad, alu_genero, car_id } = req.body;
     const cnx = await createConnection(configDB);
     const [result] = await cnx.execute(
       'INSERT INTO alumno (alu_codigo, alu_nombres, alu_apellidos, alu_edad, alu_genero, car_id) VALUES (?, ?, ?, ?, ?, ?)',
       [alu_codigo, alu_nombres, alu_apellidos, alu_edad, alu_genero, car_id]
     );
-    return res.json({ message: 'Alumno registrado', data: { alu_id: result.insertId, alu_codigo, alu_nombres, alu_apellidos, alu_edad, alu_genero, car_id } });
+    return res.json({
+      message: 'Alumno registrado',
+      data: {
+        alu_id: result.insertId,
+        alu_codigo,
+        alu_nombres,
+        alu_apellidos,
+        alu_edad,
+        alu_genero,
+        car_id,
+      },
+    });
   } catch (error) {
     return res.status(500).json({ error });
   }
