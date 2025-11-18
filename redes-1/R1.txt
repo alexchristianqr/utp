@@ -1,0 +1,46 @@
+enable
+configure terminal
+
+! Nombre del router para fácil identificación
+hostname R1
+
+! -------------------------------------
+! 1. CONFIGURACIÓN DE REDES LOCALES (LAN)
+! -------------------------------------
+
+! Interfaz para el Dominio NIKE (192.168.10.0/24)
+interface GigabitEthernet0/0
+ip address 192.168.10.1 255.255.255.0  ! Asignación de IP, este es el GATEWAY de NIKE
+no shutdown                           ! Enciende la interfaz
+exit
+
+! Interfaz para el Dominio ADIDAS (192.168.11.0/24)
+interface GigabitEthernet0/1
+ip address 192.168.11.1 255.255.255.0  ! Este es el GATEWAY de ADIDAS
+no shutdown
+exit
+
+! -------------------------------------
+! 2. CONFIGURACIÓN DE CONEXIÓN WAN (A R2)
+! -------------------------------------
+
+! Interfaz Serial de enlace entre R1 y R2
+interface Serial0/3/0
+ip address 11.0.0.1 255.255.255.252    ! IP para la conexión punto a punto
+no shutdown
+exit
+
+! -------------------------------------
+! 3. RUTAS ESTÁTICAS HACIA REDES REMOTAS (R2)
+! -------------------------------------
+
+! Ruta a la red REEBOK (192.168.12.0/24)
+! El tráfico va a la IP de R2 (11.0.0.2)
+ip route 192.168.12.0 255.255.255.0 11.0.0.2
+
+! Ruta a la red PUMA (192.168.13.0/24)
+! El tráfico también va a la IP de R2 (11.0.0.2)
+ip route 192.168.13.0 255.255.255.0 11.0.0.2
+
+end
+write memory ! Guarda la configuración
