@@ -82,7 +82,7 @@
             android:id="@+id/txtEstudianteEdad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ingrese Edad" />
+            android:hint="Ingrese edad" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
