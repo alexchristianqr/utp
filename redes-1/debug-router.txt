@@ -1,0 +1,26 @@
+! Usar en R1 y R2. Muestra la tabla de enrutamiento.
+! Debe mostrar 'C' para redes locales y 'S' con el 'via' correcto para redes remotas.
+show ip route
+
+! Usar en R1 y R2. Muestra la configuración completa guardada.
+! Útil para verificar que las IPs y las rutas estáticas se escribieron bien.
+show running-config
+
+! Usar en R1 y R2. Muestra un resumen de IPs y estado de las interfaces.
+! Debe decir 'up/up' en las interfaces usadas (Serial y Giga).
+show ip interface brief
+
+
+! Usar en Routers y PCs. Prueba conectividad básica.
+ping [Direccion IP de Destino] 
+
+! Usar en Routers (R1/R2). Muestra el camino que sigue el paquete. 
+! Útil para identificar qué router está descartando el tráfico.
+traceroute [Direccion IP de Destino]
+
+
+! Usar en R1 o R2. Muestra los mensajes de ping (ICMP) que el router procesa.
+debug ip icmp
+
+! Usar SIEMPRE al terminar cualquier debug. ¡Apaga todos los debugs!
+undebug all
