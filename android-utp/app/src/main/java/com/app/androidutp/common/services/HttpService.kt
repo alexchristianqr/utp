@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object HttpService {
 
     @Volatile
-    private var baseUrl: String = GlobalApp.ESTUDIANTE_BASE_URL
+    private var baseUrl: String = GlobalApp.PRODUCTO_BASE_URL
     // private var baseUrl: String = GlobalApp.JSONPLACEHOLDER_BASER_URL
 
     @Volatile

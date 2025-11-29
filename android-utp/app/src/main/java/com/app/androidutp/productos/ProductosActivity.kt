@@ -1,4 +1,4 @@
-package com.app.androidutp.universidad
+package com.app.androidutp.productos
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,65 +13,61 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.androidutp.R
 import com.app.androidutp.common.constants.GlobalApp
 import com.app.androidutp.common.services.HttpService
-import com.app.androidutp.universidad.entidad.Estudiante
-import com.app.androidutp.universidad.entidad.EstudianteResponse
-import com.app.androidutp.universidad.service.EstudianteService
+import com.app.androidutp.universidad.EstudianteNuevoActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
-class EstudianteActivity : AppCompatActivity() {
-    private var listaEstudiantes: List<Estudiante> = emptyList()
-
-    private var adaptador: Adaptador = Adaptador()
-
+class ProductosActivity : AppCompatActivity() {
+    private var listaProductos: List<Producto> = emptyList()
+    private var adaptador: ProductoAdaptador = ProductoAdaptador()
     private lateinit var rvEstList: RecyclerView
     private lateinit var btnNuevo: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.estudiante_listado)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.estudiante_listado)) { v, insets ->
+        setContentView(R.layout.producto_listado)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.producto_listado)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
         referenciar()
-        cargarEstudiantes()
-        btnNuevo.setOnClickListener {
-            mostrarNuevo()
-        }
+        cargarProductos()
+//        btnNuevo.setOnClickListener {
+//            mostrarNuevo()
+//        }
     }
 
     private fun referenciar() {
-        rvEstList = findViewById(R.id.rvEstList)
+        rvEstList = findViewById(R.id.rvProductoList)
 
         rvEstList.layoutManager = LinearLayoutManager(this)
         adaptador.setContext(this)
 
-        btnNuevo = findViewById(R.id.btnNuevo)
+//        btnNuevo = findViewById(R.id.btnNuevo)
     }
 
-    private fun cargarEstudiantes() {
+    private fun cargarProductos() {
         HttpService.setBaseUrl(GlobalApp.PRODUCTO_BASE_URL)
-        val service = HttpService.create<EstudianteService>()
+        val service = HttpService.create<ProductoService>()
 
         lifecycleScope.launch {
-            val response = service.cargarEstudiantes()
+            val response = service.cargarProductos()
 
             if (response.isSuccessful) {
-                val estudianteResponse: EstudianteResponse = response.body() as EstudianteResponse
-                Log.d("===", "Response: $estudianteResponse")
+                val productoResponse: ProductoResponse = response.body() as ProductoResponse
+                Log.d("===", "Response: $productoResponse")
 
-                estudianteResponse.let {
-                    listaEstudiantes = it.data
-                    mostrarEstudiantes()
+                productoResponse.let {
+                    listaProductos = it.data
+                    mostrarProductos()
 
-                    for (estudiante in listaEstudiantes) {
+                    for (producto in listaProductos) {
                         Log.d(
                             "===",
-                            "Item: ${estudiante.car_id}: ${estudiante.alu_nombres} ${estudiante.alu_apellidos}"
+                            "Item: ${producto.id}: ${producto.nombre} ${producto.precio}"
                         )
                     }
                 }
@@ -81,8 +77,8 @@ class EstudianteActivity : AppCompatActivity() {
         }
     }
 
-    private fun mostrarEstudiantes() {
-        adaptador.setListaEstudiantes(listaEstudiantes)
+    private fun mostrarProductos() {
+        adaptador.setListaProductos(listaProductos)
         rvEstList.adapter = adaptador
     }
 

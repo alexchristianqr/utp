@@ -94,15 +94,24 @@
 
 
         <!-- SEMANA 13 -->
+<!--        <activity-->
+<!--            android:name=".universidad.EstudianteActivity"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+<!--        <activity android:name=".universidad.EstudianteNuevoActivity" />-->
+
         <activity
-            android:name=".universidad.EstudianteActivity"
+            android:name=".productos.ProductosActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".universidad.EstudianteNuevoActivity" />
 
     </application>
 

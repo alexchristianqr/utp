@@ -36,10 +36,10 @@ class Adaptador : RecyclerView.Adapter<Adaptador.MiViewHolder>() {
         }
 
         private fun referenciar(view: View) {
-            txtEstCodigo = view.findViewById(R.id.txtEstCodigo)
-            txtEstNombreApellido = view.findViewById(R.id.txtEstNombreApellido)
-            txtEstEdad = view.findViewById(R.id.txtEstEdad)
-            txtEstCarrera = view.findViewById(R.id.txtEstCarrera)
+            txtEstCodigo = view.findViewById(R.id.txtProductoDescripcion)
+            txtEstNombreApellido = view.findViewById(R.id.txtProductoNombre)
+            txtEstEdad = view.findViewById(R.id.txtProductoPrecio)
+            txtEstCarrera = view.findViewById(R.id.txtProductoStock)
             imgEstGenero = view.findViewById(R.id.imgEstGenero)
             rvEstList = view.findViewById(R.id.rvEstList)
         }

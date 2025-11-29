@@ -23,10 +23,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/masculino" />
+                app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <TextView
-                android:id="@+id/txtEstNombreApellido"
+                android:id="@+id/txtProductoNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Código:"
+                android:text="Descripcion:"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imgEstGenero"
                 app:layout_constraintTop_toBottomOf="@+id/txtProductoNombre" />
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Edad:"
+                android:text="Precio:"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imgEstGenero"
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Carrera:"
+                android:text="Stock:"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imgEstGenero"
                 app:layout_constraintTop_toBottomOf="@+id/textView20" />
