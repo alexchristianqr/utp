@@ -34,9 +34,9 @@ class ProductoAdaptador : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>()
 
         private fun referenciar(view: View) {
             txtProductoNombre = view.findViewById(R.id.txtProductoNombre)
-            txtProductoDescripcion = view.findViewById(R.id.txtProductoDescripcion)
-            txtProductoPrecio = view.findViewById(R.id.txtProductoPrecio)
-            txtProductoStock = view.findViewById(R.id.txtProductoStock)
+            txtProductoDescripcion = view.findViewById(R.id.txtEstCodigo)
+            txtProductoPrecio = view.findViewById(R.id.txtEstEdad)
+            txtProductoStock = view.findViewById(R.id.txtEstCarrera)
             rvEstList = view.findViewById(R.id.rvProductoList)
         }
 

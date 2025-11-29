@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.app.androidutp.R
 import com.app.androidutp.common.constants.GlobalApp
+import com.app.androidutp.common.constants.GlobalApp.ESTUDIANTE_BASE_URL
 import com.app.androidutp.common.services.HttpService
 import com.app.androidutp.common.util.Utilidad
 import com.app.androidutp.universidad.entidad.Carrera
@@ -62,7 +63,7 @@ class EstudianteNuevoActivity : AppCompatActivity() {
     }
 
     private fun cargarCarreras() {
-        HttpService.setBaseUrl(GlobalApp.ESTUDIANTE_BASE_URL)
+        HttpService.setBaseUrl(ESTUDIANTE_BASE_URL)
         val service = HttpService.create<EstudianteService>()
 
         lifecycleScope.launch {
@@ -122,7 +123,7 @@ class EstudianteNuevoActivity : AppCompatActivity() {
 
         Log.d("===", "Nuevo Estudiante: $nuevoEstudiante")
 
-        HttpService.setBaseUrl(GlobalApp.ESTUDIANTE_BASE_URL)
+        HttpService.setBaseUrl(ESTUDIANTE_BASE_URL)
         val service = HttpService.create<EstudianteService>()
 
         lifecycleScope.launch {

@@ -54,7 +54,7 @@ class EstudianteActivity : AppCompatActivity() {
     }
 
     private fun cargarEstudiantes() {
-        HttpService.setBaseUrl(GlobalApp.PRODUCTO_BASE_URL)
+        HttpService.setBaseUrl(GlobalApp.ESTUDIANTE_BASE_URL)
         val service = HttpService.create<EstudianteService>()
 
         lifecycleScope.launch {
