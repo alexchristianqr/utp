@@ -13,17 +13,17 @@ app.get('/', (req, res) => {
 });
 
 const configDB = {
-  host: '127.0.0.1',
+  host: 'localhost',
   port: 3306,
   user: 'root',
   password: '',
-  database: 'yoapp',
+  database: 'db_productos',
 };
 
 app.get('/productos', async (req, res) => {
   try {
     const cnx = await createConnection(configDB);
-    const [rows] = await cnx.execute('SELECT * FROM producto');
+    const [rows] = await cnx.execute('SELECT * FROM productos');
     return res.json({ message: 'Todos los productos', data: rows });
   } catch (error) {
     return res.status(500).json({ error });
@@ -35,10 +35,13 @@ app.post('/productos', async (req, res) => {
     const { nombre, descripcion, precio, stock, categoria } = req.body;
     const cnx = await createConnection(configDB);
     const [result] = await cnx.execute(
-      'INSERT INTO producto (nombre, descripcion, precio, stock, categoria) VALUES (?, ?, ?, ?, ?)',
+      'INSERT INTO productos (nombre, descripcion, precio, stock, categoria) VALUES (?, ?, ?, ?, ?)',
       [nombre, descripcion, precio, stock, categoria]
     );
-    return res.json({ message: 'producto registrado', data: { producto_id: result.insertId, nombre, descripcion, precio, stock, categoria } });
+    return res.json({
+      message: 'producto registrado',
+      data: { producto_id: result.insertId, nombre, descripcion, precio, stock, categoria },
+    });
   } catch (error) {
     return res.status(500).json({ error });
   }
