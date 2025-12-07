@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.apkproductos.R
@@ -27,6 +28,8 @@ class ProductoAdaptador : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>()
         private lateinit var txtProductoPrecio: TextView
         private lateinit var txtProductoStock: TextView
         private lateinit var rvEstList: RecyclerView
+        private lateinit var btnEditar: ImageButton
+        private lateinit var btnEliminar:  ImageButton
 
         init {
             referenciar(view)
@@ -38,6 +41,8 @@ class ProductoAdaptador : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>()
             txtProductoPrecio = view.findViewById(R.id.txtEstEdad)
             txtProductoStock = view.findViewById(R.id.txtEstCarrera)
             rvEstList = view.findViewById(R.id.rvProductoList)
+            btnEditar = view.findViewById(R.id.btnEditar)
+            btnEliminar = view.findViewById(R.id.btnEliminar)
         }
 
         fun rellenarDatos(producto: Producto) {
