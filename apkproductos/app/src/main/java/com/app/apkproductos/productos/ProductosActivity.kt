@@ -2,6 +2,7 @@ package com.app.apkproductos.productos
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,6 +21,7 @@ class ProductosActivity : AppCompatActivity() {
     private var adaptador: ProductoAdaptador = ProductoAdaptador()
     private lateinit var rvEstList: RecyclerView
     private lateinit var btnNuevo: FloatingActionButton
+    private lateinit var btnBack: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,7 @@ class ProductosActivity : AppCompatActivity() {
 
         referenciar()
         cargarProductos()
+        regresar()
 //        btnNuevo.setOnClickListener {
 //            mostrarNuevo()
 //        }
@@ -40,6 +43,7 @@ class ProductosActivity : AppCompatActivity() {
 
     private fun referenciar() {
         rvEstList = findViewById(R.id.rvProductoList)
+        btnBack = findViewById(R.id.btnBack)
 
         rvEstList.layoutManager = LinearLayoutManager(this)
         adaptador.setContext(this)
@@ -78,6 +82,12 @@ class ProductosActivity : AppCompatActivity() {
     private fun mostrarProductos() {
         adaptador.setListaProductos(listaProductos)
         rvEstList.adapter = adaptador
+    }
+    
+    private fun regresar(){
+        btnBack.setOnClickListener {
+            finish() // Finaliza la actividad actual y regresa a la anterior
+        }
     }
 
 //    private fun mostrarNuevo() {
