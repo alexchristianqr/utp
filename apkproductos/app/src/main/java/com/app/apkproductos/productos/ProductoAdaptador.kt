@@ -27,7 +27,7 @@ class ProductoAdaptador : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>()
         private lateinit var txtProductoDescripcion: TextView
         private lateinit var txtProductoPrecio: TextView
         private lateinit var txtProductoStock: TextView
-        private lateinit var rvEstList: RecyclerView
+        private lateinit var rvProductoList: RecyclerView
         private lateinit var btnEditar: ImageButton
         private lateinit var btnEliminar:  ImageButton
 
@@ -40,13 +40,13 @@ class ProductoAdaptador : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>()
             txtProductoDescripcion = view.findViewById(R.id.txtEstCodigo)
             txtProductoPrecio = view.findViewById(R.id.txtEstEdad)
             txtProductoStock = view.findViewById(R.id.txtEstCarrera)
-            rvEstList = view.findViewById(R.id.rvProductoList)
+            rvProductoList = view.findViewById(R.id.rvProductoList)
             btnEditar = view.findViewById(R.id.btnEditar)
             btnEliminar = view.findViewById(R.id.btnEliminar)
         }
 
         fun rellenarDatos(producto: Producto) {
-            txtProductoNombre.text = "${producto.nombre.uppercase()}"
+            txtProductoNombre.text = producto.nombre.uppercase()
             txtProductoDescripcion.text = producto.descripcion
             txtProductoPrecio.text = producto.precio.toString()
             txtProductoStock.text = producto.stock.toString()
@@ -60,7 +60,7 @@ class ProductoAdaptador : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>()
         LayoutInflater.from(parent.context).inflate(R.layout.producto_fila, parent, false)
     )
 
-    override fun onBindViewHolder(holder: ProductoAdaptador.MiViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MiViewHolder, position: Int) {
         val item = listaProductos[position]
         holder.rellenarDatos(item)
     }

@@ -1,25 +1,26 @@
 package com.app.apkproductos.productos
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.app.apkproductos.R
-import com.app.apkproductos.movimientos.RegistrarMovimientoActivity
+import com.app.apkproductos.common.constants.GlobalApp
+import com.app.apkproductos.common.services.HttpService
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.launch
 
 class ProductosActivity : AppCompatActivity() {
     private var listaProductos: List<Producto> = emptyList()
     private var adaptador: ProductoAdaptador = ProductoAdaptador()
-    private lateinit var rvEstList: RecyclerView
+    private lateinit var rvProductoList: RecyclerView
     private lateinit var btnNuevo: FloatingActionButton
     private lateinit var btnBack: ImageButton
-//    private lateinit var btnEditar: ImageButton
-//    private lateinit var btnEliminar:  ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,30 +33,46 @@ class ProductosActivity : AppCompatActivity() {
         }
 
         referenciar()
-//        cargarProductos()
+        cargarProductos()
         regresar()
     }
     
     private fun referenciar() {
-        rvEstList = findViewById(R.id.rvProductoList)
+        rvProductoList = findViewById(R.id.rvProductoList)
         btnBack = findViewById(R.id.btnBack)
-//        btnEditar = findViewById(R.id.btnEditar)
-//        btnEliminar = findViewById(R.id.btnEliminar)
     }
     
-//    private fun cargarProductos() {
-//        btnEditar.setOnClickListener {
-//            startActivity(Intent(this, ProductosActivity::class.java))
-//        }
-//
-//        btnEliminar.setOnClickListener {
-//            startActivity(Intent(this, RegistrarMovimientoActivity::class.java))
-//        }
-//    }
+    private fun cargarProductos() {
+        HttpService.setBaseUrl(GlobalApp.PRODUCTO_BASE_URL)
+        val service = HttpService.create<ProductoService>()
+        
+        lifecycleScope.launch {
+            val response = service.cargarProductos()
+            
+            if (response.isSuccessful) {
+                val productoResponse: ProductoResponse = response.body() as ProductoResponse
+                Log.d("===", "Response: $productoResponse")
+                
+                productoResponse.let {
+                    listaProductos = it.data
+                    mostrarProductos()
+                    
+                    for (producto in listaProductos) {
+                        Log.d(
+                            "===",
+                            "Item: ${producto.id}: ${producto.nombre} ${producto.precio}"
+                        )
+                    }
+                }
+            } else {
+                Log.e("===", "Error en la respuesta: ${response.code()}")
+            }
+        }
+    }
 
     private fun mostrarProductos() {
         adaptador.setListaProductos(listaProductos)
-        rvEstList.adapter = adaptador
+        rvProductoList.adapter = adaptador
     }
     
     private fun regresar(){
