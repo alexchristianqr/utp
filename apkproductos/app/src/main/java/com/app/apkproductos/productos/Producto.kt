@@ -12,3 +12,5 @@ data class Producto(
     var stock: Int,
     var categoria: String,
 )
+
+
