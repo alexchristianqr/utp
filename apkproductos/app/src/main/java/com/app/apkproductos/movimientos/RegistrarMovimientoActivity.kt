@@ -1,29 +1,29 @@
 package com.app.apkproductos.movimientos
 
+
+//librerias
+
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.app.apkproductos.R
-
-
-//librerias
-
-import android.widget.*
-import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.lifecycleScope
+import com.app.apkproductos.R
 import com.app.apkproductos.common.constants.GlobalApp
 import com.app.apkproductos.common.services.HttpService
-import com.app.apkproductos.productos.Producto
-import com.app.apkproductos.productos.ProductoResponse
 import com.app.apkproductos.productos.ProductoService
 import kotlinx.coroutines.launch
 
 class RegistrarMovimientoActivity : AppCompatActivity() {
-
-
 	private lateinit var txtCodigo: EditText
 	private lateinit var btnBuscar: Button
 
@@ -33,11 +33,9 @@ class RegistrarMovimientoActivity : AppCompatActivity() {
 	private lateinit var spTipoMovimiento: Spinner
 	private lateinit var txtStockMovimiento: EditText
 	private lateinit var btnRegistrarMovimiento: Button
+	private lateinit var btnBack: ImageButton
 
 	private var productoSeleccionado: ProductoMovimiento? = null
-
-
-
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -52,6 +50,7 @@ class RegistrarMovimientoActivity : AppCompatActivity() {
 		referenciar()
 		cargarSpn()
 		configurarEventos()
+		regresar()
 
 	}
 
@@ -65,9 +64,8 @@ class RegistrarMovimientoActivity : AppCompatActivity() {
 		spTipoMovimiento = findViewById(R.id.spTipoMovimiento)
 		txtStockMovimiento = findViewById(R.id.txtStockMovimiento)
 		btnRegistrarMovimiento = findViewById(R.id.btnRegistrarMovimiento)
+		btnBack = findViewById(R.id.btnBack2)
 	}
-
-
 
 	private fun cargarSpn() {
 		val items = listOf("Seleccione", "ENTRADA", "SALIDA")
@@ -75,9 +73,6 @@ class RegistrarMovimientoActivity : AppCompatActivity() {
 		spTipoMovimiento.adapter = adapter
 		spTipoMovimiento.setSelection(0) // "Seleccione" por defecto
 	}
-
-
-
 
 	private fun configurarEventos() {
 
@@ -90,9 +85,7 @@ class RegistrarMovimientoActivity : AppCompatActivity() {
 			}
 
 			buscarProductoPorId(codigoInt)
-
 		}
-
 
 		/// === REGISTRAR MOVIMIENTO ==== ///
 		btnRegistrarMovimiento.setOnClickListener {
@@ -117,42 +110,6 @@ class RegistrarMovimientoActivity : AppCompatActivity() {
 			registrarMovimiento(tipo, cantidad)
 		}
 	}
-
-
-
-	/*
-	private fun buscarProductoPorId(productoId: Int) {
-
-		HttpService.setBaseUrl(GlobalApp.PRODUCTO_BASE_URL)
-		val service = HttpService.create<ProductoService>()
-
-		lifecycleScope.launch {
-
-			val response = service.obtenerProductoPorId(productoId)
-
-			if (response.isSuccessful) {
-
-				val producto = response.body()?.data
-
-				if (producto != null) {
-					productoSeleccionado = ProductoMovimiento(
-						id = producto.id,
-						nombre = producto.nombre,
-						stock = producto.stock
-					)
-
-					txtNombre.text = productoSeleccionado!!.nombre
-					txtStockActual.text = productoSeleccionado!!.stock.toString()
-
-				} else {
-					Toast.makeText(this@RegistrarMovimientoActivity, "Producto no encontrado", Toast.LENGTH_SHORT).show()
-				}
-
-			} else {
-				Toast.makeText(this@RegistrarMovimientoActivity, "Error al buscar", Toast.LENGTH_SHORT).show()
-			}
-		}
-	}*/
 
 	private fun buscarProductoPorId(productoId: Int) {
 
@@ -188,65 +145,6 @@ class RegistrarMovimientoActivity : AppCompatActivity() {
 			}
 		}
 	}
-
-
-
-
-
-	/*
-	private fun registrarMovimiento(tipo: String, cantidad: Int) {
-		val producto = productoSeleccionado ?: run {
-			Toast.makeText(this, "Seleccione un producto primero", Toast.LENGTH_SHORT).show()
-			return
-		}
-
-		// Validar ID real
-		if (producto.id <= 0) {
-			Toast.makeText(this, "ID de producto inválido", Toast.LENGTH_SHORT).show()
-			Log.d("RegistrarMovimiento", "Producto seleccionado con ID inválido: $producto")
-			return
-		}
-
-		val body = MovimientoRequest(
-			producto_id = producto.id,
-			tipo = tipo,
-			cantidad = cantidad,
-			descripcion = "Movimiento registrado desde app"
-		)
-
-		Log.d("RegistrarMovimiento", "Body enviado: $body")
-
-		val service = HttpService.create<MovimientoService>()
-
-		lifecycleScope.launch {
-			try {
-				val response = service.registrarMovimiento(body)
-
-				if (response.isSuccessful) {
-
-					val nuevoStock =
-						(response.body()?.data as? Map<*, *>)?.get("nuevoStock") as? Int
-							?: (producto.stock + if (tipo == "ENTRADA") cantidad else -cantidad)
-
-					producto.stock = nuevoStock
-					txtStockActual.text = nuevoStock.toString()
-
-					Toast.makeText(this@RegistrarMovimientoActivity, "Movimiento registrado", Toast.LENGTH_LONG).show()
-					txtStockMovimiento.text.clear()
-					spTipoMovimiento.setSelection(0)
-
-				} else {
-					val errorBody = response.errorBody()?.string()
-					Log.d("RegistrarMovimiento", "Error ${response.code()}: $errorBody")
-					Toast.makeText(this@RegistrarMovimientoActivity, "Error al registrar: $errorBody", Toast.LENGTH_SHORT).show()
-				}
-
-			} catch (e: Exception) {
-				Toast.makeText(this@RegistrarMovimientoActivity, "Error de red: ${e.message}", Toast.LENGTH_LONG).show()
-				Log.e("RegistrarMovimiento", "Exception: ", e)
-			}
-		}
-	}*/
 
 	private fun registrarMovimiento(tipo: String, cantidad: Int) {
 		val producto = productoSeleccionado ?: run {
@@ -315,12 +213,10 @@ class RegistrarMovimientoActivity : AppCompatActivity() {
 			}
 		}
 	}
-
-
-
-
-
-
-
-
-}//fin
+	
+	private fun regresar(){
+		btnBack.setOnClickListener {
+			finish() // Finaliza la actividad actual y regresa a la anterior
+		}
+	}
+}

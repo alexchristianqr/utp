@@ -9,13 +9,21 @@
     tools:context=".movimientos.RegistrarMovimientoActivity">
 
     <!-- TÍTULO -->
+    <ImageButton
+        android:id="@+id/btnBack2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="Regresar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/left_arrow" />
+
     <TextView
         android:id="@+id/txtTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="24dp"
         android:text="REGISTRAR MOVIMIENTO"
-        android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,50 +31,40 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Código -->
-    <TextView
-        android:id="@+id/txtCodigoLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:text="Código:"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtTitulo" />
 
     <EditText
         android:id="@+id/txtCodigo"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/borde_caja"
-        android:hint="Ingrese código"
+        android:layout_marginTop="24dp"
+        android:hint="Codigo"
         android:padding="10dp"
-        app:layout_constraintEnd_toStartOf="@id/btnBuscar"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtCodigoLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
 
     <Button
         android:id="@+id/btnBuscar"
-        android:layout_width="90dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="#6C63FF"
         android:text="Buscar"
         android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtCodigoLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
 
     <!-- Nombre y Stock actual -->
     <TextView
         android:id="@+id/txtNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,8 +75,8 @@
         android:id="@+id/txtStockActual"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="75dp"
         android:text="Tipo Movimiento:"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,12 +98,12 @@
     <Spinner
         android:id="@+id/spTipoMovimiento"
         android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/borde_caja"
         android:padding="10dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtTipoMovimientoLabel" />
@@ -116,10 +114,9 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/borde_caja"
-        android:hint="STOCK"
+        android:hint="Cantidad"
         android:inputType="number"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,11 +129,13 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="#6C63FF"
         android:text="Registrar"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtStockMovimiento" />
@@ -145,21 +144,25 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="55dp"
-        android:layout_height="31dp"
+        android:layout_width="70dp"
+        android:layout_height="24dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="24dp"
         android:text="Nombre:"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCodigo" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="24dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="Stock:"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
 
@@ -168,8 +171,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="Cantidad:"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spTipoMovimiento" />
 
