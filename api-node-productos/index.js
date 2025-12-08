@@ -31,7 +31,33 @@ app.get('/productos', async (req, res) => {
 });
 
 
-/*
+
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+
+// Crear carpeta uploads si no existe
+const uploadDir = path.join(process.cwd(), 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+
+// Configuración de multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage });
+
+
+
+/* original
 app.post('/productos', async (req, res) => {
   try {
     const { nombre, descripcion, precio, stock, categoria } = req.body;
@@ -49,6 +75,8 @@ app.post('/productos', async (req, res) => {
   }
 });*/
 
+
+/* ORIGINAL 2
 app.post('/productos', async (req, res) => {
   try {
     const { nombre, descripcion, precio, stock, categoria } = req.body;
@@ -76,7 +104,40 @@ app.post('/productos', async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error });
   }
+});*/
+
+
+app.post('/productos', upload.single('imagen'), async (req, res) => {
+  try {
+    const { nombre, descripcion, precio, stock, categoria } = req.body;
+    const imagenUrl = req.file ? `/uploads/${req.file.filename}` : null; // URL relativa a guardar en DB
+
+    const cnx = await createConnection(configDB);
+    const [result] = await cnx.execute(
+      'INSERT INTO productos (nombre, descripcion, imagen, precio, stock, categoria) VALUES (?, ?, ?, ?, ?, ?)',
+      [nombre, descripcion, imagenUrl, precio, stock, categoria]
+    );
+
+    return res.json({
+      message: 'Producto registrado',
+      data: {
+        producto_id: result.insertId,
+        nombre,
+        descripcion,
+        imagen: imagenUrl,
+        precio,
+        stock,
+        categoria
+      }
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error });
+  }
 });
+
+
 
 
 app.get('/productos/:id', async (req, res) => {
