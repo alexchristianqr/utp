@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 
 import android.net.Uri
-
+import android.util.Log
 
 import androidx.activity.result.contract.ActivityResultContracts
 
@@ -38,6 +38,8 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.OutputStream
+import androidx.appcompat.app.AlertDialog
+
 
 
 class RegistrarProductoActivity : AppCompatActivity() {
@@ -159,6 +161,14 @@ class RegistrarProductoActivity : AppCompatActivity() {
 				val requestStock = stock.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 				val requestCategoria = categoria.toRequestBody("text/plain".toMediaTypeOrNull())
 
+				// 🔥 IMPRIMIR EN CONSOLA LO QUE SE VA A ENVIAR
+				Log.d("RegistrarProducto", "nombre: $nombre")
+				Log.d("RegistrarProducto", "descripcion: $descripcion")
+				Log.d("RegistrarProducto", "precio: $precio")
+				Log.d("RegistrarProducto", "stock: $stock")
+				Log.d("RegistrarProducto", "categoria: $categoria")
+				Log.d("RegistrarProducto", "imagen URI: $selectedImageUri")
+
 				val response = api.registrarProductoMultipart(
 					nombre = requestNombre,
 					descripcion = requestDescripcion,
@@ -170,18 +180,24 @@ class RegistrarProductoActivity : AppCompatActivity() {
 
 				if (response.isSuccessful) {
 					val body = response.body()!!
-					Toast.makeText(
-						this@RegistrarProductoActivity,
-						"Registrado! ID = ${body.data.producto_id}",
-						Toast.LENGTH_LONG
-					).show()
-					finish()
+
+					AlertDialog.Builder(this@RegistrarProductoActivity)
+						.setTitle("✔ Producto Registrado")
+						.setMessage("El producto '${body.data.nombre}' se registró exitosamente.\n\nID generado: ${body.data.producto_id}")
+						.setPositiveButton("Aceptar") { dialog, _ ->
+							dialog.dismiss()
+							finish()
+						}
+						.setCancelable(false)
+						.show()
+
 				} else {
 					Toast.makeText(
 						this@RegistrarProductoActivity,
 						"Error API: ${response.code()}",
 						Toast.LENGTH_LONG
 					).show()
+					Log.d("RegistrarProducto", "Error API: ${response.code()}")
 				}
 
 			} catch (e: Exception) {
@@ -190,9 +206,12 @@ class RegistrarProductoActivity : AppCompatActivity() {
 					"Error: ${e.message}",
 					Toast.LENGTH_LONG
 				).show()
+				Log.e("RegistrarProducto", "Exception: ${e.message}", e)
 			}
 		}
 	}
+
+
 
 	// Función para crear un archivo temporal desde Uri
 	private fun createTempFileFromUri(uri: Uri): File {
