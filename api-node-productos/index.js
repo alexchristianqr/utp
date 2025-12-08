@@ -30,8 +30,6 @@ app.get('/productos', async (req, res) => {
   }
 });
 
-
-
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
@@ -48,14 +46,12 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
     cb(null, uniqueSuffix + path.extname(file.originalname));
-  }
+  },
 });
 
 const upload = multer({ storage: storage });
-
-
 
 /* original
 app.post('/productos', async (req, res) => {
@@ -74,7 +70,6 @@ app.post('/productos', async (req, res) => {
     return res.status(500).json({ error });
   }
 });*/
-
 
 /* ORIGINAL 2
 app.post('/productos', async (req, res) => {
@@ -106,7 +101,6 @@ app.post('/productos', async (req, res) => {
   }
 });*/
 
-
 app.post('/productos', upload.single('imagen'), async (req, res) => {
   try {
     const { nombre, descripcion, precio, stock, categoria } = req.body;
@@ -127,18 +121,14 @@ app.post('/productos', upload.single('imagen'), async (req, res) => {
         imagen: imagenUrl,
         precio,
         stock,
-        categoria
-      }
+        categoria,
+      },
     });
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ error });
   }
 });
-
-
-
 
 app.get('/productos/:id', async (req, res) => {
   const { id } = req.params;
@@ -157,13 +147,6 @@ app.get('/productos/:id', async (req, res) => {
     res.status(500).json({ error });
   }
 });
-
-
-
-
-
-
-
 
 app.post('/movimientos', async (req, res) => {
   try {
@@ -220,58 +203,46 @@ app.post('/movimientos', async (req, res) => {
   }
 });
 
-
-
-
-
 app.get('/movimientos/:producto_id', async (req, res) => {
-    const { producto_id } = req.params;
+  const { producto_id } = req.params;
 
-    try {
-        const cnx = await createConnection(configDB); // conexión directa
+  try {
+    const cnx = await createConnection(configDB); // conexión directa
 
-        // Verificar si el producto existe
-        const [productoRows] = await cnx.execute(
-            'SELECT id, nombre FROM productos WHERE id = ?',
-            [producto_id]
-        );
+    // Verificar si el producto existe
+    const [productoRows] = await cnx.execute('SELECT id, nombre FROM productos WHERE id = ?', [
+      producto_id,
+    ]);
 
-        if (productoRows.length === 0) {
-            return res.status(404).json({ message: 'Producto no encontrado' });
-        }
-
-        // Obtener movimientos
-        const [movimientosRows] = await cnx.execute(
-            'SELECT id, producto_id, tipo, cantidad, fecha, descripcion FROM movimientos WHERE producto_id = ? ORDER BY fecha DESC',
-            [producto_id]
-        );
-
-        const entradas = movimientosRows.filter(m => m.tipo === 'ENTRADA');
-        const salidas = movimientosRows.filter(m => m.tipo === 'SALIDA');
-
-        res.json({
-            message: 'Movimientos encontrados',
-            data: {
-                producto: productoRows[0],
-                movimientos: movimientosRows,
-                entradas,
-                salidas
-            }
-        });
-
-        await cnx.end(); // cerrar la conexión
-
-    } catch (error) {
-        console.error("Error al consultar movimientos:", error);
-        res.status(500).json({ error: 'Error interno del servidor al procesar la solicitud.' });
+    if (productoRows.length === 0) {
+      return res.status(404).json({ message: 'Producto no encontrado' });
     }
+
+    // Obtener movimientos
+    const [movimientosRows] = await cnx.execute(
+      'SELECT id, producto_id, tipo, cantidad, fecha, descripcion FROM movimientos WHERE producto_id = ? ORDER BY fecha DESC',
+      [producto_id]
+    );
+
+    const entradas = movimientosRows.filter((m) => m.tipo === 'ENTRADA');
+    const salidas = movimientosRows.filter((m) => m.tipo === 'SALIDA');
+
+    res.json({
+      message: 'Movimientos encontrados',
+      data: {
+        producto: productoRows[0],
+        movimientos: movimientosRows,
+        entradas,
+        salidas,
+      },
+    });
+
+    await cnx.end(); // cerrar la conexión
+  } catch (error) {
+    console.error('Error al consultar movimientos:', error);
+    res.status(500).json({ error: 'Error interno del servidor al procesar la solicitud.' });
+  }
 });
-
-
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
