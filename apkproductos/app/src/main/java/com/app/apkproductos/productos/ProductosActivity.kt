@@ -1,5 +1,6 @@
 package com.app.apkproductos.productos
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.apkproductos.R
 import com.app.apkproductos.common.constants.GlobalApp
@@ -25,8 +27,8 @@ class ProductosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.producto_listado)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.producto_listado)) { v, insets ->
+        setContentView(R.layout.activity_listar_producto)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.listar_producto)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -34,12 +36,15 @@ class ProductosActivity : AppCompatActivity() {
 
         referenciar()
         cargarProductos()
-        regresar()
+        acciones()
     }
     
     private fun referenciar() {
         rvProductoList = findViewById(R.id.rvProductoList)
         btnBack = findViewById(R.id.btnBack)
+        btnNuevo = findViewById(R.id.btnNuevo)
+        rvProductoList.layoutManager = LinearLayoutManager(this)
+        adaptador.setContext(this)
     }
     
     private fun cargarProductos() {
@@ -75,14 +80,13 @@ class ProductosActivity : AppCompatActivity() {
         rvProductoList.adapter = adaptador
     }
     
-    private fun regresar(){
+    private fun acciones() {
         btnBack.setOnClickListener {
             finish() // Finaliza la actividad actual y regresa a la anterior
         }
+        btnNuevo.setOnClickListener {
+            val intent = Intent(this, RegistrarProductoActivity::class.java)
+            startActivity(intent)
+        }
     }
-
-//    private fun mostrarNuevo() {
-//        val intent = Intent(this, EstudianteNuevoActivity::class.java)
-//        startActivity(intent)
-//    }
 }

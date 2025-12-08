@@ -33,6 +33,9 @@ android {
 	kotlinOptions {
 		jvmTarget = "11"
 	}
+	buildFeatures {
+		viewBinding = true
+	}
 }
 
 dependencies {
@@ -42,6 +45,11 @@ dependencies {
 	implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 	implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 	implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.4")
+	
+	// 	implementation(libs.androidx.recyclerview)
+	//	implementation(libs.androidx.cardview)
+	implementation("androidx.recyclerview:recyclerview:1.4.0")
+	implementation("androidx.cardview:cardview:1.0.0")
 	
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.appcompat)

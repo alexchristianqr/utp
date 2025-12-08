@@ -35,18 +35,17 @@ app.post('/productos', async (req, res) => {
     const { nombre, descripcion, precio, stock, categoria } = req.body;
     const cnx = await createConnection(configDB);
     const [result] = await cnx.execute(
-      'INSERT INTO productos (nombre, descripcion, precio, stock, categoria) VALUES (?, ?, ?, ?, ?)',
-      [nombre, descripcion, precio, stock, categoria]
+      'INSERT INTO productos (nombre, descripcion, imagen, precio, stock, categoria) VALUES (?, ?, ?, ?, ?, ?)',
+      [nombre, descripcion, imagen, precio, stock, categoria]
     );
     return res.json({
       message: 'producto registrado',
-      data: { producto_id: result.insertId, nombre, descripcion, precio, stock, categoria },
+      data: { producto_id: result.insertId, nombre, descripcion, imagen, precio, stock, categoria },
     });
   } catch (error) {
     return res.status(500).json({ error });
   }
 });
-
 
 app.get('/productos/:id', async (req, res) => {
   const { id } = req.params;
@@ -54,21 +53,18 @@ app.get('/productos/:id', async (req, res) => {
   try {
     const cnx = await createConnection(configDB);
 
-    const [rows] = await cnx.execute(
-      'SELECT id, nombre, stock FROM productos WHERE id = ?',
-      [id]
-    );
+    const [rows] = await cnx.execute('SELECT id, nombre, stock FROM productos WHERE id = ?', [id]);
 
     if (rows.length === 0) {
       return res.status(404).json({ message: 'Producto no encontrado', data: [] });
     }
 
     res.json({ message: 'Producto encontrado', data: rows[0] });
-
   } catch (error) {
     res.status(500).json({ error });
   }
 });
+
 
 
 
@@ -93,10 +89,7 @@ app.post('/movimientos', async (req, res) => {
     );
 
     // 2️⃣ Obtener el stock actual del producto
-    const [rows] = await cnx.execute(
-      'SELECT stock FROM productos WHERE id = ?',
-      [producto_id]
-    );
+    const [rows] = await cnx.execute('SELECT stock FROM productos WHERE id = ?', [producto_id]);
 
     if (rows.length === 0) {
       return res.status(404).json({ message: 'Producto no encontrado' });
@@ -114,10 +107,7 @@ app.post('/movimientos', async (req, res) => {
     }
 
     // 4️⃣ Actualizar el stock del producto
-    await cnx.execute(
-      'UPDATE productos SET stock = ? WHERE id = ?',
-      [nuevoStock, producto_id]
-    );
+    await cnx.execute('UPDATE productos SET stock = ? WHERE id = ?', [nuevoStock, producto_id]);
 
     // 5️⃣ Respuesta final
     res.json({
@@ -128,10 +118,9 @@ app.post('/movimientos', async (req, res) => {
         tipo,
         cantidad,
         nuevoStock,
-        descripcion: `Movimiento ${tipo}`
-      }
+        descripcion: `Movimiento ${tipo}`,
+      },
     });
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error interno del servidor' });
