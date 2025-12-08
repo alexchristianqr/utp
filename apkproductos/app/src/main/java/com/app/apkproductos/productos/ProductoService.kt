@@ -2,13 +2,23 @@ package com.app.apkproductos.productos
 
 import com.app.apkproductos.movimientos.ProductoMovimientoResponse
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.POST
 
 
 interface ProductoService {
     @GET("/productos")
     suspend fun cargarProductos(): Response<ProductoResponse>
+
+    //SE AGREGO PARA REGISTRA PRODUCTOS
+    @POST("/productos")
+    suspend fun registrarProducto(
+        @Body producto: RegistrarProductoRequest
+    ): Response<RegistrarProductoResponse>
+
+
 
 
     //Se agrego esto mi king prueba v1
@@ -22,6 +32,9 @@ interface ProductoService {
     suspend fun obtenerProductoPorId(
         @Path("id") id: Int
     ): Response<ProductoMovimientoResponse>
+
+
+
 
 
 }

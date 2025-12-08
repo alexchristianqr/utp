@@ -11,7 +11,7 @@ object HttpService {
     // private var baseUrl: String = GlobalApp.JSONPLACEHOLDER_BASER_URL
 
     @Volatile
-    private var retrofit: Retrofit = buildRetrofit(baseUrl)
+    var retrofit: Retrofit = buildRetrofit(baseUrl)
 
     private fun buildRetrofit(url: String): Retrofit {
         return Retrofit.Builder()
