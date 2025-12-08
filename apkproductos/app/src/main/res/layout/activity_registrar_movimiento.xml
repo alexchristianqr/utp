@@ -36,11 +36,12 @@
 
     <EditText
         android:id="@+id/txtCodigo"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:hint="Codigo"
+        android:hint="Código"
+        android:inputType="number"
         android:padding="10dp"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,13 +49,13 @@
 
     <Button
         android:id="@+id/btnBuscar"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:text="Buscar"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />

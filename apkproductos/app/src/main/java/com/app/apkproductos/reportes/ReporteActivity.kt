@@ -1,36 +1,27 @@
 package com.app.apkproductos.reportes
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.app.apkproductos.R
-import android.util.Log
-
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.apkproductos.R
 import com.app.apkproductos.common.services.HttpService
-import com.app.apkproductos.movimientos.MovimientoService
 import kotlinx.coroutines.launch
 
-
-
-
 class ReporteActivity : AppCompatActivity() {
-
 	private lateinit var txtCodigoM: EditText
 	private lateinit var btnBuscar: Button
 	private lateinit var rvMovimientos: RecyclerView
-
-	// 🔹 Aquí declaramos apiService correctamente
-	private val apiService by lazy { HttpService.create<ApiService>() }
-
+	private lateinit var btnBack: ImageButton
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -42,21 +33,22 @@ class ReporteActivity : AppCompatActivity() {
 			v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
 			insets
 		}
-
-		// 🔹 Referencias a elementos del layout
+		
+		referenciar()
+		configurarBotonBuscar()
+		acciones()
+	}
+	
+	private fun referenciar() {
 		txtCodigoM = findViewById(R.id.txtCodigoM)
 		btnBuscar = findViewById(R.id.btnBuscar)
 		rvMovimientos = findViewById(R.id.rvMovimientos)
-
+		btnBack = findViewById(R.id.btnBack4)
+		
 		// 🔹 Setup del RecyclerView
 		rvMovimientos.layoutManager = LinearLayoutManager(this)
 		rvMovimientos.adapter = ReporteAdapter(emptyList()) // Adapter inicial vacío
-
-		configurarBotonBuscar()
-
-
 	}
-
 
 	private fun configurarBotonBuscar() {
 		btnBuscar.setOnClickListener {
@@ -117,15 +109,10 @@ class ReporteActivity : AppCompatActivity() {
 			}
 		}
 	}
-
-
-	// 🔹 Función temporal para probar
-	private fun consultarMovimientos(productoId: Int) {
-		Toast.makeText(this, "Consultar movimientos para ID: $productoId", Toast.LENGTH_SHORT).show()
+	
+	private fun acciones() {
+		btnBack.setOnClickListener {
+			finish() // Finaliza la actividad actual y regresa a la anterior
+		}
 	}
-
-
-
-
-
-}//fin
+}
