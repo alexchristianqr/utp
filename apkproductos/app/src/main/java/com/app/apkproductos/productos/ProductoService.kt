@@ -1,12 +1,15 @@
 package com.app.apkproductos.productos
 
 import com.app.apkproductos.movimientos.ProductoMovimientoResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.POST
-
+import retrofit2.http.Multipart
+import retrofit2.http.Part
 
 interface ProductoService {
     @GET("/productos")
@@ -18,6 +21,18 @@ interface ProductoService {
         @Body producto: RegistrarProductoRequest
     ): Response<RegistrarProductoResponse>
 
+    //se agrego esto
+    // ProductoService.kt
+    @Multipart
+    @POST("/productos/upload")
+    suspend fun registrarProductoMultipart(
+        @Part("nombre") nombre: RequestBody,
+        @Part("descripcion") descripcion: RequestBody,
+        @Part("precio") precio: RequestBody,
+        @Part("stock") stock: RequestBody,
+        @Part("categoria") categoria: RequestBody,
+        @Part imagen: MultipartBody.Part? // Puede ser null si no selecciona imagen
+    ): Response<RegistrarProductoResponse>
 
 
 

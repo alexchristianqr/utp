@@ -16,17 +16,29 @@ import androidx.lifecycle.lifecycleScope
 import com.app.apkproductos.common.services.HttpService
 import kotlinx.coroutines.launch
 
-import android.app.Activity
+
 
 import android.net.Uri
 
-import android.util.Base64
-import android.widget.*
+
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.enableEdgeToEdge
-import kotlinx.coroutines.launch
-import java.io.ByteArrayOutputStream
+
 import java.io.InputStream
+
+
+import java.io.File
+
+
+import java.util.*
+
+
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.OutputStream
+
 
 class RegistrarProductoActivity : AppCompatActivity() {
 	private lateinit var btnBack: ImageButton
@@ -52,6 +64,19 @@ class RegistrarProductoActivity : AppCompatActivity() {
 			}
 		}
 
+	// ⚠️ 1. DEFINE EL ARREGLO DE CATEGORÍAS AQUÍ ⚠️
+	private val categorias = arrayOf(
+		"Seleccione...", // <-- Opción por defecto
+		"componentes",
+		"perifericos",
+		"Monitores",
+		"PC completa",
+		"equipo de trabajo",
+		"redes",
+		"licencia",
+		"accesorios"
+	)
+
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -64,6 +89,8 @@ class RegistrarProductoActivity : AppCompatActivity() {
 		}
 		
 		referenciar()
+
+		configurarSpinner()
 		acciones()
 	}
 
@@ -81,6 +108,19 @@ class RegistrarProductoActivity : AppCompatActivity() {
 		spProductoCategoria = findViewById(R.id.spProductoCategoria)
 	}
 
+
+	private fun configurarSpinner() {
+		// Configuramos el ArrayAdapter como antes
+		val adapter = ArrayAdapter(
+			this,
+			android.R.layout.simple_spinner_item,
+			categorias
+		)
+
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+		spProductoCategoria.adapter = adapter
+	}
+
 	private fun acciones() {
 		btnBack.setOnClickListener { finish() }
 		btnGuardar.setOnClickListener { registrarProducto() }
@@ -92,6 +132,7 @@ class RegistrarProductoActivity : AppCompatActivity() {
 	}
 
 
+
 	private fun registrarProducto() {
 		val nombre = txtProductoNombre.text.toString()
 		val descripcion = txtProductoDescripcion.text.toString()
@@ -99,25 +140,33 @@ class RegistrarProductoActivity : AppCompatActivity() {
 		val precio = txtProductoPrecio.text.toString().toFloatOrNull() ?: 0f
 		val categoria = spProductoCategoria.selectedItem.toString()
 
-		val imagenBase64 = selectedImageUri?.let { uri ->
-			contentResolver.openInputStream(uri)?.use { inputStream ->
-				val bytes = inputStream.readBytes()
-				Base64.encodeToString(bytes, Base64.DEFAULT)
-			}
+		if (nombre.isBlank() || descripcion.isBlank() || categoria == "Seleccione...") {
+			Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
+			return
 		}
-
-		val request = RegistrarProductoRequest(
-			nombre = nombre,
-			descripcion = descripcion,
-			precio = precio,
-			stock = stock,
-			categoria = categoria,
-			imagen = imagenBase64
-		)
 
 		lifecycleScope.launch {
 			try {
-				val response = api.registrarProducto(request)
+				val multipartImage: MultipartBody.Part? = selectedImageUri?.let { uri ->
+					val file = createTempFileFromUri(uri)
+					val reqFile: RequestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+					MultipartBody.Part.createFormData("imagen", file.name, reqFile)
+				}
+
+				val requestNombre = nombre.toRequestBody("text/plain".toMediaTypeOrNull())
+				val requestDescripcion = descripcion.toRequestBody("text/plain".toMediaTypeOrNull())
+				val requestPrecio = precio.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+				val requestStock = stock.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+				val requestCategoria = categoria.toRequestBody("text/plain".toMediaTypeOrNull())
+
+				val response = api.registrarProductoMultipart(
+					nombre = requestNombre,
+					descripcion = requestDescripcion,
+					precio = requestPrecio,
+					stock = requestStock,
+					categoria = requestCategoria,
+					imagen = multipartImage
+				)
 
 				if (response.isSuccessful) {
 					val body = response.body()!!
@@ -145,5 +194,15 @@ class RegistrarProductoActivity : AppCompatActivity() {
 		}
 	}
 
+	// Función para crear un archivo temporal desde Uri
+	private fun createTempFileFromUri(uri: Uri): File {
+		val inputStream: InputStream? = contentResolver.openInputStream(uri)
+		val file = File(cacheDir, "temp_${System.currentTimeMillis()}.jpg")
+		val outputStream: OutputStream = file.outputStream()
+		inputStream?.copyTo(outputStream)
+		inputStream?.close()
+		outputStream.close()
+		return file
+	}
 
 }
