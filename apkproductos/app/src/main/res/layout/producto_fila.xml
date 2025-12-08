@@ -16,7 +16,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imgEstGenero"
+                android:id="@+id/imgProducto"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginStart="16dp"
@@ -31,10 +31,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="TextView"
+                android:text="Nombre"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imgEstGenero"
+                app:layout_constraintStart_toEndOf="@+id/imgProducto"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -45,11 +45,11 @@
                 android:layout_marginTop="8dp"
                 android:text="Descripcion:"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imgEstGenero"
+                app:layout_constraintStart_toEndOf="@+id/imgProducto"
                 app:layout_constraintTop_toBottomOf="@+id/txtProductoNombre" />
 
             <TextView
-                android:id="@+id/txtEstCodigo"
+                android:id="@+id/txtProductoDescripcion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -66,18 +66,18 @@
                 android:layout_marginTop="8dp"
                 android:text="Precio:"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imgEstGenero"
+                app:layout_constraintStart_toEndOf="@+id/imgProducto"
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <TextView
-                android:id="@+id/txtEstEdad"
+                android:id="@+id/txtProductoPrecio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/textView20"
-                app:layout_constraintTop_toBottomOf="@+id/txtEstCodigo" />
+                app:layout_constraintTop_toBottomOf="@+id/txtProductoDescripcion" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -87,18 +87,18 @@
                 android:layout_marginTop="8dp"
                 android:text="Stock:"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imgEstGenero"
+                app:layout_constraintStart_toEndOf="@+id/imgProducto"
                 app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
             <TextView
-                android:id="@+id/txtEstCarrera"
+                android:id="@+id/txtProductoStock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/txtEstEdad" />
+                app:layout_constraintTop_toBottomOf="@+id/txtProductoPrecio" />
 
             <ImageButton
                 android:id="@+id/btnEditar"

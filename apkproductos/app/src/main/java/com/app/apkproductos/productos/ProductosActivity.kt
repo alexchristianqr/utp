@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.apkproductos.R
 import com.app.apkproductos.common.constants.GlobalApp
@@ -40,6 +41,8 @@ class ProductosActivity : AppCompatActivity() {
     private fun referenciar() {
         rvProductoList = findViewById(R.id.rvProductoList)
         btnBack = findViewById(R.id.btnBack)
+        rvProductoList.layoutManager = LinearLayoutManager(this)
+        adaptador.setContext(this)
     }
     
     private fun cargarProductos() {
@@ -73,6 +76,8 @@ class ProductosActivity : AppCompatActivity() {
     private fun mostrarProductos() {
         adaptador.setListaProductos(listaProductos)
         rvProductoList.adapter = adaptador
+        
+//        adaptador.setListaProductos(listaProductos)
     }
     
     private fun regresar(){
