@@ -43,6 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtTitulo2">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtProductoNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre" />
@@ -60,6 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtProductoDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Descripcion" />
@@ -77,6 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtProductoStock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Stock" />
@@ -94,13 +97,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtProductoPrecio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Precio" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spProductoCategoria"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -111,7 +115,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnGuardar"
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginStart="16dp"
@@ -122,5 +126,5 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/spProductoCategoria" />
 </androidx.constraintlayout.widget.ConstraintLayout>
