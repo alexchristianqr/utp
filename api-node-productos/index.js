@@ -30,6 +30,8 @@ app.get('/productos', async (req, res) => {
   }
 });
 
+
+/*
 app.post('/productos', async (req, res) => {
   try {
     const { nombre, descripcion, precio, stock, categoria } = req.body;
@@ -45,7 +47,37 @@ app.post('/productos', async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error });
   }
+});*/
+
+app.post('/productos', async (req, res) => {
+  try {
+    const { nombre, descripcion, precio, stock, categoria } = req.body;
+    const imagen = req.body.imagen ?? null;  // ←🔥 AGREGADO
+
+    const cnx = await createConnection(configDB);
+    const [result] = await cnx.execute(
+      'INSERT INTO productos (nombre, descripcion, imagen, precio, stock, categoria) VALUES (?, ?, ?, ?, ?, ?)',
+      [nombre, descripcion, imagen, precio, stock, categoria]
+    );
+
+    return res.json({
+      message: 'producto registrado',
+      data: {
+        producto_id: result.insertId,
+        nombre,
+        descripcion,
+        imagen,
+        precio,
+        stock,
+        categoria
+      }
+    });
+
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
 });
+
 
 app.get('/productos/:id', async (req, res) => {
   const { id } = req.params;
