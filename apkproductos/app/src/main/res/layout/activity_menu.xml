@@ -5,6 +5,7 @@
     android:id="@+id/menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".MenuActivity">
 
     <Button
@@ -16,6 +17,7 @@
         android:layout_marginEnd="16dp"
         android:text="Productos"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,6 +31,7 @@
         android:layout_marginEnd="16dp"
         android:text="Registrar movimiento"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnMenuProducto" />
@@ -42,6 +45,7 @@
         android:layout_marginEnd="16dp"
         android:text="Reporte"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnMenuMovimiento" />

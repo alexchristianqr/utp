@@ -1,5 +1,6 @@
 package com.app.apkproductos.productos
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
@@ -35,12 +36,13 @@ class ProductosActivity : AppCompatActivity() {
 
         referenciar()
         cargarProductos()
-        regresar()
+        acciones()
     }
     
     private fun referenciar() {
         rvProductoList = findViewById(R.id.rvProductoList)
         btnBack = findViewById(R.id.btnBack)
+        btnNuevo = findViewById(R.id.btnNuevo)
         rvProductoList.layoutManager = LinearLayoutManager(this)
         adaptador.setContext(this)
     }
@@ -76,18 +78,15 @@ class ProductosActivity : AppCompatActivity() {
     private fun mostrarProductos() {
         adaptador.setListaProductos(listaProductos)
         rvProductoList.adapter = adaptador
-        
-//        adaptador.setListaProductos(listaProductos)
     }
     
-    private fun regresar(){
+    private fun acciones() {
         btnBack.setOnClickListener {
             finish() // Finaliza la actividad actual y regresa a la anterior
         }
+        btnNuevo.setOnClickListener {
+            val intent = Intent(this, RegistrarProductoActivity::class.java)
+            startActivity(intent)
+        }
     }
-
-//    private fun mostrarNuevo() {
-//        val intent = Intent(this, EstudianteNuevoActivity::class.java)
-//        startActivity(intent)
-//    }
 }
