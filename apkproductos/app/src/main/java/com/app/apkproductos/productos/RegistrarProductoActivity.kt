@@ -42,6 +42,20 @@ import androidx.appcompat.app.AlertDialog
 
 
 
+
+
+import android.widget.*
+import androidx.activity.enableEdgeToEdge
+
+import androidx.lifecycle.lifecycleScope
+
+
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+
 class RegistrarProductoActivity : AppCompatActivity() {
 	private lateinit var btnBack: ImageButton
 
@@ -100,9 +114,6 @@ class RegistrarProductoActivity : AppCompatActivity() {
 		btnBack = findViewById(R.id.btnBack3)
 		btnGuardar = findViewById(R.id.btnGuardar)
 		imgProductoFoto = findViewById(R.id.imgProductoFoto)
-
-
-
 		txtProductoNombre = findViewById(R.id.txtProductoNombre)
 		txtProductoDescripcion = findViewById(R.id.txtProductoDescripcion)
 		txtProductoStock = findViewById(R.id.txtProductoStock)
@@ -135,6 +146,7 @@ class RegistrarProductoActivity : AppCompatActivity() {
 
 
 
+	/*
 	private fun registrarProducto() {
 		val nombre = txtProductoNombre.text.toString()
 		val descripcion = txtProductoDescripcion.text.toString()
@@ -161,14 +173,6 @@ class RegistrarProductoActivity : AppCompatActivity() {
 				val requestStock = stock.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 				val requestCategoria = categoria.toRequestBody("text/plain".toMediaTypeOrNull())
 
-				// 🔥 IMPRIMIR EN CONSOLA LO QUE SE VA A ENVIAR
-				Log.d("RegistrarProducto", "nombre: $nombre")
-				Log.d("RegistrarProducto", "descripcion: $descripcion")
-				Log.d("RegistrarProducto", "precio: $precio")
-				Log.d("RegistrarProducto", "stock: $stock")
-				Log.d("RegistrarProducto", "categoria: $categoria")
-				Log.d("RegistrarProducto", "imagen URI: $selectedImageUri")
-
 				val response = api.registrarProductoMultipart(
 					nombre = requestNombre,
 					descripcion = requestDescripcion,
@@ -180,6 +184,22 @@ class RegistrarProductoActivity : AppCompatActivity() {
 
 				if (response.isSuccessful) {
 					val body = response.body()!!
+
+					// Crear objeto Producto para devolver a ProductosActivity
+					val productoRegistrado = Producto(
+						id = body.data.producto_id,
+						nombre = body.data.nombre,
+						descripcion = body.data.descripcion,
+						precio = body.data.precio,
+						stock = body.data.stock,
+						categoria = body.data.categoria,
+						imagen = body.data.imagen // aquí va la URL que devuelve la API
+					)
+
+					val intent = Intent().apply {
+						putExtra("producto", productoRegistrado)
+					}
+					setResult(RESULT_OK, intent)
 
 					AlertDialog.Builder(this@RegistrarProductoActivity)
 						.setTitle("✔ Producto Registrado")
@@ -209,8 +229,92 @@ class RegistrarProductoActivity : AppCompatActivity() {
 				Log.e("RegistrarProducto", "Exception: ${e.message}", e)
 			}
 		}
-	}
+	}*/
 
+
+	 */
+
+	private fun registrarProducto() {
+		val nombre = txtProductoNombre.text.toString()
+		val descripcion = txtProductoDescripcion.text.toString()
+		val stock = txtProductoStock.text.toString().toIntOrNull() ?: 0
+		val precio = txtProductoPrecio.text.toString().toFloatOrNull() ?: 0f
+		val categoria = spProductoCategoria.selectedItem.toString()
+
+		if (nombre.isBlank() || descripcion.isBlank() || categoria == "Seleccione...") {
+			Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
+			return
+		}
+
+		lifecycleScope.launch {
+			try {
+				val multipartImage: MultipartBody.Part? = selectedImageUri?.let { uri ->
+					val file = createTempFileFromUri(uri)
+					val reqFile: RequestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+					MultipartBody.Part.createFormData("imagen", file.name, reqFile)
+				}
+
+				val requestNombre = nombre.toRequestBody("text/plain".toMediaTypeOrNull())
+				val requestDescripcion = descripcion.toRequestBody("text/plain".toMediaTypeOrNull())
+				val requestPrecio = precio.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+				val requestStock = stock.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+				val requestCategoria = categoria.toRequestBody("text/plain".toMediaTypeOrNull())
+
+				val response = api.registrarProductoMultipart(
+					nombre = requestNombre,
+					descripcion = requestDescripcion,
+					precio = requestPrecio,
+					stock = requestStock,
+					categoria = requestCategoria,
+					imagen = multipartImage
+				)
+
+				if (response.isSuccessful) {
+					val body = response.body()!!
+
+					val productoRegistrado = Producto(
+						id = body.data.producto_id,
+						nombre = body.data.nombre,
+						descripcion = body.data.descripcion,
+						precio = body.data.precio,
+						stock = body.data.stock,
+						categoria = body.data.categoria,
+						imagen = body.data.imagen // URL que devuelve la API
+					)
+
+					// Devolver producto a ProductosActivity
+					val intent = Intent().apply {
+						putExtra("producto", productoRegistrado)
+					}
+					setResult(RESULT_OK, intent)
+
+					AlertDialog.Builder(this@RegistrarProductoActivity)
+						.setTitle("✔ Producto Registrado")
+						.setMessage("El producto '${body.data.nombre}' se registró exitosamente.\n\nID generado: ${body.data.producto_id}")
+						.setPositiveButton("Aceptar") { dialog, _ ->
+							dialog.dismiss()
+							finish()
+						}
+						.setCancelable(false)
+						.show()
+
+				} else {
+					Toast.makeText(
+						this@RegistrarProductoActivity,
+						"Error API: ${response.code()}",
+						Toast.LENGTH_LONG
+					).show()
+				}
+
+			} catch (e: Exception) {
+				Toast.makeText(
+					this@RegistrarProductoActivity,
+					"Error: ${e.message}",
+					Toast.LENGTH_LONG
+				).show()
+			}
+		}
+	}
 
 
 	// Función para crear un archivo temporal desde Uri

@@ -21,20 +21,6 @@ interface ProductoService {
         @Body producto: RegistrarProductoRequest
     ): Response<RegistrarProductoResponse>
 
-    //se agrego esto
-
-    /*
-    // ProductoService.kt
-    @Multipart
-    @POST("/productos/upload")
-    suspend fun registrarProductoMultipart(
-        @Part("nombre") nombre: RequestBody,
-        @Part("descripcion") descripcion: RequestBody,
-        @Part("precio") precio: RequestBody,
-        @Part("stock") stock: RequestBody,
-        @Part("categoria") categoria: RequestBody,
-        @Part imagen: MultipartBody.Part? // Puede ser null si no selecciona imagen
-    ): Response<RegistrarProductoResponse>*/
 
     @Multipart
     @POST("/productos")

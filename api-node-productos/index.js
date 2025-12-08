@@ -12,6 +12,9 @@ app.get('/', (req, res) => {
   res.send('API en nodejs - Desarrollado por Alex Christian!');
 });
 
+// Servir carpeta uploads como estática
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+
 const configDB = {
   host: 'localhost',
   port: 3306,
@@ -20,6 +23,8 @@ const configDB = {
   database: 'db_productos',
 };
 
+
+/*
 app.get('/productos', async (req, res) => {
   try {
     const cnx = await createConnection(configDB);
@@ -28,7 +33,7 @@ app.get('/productos', async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error });
   }
-});
+});*/
 
 import multer from 'multer';
 import path from 'path';
@@ -52,6 +57,26 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+
+app.get('/', (req, res) => {
+  res.send('API en Node.js - Servidor de Productos con Imágenes');
+});
+
+
+
+// Obtener todos los productos para la lista
+app.get('/productos', async (req, res) => {
+  try {
+    const cnx = await createConnection(configDB);
+    const [rows] = await cnx.execute('SELECT * FROM productos');
+    await cnx.end();
+    return res.json({ message: 'Todos los productos', data: rows });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+});
+
 
 /* original
 app.post('/productos', async (req, res) => {
