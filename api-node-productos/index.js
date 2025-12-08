@@ -71,95 +71,8 @@ app.get('/productos/:id', async (req, res) => {
 });
 
 
-/*
-// Buscar producto por producto_id
-app.get('/productos/:id', async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const cnx = await createConnection(configDB);
-
-    const [rows] = await cnx.execute(
-      'SELECT nombre, stock FROM productos WHERE id = ?',
-      [id]
-    );
-
-    if (rows.length === 0) {
-      return res.status(404).json({ message: 'Producto no encontrado', data: [] });
-    }
-
-    res.json({ message: 'Producto encontrado', data: rows[0] });
-
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-});*/
 
 
-
-/*
-// Buscar movimientos por producto_id mostrando solo el nombre del producto
-app.get('/movimientos/producto/:producto_id', async (req, res) => {
-  const { producto_id } = req.params;
-
-  try {
-    const cnx = await createConnection(configDB);
-
-    // SELECT solo con producto_nombre y demás campos, sin producto_id
-    const [rows] = await cnx.execute(
-      `SELECT p.nombre AS producto_nombre, m.tipo, m.cantidad, m.fecha, m.descripcion
-       FROM movimientos m
-       JOIN productos p ON m.producto_id = p.id
-       WHERE m.producto_id = ?`,
-      [producto_id]
-    );
-
-    if (rows.length === 0) {
-      return res.status(404).json({ message: 'No hay movimientos para este producto', data: [] });
-    }
-
-    res.json({ message: 'Movimientos encontrados', data: rows });
-
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-});*/
-
-
-
-
-/*
-app.post('/movimientos', async (req, res) => {
-  try {
-    const { producto_id, tipo, cantidad, descripcion } = req.body;
-
-    if (!producto_id || !tipo || !cantidad) {
-      return res.status(400).json({ message: 'Faltan datos obligatorios' });
-    }
-
-    const cnx = await createConnection(configDB);
-
-    // Registrar el movimiento
-    const [result] = await cnx.execute(
-      'INSERT INTO movimientos (producto_id, tipo, cantidad, descripcion) VALUES (?, ?, ?, ?)',
-      [producto_id, tipo, cantidad, descripcion || `Movimiento ${tipo}`]
-    );
-
-    res.json({
-      message: 'Movimiento registrado',
-      data: {
-        id: result.insertId,
-        producto_id,
-        tipo,
-        cantidad,
-        descripcion: descripcion || `Movimiento ${tipo}`
-      }
-    });
-
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-});*/
 
 
 
@@ -223,6 +136,64 @@ app.post('/movimientos', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
+});
+
+
+
+
+
+// Consultar movimientos por producto_id
+app.get('/movimientos/:producto_id', async (req, res) => {
+    const { producto_id } = req.params;
+    let connection; // Declarado aquí para que sea accesible en el bloque finally
+
+    try {
+        // 1. Obtener una conexión del pool
+        connection = await pool.getConnection();
+
+        // 2. Verificar si el producto existe
+        const [productoRows] = await connection.execute(
+            'SELECT id, nombre FROM productos WHERE id = ?',
+            [producto_id]
+        );
+
+        if (productoRows.length === 0) {
+            // No se recomienda enviar data: [] si el producto no existe, 
+            // solo el mensaje de error 404.
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        // 3. Obtener los movimientos del producto
+        // ¡Cambiado! Se quitó la aserción de tipo TypeScript (as [Movimiento[], any])
+        const [movimientosRows] = await connection.execute(
+            'SELECT id, producto_id, tipo, cantidad, fecha, descripcion FROM movimientos WHERE producto_id = ? ORDER BY fecha DESC',
+            [producto_id]
+        ); 
+
+        // 4. Separar en Entradas y Salidas
+        // Usamos la variable 'm' sin tipado, lo cual es correcto en JavaScript puro.
+        const entradas = movimientosRows.filter(m => m.tipo === 'ENTRADA');
+        const salidas = movimientosRows.filter(m => m.tipo === 'SALIDA');
+
+        // 5. Respuesta final
+        res.json({
+            message: 'Movimientos encontrados',
+            data: {
+                producto: productoRows[0],
+                movimientos: movimientosRows,
+                entradas,
+                salidas
+            }
+        });
+
+    } catch (error) {
+        console.error("Error al consultar movimientos:", error);
+        // Mejor manejar el error de forma genérica
+        res.status(500).json({ error: 'Error interno del servidor al procesar la solicitud.' });
+    } finally {
+        // 6. Devolver la conexión al pool
+        if (connection) connection.release(); 
+    }
 });
 
 
