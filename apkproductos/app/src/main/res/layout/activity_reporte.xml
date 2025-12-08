@@ -7,4 +7,73 @@
     android:layout_height="match_parent"
     tools:context=".reportes.ReporteActivity">
 
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvTituloReporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REPORTE DE MOVIMIENTOS"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"/>
+
+    <!-- Código label -->
+    <TextView
+        android:id="@+id/tvCodigoLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        android:text="Código: "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/rvMovimientos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloReporte" />
+
+    <!-- EditText para ingresar código -->
+    <EditText
+        android:id="@+id/txtCodigoM"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese código"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@id/tvCodigoLabel"
+        app:layout_constraintEnd_toStartOf="@id/btnBuscar"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloReporte"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Botón buscar -->
+    <Button
+        android:id="@+id/btnBuscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="Buscar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloReporte" />
+
+    <!-- RecyclerView para mostrar lista de movimientos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMovimientos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtCodigoM"
+        android:background="#FAFAFA"
+        tools:listitem="@layout/item_reporte" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
