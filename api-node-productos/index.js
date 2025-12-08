@@ -131,40 +131,31 @@ app.post('/movimientos', async (req, res) => {
 
 
 
-// Consultar movimientos por producto_id
 app.get('/movimientos/:producto_id', async (req, res) => {
     const { producto_id } = req.params;
-    let connection; // Declarado aquí para que sea accesible en el bloque finally
 
     try {
-        // 1. Obtener una conexión del pool
-        connection = await pool.getConnection();
+        const cnx = await createConnection(configDB); // conexión directa
 
-        // 2. Verificar si el producto existe
-        const [productoRows] = await connection.execute(
+        // Verificar si el producto existe
+        const [productoRows] = await cnx.execute(
             'SELECT id, nombre FROM productos WHERE id = ?',
             [producto_id]
         );
 
         if (productoRows.length === 0) {
-            // No se recomienda enviar data: [] si el producto no existe, 
-            // solo el mensaje de error 404.
             return res.status(404).json({ message: 'Producto no encontrado' });
         }
 
-        // 3. Obtener los movimientos del producto
-        // ¡Cambiado! Se quitó la aserción de tipo TypeScript (as [Movimiento[], any])
-        const [movimientosRows] = await connection.execute(
+        // Obtener movimientos
+        const [movimientosRows] = await cnx.execute(
             'SELECT id, producto_id, tipo, cantidad, fecha, descripcion FROM movimientos WHERE producto_id = ? ORDER BY fecha DESC',
             [producto_id]
-        ); 
+        );
 
-        // 4. Separar en Entradas y Salidas
-        // Usamos la variable 'm' sin tipado, lo cual es correcto en JavaScript puro.
         const entradas = movimientosRows.filter(m => m.tipo === 'ENTRADA');
         const salidas = movimientosRows.filter(m => m.tipo === 'SALIDA');
 
-        // 5. Respuesta final
         res.json({
             message: 'Movimientos encontrados',
             data: {
@@ -175,15 +166,14 @@ app.get('/movimientos/:producto_id', async (req, res) => {
             }
         });
 
+        await cnx.end(); // cerrar la conexión
+
     } catch (error) {
         console.error("Error al consultar movimientos:", error);
-        // Mejor manejar el error de forma genérica
         res.status(500).json({ error: 'Error interno del servidor al procesar la solicitud.' });
-    } finally {
-        // 6. Devolver la conexión al pool
-        if (connection) connection.release(); 
     }
 });
+
 
 
 
