@@ -1,6 +1,8 @@
 package com.app.apkproductos.reportes
 import com.google.gson.annotations.SerializedName
 // Clase que representa un movimiento individual
+import com.app.apkproductos.reportes.ProductoSimple
+
 data class Movimiento(
     val id: Int,
     @SerializedName("producto_id") val productoId: Int,

@@ -4,13 +4,6 @@ import com.app.apkproductos.productos.Producto
 import retrofit2.Response
 import retrofit2.http.*
 
-/*
-data class MovimientoRequest(
-    val producto_id: Int,
-    val tipo: String,
-    val cantidad: Int,
-    val descripcion: String?
-)*/
 
 data class MovimientoResponse(
     val message: String,
