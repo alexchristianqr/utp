@@ -35,12 +35,12 @@ app.post('/productos', async (req, res) => {
     const { nombre, descripcion, precio, stock, categoria } = req.body;
     const cnx = await createConnection(configDB);
     const [result] = await cnx.execute(
-      'INSERT INTO productos (nombre, descripcion, precio, stock, categoria) VALUES (?, ?, ?, ?, ?)',
-      [nombre, descripcion, precio, stock, categoria]
+      'INSERT INTO productos (nombre, descripcion, imagen, precio, stock, categoria) VALUES (?, ?, ?, ?, ?, ?)',
+      [nombre, descripcion, imagen, precio, stock, categoria]
     );
     return res.json({
       message: 'producto registrado',
-      data: { producto_id: result.insertId, nombre, descripcion, precio, stock, categoria },
+      data: { producto_id: result.insertId, nombre, descripcion, imagen, precio, stock, categoria },
     });
   } catch (error) {
     return res.status(500).json({ error });
