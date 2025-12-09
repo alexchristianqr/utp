@@ -78,6 +78,35 @@ app.get('/productos', async (req, res) => {
 });
 
 
+
+router.put('/productos/:id', upload.single('imagen'), async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { nombre, descripcion, precio, cantidad, categoria } = req.body;
+
+        let imagenName = null;
+
+        if (req.file) {
+            imagenName = req.file.filename;
+        }
+
+        // Actualiza datos
+        await db.query(
+            "UPDATE productos SET nombre=?, descripcion=?, precio=?, cantidad=?, categoria=?, imagen=IFNULL(?, imagen) WHERE id=?",
+            [nombre, descripcion, precio, cantidad, categoria, imagenName, id]
+        );
+
+        const [updated] = await db.query("SELECT * FROM productos WHERE id=?", [id]);
+
+        res.json({ ok: true, data: updated[0] });
+
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ ok: false, error: e.message });
+    }
+});
+
+
 /* original
 app.post('/productos', async (req, res) => {
   try {
