@@ -79,38 +79,7 @@ app.get('/productos', async (req, res) => {
 
 
 
-
-
-/*
-//ESTA API FUNCIONA PERO SE VA AGREGAR OTRO TEXTO PARA SER EDITADO
-app.put('/productos/:id', upload.single('imagen'), async (req, res) => {
-    try {
-        const id = req.params.id;
-        const { nombre, descripcion, precio, stock, categoria } = req.body;
-
-        let imagenName = req.file ? `/uploads/${req.file.filename}` : null;
-
-        const cnx = await createConnection(configDB); // ✅ Crear conexión
-
-        const sql = `
-          UPDATE productos 
-          SET nombre=?, descripcion=?, precio=?, stock=?, categoria=?, imagen=IFNULL(?, imagen)
-          WHERE id=?`;
-        
-        await cnx.execute(sql, [nombre, descripcion, precio, stock, categoria, imagenName, id]);
-
-        const [updated] = await cnx.execute("SELECT * FROM productos WHERE id=?", [id]);
-
-        await cnx.end(); // ✅ cerrar conexión
-
-        res.json({ ok: true, data: updated[0] });
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({ ok: false, error: e.message });
-    }
-});*/
-
-
+//ACTUALIZAR POR ID
 app.put('/productos/:id', upload.single('imagen'), async (req, res) => {
     const id = req.params.id;
     const { nombre, descripcion, precio, stock, categoria } = req.body;
@@ -149,6 +118,40 @@ app.put('/productos/:id', upload.single('imagen'), async (req, res) => {
 });
 
 
+
+// Eliminar producto por id
+app.delete('/productos/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const cnx = await createConnection(configDB);
+
+    // 1️⃣ Obtener la información del producto para borrar imagen si existe
+    const [rows] = await cnx.execute('SELECT imagen FROM productos WHERE id = ?', [id]);
+
+    if (rows.length === 0) {
+      await cnx.end();
+      return res.status(404).json({ ok: false, message: 'Producto no encontrado' });
+    }
+
+    const imagenPath = rows[0].imagen ? path.join(process.cwd(), rows[0].imagen) : null;
+
+    // 2️⃣ Eliminar el producto de la DB
+    await cnx.execute('DELETE FROM productos WHERE id = ?', [id]);
+
+    await cnx.end();
+
+    // 3️⃣ Borrar la imagen del disco si existía
+    if (imagenPath && fs.existsSync(imagenPath)) {
+      fs.unlinkSync(imagenPath);
+    }
+
+    res.json({ ok: true, message: 'Producto eliminado correctamente' });
+  } catch (error) {
+    console.error('Error al eliminar producto:', error);
+    res.status(500).json({ ok: false, error: error.message });
+  }
+});
 
 
 /* original
