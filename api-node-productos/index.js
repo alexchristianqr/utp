@@ -79,28 +79,75 @@ app.get('/productos', async (req, res) => {
 
 
 
+
+
+/*
+//ESTA API FUNCIONA PERO SE VA AGREGAR OTRO TEXTO PARA SER EDITADO
 app.put('/productos/:id', upload.single('imagen'), async (req, res) => {
     try {
         const id = req.params.id;
         const { nombre, descripcion, precio, stock, categoria } = req.body;
 
-        let imagenName = req.file ? req.file.filename : null;
+        let imagenName = req.file ? `/uploads/${req.file.filename}` : null;
+
+        const cnx = await createConnection(configDB); // ✅ Crear conexión
 
         const sql = `
           UPDATE productos 
           SET nombre=?, descripcion=?, precio=?, stock=?, categoria=?, imagen=IFNULL(?, imagen)
           WHERE id=?`;
         
-        await db.query(sql, [nombre, descripcion, precio, stock, categoria, imagenName, id]);
+        await cnx.execute(sql, [nombre, descripcion, precio, stock, categoria, imagenName, id]);
 
-        const [updated] = await db.query("SELECT * FROM productos WHERE id=?", [id]);
+        const [updated] = await cnx.execute("SELECT * FROM productos WHERE id=?", [id]);
+
+        await cnx.end(); // ✅ cerrar conexión
 
         res.json({ ok: true, data: updated[0] });
     } catch (e) {
         console.error(e);
         res.status(500).json({ ok: false, error: e.message });
     }
+});*/
+
+
+app.put('/productos/:id', upload.single('imagen'), async (req, res) => {
+    const id = req.params.id;
+    const { nombre, descripcion, precio, stock, categoria } = req.body;
+
+    try {
+        const cnx = await createConnection(configDB);
+
+        // Nombre de la imagen si se subió
+        const imagenName = req.file ? `/uploads/${req.file.filename}` : null;
+
+        // Actualizar el producto
+        const sqlUpdate = `
+          UPDATE productos 
+          SET nombre = ?, descripcion = ?, precio = ?, stock = ?, categoria = ?, imagen = IFNULL(?, imagen)
+          WHERE id = ?`;
+
+        await cnx.execute(sqlUpdate, [nombre, descripcion, precio, stock, categoria, imagenName, id]);
+
+        // Obtener producto actualizado
+        const [rows] = await cnx.execute("SELECT * FROM productos WHERE id = ?", [id]);
+
+        const productoActualizado = rows.length ? rows[0] : null;
+
+        // Respuesta: data siempre es lista + timestamp
+        res.json({
+            ok: true,
+            data: productoActualizado ? [productoActualizado] : [],
+            timestamp: new Date()  // nuevo dato adicional
+        });
+
+        await cnx.end();
+    } catch (error) {
+        console.error("Error al actualizar producto:", error);
+        res.status(500).json({ ok: false, error: error.message });
+    }
 });
+
 
 
 
