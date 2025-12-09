@@ -17,14 +17,16 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import androidx.appcompat.app.AlertDialog
 
 class ModificarProductoActivity : AppCompatActivity() {
+
 
     private lateinit var imgProductoFoto: ImageView
     private lateinit var fabCamera: FloatingActionButton
     private lateinit var txtProductoNombre: EditText
     private lateinit var txtProductoDescripcion: EditText
-    private lateinit var tvStockValue: TextView
+    private lateinit var tvStockValue: EditText
     private lateinit var txtProductoPrecio: EditText
 
 
@@ -219,7 +221,8 @@ class ModificarProductoActivity : AppCompatActivity() {
 
             txtProductoNombre.setText(p.nombre)
             txtProductoDescripcion.setText(p.descripcion)
-            tvStockValue.text = p.stock.toString()
+            //tvStockValue.text = p.stock.toString()
+            tvStockValue.setText(p.stock.toString())
             txtProductoPrecio.setText(p.precio.toString())
 
             // Seleccionar categoría en el Spinner
@@ -313,6 +316,7 @@ class ModificarProductoActivity : AppCompatActivity() {
      */
 
 
+    /*
     private fun actualizarProducto() {
         val p = producto ?: return
 
@@ -373,6 +377,130 @@ class ModificarProductoActivity : AppCompatActivity() {
                 Toast.makeText(this@ModificarProductoActivity, "Excepción: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
+    }*/
+
+     */
+
+
+    private fun actualizarProducto() {
+        val p = producto ?: return
+
+        val nombre = txtProductoNombre.text.toString()
+        val descripcion = txtProductoDescripcion.text.toString()
+        val stock = tvStockValue.text.toString()
+        val precio = txtProductoPrecio.text.toString()
+        val categoria = spProductoCategoria.selectedItem.toString()
+
+        if (nombre.isBlank() || descripcion.isBlank() || categoria == "Seleccione...") {
+            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Log de datos antes de enviar
+        android.util.Log.d(
+            "ModificarProducto",
+            "=== ACTUALIZAR PRODUCTO ===\n" +
+                    "ID: ${p.id}\nNombre: $nombre\nDescripción: $descripcion\nStock: $stock\nPrecio: $precio\nCategoría: $categoria\nImagen seleccionada: ${imagenUri != null}"
+        )
+
+        // Construir requestMap con stock incluido
+        val requestMap = HashMap<String, RequestBody>().apply {
+            put("nombre", nombre.toRequestBody())
+            put("descripcion", descripcion.toRequestBody())
+            put("precio", precio.toRequestBody())
+            put("stock", stock.toRequestBody())
+            put("categoria", categoria.toRequestBody())
+        }
+
+        // Imagen opcional
+        var imagenPart: MultipartBody.Part? = null
+        imagenUri?.let {
+            val file = File(getRealPathFromURI(it))
+            val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+            imagenPart = MultipartBody.Part.createFormData("imagen", file.name, requestFile)
+            android.util.Log.d("ModificarProducto", "Imagen enviada: ${file.absolutePath}")
+        }
+
+        val api = HttpService.retrofit.create(ProductoService::class.java)
+
+        /*
+        lifecycleScope.launch {
+            try {
+                val response = api.actualizarProducto(p.id, requestMap, imagenPart)
+
+                android.util.Log.d("ModificarProducto", "Código HTTP: ${response.code()}")
+                android.util.Log.d("ModificarProducto", "Respuesta raw: ${response.raw()}")
+
+                if (response.isSuccessful) {
+                    val productoActualizado = response.body()?.data
+                    android.util.Log.d("ModificarProducto", "Respuesta body: $productoActualizado")
+                    if (productoActualizado != null) {
+                        val data = Intent().apply {
+                            putExtra("PRODUCTO_ACTUALIZADO", productoActualizado as java.io.Serializable)
+                        }
+                        setResult(Activity.RESULT_OK, data)
+                        finish()
+                    } else {
+                        Toast.makeText(this@ModificarProductoActivity, "Error: body vacío", Toast.LENGTH_LONG).show()
+                        android.util.Log.e("ModificarProducto", "Body de respuesta es null")
+                    }
+                } else {
+                    // Leer body de error si existe
+                    val errorBody = response.errorBody()?.string()
+                    android.util.Log.e("ModificarProducto", "Error HTTP: ${response.code()}, body: $errorBody")
+                    Toast.makeText(this@ModificarProductoActivity, "Error: ${response.code()}", Toast.LENGTH_LONG).show()
+                }
+            } catch (e: Exception) {
+                // Log completo del stacktrace
+                e.printStackTrace()
+                Toast.makeText(this@ModificarProductoActivity, "Excepción: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        }*/
+
+
+        lifecycleScope.launch {
+            try {
+                val response = api.actualizarProducto(p.id, requestMap, imagenPart)
+
+                android.util.Log.d("ModificarProducto", "Código HTTP: ${response.code()}")
+                android.util.Log.d("ModificarProducto", "Respuesta raw: ${response.raw()}")
+
+                if (response.isSuccessful) {
+                    val productoActualizado = response.body()?.data
+                    android.util.Log.d("ModificarProducto", "Respuesta body: $productoActualizado")
+
+                    if (productoActualizado != null) {
+                        // Mostrar diálogo de éxito
+                        AlertDialog.Builder(this@ModificarProductoActivity)
+                            .setTitle("Éxito")
+                            .setMessage("Producto actualizado exitosamente")
+                            .setPositiveButton("OK") { dialog, _ ->
+                                // Cuando presione OK, devolver resultado y cerrar
+                                val data = Intent().apply {
+                                    putExtra("PRODUCTO_ACTUALIZADO", productoActualizado as java.io.Serializable)
+                                }
+                                setResult(Activity.RESULT_OK, data)
+                                dialog.dismiss()
+                                finish()
+                            }
+                            .setCancelable(false)
+                            .show()
+                    } else {
+                        Toast.makeText(this@ModificarProductoActivity, "Error: body vacío", Toast.LENGTH_LONG).show()
+                        android.util.Log.e("ModificarProducto", "Body de respuesta es null")
+                    }
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    android.util.Log.e("ModificarProducto", "Error HTTP: ${response.code()}, body: $errorBody")
+                    Toast.makeText(this@ModificarProductoActivity, "Error: ${response.code()}", Toast.LENGTH_LONG).show()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this@ModificarProductoActivity, "Excepción: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        }
+
+
     }
 
 

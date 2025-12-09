@@ -9,4 +9,5 @@ import kotlinx.serialization.Serializable
 data class ProductoResponse (
     @SerializedName("message") var message: String,
     @SerializedName("data") var data: List<Producto>
+
 )

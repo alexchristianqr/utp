@@ -25,6 +25,7 @@ interface ProductoService {
     ): Response<RegistrarProductoResponse>
 
     //SE AGREGO PARA MODIFICAR
+
     @Multipart
     @PUT("/productos/{id}")
     suspend fun actualizarProducto(
@@ -32,6 +33,17 @@ interface ProductoService {
         @PartMap campos: Map<String, @JvmSuppressWildcards RequestBody>,
         @Part imagen: MultipartBody.Part?
     ): Response<ProductoResponse>
+
+    /*
+    @Multipart
+    @PUT("productos/{id}")
+    suspend fun actualizarProducto(
+        @Path("id") id: Int,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part imagen: MultipartBody.Part?
+    ): Response<ApiResponse<Producto>>*/
+
+
 
     @Multipart
     @POST("/productos")
