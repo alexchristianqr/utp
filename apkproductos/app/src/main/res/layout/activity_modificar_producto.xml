@@ -139,7 +139,7 @@
                     android:text="150"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
-                    android:textStyle="bold"
+                    android:textStyle="normal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvStockLabel"
                     app:layout_constraintTop_toTopOf="parent" />
