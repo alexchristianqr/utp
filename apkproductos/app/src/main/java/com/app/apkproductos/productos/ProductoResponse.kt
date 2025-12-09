@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ProductoResponse (
     @SerializedName("message") var message: String,
-    @SerializedName("data") var data: List<Producto>
-
+    @SerializedName("data") var data: List<Producto>,
+    @SerializedName("data2") var data2: Producto? //
 )

@@ -1,9 +1,13 @@
 package com.app.apkproductos.productos
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,40 +23,29 @@ import kotlinx.coroutines.launch
 
 //import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import com.google.android.material.snackbar.Snackbar
+
+import kotlinx.coroutines.launch
+
+import android.widget.Button
+import android.widget.TextView
 
 
 class ProductosActivity : AppCompatActivity() {
 
-    /*
-    private var listaProductos: MutableList<Producto> = mutableListOf()
-    //private var listaProductos: List<Producto> = emptyList()
-    private var adaptador: ProductoAdaptador = ProductoAdaptador()
-    private lateinit var rvProductoList: RecyclerView
-    private lateinit var btnNuevo: FloatingActionButton
-    private lateinit var btnBack: ImageButton*/
-
 
     private var listaProductos: MutableList<Producto> = mutableListOf()
-    private var adaptador: ProductoAdaptador = ProductoAdaptador()
+    //private var listaProductos = mutableListOf<Producto>()
+
+    private lateinit var adaptador: ProductoAdaptador
     private lateinit var rvProductoList: RecyclerView
     private lateinit var btnNuevo: FloatingActionButton
     private lateinit var btnBack: ImageButton
 
 
-    /*
-    private val nuevoProductoLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val productoNuevo = result.data?.getSerializableExtra("producto") as? Producto
-            productoNuevo?.let {
-                listaProductos.add(0, it) // agregar al inicio
-                adaptador.setListaProductos(listaProductos)
-                rvProductoList.scrollToPosition(0)
-            }
-        }
-    }
-*/
+
+
 
 
     private val nuevoProductoLauncher = registerForActivityResult(
@@ -69,6 +62,82 @@ class ProductosActivity : AppCompatActivity() {
         }
     }
 
+    /*
+    private fun eliminarProducto(producto: Producto) {
+        lifecycleScope.launch {
+            try {
+                val response = HttpService.create<ProductoService>().eliminarProducto(producto.id)
+                if (response.isSuccessful && response.body()?.ok == true) {
+                    // 🔥 Quitar de la lista local
+                    listaProductos.remove(producto)
+                    adaptador.setListaProductos(listaProductos)
+                } else {
+                    Log.e("EliminarProducto", "Error: ${response.body()?.message}")
+                }
+            } catch (e: Exception) {
+                Log.e("EliminarProducto", "Excepción: ${e.message}")
+            }
+        }
+    }*/
+
+    private fun eliminarProducto(producto: Producto) {
+        mostrarDialogEliminar(producto) // Llama a la función que crea el modal oscuro
+    }
+
+    private fun mostrarDialogEliminar(producto: Producto) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_confirmar_eliminar)
+        dialog.setCancelable(true)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val tvTitulo = dialog.findViewById<TextView>(R.id.tvTitulo)
+        val tvMensaje = dialog.findViewById<TextView>(R.id.tvMensaje)
+        val btnCancelar = dialog.findViewById<Button>(R.id.btnCancelar)
+        val btnEliminar = dialog.findViewById<Button>(R.id.btnEliminar)
+
+        tvMensaje.text = "¿Seguro que quieres eliminar '${producto.nombre}'?"
+
+        btnCancelar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnEliminar.setOnClickListener {
+            dialog.dismiss()
+            borrarProductoServidor(producto) // Llama a tu función que elimina del servidor
+        }
+
+        dialog.show()
+    }
+
+    private fun borrarProductoServidor(producto: Producto) {
+        lifecycleScope.launch {
+            try {
+                val response = HttpService.create<ProductoService>().eliminarProducto(producto.id)
+                if (response.isSuccessful && response.body()?.ok == true) {
+                    val index = listaProductos.indexOf(producto)
+                    listaProductos.remove(producto)
+                    adaptador.setListaProductos(listaProductos)
+                    Snackbar.make(
+                        findViewById(R.id.listar_producto),
+                        "Producto '${producto.nombre}' eliminado",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    Log.i("EliminarProducto", "Producto eliminado: ${producto.id} - ${producto.nombre}")
+                } else {
+                    Log.e("EliminarProducto", "Error al eliminar: ${response.body()?.message}")
+                    Toast.makeText(this@ProductosActivity, "Error al eliminar producto", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Log.e("EliminarProducto", "Excepción al eliminar producto: ${e.message}")
+                Toast.makeText(this@ProductosActivity, "Error al eliminar producto", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,50 +153,97 @@ class ProductosActivity : AppCompatActivity() {
         cargarProductos()
         acciones()
     }
-    
+
     private fun referenciar() {
         rvProductoList = findViewById(R.id.rvProductoList)
         btnBack = findViewById(R.id.btnBack)
         btnNuevo = findViewById(R.id.btnNuevo)
+
         rvProductoList.layoutManager = LinearLayoutManager(this)
+
+        /*
+        adaptador = ProductoAdaptador { productoEditar -> // <- Aquí recibes el 'productomod'
+            val intent = Intent(this, ModificarProductoActivity::class.java)
+            intent.putExtra("PRODUCTO_EDITAR", productoEditar)
+            editProductoLauncher.launch(intent) // <- Aquí se lanza correctamente esperando resultado
+        }*/
+
+        /*
+        adaptador = ProductoAdaptador { productoEditar ->
+            val intent = Intent(this, ModificarProductoActivity::class.java)
+            intent.putExtra("PRODUCTO_EDITAR", productoEditar)
+            editProductoLauncher.launch(intent)
+        }*/
+        adaptador = ProductoAdaptador(
+            onEditarProducto = { productoEditar ->
+                val intent = Intent(this, ModificarProductoActivity::class.java)
+                intent.putExtra("PRODUCTO_EDITAR", productoEditar)
+                editProductoLauncher.launch(intent)
+            },
+            onEliminar = { producto ->
+                eliminarProducto(producto) // llamamos a tu función que hace la eliminación
+            }
+        )
+
+
+
         adaptador.setContext(this)
         rvProductoList.adapter = adaptador // se agrego esto
     }
 
-    /*
-    private fun cargarProductos() {
-        HttpService.setBaseUrl(GlobalApp.PRODUCTO_BASE_URL)
-        val service = HttpService.create<ProductoService>()
 
-        lifecycleScope.launch {
-            val response = service.cargarProductos()
-            if (response.isSuccessful) {
-                val productoResponse: ProductoResponse = response.body() as ProductoResponse
-                listaProductos.clear()
-                listaProductos.addAll(productoResponse.data)
-                adaptador.setListaProductos(listaProductos)
-            } else {
-                Log.e("===", "Error en la respuesta: ${response.code()}")
-            }
-        }
-    }*/
 
-    private fun cargarProductos() {
-        HttpService.setBaseUrl(GlobalApp.PRODUCTO_BASE_URL)
-        val service = HttpService.create<ProductoService>()
 
-        lifecycleScope.launch {
-            val response = service.cargarProductos()
-            if (response.isSuccessful) {
-                val productoResponse: ProductoResponse = response.body()!!
-                listaProductos.clear()
-                listaProductos.addAll(productoResponse.data)
-                adaptador.setListaProductos(listaProductos)
-            } else {
-                Log.e("ProductosActivity", "Error en la respuesta: ${response.code()}")
+    private val editProductoLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val productoActualizado = result.data?.getSerializableExtra("PRODUCTO_ACTUALIZADO") as? Producto
+
+            productoActualizado?.let { prod ->
+                val index = listaProductos.indexOfFirst { it.id == prod.id }
+
+                if (index >= 0) {
+                    listaProductos[index] = prod
+                    adaptador.setListaProductos(listaProductos)
+                } else {
+                    cargarProductos()
+                }
             }
         }
     }
+
+
+
+    private fun cargarProductos() {
+        HttpService.setBaseUrl(GlobalApp.PRODUCTO_BASE_URL)
+        val service = HttpService.create<ProductoService>()
+
+        lifecycleScope.launch {
+            try {
+                val response = service.cargarProductos()
+                if (response.isSuccessful) {
+
+                    val productoResponse = response.body()
+                    listaProductos.clear()
+                    listaProductos.addAll(productoResponse!!.data)
+
+                    adaptador.setListaProductos(listaProductos)
+
+                } else {
+                    Log.e("ProductosActivity", "Error en la respuesta: ${response.code()}")
+                }
+            } catch (e: Exception) {
+                Log.e("ProductosActivity", "Error: ${e.message}")
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        cargarProductos()   // 🔥 Recarga los datos cada vez que vuelves a la Activity
+    }
+
 
 
     private fun mostrarProductos() {

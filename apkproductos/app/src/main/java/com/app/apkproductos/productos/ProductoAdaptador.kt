@@ -17,9 +17,15 @@ import com.bumptech.glide.Glide
 
 
 
-class ProductoAdaptador : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>() {
+//class ProductoAdaptador : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>() {
+
+class ProductoAdaptador(
+    private val onEditarProducto: (Productomodificar) -> Unit,
+    private val onEliminar: (Producto) -> Unit
+) : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>() {
 
     private var listaProductos: List<Producto> = emptyList()
+
     private lateinit var context: Context
 
     fun setContext(context: Context) {
@@ -58,31 +64,24 @@ class ProductoAdaptador : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>()
                 imgProducto.setImageResource(R.drawable.ic_launcher_foreground)
             }
 
-            // Aquí puedes agregar listeners para editar/eliminar si quieres
-            // btnEditar.setOnClickListener { ... }
-            // btnEliminar.setOnClickListener { ... }
 
-            // 🎯 IMPLEMENTACIÓN DEL CLIC EN EL BOTÓN EDITAR
             btnEditar.setOnClickListener {
-                // Convertimos Producto a Productomodificar
                 val productomod = Productomodificar(
                     id = producto.id,
                     nombre = producto.nombre ?: "",
                     descripcion = producto.descripcion ?: "",
                     precio = producto.precio,
                     stock = producto.stock,
-                    //cantidad = producto.stock,
                     categoria = producto.categoria ?: "General",
                     imagen = producto.imagen
                 )
 
+                onEditarProducto(productomod)  // <- AHORA SÍ SE LLAMA A LA ACTIVITY
+            }
 
-
-                // Creamos el Intent
-                val intent = android.content.Intent(context, ModificarProductoActivity::class.java).apply {
-                    putExtra("PRODUCTO_EDITAR", productomod)
-                }
-                context.startActivity(intent)
+            // Botón eliminar
+            btnEliminar.setOnClickListener {
+                onEliminar(producto)
             }
 
         }

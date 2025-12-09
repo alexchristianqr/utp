@@ -4,19 +4,6 @@ package com.app.apkproductos.productos
 import java.io.Serializable
 
 
-/*
-@Serializable
-data class Producto(
-    var id: Int = 0,
-    var nombre: String,
-    var descripcion: String,
-    var imagen: String,
-    var precio: Float,
-    var stock: Int,
-    var categoria: String,
-)
-*/
-
 
 
 //version1
@@ -33,6 +20,10 @@ data class Producto(
 
 
 
+
+
+
+
 data class Productomodificar(
     val id: Int,
     val nombre: String,
@@ -46,25 +37,15 @@ data class Productomodificar(
 
 
 
-/*
-data class Productomodificar(
+data class Productomodificado(
     val id: Int,
     val nombre: String,
     val descripcion: String,
-    val precio: Float,
     val stock: Int,
-    val cantidad: Int,
+    val precio: Double, // <-- Double
     val categoria: String,
-    val imagen: String? // URL devuelta por la API
-) : Serializable*/
+    val imagen: String?
+) : java.io.Serializable
 
-/*
-data class Producto(
-    var id: Int = 0,
-    var nombre: String,
-    var descripcion: String,
-    var imagen: String,
-    var precio: Float,
-    var stock: Int,
-    var categoria: String
-) : Serializable*/
+
+
