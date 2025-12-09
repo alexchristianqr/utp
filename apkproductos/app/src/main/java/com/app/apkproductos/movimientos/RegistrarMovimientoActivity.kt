@@ -1,8 +1,5 @@
 package com.app.apkproductos.movimientos
 
-
-//librerias
-
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter

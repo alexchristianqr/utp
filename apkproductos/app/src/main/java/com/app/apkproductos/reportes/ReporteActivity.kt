@@ -45,9 +45,8 @@ class ReporteActivity : AppCompatActivity() {
 		rvMovimientos = findViewById(R.id.rvMovimientos)
 		btnBack = findViewById(R.id.btnBack4)
 		
-		// 🔹 Setup del RecyclerView
 		rvMovimientos.layoutManager = LinearLayoutManager(this)
-		rvMovimientos.adapter = ReporteAdapter(emptyList()) // Adapter inicial vacío
+		rvMovimientos.adapter = ReporteAdapter(emptyList())
 	}
 
 	private fun configurarBotonBuscar() {
@@ -60,7 +59,7 @@ class ReporteActivity : AppCompatActivity() {
 
 			lifecycleScope.launch {
 				try {
-					val response = HttpService.create<ApiService>().getMovimientos(codigo)
+					val response = HttpService.create<ReporteService>().getMovimientos(codigo)
 
 					if (response.isSuccessful) {
 						val apiResponse = response.body()

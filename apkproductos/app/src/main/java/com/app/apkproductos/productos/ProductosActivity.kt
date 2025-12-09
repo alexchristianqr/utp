@@ -6,9 +6,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -19,67 +22,69 @@ import com.app.apkproductos.R
 import com.app.apkproductos.common.constants.GlobalApp
 import com.app.apkproductos.common.services.HttpService
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.launch
-
-//import android.content.Intent
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
-
 import kotlinx.coroutines.launch
-
-import android.widget.Button
-import android.widget.TextView
-
 
 class ProductosActivity : AppCompatActivity() {
-
-
     private var listaProductos: MutableList<Producto> = mutableListOf()
-    //private var listaProductos = mutableListOf<Producto>()
 
     private lateinit var adaptador: ProductoAdaptador
     private lateinit var rvProductoList: RecyclerView
     private lateinit var btnNuevo: FloatingActionButton
     private lateinit var btnBack: ImageButton
-
-
-
-
-
-
-    private val nuevoProductoLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val productoNuevo = result.data?.getSerializableExtra("producto") as? Producto
-            productoNuevo?.let {
-                listaProductos.add(0, it) // Agregar al inicio
-                //listaProductos.add(it) // agrega al final
-                adaptador.setListaProductos(listaProductos) // Notificar adaptador
-                rvProductoList.scrollToPosition(0) // Mover scroll al inicio
-            }
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_listar_producto)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.listar_producto)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
+        
+        referenciar()
+        cargarProductos()
+        acciones()
     }
-
-    /*
-    private fun eliminarProducto(producto: Producto) {
-        lifecycleScope.launch {
-            try {
-                val response = HttpService.create<ProductoService>().eliminarProducto(producto.id)
-                if (response.isSuccessful && response.body()?.ok == true) {
-                    // 🔥 Quitar de la lista local
-                    listaProductos.remove(producto)
-                    adaptador.setListaProductos(listaProductos)
-                } else {
-                    Log.e("EliminarProducto", "Error: ${response.body()?.message}")
-                }
-            } catch (e: Exception) {
-                Log.e("EliminarProducto", "Excepción: ${e.message}")
+    
+    private fun referenciar() {
+        rvProductoList = findViewById(R.id.rvProductoList)
+        btnBack = findViewById(R.id.btnBack)
+        btnNuevo = findViewById(R.id.btnNuevo)
+        
+        rvProductoList.layoutManager = LinearLayoutManager(this)
+        
+        /*
+        adaptador = ProductoAdaptador { productoEditar -> // <- Aquí recibes el 'productomod'
+            val intent = Intent(this, ModificarProductoActivity::class.java)
+            intent.putExtra("PRODUCTO_EDITAR", productoEditar)
+            editProductoLauncher.launch(intent) // <- Aquí se lanza correctamente esperando resultado
+        }*/
+        
+        /*
+        adaptador = ProductoAdaptador { productoEditar ->
+            val intent = Intent(this, ModificarProductoActivity::class.java)
+            intent.putExtra("PRODUCTO_EDITAR", productoEditar)
+            editProductoLauncher.launch(intent)
+        }*/
+        adaptador = ProductoAdaptador(
+            onEditarProducto = { productoEditar ->
+                val intent = Intent(this, ModificarProductoActivity::class.java)
+                intent.putExtra("PRODUCTO_EDITAR", productoEditar)
+                editProductoLauncher.launch(intent)
+            },
+            onEliminar = { producto ->
+                eliminarProducto(producto) // llamamos a tu función que hace la eliminación
             }
-        }
-    }*/
-
+        )
+        
+        
+        
+        adaptador.setContext(this)
+        rvProductoList.adapter = adaptador // se agrego esto
+    }
+    
     private fun eliminarProducto(producto: Producto) {
         mostrarDialogEliminar(producto) // Llama a la función que crea el modal oscuro
     }
@@ -133,67 +138,20 @@ class ProductosActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_listar_producto)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.listar_producto)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        referenciar()
-        cargarProductos()
-        acciones()
-    }
-
-    private fun referenciar() {
-        rvProductoList = findViewById(R.id.rvProductoList)
-        btnBack = findViewById(R.id.btnBack)
-        btnNuevo = findViewById(R.id.btnNuevo)
-
-        rvProductoList.layoutManager = LinearLayoutManager(this)
-
-        /*
-        adaptador = ProductoAdaptador { productoEditar -> // <- Aquí recibes el 'productomod'
-            val intent = Intent(this, ModificarProductoActivity::class.java)
-            intent.putExtra("PRODUCTO_EDITAR", productoEditar)
-            editProductoLauncher.launch(intent) // <- Aquí se lanza correctamente esperando resultado
-        }*/
-
-        /*
-        adaptador = ProductoAdaptador { productoEditar ->
-            val intent = Intent(this, ModificarProductoActivity::class.java)
-            intent.putExtra("PRODUCTO_EDITAR", productoEditar)
-            editProductoLauncher.launch(intent)
-        }*/
-        adaptador = ProductoAdaptador(
-            onEditarProducto = { productoEditar ->
-                val intent = Intent(this, ModificarProductoActivity::class.java)
-                intent.putExtra("PRODUCTO_EDITAR", productoEditar)
-                editProductoLauncher.launch(intent)
-            },
-            onEliminar = { producto ->
-                eliminarProducto(producto) // llamamos a tu función que hace la eliminación
+    
+    private val nuevoProductoLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val productoNuevo = result.data?.getSerializableExtra("producto") as? Producto
+            productoNuevo?.let {
+                listaProductos.add(0, it) // Agregar al inicio
+                adaptador.setListaProductos(listaProductos) // Notificar adaptador
+                rvProductoList.scrollToPosition(0) // Mover scroll al inicio
             }
-        )
-
-
-
-        adaptador.setContext(this)
-        rvProductoList.adapter = adaptador // se agrego esto
+        }
     }
-
-
-
-
+    
     private val editProductoLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -213,8 +171,6 @@ class ProductosActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun cargarProductos() {
         HttpService.setBaseUrl(GlobalApp.PRODUCTO_BASE_URL)
         val service = HttpService.create<ProductoService>()
@@ -227,7 +183,6 @@ class ProductosActivity : AppCompatActivity() {
                     val productoResponse = response.body()
                     listaProductos.clear()
                     listaProductos.addAll(productoResponse!!.data)
-
                     adaptador.setListaProductos(listaProductos)
 
                 } else {
@@ -244,13 +199,6 @@ class ProductosActivity : AppCompatActivity() {
         cargarProductos()   // 🔥 Recarga los datos cada vez que vuelves a la Activity
     }
 
-
-
-    private fun mostrarProductos() {
-        adaptador.setListaProductos(listaProductos)
-        rvProductoList.adapter = adaptador
-    }
-
     private fun acciones() {
         btnBack.setOnClickListener { finish() }
 
@@ -259,6 +207,4 @@ class ProductosActivity : AppCompatActivity() {
             nuevoProductoLauncher.launch(intent)
         }
     }
-
-
-}//fin
+}

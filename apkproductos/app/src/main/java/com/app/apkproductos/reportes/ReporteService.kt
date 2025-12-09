@@ -1,13 +1,10 @@
 package com.app.apkproductos.reportes
 
-import com.app.apkproductos.reportes.MovimientosResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
-import com.app.apkproductos.reportes.ProductoSimple
 
-interface ApiService {
-
+interface ReporteService {
     @GET("movimientos/{producto_id}")
     suspend fun getMovimientos(
         @Path("producto_id") productoId: Int
@@ -15,14 +12,6 @@ interface ApiService {
 
 }
 
-
-/*
-// Producto simple
-data class ProductoSimple(
-    val id: Int,
-    val nombre: String
-)
-*/
 // Movimiento individual (tal como lo envía tu backend)
 data class MovimientoData(
     val id: Int,

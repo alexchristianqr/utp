@@ -22,7 +22,6 @@ import okhttp3.RequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
-import android.util.Log
 
 class ModificarProductoActivity : AppCompatActivity() {
 

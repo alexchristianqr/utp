@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.apkproductos.R
 
-
 class ReporteAdapter(
     private val movimientos: List<MovimientoReporte>
 ) : RecyclerView.Adapter<ReporteAdapter.MovimientoViewHolder>() {
