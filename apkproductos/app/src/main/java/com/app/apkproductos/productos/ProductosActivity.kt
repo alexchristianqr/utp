@@ -62,6 +62,7 @@ class ProductosActivity : AppCompatActivity() {
             val productoNuevo = result.data?.getSerializableExtra("producto") as? Producto
             productoNuevo?.let {
                 listaProductos.add(0, it) // Agregar al inicio
+                //listaProductos.add(it) // agrega al final
                 adaptador.setListaProductos(listaProductos) // Notificar adaptador
                 rvProductoList.scrollToPosition(0) // Mover scroll al inicio
             }

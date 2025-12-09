@@ -38,6 +38,7 @@ class ProductoAdaptador : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>()
         private val txtProductoStock: TextView = view.findViewById(R.id.txtProductoStock)
         private val imgProducto: ImageView = view.findViewById(R.id.imgProducto)
         private val btnEditar: ImageButton = view.findViewById(R.id.btnEditar)
+
         private val btnEliminar: ImageButton = view.findViewById(R.id.btnEliminar)
 
         fun rellenarDatos(producto: Producto) {
@@ -60,6 +61,30 @@ class ProductoAdaptador : RecyclerView.Adapter<ProductoAdaptador.MiViewHolder>()
             // Aquí puedes agregar listeners para editar/eliminar si quieres
             // btnEditar.setOnClickListener { ... }
             // btnEliminar.setOnClickListener { ... }
+
+            // 🎯 IMPLEMENTACIÓN DEL CLIC EN EL BOTÓN EDITAR
+            btnEditar.setOnClickListener {
+                // Convertimos Producto a Productomodificar
+                val productomod = Productomodificar(
+                    id = producto.id,
+                    nombre = producto.nombre ?: "",
+                    descripcion = producto.descripcion ?: "",
+                    precio = producto.precio,
+                    stock = producto.stock,
+                    //cantidad = producto.stock,
+                    categoria = producto.categoria ?: "General",
+                    imagen = producto.imagen
+                )
+
+
+
+                // Creamos el Intent
+                val intent = android.content.Intent(context, ModificarProductoActivity::class.java).apply {
+                    putExtra("PRODUCTO_EDITAR", productomod)
+                }
+                context.startActivity(intent)
+            }
+
         }
     }
 

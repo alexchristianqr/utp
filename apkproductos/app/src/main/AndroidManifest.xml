@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Apkproductos"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".productos.ModificarProductoActivity"
+            android:exported="false" />
         <activity
             android:name=".productos.RegistrarProductoActivity"
             android:exported="false" />
@@ -26,6 +30,7 @@
         <activity
             android:name=".productos.ProductosActivity"
             android:exported="false" /> <!-- <activity -->
+
         <!-- android:name=".MainActivity" -->
         <!-- android:exported="true"> -->
         <!-- <intent-filter> -->

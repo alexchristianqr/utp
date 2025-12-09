@@ -8,8 +8,11 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Multipart
 import retrofit2.http.Part
+import retrofit2.http.PartMap
+
 
 interface ProductoService {
     @GET("/productos")
@@ -21,6 +24,14 @@ interface ProductoService {
         @Body producto: RegistrarProductoRequest
     ): Response<RegistrarProductoResponse>
 
+    //SE AGREGO PARA MODIFICAR
+    @Multipart
+    @PUT("/productos/{id}")
+    suspend fun actualizarProducto(
+        @Path("id") id: Int,
+        @PartMap campos: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part imagen: MultipartBody.Part?
+    ): Response<ProductoResponse>
 
     @Multipart
     @POST("/productos")
