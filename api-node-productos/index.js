@@ -79,7 +79,7 @@ app.get('/productos', async (req, res) => {
 
 
 
-router.put('/productos/:id', upload.single('imagen'), async (req, res) => {
+app.put('/productos/:id', upload.single('imagen'), async (req, res) => {
     try {
         const id = req.params.id;
         const { nombre, descripcion, precio, cantidad, categoria } = req.body;
