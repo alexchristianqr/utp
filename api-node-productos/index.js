@@ -23,18 +23,6 @@ const configDB = {
   database: 'db_productos',
 };
 
-
-/*
-app.get('/productos', async (req, res) => {
-  try {
-    const cnx = await createConnection(configDB);
-    const [rows] = await cnx.execute('SELECT * FROM productos');
-    return res.json({ message: 'Todos los productos', data: rows });
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-});*/
-
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
@@ -56,16 +44,14 @@ const storage = multer.diskStorage({
   },
 });
 
+// Middleware de subida de archivos
 const upload = multer({ storage: storage });
-
 
 app.get('/', (req, res) => {
   res.send('API en Node.js - Servidor de Productos con Imágenes');
 });
 
-
-
-// Obtener todos los productos para la lista
+// Obtener todos los productos
 app.get('/productos', async (req, res) => {
   try {
     const cnx = await createConnection(configDB);
@@ -77,47 +63,43 @@ app.get('/productos', async (req, res) => {
   }
 });
 
-
-
-//ACTUALIZAR POR ID
+// Actualizar producto por id
 app.put('/productos/:id', upload.single('imagen'), async (req, res) => {
-    const id = req.params.id;
-    const { nombre, descripcion, precio, stock, categoria } = req.body;
+  const id = req.params.id;
+  const { nombre, descripcion, precio, stock, categoria } = req.body;
 
-    try {
-        const cnx = await createConnection(configDB);
+  try {
+    const cnx = await createConnection(configDB);
 
-        // Nombre de la imagen si se subió
-        const imagenName = req.file ? `/uploads/${req.file.filename}` : null;
+    // Nombre de la imagen si se subió
+    const imagenName = req.file ? `/uploads/${req.file.filename}` : null;
 
-        // Actualizar el producto
-        const sqlUpdate = `
+    // Actualizar el producto
+    const sqlUpdate = `
           UPDATE productos 
           SET nombre = ?, descripcion = ?, precio = ?, stock = ?, categoria = ?, imagen = IFNULL(?, imagen)
           WHERE id = ?`;
 
-        await cnx.execute(sqlUpdate, [nombre, descripcion, precio, stock, categoria, imagenName, id]);
+    await cnx.execute(sqlUpdate, [nombre, descripcion, precio, stock, categoria, imagenName, id]);
 
-        // Obtener producto actualizado
-        const [rows] = await cnx.execute("SELECT * FROM productos WHERE id = ?", [id]);
+    // Obtener producto actualizado
+    const [rows] = await cnx.execute('SELECT * FROM productos WHERE id = ?', [id]);
 
-        const productoActualizado = rows.length ? rows[0] : null;
+    const productoActualizado = rows.length ? rows[0] : null;
 
-        // Respuesta: data siempre es lista + timestamp
-        res.json({
-            ok: true,
-            data: productoActualizado ? [productoActualizado] : [],
-            timestamp: new Date()  // nuevo dato adicional
-        });
+    // Respuesta: data siempre es lista + timestamp
+    res.json({
+      ok: true,
+      data: productoActualizado ? [productoActualizado] : [],
+      timestamp: new Date(), // nuevo dato adicional
+    });
 
-        await cnx.end();
-    } catch (error) {
-        console.error("Error al actualizar producto:", error);
-        res.status(500).json({ ok: false, error: error.message });
-    }
+    await cnx.end();
+  } catch (error) {
+    console.error('Error al actualizar producto:', error);
+    res.status(500).json({ ok: false, error: error.message });
+  }
 });
-
-
 
 // Eliminar producto por id
 app.delete('/productos/:id', async (req, res) => {
@@ -153,55 +135,7 @@ app.delete('/productos/:id', async (req, res) => {
   }
 });
 
-
-/* original
-app.post('/productos', async (req, res) => {
-  try {
-    const { nombre, descripcion, precio, stock, categoria } = req.body;
-    const cnx = await createConnection(configDB);
-    const [result] = await cnx.execute(
-      'INSERT INTO productos (nombre, descripcion, imagen, precio, stock, categoria) VALUES (?, ?, ?, ?, ?, ?)',
-      [nombre, descripcion, imagen, precio, stock, categoria]
-    );
-    return res.json({
-      message: 'producto registrado',
-      data: { producto_id: result.insertId, nombre, descripcion, imagen, precio, stock, categoria },
-    });
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-});*/
-
-/* ORIGINAL 2
-app.post('/productos', async (req, res) => {
-  try {
-    const { nombre, descripcion, precio, stock, categoria } = req.body;
-    const imagen = req.body.imagen ?? null;  // ←🔥 AGREGADO
-
-    const cnx = await createConnection(configDB);
-    const [result] = await cnx.execute(
-      'INSERT INTO productos (nombre, descripcion, imagen, precio, stock, categoria) VALUES (?, ?, ?, ?, ?, ?)',
-      [nombre, descripcion, imagen, precio, stock, categoria]
-    );
-
-    return res.json({
-      message: 'producto registrado',
-      data: {
-        producto_id: result.insertId,
-        nombre,
-        descripcion,
-        imagen,
-        precio,
-        stock,
-        categoria
-      }
-    });
-
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-});*/
-
+// Registrar nuevo producto con imagen
 app.post('/productos', upload.single('imagen'), async (req, res) => {
   try {
     const { nombre, descripcion, precio, stock, categoria } = req.body;
@@ -231,6 +165,7 @@ app.post('/productos', upload.single('imagen'), async (req, res) => {
   }
 });
 
+// Obtener producto por id
 app.get('/productos/:id', async (req, res) => {
   const { id } = req.params;
 
@@ -249,6 +184,7 @@ app.get('/productos/:id', async (req, res) => {
   }
 });
 
+// Registrar movimiento y actualizar stock
 app.post('/movimientos', async (req, res) => {
   try {
     const { producto_id, tipo, cantidad } = req.body;
@@ -304,6 +240,7 @@ app.post('/movimientos', async (req, res) => {
   }
 });
 
+// Obtener movimientos por producto_id
 app.get('/movimientos/:producto_id', async (req, res) => {
   const { producto_id } = req.params;
 
