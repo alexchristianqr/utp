@@ -1,0 +1,1470 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/12/2026 1:30:51 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ALEX-LAPTOP"
+  DTS:CreatorName="ALEX-LAPTOP\alex"
+  DTS:DTSID="{0ADC91FF-38DC-4581-AC0F-3000F305B05C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="87"
+  DTS:VersionGUID="{27E8926F-3E12-42F3-B1CC-6BDE6DC17DFB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[.\SQLEXPRESS.BDVENTAS]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{962B7101-9B80-4712-9D3D-B2BD2620AFA1}"
+      DTS:ObjectName=".\SQLEXPRESS.BDVENTAS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=BDVENTAS;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package-{962B7101-9B80-4712-9D3D-B2BD2620AFA1}.\SQLEXPRESS.BDVENTAS;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[.\SQLEXPRESS.DWVENTAS_FINAL]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1FCD1E42-40F2-44DF-B88D-170ACB5B69B3}"
+      DTS:ObjectName=".\SQLEXPRESS.DWVENTAS_FINAL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=DWVENTAS_FINAL;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{1FCD1E42-40F2-44DF-B88D-170ACB5B69B3}.\SQLEXPRESS.DWVENTAS_FINAL;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{B6A02267-0917-4A56-A9B1-7AF9569CF3B0}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\alex\Downloads\exportados\clientes.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Carga inicial"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0EBB9AD4-6843-4A14-9BB5-9D88E25F9DE9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Carga inicial"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{962B7101-9B80-4712-9D3D-B2BD2620AFA1}"
+          SQLTask:SqlStatementSource="EXEC DWVENTAS_FINAL.dw.usp_Run_ETL_Ventas_FullInit;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Conectarse a BDVENTAS"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{458A6E20-1125-476F-AE2C-84ED81DF9EA3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Conectarse a BDVENTAS"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Conectarse a BDVENTAS\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input].Columns[TLF_CLI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="9"
+                      cachedName="TLF_CLI"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TLF_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input].Columns[COD_CLI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="COD_CLI"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[COD_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input].Columns[RSO_CLI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="RSO_CLI"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[RSO_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input].Columns[DIR_CLI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DIR_CLI"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIR_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input].Columns[RUC_CLI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="RUC_CLI"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[RUC_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input].Columns[COD_DIS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="COD_DIS"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[COD_DIS]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input].Columns[FEC_REG]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="FEC_REG"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[FEC_REG]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input].Columns[TIP_CLI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="TIP_CLI"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TIP_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input].Columns[CON_CLI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="CON_CLI"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[CON_CLI]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TLF_CLI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TLF_CLI]"
+                      name="Copy of TLF_CLI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TLF_CLI]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of COD_CLI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of COD_CLI]"
+                      name="Copy of COD_CLI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[COD_CLI]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of RSO_CLI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of RSO_CLI]"
+                      name="Copy of RSO_CLI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[RSO_CLI]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DIR_CLI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DIR_CLI]"
+                      name="Copy of DIR_CLI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIR_CLI]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of RUC_CLI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of RUC_CLI]"
+                      name="Copy of RUC_CLI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[RUC_CLI]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of COD_DIS]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of COD_DIS]"
+                      name="Copy of COD_DIS"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[COD_DIS]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FEC_REG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FEC_REG]"
+                      name="Copy of FEC_REG"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[FEC_REG]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TIP_CLI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TIP_CLI]"
+                      name="Copy of TIP_CLI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TIP_CLI]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CON_CLI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CON_CLI]"
+                      name="Copy of CON_CLI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[CON_CLI]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Conectarse a BDVENTAS\Excel Destination"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Excel Destination"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">ExcelClientes</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Conectarse a BDVENTAS\Excel Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of TLF_CLI]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of TLF_CLI"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[TLF_CLI]"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TLF_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of COD_CLI]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of COD_CLI"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[COD_CLI]"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of COD_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of RSO_CLI]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of RSO_CLI"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[RSO_CLI]"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of RSO_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of DIR_CLI]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of DIR_CLI"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[DIR_CLI]"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DIR_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of RUC_CLI]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of RUC_CLI"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[RUC_CLI]"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of RUC_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of COD_DIS]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of COD_DIS"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[COD_DIS]"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of COD_DIS]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of FEC_REG]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of FEC_REG"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[FEC_REG]"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FEC_REG]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of TIP_CLI]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of TIP_CLI"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[TIP_CLI]"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TIP_CLI]" />
+                    <inputColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of CON_CLI]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of CON_CLI"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[CON_CLI]"
+                      lineageId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CON_CLI]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[TLF_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="TLF_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[COD_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="COD_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[RSO_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="RSO_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[DIR_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="DIR_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[RUC_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="RUC_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[COD_DIS]"
+                      dataType="wstr"
+                      length="255"
+                      name="COD_DIS" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[FEC_REG]"
+                      dataType="wstr"
+                      length="255"
+                      name="FEC_REG" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[TIP_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="TIP_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[CON_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="CON_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of TLF_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of TLF_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of COD_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of COD_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of RSO_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of RSO_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of DIR_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of DIR_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of RUC_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of RUC_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of COD_DIS]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of COD_DIS" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of FEC_REG]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of FEC_REG" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of TIP_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of TIP_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of CON_CLI]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of CON_CLI" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Conectarse a BDVENTAS\Excel Destination.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Conectarse a BDVENTAS\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Conectarse a BDVENTAS\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Conectarse a BDVENTAS\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CLIENTE]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Conectarse a BDVENTAS\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[.\SQLEXPRESS.BDVENTAS]"
+                  connectionManagerRefId="Package.ConnectionManagers[.\SQLEXPRESS.BDVENTAS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TLF_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TLF_CLI]"
+                      length="9"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TLF_CLI]"
+                      name="TLF_CLI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[COD_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COD_CLI]"
+                      length="5"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[COD_CLI]"
+                      name="COD_CLI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[RSO_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RSO_CLI]"
+                      length="30"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[RSO_CLI]"
+                      name="RSO_CLI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIR_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DIR_CLI]"
+                      length="100"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DIR_CLI]"
+                      name="DIR_CLI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[RUC_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RUC_CLI]"
+                      length="11"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[RUC_CLI]"
+                      name="RUC_CLI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[COD_DIS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COD_DIS]"
+                      length="5"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[COD_DIS]"
+                      name="COD_DIS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[FEC_REG]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FEC_REG]"
+                      length="10"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[FEC_REG]"
+                      name="FEC_REG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TIP_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TIP_CLI]"
+                      length="10"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TIP_CLI]"
+                      name="TIP_CLI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[CON_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CON_CLI]"
+                      length="30"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[CON_CLI]"
+                      name="CON_CLI"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COD_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="COD_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RSO_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="RSO_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DIR_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="DIR_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TLF_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="9"
+                      name="TLF_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RUC_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="RUC_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[COD_DIS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="COD_DIS" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FEC_REG]"
+                      dataType="wstr"
+                      length="10"
+                      name="FEC_REG" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TIP_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="TIP_CLI" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CON_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="CON_CLI" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TLF_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="9"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TLF_CLI]"
+                      name="TLF_CLI" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COD_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COD_CLI]"
+                      name="COD_CLI" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RSO_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RSO_CLI]"
+                      name="RSO_CLI" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DIR_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DIR_CLI]"
+                      name="DIR_CLI" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RUC_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RUC_CLI]"
+                      name="RUC_CLI" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COD_DIS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[COD_DIS]"
+                      name="COD_DIS" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FEC_REG]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FEC_REG]"
+                      name="FEC_REG" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TIP_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TIP_CLI]"
+                      name="TIP_CLI" />
+                    <outputColumn
+                      refId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CON_CLI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CON_CLI]"
+                      name="CON_CLI" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Conectarse a BDVENTAS.Paths[Data Conversion Output]"
+              endId="Package\Conectarse a BDVENTAS\Excel Destination.Inputs[Excel Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Conectarse a BDVENTAS\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Conectarse a BDVENTAS.Paths[OLE DB Source Output]"
+              endId="Package\Conectarse a BDVENTAS\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Conectarse a BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Conectarse a DW_BDVENTAS"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{953FB54B-83EC-478E-9517-DABB5B810A92}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Conectarse a DW_BDVENTAS"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[sysdiagrams]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[.\SQLEXPRESS.DWVENTAS_FINAL]"
+                  connectionManagerRefId="Package.ConnectionManagers[.\SQLEXPRESS.DWVENTAS_FINAL]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      length="128"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                      name="name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[principal_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[principal_id]"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[principal_id]"
+                      name="principal_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[diagram_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[diagram_id]"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[diagram_id]"
+                      name="diagram_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[version]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[version]"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[version]"
+                      name="version"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[definition]"
+                      dataType="image"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[definition]"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].Columns[definition]"
+                      name="definition"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="128"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[principal_id]"
+                      dataType="i4"
+                      name="principal_id" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[diagram_id]"
+                      dataType="i4"
+                      name="diagram_id" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[version]"
+                      dataType="i4"
+                      name="version" />
+                    <externalMetadataColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[definition]"
+                      dataType="image"
+                      name="definition" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[principal_id]"
+                      dataType="i4"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[principal_id]"
+                      name="principal_id" />
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[diagram_id]"
+                      dataType="i4"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[diagram_id]"
+                      name="diagram_id" />
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[version]"
+                      dataType="i4"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[version]"
+                      name="version" />
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[definition]"
+                      dataType="image"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[definition]"
+                      name="definition" />
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Conectarse a DW_BDVENTAS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ETL Incremental"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BB2CB994-8720-42B4-849E-AC5011B3931A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL Incremental"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1FCD1E42-40F2-44DF-B88D-170ACB5B69B3}"
+          SQLTask:SqlStatementSource="EXEC dw.usp_Run_ETL_Ventas_Delta;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{467756BC-BA54-47E1-9540-7EC0354AB7D1}"
+      DTS:From="Package\Conectarse a DW_BDVENTAS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\ETL Incremental" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{EE3451E7-0A85-446D-BED9-1662F803567B}"
+      DTS:From="Package\Conectarse a BDVENTAS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Carga inicial" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{BD7C8CBE-ADA7-4625-8FCB-2E57D46132DD}"
+      DTS:From="Package\Carga inicial"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Conectarse a DW_BDVENTAS" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="199.2,41.6"
+          Id="Package\Conectarse a BDVENTAS"
+          TopLeft="113.333327141073,79.7333327788776" />
+        <NodeLayout
+          Size="222.4,41.6"
+          Id="Package\Conectarse a DW_BDVENTAS"
+          TopLeft="438.397411944457,195.733331972228" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\ETL Incremental"
+          TopLeft="494.369631108492,317.166664461129" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="549.597411944457,237.333331972228">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="21.9722191640349,79.8333324889012"
+              Start="0,0"
+              End="21.9722191640349,72.3333324889012">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.9166662444506" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.9166662444506"
+                    Point2="0,39.9166662444506"
+                    Point3="4,39.9166662444506" />
+                  <mssgle:LineSegment
+                    End="17.9722191640349,39.9166662444506" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17.9722191640349,39.9166662444506"
+                    Point2="21.9722191640349,39.9166662444506"
+                    Point3="21.9722191640349,43.9166662444506" />
+                  <mssgle:LineSegment
+                    End="21.9722191640349,72.3333324889012" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="136,41.6"
+          Id="Package\Carga inicial"
+          TopLeft="162.499991121392,218.111109594394" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="212.933327141073,121.333332778878">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="17.5666639803189,96.7777768155161"
+              Start="0,0"
+              End="17.5666639803189,89.2777768155161">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.3888884077581" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44.3888884077581"
+                    Point2="0,48.3888884077581"
+                    Point3="4,48.3888884077581" />
+                  <mssgle:LineSegment
+                    End="13.5666639803189,48.3888884077581" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.5666639803189,48.3888884077581"
+                    Point2="17.5666639803189,48.3888884077581"
+                    Point3="17.5666639803189,52.3888884077581" />
+                  <mssgle:LineSegment
+                    End="17.5666639803189,89.2777768155161" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="298.499991121392,238.911109594394">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="139.897420823065,-22.3777776221656"
+              Start="0,0"
+              End="132.397420823065,-22.3777776221656">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="65.9487104115327,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="65.9487104115327,0"
+                    Point2="69.9487104115327,0"
+                    Point3="69.9487104115327,-4" />
+                  <mssgle:LineSegment
+                    End="69.9487104115327,-18.3777776221656" />
+                  <mssgle:CubicBezierSegment
+                    Point1="69.9487104115327,-18.3777776221656"
+                    Point2="69.9487104115327,-22.3777776221656"
+                    Point3="73.9487104115327,-22.3777776221656" />
+                  <mssgle:LineSegment
+                    End="132.397420823065,-22.3777776221656" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Conectarse a BDVENTAS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Conectarse a BDVENTAS\OLE DB Source"
+          TopLeft="109.621206131774,86.4303024292775" />
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\Conectarse a BDVENTAS\Excel Destination"
+          TopLeft="516.439365722391,334.13939161583" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Conectarse a BDVENTAS\Data Conversion"
+          TopLeft="316.060588791816,201.224241024954" />
+        <EdgeLayout
+          Id="Package\Conectarse a BDVENTAS.Paths[OLE DB Source Output]"
+          TopLeft="185.621206131774,128.030302429277">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="208.439382660042,73.1939385956766"
+              Start="0,0"
+              End="208.439382660042,65.6939385956766">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5969692978383" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.5969692978383"
+                    Point2="0,36.5969692978383"
+                    Point3="4,36.5969692978383" />
+                  <mssgle:LineSegment
+                    End="204.439382660042,36.5969692978383" />
+                  <mssgle:CubicBezierSegment
+                    Point1="204.439382660042,36.5969692978383"
+                    Point2="208.439382660042,36.5969692978383"
+                    Point3="208.439382660042,40.5969692978383" />
+                  <mssgle:LineSegment
+                    End="208.439382660042,65.6939385956766" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Conectarse a BDVENTAS.Paths[Data Conversion Output]"
+          TopLeft="394.060588791816,242.824241024954">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="201.978776930575,91.3151505908763"
+              Start="0,0"
+              End="201.978776930575,83.8151505908763">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.6575752954381" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.6575752954381"
+                    Point2="0,45.6575752954381"
+                    Point3="4,45.6575752954381" />
+                  <mssgle:LineSegment
+                    End="197.978776930575,45.6575752954381" />
+                  <mssgle:CubicBezierSegment
+                    Point1="197.978776930575,45.6575752954381"
+                    Point2="201.978776930575,45.6575752954381"
+                    Point3="201.978776930575,49.6575752954381" />
+                  <mssgle:LineSegment
+                    End="201.978776930575,83.8151505908763" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Conectarse a BDVENTAS\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Conectarse a BDVENTAS\Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Conectarse a DW_BDVENTAS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Conectarse a DW_BDVENTAS\OLE DB Source"
+          TopLeft="204.99999207755,71.2666665883197" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Conectarse a DW_BDVENTAS\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

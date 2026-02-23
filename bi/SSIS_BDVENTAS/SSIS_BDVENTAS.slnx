@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Development" />
+    <Platform Name="Default" />
+  </Configurations>
+  <Project Path="SSIS_BDVENTAS.dtproj" Type="c9674dcb-5085-4a16-b785-4c70dd1589bd">
+    <Platform Project="?" />
+  </Project>
+</Solution>
