@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="101"
-  DTS:VersionGUID="{C2DBAB64-55FE-4F36-830B-6F5CD8314049}">
+  DTS:VersionBuild="110"
+  DTS:VersionGUID="{1EF5FD2E-1F4E-4DC1-B042-3ADC33217A58}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -862,13 +862,13 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\OLEDB (Conexión a DW_BDVENTAS)"
+      DTS:refId="Package\OLEDB (Conexión a DWVENTAS)"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{953FB54B-83EC-478E-9517-DABB5B810A92}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="OLEDB (Conexión a DW_BDVENTAS)"
+      DTS:ObjectName="OLEDB (Conexión a DWVENTAS)"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -876,7 +876,7 @@
           version="1">
           <components>
             <component
-              refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source"
+              refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
@@ -925,7 +925,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Connections[OleDbConnection]"
+                  refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[.\SQLEXPRESS.DWVENTAS_FINAL]"
                   connectionManagerRefId="Package.ConnectionManagers[.\SQLEXPRESS.DWVENTAS_FINAL]"
                   description="The OLE DB runtime connection used to access the database."
@@ -933,122 +933,122 @@
               </connections>
               <outputs>
                 <output
-                  refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output]"
+                  refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      externalMetadataColumnId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
                       length="128"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[name]"
                       name="name"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[principal_id]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[principal_id]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[principal_id]"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[principal_id]"
+                      externalMetadataColumnId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[principal_id]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[principal_id]"
                       name="principal_id"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[diagram_id]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[diagram_id]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[diagram_id]"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[diagram_id]"
+                      externalMetadataColumnId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[diagram_id]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[diagram_id]"
                       name="diagram_id"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[version]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[version]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[version]"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[version]"
+                      externalMetadataColumnId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[version]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[version]"
                       name="version"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[definition]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[definition]"
                       dataType="image"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[definition]"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[definition]"
+                      externalMetadataColumnId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[definition]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].Columns[definition]"
                       name="definition"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[name]"
                       dataType="wstr"
                       length="128"
                       name="name" />
                     <externalMetadataColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[principal_id]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[principal_id]"
                       dataType="i4"
                       name="principal_id" />
                     <externalMetadataColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[diagram_id]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[diagram_id]"
                       dataType="i4"
                       name="diagram_id" />
                     <externalMetadataColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[version]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[version]"
                       dataType="i4"
                       name="version" />
                     <externalMetadataColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[definition]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[definition]"
                       dataType="image"
                       name="definition" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
                       dataType="wstr"
                       length="128"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[name]"
                       name="name" />
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[principal_id]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[principal_id]"
                       dataType="i4"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[principal_id]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[principal_id]"
                       name="principal_id" />
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[diagram_id]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[diagram_id]"
                       dataType="i4"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[diagram_id]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[diagram_id]"
                       name="diagram_id" />
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[version]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[version]"
                       dataType="i4"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[version]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[version]"
                       name="version" />
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[definition]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[definition]"
                       dataType="image"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[definition]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[definition]"
                       name="definition" />
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1061,13 +1061,30 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\TASK (Carga inicial)"
+      DTS:refId="Package\TASK (Carga inicial BD)"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{06FAD0D5-FE98-4028-84BD-D5CC690FC996}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TASK (Carga inicial BD)"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{962B7101-9B80-4712-9D3D-B2BD2620AFA1}"
+          SQLTask:SqlStatementSource="EXEC BDVENTAS.dbo.usp_FullInitBDVentas;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TASK (Carga inicial DW)"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{E30BD0F0-0C6D-4E1C-A247-B0984C81056C}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="TASK (Carga inicial)"
+      DTS:ObjectName="TASK (Carga inicial DW)"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
@@ -1098,7 +1115,7 @@
       DTS:refId="Package\TASK (Reset BD)"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{EBADC67B-2AA7-4C43-B246-4FAF8DB47C73}"
+      DTS:DTSID="{E1A001A8-9E9E-4708-BF3E-2E0EAA5A9A98}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TASK (Reset BD)"
@@ -1107,8 +1124,25 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
+          SQLTask:Connection="{962B7101-9B80-4712-9D3D-B2BD2620AFA1}"
+          SQLTask:SqlStatementSource="EXEC BDVENTAS.dbo.usp_ResetBDVENTAS;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TASK (Reset DW)"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EBADC67B-2AA7-4C43-B246-4FAF8DB47C73}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TASK (Reset DW)"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
           SQLTask:Connection="{1FCD1E42-40F2-44DF-B88D-170ACB5B69B3}"
-          SQLTask:SqlStatementSource="exec DWVENTAS_FINAL.dw.usp_Reset_DWVENTAS_FINAL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="EXEC DWVENTAS_FINAL.dw.usp_Reset_DWVENTAS_FINAL;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -1117,10 +1151,10 @@
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{7303B51F-DA43-429B-8A5E-926BC6CFCF1C}"
-      DTS:From="Package\OLEDB (Conexión a DW_BDVENTAS)"
+      DTS:From="Package\OLEDB (Conexión a DWVENTAS)"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\TASK (Reset BD)" />
+      DTS:To="Package\TASK (Reset DW)" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
@@ -1133,7 +1167,7 @@
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{BDB4570D-935C-4904-9DDB-F74952E88B2B}"
-      DTS:From="Package\TASK (Carga inicial)"
+      DTS:From="Package\TASK (Carga inicial DW)"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
       DTS:To="Package\TASK (ETL Incremental)" />
@@ -1141,10 +1175,34 @@
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
       DTS:DTSID="{445C99CD-5C77-4126-A738-DDFB56C9A92B}"
-      DTS:From="Package\TASK (Reset BD)"
+      DTS:From="Package\TASK (Reset DW)"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\TASK (Carga inicial)" />
+      DTS:To="Package\TASK (Carga inicial DW)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{0DFDEDC9-CC68-44EA-A52A-6F43225C8485}"
+      DTS:From="Package\OLEDB (Conexión a BDVENTAS)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\TASK (Reset BD)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{4CD5A985-8255-4252-BEAB-FA4173142655}"
+      DTS:From="Package\TASK (Reset BD)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\TASK (Carga inicial BD)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{B43151E3-254F-449C-86FA-449028129389}"
+      DTS:From="Package\TASK (Carga inicial BD)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\OLEDB (Conexión a DWVENTAS)" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1159,47 +1217,55 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\Exportar a Excel"
+          TopLeft="703.585689874421,930.296290648618" />
+        <NodeLayout
           Size="234.4,41.6"
           Id="Package\OLEDB (Conexión a BDVENTAS)"
-          TopLeft="51.0372932487409,219.551513624781" />
+          TopLeft="395.944681811239,57.8107740699591" />
         <NodeLayout
-          Size="257.6,41.6"
-          Id="Package\OLEDB (Conexión a DW_BDVENTAS)"
-          TopLeft="281.495063614867,87.7063966964978" />
+          Size="237.6,41.6"
+          Id="Package\OLEDB (Conexión a DWVENTAS)"
+          TopLeft="397.42098320688,475.950839262623" />
         <NodeLayout
-          Size="172.8,41.6"
-          Id="Package\TASK (Carga inicial)"
-          TopLeft="829.545409221091,245.030301326393" />
+          Size="192.8,41.6"
+          Id="Package\TASK (Carga inicial DW)"
+          TopLeft="810.378743601645,712.526595193264" />
         <NodeLayout
           Size="191.2,41.6"
           Id="Package\TASK (ETL Incremental)"
-          TopLeft="448.915088137473,336.075755238728" />
+          TopLeft="420.952126702339,818.112789745226" />
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\TASK (Reset DW)"
+          TopLeft="598.425893229377,600.07407087725" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="915.945409221091,286.630301326393">
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="516.22098320688,517.550839262623">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-371.430321083618,49.4454539123354"
+              EndConnector="163.404910022497,82.5232316146269"
               Start="0,0"
-              End="-371.430321083618,41.9454539123354">
+              End="163.404910022497,75.0232316146269">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.7227269561677" />
+                    End="0,37.2616158073134" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20.7227269561677"
-                    Point2="0,24.7227269561677"
-                    Point3="-4,24.7227269561677" />
+                    Point1="0,37.2616158073134"
+                    Point2="0,41.2616158073134"
+                    Point3="4,41.2616158073134" />
                   <mssgle:LineSegment
-                    End="-367.430321083618,24.7227269561677" />
+                    End="159.404910022497,41.2616158073134" />
                   <mssgle:CubicBezierSegment
-                    Point1="-367.430321083618,24.7227269561677"
-                    Point2="-371.430321083618,24.7227269561677"
-                    Point3="-371.430321083618,28.7227269561677" />
+                    Point1="159.404910022497,41.2616158073134"
+                    Point2="163.404910022497,41.2616158073134"
+                    Point3="163.404910022497,45.2616158073134" />
                   <mssgle:LineSegment
-                    End="-371.430321083618,41.9454539123354" />
+                    End="163.404910022497,75.0232316146269" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1208,36 +1274,100 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\Exportar a Excel"
-          TopLeft="822.752350030108,477.533330012626" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="544.515088137473,377.675755238728">
+          TopLeft="516.552126702339,859.712789745226">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="355.437261892635,99.8575747738981"
+              EndConnector="264.233563172082,70.5835009033926"
               Start="0,0"
-              End="355.437261892635,92.3575747738981">
+              End="264.233563172082,63.0835009033926">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,45.928787386949" />
+                    End="0,31.2917504516963" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,45.928787386949"
-                    Point2="0,49.928787386949"
-                    Point3="4,49.928787386949" />
+                    Point1="0,31.2917504516963"
+                    Point2="0,35.2917504516963"
+                    Point3="4,35.2917504516963" />
                   <mssgle:LineSegment
-                    End="351.437261892635,49.928787386949" />
+                    End="260.233563172082,35.2917504516963" />
                   <mssgle:CubicBezierSegment
-                    Point1="351.437261892635,49.928787386949"
-                    Point2="355.437261892635,49.928787386949"
-                    Point3="355.437261892635,53.928787386949" />
+                    Point1="260.233563172082,35.2917504516963"
+                    Point2="264.233563172082,35.2917504516963"
+                    Point3="264.233563172082,39.2917504516963" />
                   <mssgle:LineSegment
-                    End="355.437261892635,92.3575747738981" />
+                    End="264.233563172082,63.0835009033926" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="906.778743601645,754.126595193264">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-390.226616899306,63.9861945519617"
+              Start="0,0"
+              End="-390.226616899306,56.4861945519617">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.9930972759809" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.9930972759809"
+                    Point2="0,31.9930972759809"
+                    Point3="-4,31.9930972759809" />
+                  <mssgle:LineSegment
+                    End="-386.226616899306,31.9930972759809" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-386.226616899306,31.9930972759809"
+                    Point2="-390.226616899306,31.9930972759809"
+                    Point3="-390.226616899306,35.9930972759809" />
+                  <mssgle:LineSegment
+                    End="-390.226616899306,56.4861945519617" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="679.625893229377,641.67407087725">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="227.152850372268,70.8525243160142"
+              Start="0,0"
+              End="227.152850372268,63.3525243160142">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.4262621580071" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.4262621580071"
+                    Point2="0,35.4262621580071"
+                    Point3="4,35.4262621580071" />
+                  <mssgle:LineSegment
+                    End="223.152850372268,35.4262621580071" />
+                  <mssgle:CubicBezierSegment
+                    Point1="223.152850372268,35.4262621580071"
+                    Point2="227.152850372268,35.4262621580071"
+                    Point3="227.152850372268,39.4262621580071" />
+                  <mssgle:LineSegment
+                    End="227.152850372268,63.3525243160142" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1249,33 +1379,71 @@
         <NodeLayout
           Size="160,41.6"
           Id="Package\TASK (Reset BD)"
-          TopLeft="593.518486090098,172.444443399818" />
+          TopLeft="578.611079497195,190.740739681382" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="410.295063614867,129.306396696498">
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="513.144681811239,99.4107740699591">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="263.223422475231,43.1380467033201"
+              EndConnector="145.466397685956,91.329965611423"
               Start="0,0"
-              End="263.223422475231,35.6380467033201">
+              End="145.466397685956,83.829965611423">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,17.56902335166" />
+                    End="0,41.6649828057115" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,17.56902335166"
-                    Point2="0,21.56902335166"
-                    Point3="4,21.56902335166" />
+                    Point1="0,41.6649828057115"
+                    Point2="0,45.6649828057115"
+                    Point3="4,45.6649828057115" />
                   <mssgle:LineSegment
-                    End="259.223422475231,21.56902335166" />
+                    End="141.466397685956,45.6649828057115" />
                   <mssgle:CubicBezierSegment
-                    Point1="259.223422475231,21.56902335166"
-                    Point2="263.223422475231,21.56902335166"
-                    Point3="263.223422475231,25.56902335166" />
+                    Point1="141.466397685956,45.6649828057115"
+                    Point2="145.466397685956,45.6649828057115"
+                    Point3="145.466397685956,49.6649828057115" />
                   <mssgle:LineSegment
-                    End="263.223422475231,35.6380467033201" />
+                    End="145.466397685956,83.829965611423" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\TASK (Carga inicial BD)"
+          TopLeft="800.925882165266,326.962961449593" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="658.611079497195,232.340739681382">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="237.11480266807,94.6222217682113"
+              Start="0,0"
+              End="237.11480266807,87.1222217682113">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.3111108841056" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.3111108841056"
+                    Point2="0,47.3111108841056"
+                    Point3="4,47.3111108841056" />
+                  <mssgle:LineSegment
+                    End="233.11480266807,47.3111108841056" />
+                  <mssgle:CubicBezierSegment
+                    Point1="233.11480266807,47.3111108841056"
+                    Point2="237.11480266807,47.3111108841056"
+                    Point3="237.11480266807,51.3111108841056" />
+                  <mssgle:LineSegment
+                    End="237.11480266807,87.1222217682113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1285,31 +1453,31 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="673.518486090098,214.044443399818">
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="895.725882165265,368.562961449593">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="242.426923130993,30.9858579265751"
+              EndConnector="-379.504898958386,107.387877813029"
               Start="0,0"
-              End="242.426923130993,23.4858579265751">
+              End="-379.504898958386,99.8878778130295">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,11.4929289632876" />
+                    End="0,49.6939389065147" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,11.4929289632876"
-                    Point2="0,15.4929289632876"
-                    Point3="4,15.4929289632876" />
+                    Point1="0,49.6939389065147"
+                    Point2="0,53.6939389065147"
+                    Point3="-4,53.6939389065147" />
                   <mssgle:LineSegment
-                    End="238.426923130993,15.4929289632876" />
+                    End="-375.504898958386,53.6939389065147" />
                   <mssgle:CubicBezierSegment
-                    Point1="238.426923130993,15.4929289632876"
-                    Point2="242.426923130993,15.4929289632876"
-                    Point3="242.426923130993,19.4929289632876" />
+                    Point1="-375.504898958386,53.6939389065147"
+                    Point2="-379.504898958386,53.6939389065147"
+                    Point3="-379.504898958386,57.6939389065147" />
                   <mssgle:LineSegment
-                    End="242.426923130993,23.4858579265751" />
+                    End="-379.504898958386,99.8878778130295" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1322,60 +1490,10 @@
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\OLEDB (Conexión a BDVENTAS)">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\OLEDB (Conexión a BDVENTAS)\OLE DB Source"
-          TopLeft="109.621206131774,86.4303024292775" />
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\OLEDB (Conexión a BDVENTAS)\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\OLEDB (Conexión a DW_BDVENTAS)">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source"
-          TopLeft="204.99999207755,71.2666665883197" />
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\OLEDB (Conexión a DW_BDVENTAS)\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\Exportar a Excel">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="159.2,41.6"
           Id="Package\Exportar a Excel\Excel Destination"
@@ -1384,40 +1502,6 @@
           Size="156,41.6"
           Id="Package\Exportar a Excel\Data Conversion"
           TopLeft="557.999991685152,160.999997600913" />
-        <EdgeLayout
-          Id="Package\Exportar a Excel.Paths[Data Conversion Output]"
-          TopLeft="635.999991685152,202.599997600913">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-378.399994337559,125.399997511506"
-              Start="0,0"
-              End="-378.399994337559,117.899997511506">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,58.699998755753" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,58.699998755753"
-                    Point2="0,62.699998755753"
-                    Point3="-4,62.699998755753" />
-                  <mssgle:LineSegment
-                    End="-374.399994337559,62.699998755753" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-374.399994337559,62.699998755753"
-                    Point2="-378.399994337559,62.699998755753"
-                    Point3="-378.399994337559,66.699998755753" />
-                  <mssgle:LineSegment
-                    End="-378.399994337559,117.899997511506" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="152,41.6"
           Id="Package\Exportar a Excel\OLE DB Source"
@@ -1453,7 +1537,45 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Exportar a Excel.Paths[Data Conversion Output]"
+          TopLeft="635.999991685152,202.599997600913">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-378.399994337559,125.399997511506"
+              Start="0,0"
+              End="-378.399994337559,117.899997511506">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.699998755753" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,58.699998755753"
+                    Point2="0,62.699998755753"
+                    Point3="-4,62.699998755753" />
+                  <mssgle:LineSegment
+                    End="-374.399994337559,62.699998755753" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-374.399994337559,62.699998755753"
+                    Point2="-378.399994337559,62.699998755753"
+                    Point3="-378.399994337559,66.699998755753" />
+                  <mssgle:LineSegment
+                    End="-378.399994337559,117.899997511506" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -1474,6 +1596,56 @@
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Exportar a Excel\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\OLEDB (Conexión a BDVENTAS)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\OLEDB (Conexión a BDVENTAS)\OLE DB Source"
+          TopLeft="109.621206131774,86.4303024292775" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\OLEDB (Conexión a BDVENTAS)\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\OLEDB (Conexión a DWVENTAS)">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source"
+          TopLeft="204.99999207755,71.2666665883197" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\OLEDB (Conexión a DWVENTAS)\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
