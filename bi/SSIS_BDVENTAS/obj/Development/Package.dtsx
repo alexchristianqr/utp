@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="110"
-  DTS:VersionGUID="{1EF5FD2E-1F4E-4DC1-B042-3ADC33217A58}">
+  DTS:VersionBuild="119"
+  DTS:VersionGUID="{20779767-DB7F-41F0-95AA-F9F3D96D3FD0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -82,10 +82,22 @@
                   name="Data Conversion Input">
                   <inputColumns>
                     <inputColumn
+                      refId="Package\Exportar a Excel\Data Conversion.Inputs[Data Conversion Input].Columns[AuditId]"
+                      cachedDataType="i8"
+                      cachedName="AuditId"
+                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[AuditId]" />
+                    <inputColumn
                       refId="Package\Exportar a Excel\Data Conversion.Inputs[Data Conversion Input].Columns[BatchId]"
                       cachedDataType="i8"
                       cachedName="BatchId"
                       lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[BatchId]" />
+                    <inputColumn
+                      refId="Package\Exportar a Excel\Data Conversion.Inputs[Data Conversion Input].Columns[Proceso]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Proceso"
+                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Proceso]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -98,10 +110,32 @@
                   synchronousInputId="Package\Exportar a Excel\Data Conversion.Inputs[Data Conversion Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Exportar a Excel\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BatchId]"
-                      dataType="i8"
+                      refId="Package\Exportar a Excel\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of AuditId]"
+                      dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
+                      length="250"
+                      lineageId="Package\Exportar a Excel\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of AuditId]"
+                      name="Copy of AuditId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[AuditId]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Exportar a Excel\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BatchId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="250"
                       lineageId="Package\Exportar a Excel\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BatchId]"
                       name="Copy of BatchId"
                       truncationRowDisposition="FailComponent">
@@ -111,6 +145,27 @@
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
                           name="SourceInputColumnLineageID">#{Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[BatchId]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Exportar a Excel\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Proceso]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="250"
+                      lineageId="Package\Exportar a Excel\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Proceso]"
+                      name="Copy of Proceso"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Proceso]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -159,7 +214,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">ExcelMisCambios</property>
+                  name="OpenRowset">Cambios_Auditados$</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -208,11 +263,26 @@
                   name="Excel Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Exportar a Excel\Excel Destination.Inputs[Excel Destination Input].Columns[AuditId]"
-                      cachedDataType="i8"
-                      cachedName="AuditId"
+                      refId="Package\Exportar a Excel\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of AuditId]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="Copy of AuditId"
                       externalMetadataColumnId="Package\Exportar a Excel\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[AuditId]"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[AuditId]" />
+                      lineageId="Package\Exportar a Excel\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of AuditId]" />
+                    <inputColumn
+                      refId="Package\Exportar a Excel\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of BatchId]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="Copy of BatchId"
+                      externalMetadataColumnId="Package\Exportar a Excel\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[BatchId]"
+                      lineageId="Package\Exportar a Excel\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BatchId]" />
+                    <inputColumn
+                      refId="Package\Exportar a Excel\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Proceso]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="Copy of Proceso"
+                      externalMetadataColumnId="Package\Exportar a Excel\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Proceso]"
+                      lineageId="Package\Exportar a Excel\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Proceso]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -221,6 +291,16 @@
                       dataType="wstr"
                       length="255"
                       name="AuditId" />
+                    <externalMetadataColumn
+                      refId="Package\Exportar a Excel\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[BatchId]"
+                      dataType="wstr"
+                      length="255"
+                      name="BatchId" />
+                    <externalMetadataColumn
+                      refId="Package\Exportar a Excel\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Proceso]"
+                      dataType="wstr"
+                      length="255"
+                      name="Proceso" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -339,67 +419,6 @@
                       lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Proceso]"
                       name="Proceso"
                       truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Paso]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Paso]"
-                      length="50"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Paso]"
-                      name="Paso"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Inicio]"
-                      dataType="dbTimeStamp2"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Inicio]"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Inicio]"
-                      name="Inicio"
-                      scale="7"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Fin]"
-                      dataType="dbTimeStamp2"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Fin]"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Fin]"
-                      name="Fin"
-                      scale="7"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Filas]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Filas]"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Filas]"
-                      name="Filas"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Estado]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Estado]"
-                      length="20"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Estado]"
-                      name="Estado"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Mensaje]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Mensaje]"
-                      length="4000"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Output].Columns[Mensaje]"
-                      name="Mensaje"
-                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -456,6 +475,18 @@
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
+                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
                       refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AuditId]"
                       dataType="i8"
                       lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AuditId]"
@@ -472,55 +503,6 @@
                       length="50"
                       lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Proceso]"
                       name="Proceso" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Paso]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Paso]"
-                      name="Paso" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Inicio]"
-                      dataType="dbTimeStamp2"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Inicio]"
-                      name="Inicio"
-                      scale="7" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Fin]"
-                      dataType="dbTimeStamp2"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Fin]"
-                      name="Fin"
-                      scale="7" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Filas]"
-                      dataType="i4"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Filas]"
-                      name="Filas" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Estado]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Estado]"
-                      name="Estado" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Mensaje]"
-                      dataType="wstr"
-                      length="4000"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Mensaje]"
-                      name="Mensaje" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Exportar a Excel\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -1219,7 +1201,7 @@
         <NodeLayout
           Size="154.4,41.6"
           Id="Package\Exportar a Excel"
-          TopLeft="703.585689874421,930.296290648618" />
+          TopLeft="702.196801061417,930.296290648618" />
         <NodeLayout
           Size="234.4,41.6"
           Id="Package\OLEDB (Conexión a BDVENTAS)"
@@ -1229,6 +1211,10 @@
           Id="Package\OLEDB (Conexión a DWVENTAS)"
           TopLeft="397.42098320688,475.950839262623" />
         <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\TASK (Carga inicial BD)"
+          TopLeft="800.925882165266,326.962961449593" />
+        <NodeLayout
           Size="192.8,41.6"
           Id="Package\TASK (Carga inicial DW)"
           TopLeft="810.378743601645,712.526595193264" />
@@ -1236,6 +1222,10 @@
           Size="191.2,41.6"
           Id="Package\TASK (ETL Incremental)"
           TopLeft="420.952126702339,818.112789745226" />
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\TASK (Reset BD)"
+          TopLeft="578.611079497195,190.740739681382" />
         <NodeLayout
           Size="162.4,41.6"
           Id="Package\TASK (Reset DW)"
@@ -1280,26 +1270,26 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="264.233563172082,70.5835009033926"
+              EndConnector="262.844674359078,70.583500903392"
               Start="0,0"
-              End="264.233563172082,63.0835009033926">
+              End="262.844674359078,63.083500903392">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.2917504516963" />
+                    End="0,31.291750451696" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.2917504516963"
-                    Point2="0,35.2917504516963"
-                    Point3="4,35.2917504516963" />
+                    Point1="0,31.291750451696"
+                    Point2="0,35.291750451696"
+                    Point3="4,35.291750451696" />
                   <mssgle:LineSegment
-                    End="260.233563172082,35.2917504516963" />
+                    End="258.844674359078,35.291750451696" />
                   <mssgle:CubicBezierSegment
-                    Point1="260.233563172082,35.2917504516963"
-                    Point2="264.233563172082,35.2917504516963"
-                    Point3="264.233563172082,39.2917504516963" />
+                    Point1="258.844674359078,35.291750451696"
+                    Point2="262.844674359078,35.291750451696"
+                    Point3="262.844674359078,39.291750451696" />
                   <mssgle:LineSegment
-                    End="264.233563172082,63.0835009033926" />
+                    End="262.844674359078,63.083500903392" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1376,10 +1366,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="160,41.6"
-          Id="Package\TASK (Reset BD)"
-          TopLeft="578.611079497195,190.740739681382" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
           TopLeft="513.144681811239,99.4107740699591">
@@ -1414,10 +1400,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="189.6,41.6"
-          Id="Package\TASK (Carga inicial BD)"
-          TopLeft="800.925882165266,326.962961449593" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
           TopLeft="658.611079497195,232.340739681382">
@@ -1493,7 +1475,11 @@
     design-time-name="Package\Exportar a Excel">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Exportar a Excel\OLE DB Source"
+          TopLeft="182.999997273088,96.9999985545874" />
         <NodeLayout
           Size="159.2,41.6"
           Id="Package\Exportar a Excel\Excel Destination"
@@ -1502,10 +1488,6 @@
           Size="156,41.6"
           Id="Package\Exportar a Excel\Data Conversion"
           TopLeft="557.999991685152,160.999997600913" />
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\Exportar a Excel\OLE DB Source"
-          TopLeft="182.999997273088,96.9999985545874" />
         <EdgeLayout
           Id="Package\Exportar a Excel.Paths[OLE DB Source Output]"
           TopLeft="334.999997273088,117.799998554587">
@@ -1537,9 +1519,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1573,16 +1553,14 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Exportar a Excel\Excel Destination">
+    design-time-name="Package\Exportar a Excel\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1595,7 +1573,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Exportar a Excel\OLE DB Source">
+    design-time-name="Package\Exportar a Excel\Excel Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
