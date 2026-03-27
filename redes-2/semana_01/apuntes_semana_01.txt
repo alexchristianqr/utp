@@ -1,0 +1,105 @@
+Switch> enable
+Switch# configure terminal
+Switch(config)# line console 0
+Switch(config-line)# password class
+Switch(config-line)# login
+Switch(config-line)# exit
+Switch(config)# enable secret cisco
+
+
+Switch(config)# banner motd "Acceso solo a Personal Autorizado"
+
+
+Switch(config)# ip domain-name cisco.com
+Switch(config)# crypto key generate rsa
+# Cuando pregunte por los bits, escribe: 1024
+
+
+# Crear usuario local
+Switch(config)# username admin secret class
+
+# Renombrar obligatoriamente el switch
+Switch(config)# hostname SW-Semana1
+
+# Configurar las líneas virtuales (vty) para 4 sesiones (0 a 3)
+Switch(config)# line vty 0 3
+Switch(config-line)# transport input ssh
+Switch(config-line)# login local
+Switch(config-line)# password cisco123
+Switch(config-line)# exit
+
+
+Switch(config)# exit
+Switch# copy running-config startup-config
+# O simplemente usa el comando corto:
+Switch# write
+
+
+# PRUEBAS GENERALES:
+--------------------
+
+// CONFIG BASICA
+username: admin
+password_simple: class
+password_privilegiado: cisco
+ssh: cisco123
+rsakey: 1024
+
+// ENCRIPTACION
+show running-config
+
+
+// ESTADO SSH Y LLAVES
+show ip ssh
+
+// MOSTRAR CONFIG DE VLANS
+do sh vlan br
+
+// Romper o elminar una VLAN mal configurada
+SW-Semana1(config)# no interface fastEthernet 0/1 # Simple
+SW-Semana1(config)# no interface range fastEthernet 0/1-5 # Por rango
+
+
+# CONFIGURACION DE VLANS: 
+-------------------------
+
+SW-Semana1(config)# vlan 10
+SW-Semana1(config-vlan)# name Estudiantes
+SW-Semana1(config-vlan)# exit
+
+	// Config para SW01
+	SW-Semana1(config)# interface range fastEthernet 0/1-5
+	SW-Semana1(config-if)# description Conexion a Estudiantes
+	SW-Semana1(config-if)# switchport mode access
+	SW-Semana1(config-if-range)# switchport access vlan 10
+	SW-Semana1(config-if-range)# no shutdown
+	SW-Semana1(config-if-range)# exit
+
+SW-Semana1(config)# vlan 20
+SW-Semana1(config-vlan)# name Docentes
+SW-Semana1(config-vlan)# exit
+
+	// Config para SW02
+	SW-Semana1(config)# interface range fastEthernet 0/6-10
+	SW-Semana1(config-if)# description Conexion a Docentes
+	SW-Semana1(config-if-range)# switchport mode access
+	SW-Semana1(config-if-range)# switchport access vlan 20
+	SW-Semana1(config-if-range)# no shutdown
+	SW-Semana1(config-if-range)# exit
+
+SW-Semana1(config)# vlan 30
+SW-Semana1(config-vlan)# name Administracion
+SW-Semana1(config-vlan)# exit
+
+	// Config para SW03
+	SW-Semana1(config)# interface range fastEthernet 0/11-15
+	SW-Semana1(config-if)# description Conexion a Administracion
+	SW-Semana1(config-if)# switchport mode access
+	SW-Semana1(config-if-range)# switchport access vlan 30
+	SW-Semana1(config-if-range)# no shutdown
+	SW-Semana1(config-if-range)# exit
+
+
+
+
+
