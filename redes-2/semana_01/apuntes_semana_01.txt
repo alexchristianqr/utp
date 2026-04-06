@@ -99,6 +99,10 @@ SW-Semana1(config-vlan)# exit
 	SW-Semana1(config-if-range)# no shutdown
 	SW-Semana1(config-if-range)# exit
 
+// 
+
+SW-Semana1(config-if)# switchport mode trunk
+SW-Semana1(config-if)# switchport trunk encapsulation dot1q
 
 
 
