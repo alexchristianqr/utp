@@ -1,0 +1,95 @@
+[6:26 PM, 4/23/2026] Alex Christian: SLAAC (Stateless Address Autoconfiguration)
+[6:26 PM, 4/23/2026] Alex Christian: # R1
+
+enable
+configure terminal
+ipv6 unicast-routing
+interface g0/0
+ipv6 address 2001:db8:1::1/64
+no shutdown
+exit
+
+
+# RESULTADO:
+
+IPv6 Address: 2001:db8:1:xxxx
+Default Gateway: fe80::1
+ping 2001:db8:1::1
+
+
+
+
+
+[6:27 PM, 4/23/2026] Alex Christian: DHCPv6 STATEFUL
+[6:27 PM, 4/23/2026] Alex Christian: # R1
+
+enable
+configure terminal
+ipv6 unicast-routing
+ipv6 dhcp pool RED_DHCPV6
+address prefix 2001:db8:2::/64
+dns-server 2001:db8::53
+domain-name redes.local
+exit
+interface g0/0
+ipv6 address 2001:db8:2::1/64
+ipv6 dhcp server RED_DHCPV6
+ipv6 nd managed-config-flag
+no shutdown
+exit
+
+
+# RESULTADO:
+
+IPv6 Address: 2001:db8:2::X
+Gateway: fe80::1
+DNS: 2001:db8::53
+
+
+
+
+
+[6:27 PM, 4/23/2026] Alex Christian: FHRP con IPv6 (GLBPv6 – conceptual)
+[6:27 PM, 4/23/2026] Alex Christian: # (En R2 se cambia la prioridad a menor)
+
+interface g0/0
+ipv6 address 2001:db8:3::1/64
+standby 3 ipv6 2001:db8:3::FE
+standby 3 priority 110
+standby 3 preempt
+
+
+
+
+
+
+[6:27 PM, 4/23/2026] Alex Christian: HSRP con IPv6
+[6:27 PM, 4/23/2026] Alex Christian: # R1
+
+enable
+configure terminal
+ipv6 unicast-routing
+interface g0/0
+ipv6 address 2001:db8:4::1/64
+standby version 2
+standby 4 ipv6 2001:db8:4::FE
+standby 4 priority 110
+standby 4 preempt
+no shutdown
+
+
+# R2
+
+interface g0/0
+ipv6 address 2001:db8:4::2/64
+standby version 2
+standby 4 ipv6 2001:db8:4::FE
+standby 4 priority 100
+standby 4 preempt
+
+
+# RESULTADO
+
+Apagar el R1, el Gateway debe seguir funcionado
+Comprobar haciendo ping continuo al Gateway virtual
+El o lo hosts no pierde conectividad
