@@ -1,23 +1,14 @@
-# Seguridad de Puertos y DHCP Snooping en Packet Tracer
+# Escenario 4: DHCP Snooping con DHCP Relay y Port Security
 
-Este proyecto muestra una práctica académica de seguridad en redes usando **Cisco Packet Tracer**.
-El escenario implementa:
+## Objetivo
 
-* DHCP seguro.
-* DHCP Relay con `ip helper-address`.
-* DHCP Snooping.
-* Bloqueo de servidor DHCP atacante.
-* Port Security contra cambios de MAC no autorizados.
+Configurar una red en Cisco Packet Tracer donde las PCs obtienen dirección IP desde un servidor DHCP seguro ubicado en otra red.
 
-## Topología
+R1 reenvía las solicitudes DHCP usando `ip helper-address`.
 
-```text
-Servidor DHCP Seguro ---- S1 ---- R1 ---- S2 ---- PCs
-                                      |
-                                      +---- Router DHCP Atacante
-                                      |
-                                      +---- PC Atacante Port Security
-```
+Además, se configura DHCP Snooping en S2 para bloquear un router DHCP atacante, y Port Security para proteger el puerto del PC atacante.
+
+---
 
 ## Direccionamiento
 
