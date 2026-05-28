@@ -1,0 +1,19 @@
+Examen de Redes 2:
+
+- Seguridad
+- Firewall
+- Teoria de inalambrico
+
+//
+
+- con red inalambrica
+- con router
+- cpn dhcp
+- con snopy
+- bloqueo de puertos
+- bloquear una ip, une quipo que no ingrese al servidor, puiede hacer ping a otra computadoras
+- port security
+- DHCP Snopy
+- Crear usuarios y conectarse via SSH
+
+// Configurar una servidor AAA

@@ -1,0 +1,7 @@
+DHCP Snooping se activa en el switch para evitar que un servidor DHCP falso entregue direcciones IP a los clientes.
+
+El puerto Fa0/1 se configura como trusted porque conecta hacia el router y permite llegar al servidor DHCP seguro.
+
+Los puertos Fa0/2 y Fa0/3 quedan como untrusted porque conectan a PCs clientes.
+
+El puerto Fa0/4 queda como untrusted porque conecta al servidor DHCP atacante. Por eso, sus respuestas DHCP Offer/Ack serán bloqueadas por el switch.

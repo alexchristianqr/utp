@@ -1,0 +1,26 @@
+Lo más importante que debes recordar:
+-------------------------------------
+
+1. Las VLAN se crean en todos los switches que las van a usar o transportar.
+2. Los puertos hacia PCs son access.
+3. Los puertos entre switches son trunk.
+4. El puerto del switch hacia el router también debe ser trunk si el router maneja varias VLAN.
+5. El router usa subinterfaces para dar gateway a cada VLAN.
+6. Cada VLAN necesita su propio gateway.
+7. DHCP Snooping bloquea servidores DHCP falsos.
+8. Los puertos hacia el DHCP real se configuran como trusted.
+9. Los puertos de usuarios y atacantes quedan como untrusted.
+10. Port Security limita qué dispositivos pueden conectarse a un puerto.
+11. SSH v2 permite administrar los switches de forma segura.
+
+
+Una forma simple de verlo sería:
+--------------------------------
+
+VLAN = separa redes.
+Trunk = transporta varias VLAN.
+Access = conecta una PC a una VLAN.
+Router = comunica VLANs y entrega gateway.
+DHCP Snooping = bloquea DHCP falso.
+Port Security = bloquea dispositivos no autorizados.
+SSH = administración segura.
